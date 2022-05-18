@@ -4,7 +4,10 @@
     "dotenv": "^16.0.1",
     "nodeman": "^1.1.2",
     "path": "^0.12.7",
-    "react": "^18.1.0"
+    "react": "^18.1.0",
+    "react-redux": "^8.0.1",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.12",
