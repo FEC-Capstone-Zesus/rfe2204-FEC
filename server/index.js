@@ -81,7 +81,6 @@ app.get('/products/:product_id/related', (req, res) => {
 
 
 app.get('/reviews', (req, res) => {
-  console.log("this is the req.params", req.params.product_id)
   axios({
     url: `${apiURL}/reviews`,
     method: "GET",
