@@ -1,11 +1,5 @@
 {
-  "presets": [
-    "@babel/preset-env",
-    [
-      "@babel/preset-react",
-      {
-        "runtime": "automatic"
-      }
-    ]
-  ]
+  // "presets" allow us to define the additional packages we would like to include
+  // this will give us access to jsx and several other newer js feature
+  "presets": ["@babel/preset-env","@babel/preset-react"]
 }
