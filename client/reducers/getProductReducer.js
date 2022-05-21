@@ -1,5 +1,3 @@
-import Redux from 'redux';
-
 const getProductReducer = (state = {}, action) => {
   switch (action.type) {
     case 'GET_PRODUCT':
