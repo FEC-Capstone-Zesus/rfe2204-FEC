@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import getProduct from "../actions/getProduct.js";
 import getReviews from "../actions/getReviews.js";
 import getStyles from "../actions/getStyles.js";
+import getMetaData from "../actions/getMetaData.js";
 import store from "../store/store.js";
 import axios from "axios";
 import AppContainer from "./containers/AppContainer.js"
@@ -20,8 +21,13 @@ const retrieve = () => {
 
   axios.get('/products/37311/styles')
     .then((data) => {
-      console.log('STYLES: ', data.data);
       store.dispatch(getStyles(data.data))})
+    .catch((err)=>console.error(err));
+
+  axios.get('/reviews/meta?product_id=37311')
+    .then((data) => {
+      console.log('METADATA: ', data.data);
+      store.dispatch(getMetaData(data.data))})
     .catch((err)=>console.error(err));
 };
 

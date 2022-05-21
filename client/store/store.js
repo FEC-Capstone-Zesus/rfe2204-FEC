@@ -6,8 +6,8 @@ const initialState = {
   //TODO: key/value pairs with appropriate names and data types (empty)
   product: {},
   reviews: {},
-  // styles: {},
-  // metaData: {},
+  styles: {},
+  metaData: {},
   // questions: {},
   // relatedProducts: []
 };

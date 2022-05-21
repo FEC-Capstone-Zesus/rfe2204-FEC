@@ -6,7 +6,7 @@ const mapStateToProps = (state) => (
     product: state.product,
     reviews: state.reviews,
     styles: state.styles,
-
+    metaData: state.metaData,
 
   }
 );

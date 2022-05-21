@@ -1,6 +1,28 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./client/actions/getMetaData.js":
+/*!***************************************!*\
+  !*** ./client/actions/getMetaData.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var getMetaData = function getMetaData(metaData) {
+  return {
+    type: 'GET_METADATA',
+    metaData: metaData
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getMetaData);
+
+/***/ }),
+
 /***/ "./client/actions/getProduct.js":
 /*!**************************************!*\
   !*** ./client/actions/getProduct.js ***!
@@ -64,6 +86,34 @@ var getStyles = function getStyles(styles) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getStyles);
+
+/***/ }),
+
+/***/ "./client/reducers/getMetaDataReducer.js":
+/*!***********************************************!*\
+  !*** ./client/reducers/getMetaDataReducer.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var getMetaDataReducer = function getMetaDataReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'GET_METADATA':
+      return action.metaData || {};
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getMetaDataReducer);
 
 /***/ }),
 
@@ -162,20 +212,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _getProductReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getProductReducer.js */ "./client/reducers/getProductReducer.js");
 /* harmony import */ var _getReviewsReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getReviewsReducer.js */ "./client/reducers/getReviewsReducer.js");
 /* harmony import */ var _getStylesReducer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getStylesReducer.js */ "./client/reducers/getStylesReducer.js");
+/* harmony import */ var _getMetaDataReducer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getMetaDataReducer.js */ "./client/reducers/getMetaDataReducer.js");
+
 
 
 
  // Need to import reducers once written in an actions dir
 
-var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
+var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
   // TODO: Add reducers as key/value pairs
   product: _getProductReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"],
   reviews: _getReviewsReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-  styles: _getStylesReducer_js__WEBPACK_IMPORTED_MODULE_2__["default"]
+  styles: _getStylesReducer_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  metaData: _getMetaDataReducer_js__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootReducer);
 
@@ -203,12 +256,13 @@ var GlobalStyle = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__.createGlobal
 var App = function App(_ref) {
   var product = _ref.product,
       reviews = _ref.reviews,
-      styles = _ref.styles;
+      styles = _ref.styles,
+      metaData = _ref.metaData;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(GlobalStyle, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", {
       children: "Hello World!!!!!"
-    }), styles ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-      children: JSON.stringify(styles)
+    }), metaData ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+      children: JSON.stringify(metaData)
     }) : null]
   });
 };
@@ -237,7 +291,8 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     product: state.product,
     reviews: state.reviews,
-    styles: state.styles
+    styles: state.styles,
+    metaData: state.metaData
   };
 };
 
@@ -266,9 +321,9 @@ __webpack_require__.r(__webpack_exports__);
 var initialState = {
   //TODO: key/value pairs with appropriate names and data types (empty)
   product: {},
-  reviews: {} // styles: {},
-  // metaData: {},
-  // questions: {},
+  reviews: {},
+  styles: {},
+  metaData: {} // questions: {},
   // relatedProducts: []
 
 };
@@ -17660,11 +17715,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_getProduct_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/getProduct.js */ "./client/actions/getProduct.js");
 /* harmony import */ var _actions_getReviews_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/getReviews.js */ "./client/actions/getReviews.js");
 /* harmony import */ var _actions_getStyles_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/getStyles.js */ "./client/actions/getStyles.js");
-/* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../store/store.js */ "./client/store/store.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _containers_AppContainer_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./containers/AppContainer.js */ "./client/src/containers/AppContainer.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _actions_getMetaData_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions/getMetaData.js */ "./client/actions/getMetaData.js");
+/* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../store/store.js */ "./client/store/store.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _containers_AppContainer_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./containers/AppContainer.js */ "./client/src/containers/AppContainer.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -17677,27 +17734,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var retrieve = function retrieve() {
-  axios__WEBPACK_IMPORTED_MODULE_7___default().get('/products/37311').then(function (data) {
-    _store_store_js__WEBPACK_IMPORTED_MODULE_6__["default"].dispatch((0,_actions_getProduct_js__WEBPACK_IMPORTED_MODULE_3__["default"])(data.data));
+  axios__WEBPACK_IMPORTED_MODULE_8___default().get('/products/37311').then(function (data) {
+    _store_store_js__WEBPACK_IMPORTED_MODULE_7__["default"].dispatch((0,_actions_getProduct_js__WEBPACK_IMPORTED_MODULE_3__["default"])(data.data));
   })["catch"](function (err) {
     return console.error(err);
   });
-  axios__WEBPACK_IMPORTED_MODULE_7___default().get('/reviews?product_id=37311&page=1&count=5&sort=helpful').then(function (data) {
-    _store_store_js__WEBPACK_IMPORTED_MODULE_6__["default"].dispatch((0,_actions_getReviews_js__WEBPACK_IMPORTED_MODULE_4__["default"])(data.data));
+  axios__WEBPACK_IMPORTED_MODULE_8___default().get('/reviews?product_id=37311&page=1&count=5&sort=helpful').then(function (data) {
+    _store_store_js__WEBPACK_IMPORTED_MODULE_7__["default"].dispatch((0,_actions_getReviews_js__WEBPACK_IMPORTED_MODULE_4__["default"])(data.data));
   })["catch"](function (err) {
     return console.error(err);
   });
-  axios__WEBPACK_IMPORTED_MODULE_7___default().get('/products/37311/styles').then(function (data) {
-    console.log('STYLES: ', data.data);
-    _store_store_js__WEBPACK_IMPORTED_MODULE_6__["default"].dispatch((0,_actions_getStyles_js__WEBPACK_IMPORTED_MODULE_5__["default"])(data.data));
+  axios__WEBPACK_IMPORTED_MODULE_8___default().get('/products/37311/styles').then(function (data) {
+    _store_store_js__WEBPACK_IMPORTED_MODULE_7__["default"].dispatch((0,_actions_getStyles_js__WEBPACK_IMPORTED_MODULE_5__["default"])(data.data));
+  })["catch"](function (err) {
+    return console.error(err);
+  });
+  axios__WEBPACK_IMPORTED_MODULE_8___default().get('/reviews/meta?product_id=37311').then(function (data) {
+    console.log('METADATA: ', data.data);
+    _store_store_js__WEBPACK_IMPORTED_MODULE_7__["default"].dispatch((0,_actions_getMetaData_js__WEBPACK_IMPORTED_MODULE_6__["default"])(data.data));
   })["catch"](function (err) {
     return console.error(err);
   });
 };
 
-(0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
-  store: _store_store_js__WEBPACK_IMPORTED_MODULE_6__["default"],
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_containers_AppContainer_js__WEBPACK_IMPORTED_MODULE_8__["default"], {})
+(0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
+  store: _store_store_js__WEBPACK_IMPORTED_MODULE_7__["default"],
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_containers_AppContainer_js__WEBPACK_IMPORTED_MODULE_9__["default"], {})
 }), document.getElementById("root"), retrieve);
 })();
 
