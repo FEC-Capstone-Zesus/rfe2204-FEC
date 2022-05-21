@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
   h1 {
     color: blue;
   }
-  h1.fetching {
+  h1.loading {
     color: black;
   }
   `;
@@ -41,7 +41,7 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
       <GlobalStyle />
       <Modal loading={loading} >
         <Container>
-          <h1 className='fetching' >Loading...</h1>
+          <h1 className='loading' >Loading...</h1>
         </Container>
       </Modal>
       <h1>Hello World!!!!!</h1>
