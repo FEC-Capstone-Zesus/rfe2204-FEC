@@ -395,7 +395,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var GlobalStyle = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__.createGlobalStyle)(["body{margin:0;padding:0;background:white;font-family:'Inter',sans-serif;}h1{color:blue;}h1.fetching{color:black;}"]);
+var GlobalStyle = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__.createGlobalStyle)(["body{margin:0;padding:0;background:white;font-family:'Inter',sans-serif;}h1{color:blue;}h1.loading{color:black;}"]);
 var Modal = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  z-index: auto;\n  display: ", ";\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 100vh;\n  width:100vw;\n  background: rgba(250,250,250,0.5);\n"])), function (_ref) {
   var loading = _ref.loading;
   return loading ? 'block' : 'none';
@@ -415,7 +415,7 @@ var App = function App(_ref2) {
       loading: loading,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Container, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", {
-          className: "fetching",
+          className: "loading",
           children: "Loading..."
         })
       })
