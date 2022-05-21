@@ -312,23 +312,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var loadData = function loadData() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+var loadDataReducer = function loadDataReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
     case 'START':
-      return true;
+      return 1;
 
     case 'STOP':
-      return false;
+      return 0;
 
     default:
       return state;
   }
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loadData);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loadDataReducer);
 
 /***/ }),
 
@@ -493,7 +493,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var initialState = {
   //TODO: key/value pairs with appropriate names and data types (empty)
-  loading: true,
+  loading: 1,
   product: {},
   reviews: {},
   styles: {},
@@ -17915,38 +17915,20 @@ var retrieve = function retrieve() {
   _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch({
     type: 'START'
   });
-  axios__WEBPACK_IMPORTED_MODULE_10___default().get('/products/37311').then(function (data) {
-    _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch((0,_actions_getProduct_js__WEBPACK_IMPORTED_MODULE_3__["default"])(data.data));
-  })["catch"](function (err) {
-    return console.error(err);
-  });
-  axios__WEBPACK_IMPORTED_MODULE_10___default().get('/reviews?product_id=37311&page=1&count=5&sort=helpful').then(function (data) {
-    _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch((0,_actions_getReviews_js__WEBPACK_IMPORTED_MODULE_4__["default"])(data.data));
-  })["catch"](function (err) {
-    return console.error(err);
-  });
-  axios__WEBPACK_IMPORTED_MODULE_10___default().get('/products/37311/styles').then(function (data) {
-    _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch((0,_actions_getStyles_js__WEBPACK_IMPORTED_MODULE_5__["default"])(data.data));
-  })["catch"](function (err) {
-    return console.error(err);
-  });
-  axios__WEBPACK_IMPORTED_MODULE_10___default().get('/reviews/meta?product_id=37311').then(function (data) {
-    _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch((0,_actions_getMetaData_js__WEBPACK_IMPORTED_MODULE_6__["default"])(data.data));
-  })["catch"](function (err) {
-    return console.error(err);
-  });
-  axios__WEBPACK_IMPORTED_MODULE_10___default().get('/qa/questions?product_id=37311&page=1&count=5').then(function (data) {
-    _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch((0,_actions_getQuestions_js__WEBPACK_IMPORTED_MODULE_7__["default"])(data.data.results));
-  })["catch"](function (err) {
-    return console.error(err);
-  });
-  axios__WEBPACK_IMPORTED_MODULE_10___default().get('/products/37311/related').then(function (data) {
-    _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch((0,_actions_getRelatedProducts_js__WEBPACK_IMPORTED_MODULE_8__["default"])(data.data));
-    _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch({
-      type: 'STOP'
+  var promises = [axios__WEBPACK_IMPORTED_MODULE_10___default().get('/products/37311'), axios__WEBPACK_IMPORTED_MODULE_10___default().get('/reviews?product_id=37311&page=1&count=5&sort=helpful'), axios__WEBPACK_IMPORTED_MODULE_10___default().get('/products/37311/styles'), axios__WEBPACK_IMPORTED_MODULE_10___default().get('/reviews/meta?product_id=37311'), axios__WEBPACK_IMPORTED_MODULE_10___default().get('/qa/questions?product_id=37311&page=1&count=5'), axios__WEBPACK_IMPORTED_MODULE_10___default().get('/products/37311/related')];
+  var actions = [_actions_getProduct_js__WEBPACK_IMPORTED_MODULE_3__["default"], _actions_getReviews_js__WEBPACK_IMPORTED_MODULE_4__["default"], _actions_getStyles_js__WEBPACK_IMPORTED_MODULE_5__["default"], _actions_getMetaData_js__WEBPACK_IMPORTED_MODULE_6__["default"], _actions_getQuestions_js__WEBPACK_IMPORTED_MODULE_7__["default"], _actions_getRelatedProducts_js__WEBPACK_IMPORTED_MODULE_8__["default"]];
+  Promise.all(promises).then(function (promises) {
+    promises.forEach(function (data, i) {
+      _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch(actions[i](data.data));
+
+      if (i === promises.length - 1) {
+        _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch({
+          type: 'STOP'
+        });
+      }
     });
   })["catch"](function (err) {
-    return console.error(err);
+    return console.log('retrieve data err: ', err);
   });
 };
 
