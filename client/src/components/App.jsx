@@ -19,8 +19,8 @@ const App = ( { product, reviews, styles } ) => {
     <>
       <GlobalStyle />
       <h1>Hello World!!!!!</h1>
-      {product.id ? <p>{ JSON.stringify(product)}</p> : null}
-      {reviews ? <p>{ JSON.stringify(reviews)}</p> : null}
+      {/* {product.id ? <p>{ JSON.stringify(product)}</p> : null} */}
+      {/* {reviews ? <p>{ JSON.stringify(reviews)}</p> : null} */}
       {styles ? <p>{ JSON.stringify(styles)}</p> : null}
 
     </>

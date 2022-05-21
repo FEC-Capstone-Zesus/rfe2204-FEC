@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import getProduct from "../actions/getProduct.js";
 import getReviews from "../actions/getReviews.js";
+import getStyles from "../actions/getStyles.js";
 import store from "../store/store.js";
 import axios from "axios";
 import AppContainer from "./containers/AppContainer.js"
@@ -14,8 +15,13 @@ const retrieve = () => {
 
   axios.get('/reviews?product_id=37311&page=1&count=5&sort=helpful')
     .then((data) => {
-      console.log("REVIEWS: ", data.data);
       store.dispatch(getReviews(data.data))})
+    .catch((err)=>console.error(err));
+
+  axios.get('/products/37311/styles')
+    .then((data) => {
+      console.log('STYLES: ', data.data);
+      store.dispatch(getStyles(data.data))})
     .catch((err)=>console.error(err));
 };
 
