@@ -8,8 +8,8 @@ const initialState = {
   reviews: {},
   styles: {},
   metaData: {},
-  // questions: {},
-  // relatedProducts: []
+  questions: {},
+  relatedProducts: []
 };
 
 var store = createStore(

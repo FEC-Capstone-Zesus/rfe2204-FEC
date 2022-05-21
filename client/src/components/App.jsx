@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
   `;
 
-const App = ( { product, reviews, styles, metaData, questions } ) => {
+const App = ( { product, reviews, styles, metaData, questions, relatedProducts } ) => {
 
   return (
     <>
@@ -23,7 +23,8 @@ const App = ( { product, reviews, styles, metaData, questions } ) => {
       {/* {reviews ? <p>{ JSON.stringify(reviews)}</p> : null} */}
       {/* {styles ? <p>{ JSON.stringify(styles)}</p> : null} */}
       {/* {metaData ? <p>{ JSON.stringify(metaData)}</p> : null} */}
-      {questions ? <p>{ JSON.stringify(questions)}</p> : null}
+      {/* {questions ? <p>{ JSON.stringify(questions)}</p> : null} */}
+      {relatedProducts ? <p>{ JSON.stringify(relatedProducts)}</p> : null}
 
 
 

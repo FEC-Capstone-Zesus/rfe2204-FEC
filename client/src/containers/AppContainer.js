@@ -8,7 +8,7 @@ const mapStateToProps = (state) => (
     styles: state.styles,
     metaData: state.metaData,
     questions: state.questions,
-
+    relatedProducts: state.relatedProducts,
 
   }
 );

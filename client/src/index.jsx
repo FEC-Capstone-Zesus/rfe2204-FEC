@@ -6,6 +6,7 @@ import getReviews from "../actions/getReviews.js";
 import getStyles from "../actions/getStyles.js";
 import getMetaData from "../actions/getMetaData.js";
 import getQuestions from "../actions/getQuestions.js";
+import getRelatedProducts from "../actions/getRelatedProducts.js";
 import store from "../store/store.js";
 import axios from "axios";
 import AppContainer from "./containers/AppContainer.js"
@@ -32,8 +33,12 @@ const retrieve = () => {
 
   axios.get('/qa/questions?product_id=37311&page=1&count=5')
     .then((data) => {
-      console.log('QUESTIONS: ', data.data.results);
       store.dispatch(getQuestions(data.data.results))})
+    .catch((err)=>console.error(err));
+
+  axios.get('/products/37311/related')
+    .then((data) => {
+      store.dispatch(getRelatedProducts(data.data))})
     .catch((err)=>console.error(err));
 };
 
