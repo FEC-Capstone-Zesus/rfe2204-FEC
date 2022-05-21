@@ -5,6 +5,7 @@ import getStylesReducer from './getStylesReducer.js';
 import getMetaDataReducer from './getMetaDataReducer.js';
 import getQuestionsReducer from './getQuestionsReducer.js';
 import getRelatedProductsReducer from './getRelatedProductsReducer.js';
+import loadDataReducer from './loadDataReducer.js';
 
 // Need to import reducers once written in an actions dir
 
@@ -16,7 +17,7 @@ var rootReducer = combineReducers({
   metaData: getMetaDataReducer,
   questions: getQuestionsReducer,
   relatedProducts: getRelatedProductsReducer,
-
+  loading: loadDataReducer
 });
 
 export default rootReducer;
