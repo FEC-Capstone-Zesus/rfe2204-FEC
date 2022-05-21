@@ -1,7 +1,7 @@
-const getQuestionsReducer = (state = {}, action) => {
+const getQuestionsReducer = (state = [], action) => {
   switch (action.type) {
     case 'GET_QUESTIONS':
-      return action.questions || {}
+      return action.questions || []
     default :
       return state
   }
