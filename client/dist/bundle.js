@@ -53,6 +53,35 @@ var getProductReducer = function getProductReducer() {
 
 /***/ }),
 
+/***/ "./client/reducers/getReviewsReducer.js":
+/*!**********************************************!*\
+  !*** ./client/reducers/getReviewsReducer.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// import Redux from 'redux';
+var getReviewsReducer = function getReviewsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'GET_REVIEWS':
+      return action.reviews || {};
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getReviewsReducer);
+
+/***/ }),
+
 /***/ "./client/reducers/main.js":
 /*!*********************************!*\
   !*** ./client/reducers/main.js ***!
@@ -64,14 +93,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _getProductReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getProductReducer.js */ "./client/reducers/getProductReducer.js");
+/* harmony import */ var _getReviewsReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getReviewsReducer.js */ "./client/reducers/getReviewsReducer.js");
+
 
  // Need to import reducers once written in an actions dir
 
-var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
+var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
   // TODO: Add reducers as key/value pairs
-  product: _getProductReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"]
+  product: _getProductReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"],
+  reviews: _getReviewsReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootReducer);
 
@@ -157,8 +189,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var initialState = {
   //TODO: key/value pairs with appropriate names and data types (empty)
-  product: {} // reviews: {},
-  // styles: {},
+  product: {},
+  reviews: {} // styles: {},
   // metaData: {},
   // questions: {},
   // relatedProducts: []
