@@ -4,7 +4,7 @@ import rootReducer from '../reducers/main.js';
 
 const initialState = {
   //TODO: key/value pairs with appropriate names and data types (empty)
-  loading: true,
+  loading: 1,
   product: {},
   reviews: {},
   styles: {},
