@@ -4,11 +4,12 @@ import rootReducer from '../reducers/main.js';
 
 const initialState = {
   //TODO: key/value pairs with appropriate names and data types (empty)
+  loading: true,
   product: {},
   reviews: {},
   styles: {},
   metaData: {},
-  questions: {},
+  questions: [],
   relatedProducts: []
 };
 
