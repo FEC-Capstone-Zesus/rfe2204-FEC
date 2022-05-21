@@ -1,8 +1,11 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import store from "../store/store.js";
 import { createGlobalStyle } from "styled-components";
+import getProduct from "../actions/getProduct.js";
+import store from "../store/store.js";
+import axios from "axios";
+import Promise from "bluebird";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -17,10 +20,16 @@ const GlobalStyle = createGlobalStyle`
   `;
 
 const App = () => {
+  const retrieve = () => {
+    axios.get('/products/37311')
+      .then((data) => { store.dispatch(getProduct(data)).then((data) => { console.log(store) }) })
+      .catch((err)=>console.error(err));
+  };
   return (
     <>
       <GlobalStyle />
-      <h1>Hello World!</h1>
+      <h1>Hello World!!!!!</h1>
+      <button onClick={retrieve}>Get A Product</button>
     </>
   );
 };
