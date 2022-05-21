@@ -4,6 +4,8 @@ import App from "../components/App.jsx";
 const mapStateToProps = (state) => (
   {
     product: state.product,
+    reviews: state.reviews,
+
   }
 );
 

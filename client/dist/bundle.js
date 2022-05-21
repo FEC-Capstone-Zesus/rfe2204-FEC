@@ -129,12 +129,15 @@ __webpack_require__.r(__webpack_exports__);
 var GlobalStyle = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__.createGlobalStyle)(["body{margin:0;padding:0;background:white;font-family:'Inter',sans-serif;}h1{color:blue;}"]);
 
 var App = function App(_ref) {
-  var product = _ref.product;
+  var product = _ref.product,
+      reviews = _ref.reviews;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(GlobalStyle, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", {
       children: "Hello World!!!!!"
     }), product.id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
       children: JSON.stringify(product)
+    }) : null, reviews.id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+      children: JSON.stringify(reviews)
     }) : null]
   });
 };
@@ -161,7 +164,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    product: state.product
+    product: state.product,
+    reviews: state.reviews
   };
 };
 

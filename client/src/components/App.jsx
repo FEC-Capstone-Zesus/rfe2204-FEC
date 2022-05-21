@@ -13,13 +13,15 @@ const GlobalStyle = createGlobalStyle`
   }
   `;
 
-const App = ( { product } ) => {
+const App = ( { product, reviews } ) => {
 
   return (
     <>
       <GlobalStyle />
       <h1>Hello World!!!!!</h1>
       {product.id ? <p>{ JSON.stringify(product)}</p> : null}
+      {reviews.id ? <p>{ JSON.stringify(reviews)}</p> : null}
+
     </>
   );
 };
