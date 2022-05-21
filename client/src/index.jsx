@@ -12,6 +12,7 @@ import axios from "axios";
 import AppContainer from "./containers/AppContainer.js"
 
 const retrieve = () => {
+  store.dispatch({ type: 'START' });
   axios.get('/products/37311')
     .then((data) => { store.dispatch(getProduct(data.data))})
     .catch((err)=>console.error(err));
@@ -38,11 +39,18 @@ const retrieve = () => {
 
   axios.get('/products/37311/related')
     .then((data) => {
-      store.dispatch(getRelatedProducts(data.data))})
+      store.dispatch(getRelatedProducts(data.data))
+      store.dispatch({ type: 'STOP' })})
     .catch((err)=>console.error(err));
 };
 
-render(<Provider store={store}><AppContainer /></Provider>, document.getElementById("root"), retrieve);
+render(
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>,
+  document.getElementById("root"),
+  retrieve
+);
 
 
 
