@@ -9,6 +9,7 @@ const mapStateToProps = (state) => (
     metaData: state.metaData,
     questions: state.questions,
     relatedProducts: state.relatedProducts,
+    loading: state.loading
 
   }
 );
