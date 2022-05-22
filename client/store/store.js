@@ -4,12 +4,13 @@ import rootReducer from '../reducers/main.js';
 
 const initialState = {
   //TODO: key/value pairs with appropriate names and data types (empty)
-  product: {}
-  // reviews: {},
-  // styles: {},
-  // metaData: {},
-  // questions: {},
-  // relatedProducts: []
+  loading: true,
+  product: {},
+  reviews: {},
+  styles: {},
+  metaData: {},
+  questions: [],
+  relatedProducts: []
 };
 
 var store = createStore(

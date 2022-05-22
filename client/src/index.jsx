@@ -1,40 +1,56 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { createGlobalStyle } from "styled-components";
 import getProduct from "../actions/getProduct.js";
+import getReviews from "../actions/getReviews.js";
+import getStyles from "../actions/getStyles.js";
+import getMetaData from "../actions/getMetaData.js";
+import getQuestions from "../actions/getQuestions.js";
+import getRelatedProducts from "../actions/getRelatedProducts.js";
 import store from "../store/store.js";
 import axios from "axios";
-import Promise from "bluebird";
+import AppContainer from "./containers/AppContainer.js"
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    background: white;
-    font-family: 'Inter', sans-serif;
-  }
-  h1 {
-    color: blue;
-  }
-  `;
+const retrieve = () => {
+  store.dispatch({ type: 'START' });
+  axios.get('/products/37311')
+    .then((data) => { store.dispatch(getProduct(data.data))})
+    .catch((err)=>console.error(err));
 
-const App = () => {
-  const retrieve = () => {
-    axios.get('/products/37311')
-      .then((data) => { store.dispatch(getProduct(data)).then((data) => { console.log(store) }) })
-      .catch((err)=>console.error(err));
-  };
-  return (
-    <>
-      <GlobalStyle />
-      <h1>Hello World!!!!!</h1>
-      <button onClick={retrieve}>Get A Product</button>
-    </>
-  );
+  axios.get('/reviews?product_id=37311&page=1&count=5&sort=helpful')
+    .then((data) => {
+      store.dispatch(getReviews(data.data))})
+    .catch((err)=>console.error(err));
+
+  axios.get('/products/37311/styles')
+    .then((data) => {
+      store.dispatch(getStyles(data.data))})
+    .catch((err)=>console.error(err));
+
+  axios.get('/reviews/meta?product_id=37311')
+    .then((data) => {
+      store.dispatch(getMetaData(data.data))})
+    .catch((err)=>console.error(err));
+
+  axios.get('/qa/questions?product_id=37311&page=1&count=5')
+    .then((data) => {
+      store.dispatch(getQuestions(data.data.results))})
+    .catch((err)=>console.error(err));
+
+  axios.get('/products/37311/related')
+    .then((data) => {
+      store.dispatch(getRelatedProducts(data.data))
+      store.dispatch({ type: 'STOP' })})
+    .catch((err)=>console.error(err));
 };
 
-render(<Provider store={store}><App /></Provider>, document.getElementById("root"));
+render(
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>,
+  document.getElementById("root"),
+  retrieve
+);
 
 
 
