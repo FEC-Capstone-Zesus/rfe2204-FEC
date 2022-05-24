@@ -20,6 +20,7 @@ var end = 8;
 var imageIndex = 0;
 
 const ImageGallery = ( { styles } ) => {
+
   if (styles.product_id) {
     var [currentStyle, changeStyle] = useState(styles.results[0]);
     var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);
@@ -29,6 +30,11 @@ const ImageGallery = ( { styles } ) => {
 
   const updateCurrentImage = (photo) => {
     if (photo.thumbnail_url !== currentImage) {
+      styles.results[0].photos.forEach((currentPhoto, i) => {
+        if (currentPhoto.thumbnail_url === photo.thumbnail_url) {
+          imageIndex = i;
+        }
+      })
       changeImage(photo.thumbnail_url);
     }
   }
@@ -79,71 +85,71 @@ const ImageGallery = ( { styles } ) => {
   }
 
   return (
-    <>
-      <div className='main-image' style={{ width: 50 + 'rem', height: 40 + 'rem',
-                                           background: 'rgba(226,226,226,100)',
-                                           backgroundImage: `url(${currentImage})`,
-                                           backgroundRepeat: 'no-repeat',
-                                           backgroundSize: 'contain',
-                                           backgroundPosition: 'center' }} >
-        <div className='image-carousel'
-             style={{ position: 'absolute',
-                      marginTop: 1.5 + 'rem',
-                      marginLeft: 1.5 + 'rem',
-                      background: 'rgba(226,226,226,0.5)' }}>
-          {currentStyle ? photosCarousel.length > 7 ?
-            <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}
-                 onClick={() => updateCarousel('up') }>
-              <div className='arrow up'
-                   style={{ marginLeft: 1.3 + 'rem' }}></div>
-            </div>
-                   : null : null}
-          <ImageNoUnderline />
-          <div>
-            {currentStyle ?
-              photosCarousel.map(photo => {
-                  return (
-                    <div key={photo.thumbnail_url}>
-                      <div onClick={() => updateCurrentImage(photo)}
-                           style={{ width: 3 + 'rem', height: 3 + 'rem',
-                                    background: 'rgba(226,226,226,100)',
-                                    backgroundImage: `url(${photo.thumbnail_url})`,
-                                    backgroundSize: 'contain',
-                                    border: '1px solid',
-                                    backgroundRepeat: 'no-repeat',
-                                    backgroundPosition: 'center' }}>
-                      </div>
-                      {photo.thumbnail_url === currentImage ?
-                        <ImageUnderline />
-                        : <ImageNoUnderline /> }
-                      <ImageNoUnderline />
+    <div className='main-image' style={{ width: 50 + 'rem', height: 40 + 'rem',
+                                         background: 'rgba(226,226,226,100)',
+                                         backgroundImage: `url(${currentImage})`,
+                                         backgroundRepeat: 'no-repeat',
+                                         backgroundOrigin: 'content-box',
+                                         backgroundSize: 75 + '%',
+                                         backgroundPosition: 'center' }} >
+      <div className='image-carousel'
+            style={{ position: 'absolute',
+                     marginTop: 1.5 + 'rem',
+                     marginLeft: 1.5 + 'rem',
+                     background: 'rgba(226,226,226,0.5)' }}>
+        {currentStyle ? photosCarousel.length > 7 ?
+          <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}
+               onClick={() => updateCarousel('up') }>
+            <div className='arrow up'
+                 style={{ marginLeft: 1.3 + 'rem' }}></div>
+          </div>
+                  : null : null}
+        <ImageNoUnderline />
+        <div>
+          {currentStyle ?
+            photosCarousel.map(photo => {
+                return (
+                  <div key={photo.thumbnail_url}>
+                    <div onClick={() => updateCurrentImage(photo)}
+                          style={{ width: 3 + 'rem', height: 3 + 'rem',
+                                   background: 'rgba(226,226,226,100)',
+                                   backgroundImage: `url(${photo.thumbnail_url})`,
+                                   backgroundSize: 'contain',
+                                   border: '1px solid',
+                                   backgroundRepeat: 'no-repeat',
+                                   backgroundPosition: 'center' }}>
                     </div>
-                  )
-              })
-              : null}
-          </div>
-          {currentStyle ? photosCarousel.length > 7 ?
-            <div style={{ width: 3 + 'rem', height: 1 + 'rem' }}
-                 onClick={() => updateCarousel('down') }>
-              <div className='arrow down'
-                   style={{ marginLeft: 1.3 + 'rem' }}></div>
-            </div>
-            : null : null}
+                    <ImageNoUnderline />
+                    {photo.thumbnail_url === currentImage ?
+                      <ImageUnderline />
+                      : <ImageNoUnderline /> }
+                    <ImageNoUnderline />
+                  </div>
+                )
+            })
+            : null}
         </div>
-        <HorizontalButtons>
-          <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
-               onClick={() => horizontalClick('left')}>
-            <div className='arrow left'
-                 style={{ marginLeft: 1 + 'rem' }}></div>
+        {currentStyle ? photosCarousel.length > 7 ?
+          <div style={{ width: 3 + 'rem', height: 1 + 'rem' }}
+               onClick={() => updateCarousel('down') }>
+            <div className='arrow down'
+                 style={{ marginLeft: 1.3 + 'rem' }}></div>
           </div>
-          <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
-               onClick={() => horizontalClick('right')}>
-            <div className='arrow right'
-                 style={{ marginRight: 1 + 'rem' }}></div>
-          </div>
-        </HorizontalButtons>
+          : null : null}
       </div>
-    </>
+      <HorizontalButtons>
+        <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
+             onClick={() => horizontalClick('left')}>
+          <div className='arrow left'
+               style={{ marginLeft: 1 + 'rem' }}></div>
+        </div>
+        <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
+             onClick={() => horizontalClick('right')}>
+          <div className='arrow right'
+               style={{ marginRight: 1 + 'rem' }}></div>
+        </div>
+      </HorizontalButtons>
+    </div>
   );
 };
 
