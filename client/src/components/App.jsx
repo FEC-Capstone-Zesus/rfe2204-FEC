@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
+import RatingsReviews from "./RatingsReviews.jsx";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -17,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
 
 const Modal = styled.div`
   z-index: auto;
-  display: ${({loading}) => (loading ? 'block' : 'none')};
+  display: ${({ loading }) => (loading ? 'block' : 'none')};
   position: fixed;
   top: 0;
   left: 0;
@@ -34,23 +35,13 @@ const Container = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const App = ( { loading, product, reviews, styles, metaData, questions, relatedProducts } ) => {
+
+const App = ({ loading, product, reviews, styles, metaData, questions, relatedProducts }) => {
 
   return (
     <>
       <GlobalStyle />
-      <Modal loading={loading} >
-        <Container>
-          <h1 className='loading' >Loading...</h1>
-        </Container>
-      </Modal>
-      <h1>Hello World!!!!!</h1>
-      {product.id ? <p>{ JSON.stringify(product)}</p> : null}
-      {reviews.product ? <p>{ JSON.stringify(reviews)}</p> : null}
-      {styles.product_id ? <p>{ JSON.stringify(styles)}</p> : null}
-      {metaData.product_id ? <p>{ JSON.stringify(metaData)}</p> : null}
-      {questions.length ? <p>{ JSON.stringify(questions)}</p> : null}
-      {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null}
+      <RatingsReviews />
     </>
   );
 };
