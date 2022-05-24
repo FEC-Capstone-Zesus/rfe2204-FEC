@@ -15,7 +15,18 @@ const GlobalStyle = createGlobalStyle`
   h1.loading {
     color: black;
   }
-  `;
+  select {
+    border: 1px solid rgba(0, 0, 0, 100);
+    border-radius: 0;
+    height: 2rem;
+  }
+  button {
+    border: 1px solid rgba(0, 0, 0, 100);
+    border-radius: 0;
+    background: white;
+    height: 2rem;
+  }
+`;
 
 const SubOverview = styled.div`
   margin-left: 7rem;
@@ -34,7 +45,7 @@ const Modal = styled.div`
   background: rgba(250,250,250,0.5);
 `;
 
-const Container = styled.div`
+const Loading = styled.div`
   background: rgba(250,250,250,0);
   position: absolute;
   left: 50%;
@@ -61,9 +72,9 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
     <>
       <GlobalStyle />
         <Modal loading={loading} >
-          <Container>
+          <Loading>
             <h1 className='loading' >Loading...</h1>
-          </Container>
+          </Loading>
         </Modal>
         <Header>
           <img style={{ marginTop: 1.3 + 'rem',
