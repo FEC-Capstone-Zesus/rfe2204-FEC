@@ -10,6 +10,11 @@ const OverviewDIV = styled.div`
   width:100vw;
 `;
 
+const ImageUnderline = styled.div`
+  border: 1px solid rgba(0, 0, 0, 100);
+  width: 2rem;
+`
+
 const Overview = ( { product, reviews, styles } ) => {
   if (styles.product_id) {
     var [currentStyle, changeStyle] = useState(styles.results[0]);
@@ -17,11 +22,9 @@ const Overview = ( { product, reviews, styles } ) => {
     var [photosCarousel, changePhotosCarousel] = useState(styles.results[0].photos);
   }
 
-  const updateCurrentImage = (url, i) => {
-    changeImage(url);
-    currentStyle.photos.filter(photo => photo.thumbnail_url !== url)
-
-    changePhotosCarousel(currentStyle.photos.filter(photo => photo.thumbnail_url !== url))
+  const updateCurrentImage = (photo) => {
+    changeImage(photo.thumbnail_url);
+    changePhotosCarousel(styles.results[0].photos)
   }
   console.log('product: ', product);
   console.log('reviews: ', reviews);
@@ -37,11 +40,17 @@ const Overview = ( { product, reviews, styles } ) => {
               {currentStyle ?
                 photosCarousel.map(photo => {
                     return (
-                      <img key={photo.thumbnail_url}
-                          style={{ width: 2 + 'rem', height: 2 + 'rem' }}
-                          src={photo.thumbnail_url}
-                          onClick={() => updateCurrentImage(photo)}>
-                      </img>
+                      <div key={photo.thumbnail_url}
+                           onClick={() => updateCurrentImage(photo)}>
+                        &nbsp;
+                        <img style={{ width: 2 + 'rem', height: 2 + 'rem' }}
+                             src={photo.thumbnail_url} >
+                        </img>
+                        &nbsp;
+                        {photo.thumbnail_url === currentImage ?
+                          <ImageUnderline />
+                          : null }
+                      </div>
                     )
                 })
                 : null}
