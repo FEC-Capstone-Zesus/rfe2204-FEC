@@ -10,6 +10,7 @@ import getRelatedProducts from "../actions/getRelatedProducts.js";
 import store from "../store/store.js";
 import axios from "axios";
 import AppContainer from "./containers/AppContainer.js"
+import RelateditemsContainer from "./containers/RelateditemsContainer.js"
 
 var actions = [
   getProduct,
