@@ -4,9 +4,11 @@ const app = express()
 const port = 3000
 const axios = require('axios')
 const path = require('path')
+const cors = require('cors')
 
 const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe'
 
+app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/dist')))
 app.use(express.urlencoded({extended:true}))
