@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from "styled-components";
+import ImageGallery from './ImageGallery.jsx';
 
 // Change these styled divs. Keeping here to remember syntax.
 const OverviewDIV = styled.div`
@@ -10,13 +11,17 @@ const OverviewDIV = styled.div`
   width:100vw;
 `;
 
+const ImagesStylesContainer = styled.div`
+  display: flex;
+`
+
 const ImageUnderline = styled.div`
   border: 1px solid rgba(0, 0, 0, 100);
-  width: 2rem;
+  width: 3rem;
 `
 const ImageNoUnderline = styled.div`
   border: 1px solid rgba(0, 0, 0, 0);
-  width: 2rem;
+  width: 3rem;
 `
 
 const Overview = ( { product, reviews, styles } ) => {
@@ -32,41 +37,14 @@ const Overview = ( { product, reviews, styles } ) => {
       changePhotosCarousel(styles.results[0].photos);
     }
   }
-  console.log('product: ', product);
-  console.log('reviews: ', reviews);
-  console.log('styles: ', styles);
+  // console.log('product: ', product);
+  // console.log('reviews: ', reviews);
+  // console.log('styles: ', styles);
   return (
     <>
       <div className='overview-container'>
-        <div className='images-styles-container'>
-          <div className='main-image' style={{ width: 30 + 'rem', height: 30 + 'rem',
-                                               backgroundImage: `url(${currentImage})`,
-                                               backgroundRepeat: 'no-repeat' }} >
-            <div className='image-carousel'>
-              {currentStyle ?
-                photosCarousel.map(photo => {
-                    return (
-                      <div key={photo.thumbnail_url}
-                           onClick={() => updateCurrentImage(photo)}>
-                        &nbsp;
-                        <img style={{ width: 2 + 'rem', height: 2 + 'rem' }}
-                             src={photo.thumbnail_url} >
-                        </img>
-                        &nbsp;
-                        {photo.thumbnail_url === currentImage ?
-                          <ImageUnderline />
-                          : <ImageNoUnderline /> }
-                      </div>
-                    )
-                })
-                : null}
-            </div>
-            <div className='horizontal-buttons'>
-              <div className='left-button'></div>
-              <div className='right-button'></div>
-            </div>
-            <div className='expand-button'></div>
-          </div>
+        <ImagesStylesContainer>
+          <ImageGallery styles={styles} />
           <div className='ratings-styles-container'>
             <div className='ratings'>
             </div>
@@ -93,20 +71,7 @@ const Overview = ( { product, reviews, styles } ) => {
           {/* {product.id ? <p>{ JSON.stringify(product)}</p> : null}
           {reviews.product ? <p>{ JSON.stringify(reviews)}</p> : null}
           {styles.product_id ? <p>{ JSON.stringify(styles)}</p> : null} */}
-        </div>
-        <div className='summary-container'>
-          <div className='summary'>
-            <h5>Summary Title</h5>
-            <p>Summary</p>
-          </div>
-          <div className='features'>
-            <ul>
-              <li>
-                List of features
-              </li>
-            </ul>
-          </div>
-        </div>
+        </ImagesStylesContainer>
       </div>
     </>
   );
