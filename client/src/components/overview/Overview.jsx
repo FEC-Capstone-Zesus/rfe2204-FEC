@@ -14,6 +14,10 @@ const ImageUnderline = styled.div`
   border: 1px solid rgba(0, 0, 0, 100);
   width: 2rem;
 `
+const ImageNoUnderline = styled.div`
+  border: 1px solid rgba(0, 0, 0, 0);
+  width: 2rem;
+`
 
 const Overview = ( { product, reviews, styles } ) => {
   if (styles.product_id) {
@@ -23,8 +27,10 @@ const Overview = ( { product, reviews, styles } ) => {
   }
 
   const updateCurrentImage = (photo) => {
-    changeImage(photo.thumbnail_url);
-    changePhotosCarousel(styles.results[0].photos)
+    if (photo.thumbnail_url !== currentImage) {
+      changeImage(photo.thumbnail_url);
+      changePhotosCarousel(styles.results[0].photos);
+    }
   }
   console.log('product: ', product);
   console.log('reviews: ', reviews);
@@ -49,7 +55,7 @@ const Overview = ( { product, reviews, styles } ) => {
                         &nbsp;
                         {photo.thumbnail_url === currentImage ?
                           <ImageUnderline />
-                          : null }
+                          : <ImageNoUnderline /> }
                       </div>
                     )
                 })
