@@ -7,7 +7,7 @@ const axios = require('axios');
 import Relateditems from '../client/src/components/Relateditems.jsx'
 import RelateditemsContainer from '../client/src/containers/RelateditemsContainer.js'
 
-describe("Test redux components", () => {
+describe("Test related items redux components", () => {
   let store;
   let component;
 
@@ -32,3 +32,4 @@ describe("Test redux components", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 });
+
