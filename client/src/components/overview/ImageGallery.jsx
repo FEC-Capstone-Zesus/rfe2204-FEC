@@ -166,14 +166,10 @@ const ImageGallery = ( { styles } ) => {
       <HorizontalButtons>
         <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
              onClick={() => horizontalClick('left')}>
-          {/* <div style={{ marginLeft: 1 + 'rem',
-                        fontSize: 30 + 'px' }}>←</div> */}
           <ArrowLeft>←</ArrowLeft>
         </div>
         <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
              onClick={() => horizontalClick('right')}>
-          {/* <div style={{ marginRight: 2 + 'rem',
-                        fontSize: 30 + 'px' }}>→</div> */}
           <ArrowRight>→</ArrowRight>
         </div>
       </HorizontalButtons>

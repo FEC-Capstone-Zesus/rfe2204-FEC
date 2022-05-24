@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 import OverviewContainer from "../containers/overview/OverviewContainer.js";
+import Summary from './overview/Summary.jsx';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -113,7 +114,9 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
         </Header>
         <h1>Hello World!!!!!</h1>
         <OverviewContainer />
+        &nbsp;
         <SubOverview>
+          <Summary product={product} />
           {product.id ? <p>{ JSON.stringify(product)}</p> : null}
           {reviews.product ? <p>{ JSON.stringify(reviews)}</p> : null}
           {styles.product_id ? <p>{ JSON.stringify(styles)}</p> : null}
