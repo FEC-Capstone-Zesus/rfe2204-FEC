@@ -63,7 +63,6 @@ const Header = styled.div`
 const SearchBar = styled.div`
   border: 1px solid rgba(0, 0, 0, 100);
   width: 9rem;
-  display: inline-block;
 `
 
 const App = ( { loading, product, reviews, styles, metaData, questions, relatedProducts } ) => {
