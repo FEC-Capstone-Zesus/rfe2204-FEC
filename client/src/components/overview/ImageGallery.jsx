@@ -1,0 +1,150 @@
+import { useState } from 'react';
+import styled from "styled-components";
+
+// Change these styled divs. Keeping here to remember syntax.
+const ImageUnderline = styled.div`
+  border: 1px solid rgba(0, 0, 0, 100);
+  width: 3rem;
+`
+const ImageNoUnderline = styled.div`
+  border: 1px solid rgba(0, 0, 0, 0);
+  width: 3rem;
+`
+const HorizontalButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+var start = 0;
+var end = 8;
+var imageIndex = 0;
+
+const ImageGallery = ( { styles } ) => {
+  if (styles.product_id) {
+    var [currentStyle, changeStyle] = useState(styles.results[0]);
+    var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);
+    var [photosCarousel, changePhotosCarousel] = useState(styles.results[0].photos.slice(0, 8));
+    var max = styles.results[0].photos.length;
+  }
+
+  const updateCurrentImage = (photo) => {
+    if (photo.thumbnail_url !== currentImage) {
+      changeImage(photo.thumbnail_url);
+    }
+  }
+
+  const updateCarousel = (direction) => {
+    if ((start > 0 && direction === 'up') || (end < max && direction === 'down')) {
+      start = direction === 'down' ? start + 1 : start - 1;
+      end = direction === 'down' ? end + 1 : end - 1;
+
+      var photosArray = styles.results[0].photos.slice(start, end);
+
+      if (photosCarousel[0].thumbnail_url === currentImage && direction === 'down') {
+        imageIndex++;
+        changeImage(photosCarousel[1].thumbnail_url);
+      }
+
+      if (photosCarousel[7].thumbnail_url === currentImage && direction === 'up') {
+        imageIndex--;
+        changeImage(photosCarousel[6].thumbnail_url);
+      }
+
+      changePhotosCarousel(photosArray);
+    }
+  }
+
+  const horizontalClick = (direction) => {
+    if ((imageIndex > 0 && direction === 'left') || (imageIndex < max - 1 && direction === 'right')) {
+      imageIndex = direction === 'right' ? imageIndex + 1 : imageIndex - 1;
+
+      if (photosCarousel[0].thumbnail_url === currentImage && direction === 'left') {
+        start--;
+        end--;
+        var photosArray = styles.results[0].photos.slice(start, end);
+        changePhotosCarousel(photosArray);
+      }
+
+      if (photosCarousel[7].thumbnail_url === currentImage && direction === 'right') {
+        start++;
+        end++;
+        var photosArray = styles.results[0].photos.slice(start, end);
+        changePhotosCarousel(photosArray);
+      }
+
+      changeImage(styles.results[0].photos[imageIndex].thumbnail_url);
+
+    }
+
+  }
+
+  return (
+    <>
+      <div className='main-image' style={{ width: 50 + 'rem', height: 40 + 'rem',
+                                           background: 'rgba(226,226,226,100)',
+                                           backgroundImage: `url(${currentImage})`,
+                                           backgroundRepeat: 'no-repeat',
+                                           backgroundSize: 'contain',
+                                           backgroundPosition: 'center' }} >
+        <div className='image-carousel'
+             style={{ position: 'absolute',
+                      marginTop: 1.5 + 'rem',
+                      marginLeft: 1.5 + 'rem',
+                      background: 'rgba(226,226,226,0.5)' }}>
+          {currentStyle ? photosCarousel.length > 7 ?
+            <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}
+                 onClick={() => updateCarousel('up') }>
+              <div className='arrow up'
+                   style={{ marginLeft: 1.3 + 'rem' }}></div>
+            </div>
+                   : null : null}
+          <ImageNoUnderline />
+          <div>
+            {currentStyle ?
+              photosCarousel.map(photo => {
+                  return (
+                    <div key={photo.thumbnail_url}>
+                      <div onClick={() => updateCurrentImage(photo)}
+                           style={{ width: 3 + 'rem', height: 3 + 'rem',
+                                    background: 'rgba(226,226,226,100)',
+                                    backgroundImage: `url(${photo.thumbnail_url})`,
+                                    backgroundSize: 'contain',
+                                    border: '1px solid',
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: 'center' }}>
+                      </div>
+                      {photo.thumbnail_url === currentImage ?
+                        <ImageUnderline />
+                        : <ImageNoUnderline /> }
+                      <ImageNoUnderline />
+                    </div>
+                  )
+              })
+              : null}
+          </div>
+          {currentStyle ? photosCarousel.length > 7 ?
+            <div style={{ width: 3 + 'rem', height: 1 + 'rem' }}
+                 onClick={() => updateCarousel('down') }>
+              <div className='arrow down'
+                   style={{ marginLeft: 1.3 + 'rem' }}></div>
+            </div>
+            : null : null}
+        </div>
+        <HorizontalButtons>
+          <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
+               onClick={() => horizontalClick('left')}>
+            <div className='arrow left'
+                 style={{ marginLeft: 1 + 'rem' }}></div>
+          </div>
+          <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
+               onClick={() => horizontalClick('right')}>
+            <div className='arrow right'
+                 style={{ marginRight: 1 + 'rem' }}></div>
+          </div>
+        </HorizontalButtons>
+      </div>
+    </>
+  );
+};
+
+export default ImageGallery
