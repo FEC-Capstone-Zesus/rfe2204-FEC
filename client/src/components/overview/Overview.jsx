@@ -12,7 +12,16 @@ const OverviewDIV = styled.div`
 
 const Overview = ( { product, reviews, styles } ) => {
   if (styles.product_id) {
-    var [currentStyle, changeStyle] = useState(styles.results[0])
+    var [currentStyle, changeStyle] = useState(styles.results[0]);
+    var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);
+    var [photosCarousel, changePhotosCarousel] = useState(styles.results[0].photos);
+  }
+
+  const updateCurrentImage = (url, i) => {
+    changeImage(url);
+    currentStyle.photos.filter(photo => photo.thumbnail_url !== url)
+
+    changePhotosCarousel(currentStyle.photos.filter(photo => photo.thumbnail_url !== url))
   }
   console.log('product: ', product);
   console.log('reviews: ', reviews);
@@ -21,10 +30,21 @@ const Overview = ( { product, reviews, styles } ) => {
     <>
       <div className='overview-container'>
         <div className='images-styles-container'>
-          <div className='main-image'>
-            <img></img>
+          <div className='main-image' style={{ width: 30 + 'rem', height: 30 + 'rem',
+                                               backgroundImage: `url(${currentImage})`,
+                                               backgroundRepeat: 'no-repeat' }} >
             <div className='image-carousel'>
-              <img></img>
+              {currentStyle ?
+                photosCarousel.map(photo => {
+                    return (
+                      <img key={photo.thumbnail_url}
+                          style={{ width: 2 + 'rem', height: 2 + 'rem' }}
+                          src={photo.thumbnail_url}
+                          onClick={() => updateCurrentImage(photo)}>
+                      </img>
+                    )
+                })
+                : null}
             </div>
             <div className='horizontal-buttons'>
               <div className='left-button'></div>
@@ -33,26 +53,26 @@ const Overview = ( { product, reviews, styles } ) => {
             <div className='expand-button'></div>
           </div>
           <div className='ratings-styles-container'>
-            <div className='ratings'></div>
+            <div className='ratings'>
+            </div>
             <h3>{product.name}</h3>
             {currentStyle ? !currentStyle.sale_price ?
               <p>${currentStyle.original_price}</p> :
               <>
                 <p style={{ color: 'red' }}>${currentStyle.sale_price}</p>
                 <p style={{textDecorationLine: 'line-through',
-                            textDecorationStyle: 'solid'}}>
-                    ${currentStyle.original_price}
-                </p>
+                           textDecorationStyle: 'solid'}}>
+                           ${currentStyle.original_price}</p>
               </>
             : null}
             <div className='styles-container'>
               <img></img>
             </div>
             <div className='selector-container'>
-              <input type='dropdown' name='size'></input>
-              <input type='dropdown' name='qty'></input>
+              <select name='size'></select>
+              <select name='qty'></select>
             </div>
-            <button>Add to cart</button>
+            <button style={{ width: 10 + 'rem', fontWeight: 500 }}>ADD TO CART</button>
             <div className='star-item'></div>
           </div>
           {/* {product.id ? <p>{ JSON.stringify(product)}</p> : null}
