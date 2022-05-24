@@ -10,13 +10,24 @@ const ImageNoUnderline = styled.div`
   border: 1px solid rgba(0, 0, 0, 0);
   width: 3rem;
 `
+
+const ImageCarousel = styled.div`
+  position: absolute;
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
+  background: rgba(226,226,226,0.5);
+  float: 'left';
+`
+
 const HorizontalButtons = styled.div`
+  float: 'right';
   display: flex;
   justify-content: space-between;
+  padding-right: 1.5rem;
 `
 
 var start = 0;
-var end = 8;
+var end = 7;
 var imageIndex = 0;
 
 const ImageGallery = ( { styles } ) => {
@@ -24,7 +35,7 @@ const ImageGallery = ( { styles } ) => {
   if (styles.product_id) {
     var [currentStyle, changeStyle] = useState(styles.results[0]);
     var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);
-    var [photosCarousel, changePhotosCarousel] = useState(styles.results[0].photos.slice(0, 8));
+    var [photosCarousel, changePhotosCarousel] = useState(styles.results[0].photos.slice(0, 7));
     var max = styles.results[0].photos.length;
   }
 
@@ -85,7 +96,7 @@ const ImageGallery = ( { styles } ) => {
   }
 
   return (
-    <div className='main-image' style={{ width: 50 + 'rem', height: 40 + 'rem',
+    <div className='main-image' style={{ width: 45 + 'rem', height: 35 + 'rem',
                                          background: 'rgba(226,226,226,100)',
                                          backgroundImage: `url(${currentImage})`,
                                          backgroundRepeat: 'no-repeat',
@@ -96,14 +107,15 @@ const ImageGallery = ( { styles } ) => {
             style={{ position: 'absolute',
                      marginTop: 1.5 + 'rem',
                      marginLeft: 1.5 + 'rem',
-                     background: 'rgba(226,226,226,0.5)' }}>
-        {currentStyle ? photosCarousel.length > 7 ?
+                     background: 'rgba(226,226,226,0.5)',
+                     float: 'left' }}>
+        {currentStyle ? styles.results[0].photos.length > 7 ?
           <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}
                onClick={() => updateCarousel('up') }>
             <div className='arrow up'
                  style={{ marginLeft: 1.3 + 'rem' }}></div>
           </div>
-                  : null : null}
+          : null : null}
         <ImageNoUnderline />
         <div>
           {currentStyle ?
@@ -129,24 +141,24 @@ const ImageGallery = ( { styles } ) => {
             })
             : null}
         </div>
-        {currentStyle ? photosCarousel.length > 7 ?
+        {currentStyle ? styles.results[0].photos.length > 7 ?
           <div style={{ width: 3 + 'rem', height: 1 + 'rem' }}
                onClick={() => updateCarousel('down') }>
             <div className='arrow down'
-                 style={{ marginLeft: 1.3 + 'rem' }}></div>
+                 style={{ marginLeft: 1.3 + 'rem'}}></div>
           </div>
           : null : null}
       </div>
       <HorizontalButtons>
         <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
              onClick={() => horizontalClick('left')}>
-          <div className='arrow left'
-               style={{ marginLeft: 1 + 'rem' }}></div>
+          <div style={{ marginLeft: 1 + 'rem',
+                        fontSize: 30 + 'px' }}>←</div>
         </div>
         <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
              onClick={() => horizontalClick('right')}>
-          <div className='arrow right'
-               style={{ marginRight: 1 + 'rem' }}></div>
+          <div style={{ marginRight: 2 + 'rem',
+                        fontSize: 30 + 'px' }}>→</div>
         </div>
       </HorizontalButtons>
     </div>
