@@ -11,6 +11,15 @@ import store from "../store/store.js";
 import axios from "axios";
 import AppContainer from "./containers/AppContainer.js"
 
+var actions = [
+  getProduct,
+  getReviews,
+  getStyles,
+  getMetaData,
+  getQuestions,
+  getRelatedProducts
+]
+
 const retrieve = () => {
   store.dispatch({ type: 'START' });
 
@@ -23,14 +32,6 @@ const retrieve = () => {
     axios.get('/products/37311/related')
   ];
 
-  var actions = [
-    getProduct,
-    getReviews,
-    getStyles,
-    getMetaData,
-    getQuestions,
-    getRelatedProducts
-  ]
 
   Promise.all(promises).then(promises => {
 
