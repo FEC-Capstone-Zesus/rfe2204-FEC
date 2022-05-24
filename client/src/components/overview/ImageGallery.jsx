@@ -26,6 +26,21 @@ const HorizontalButtons = styled.div`
   padding-right: 1.5rem;
 `
 
+const ArrowLeft = styled.div`
+  margin-left: 1rem;
+  font-size: 30px;
+  &:hover {
+    cursor: pointer;
+  }
+`
+const ArrowRight = styled.div`
+  margin-right: 1rem;
+  font-size: 30px;
+  &:hover {
+    cursor: pointer;
+  }
+`
+
 var start = 0;
 var end = 7;
 var imageIndex = 0;
@@ -62,9 +77,9 @@ const ImageGallery = ( { styles } ) => {
         changeImage(photosCarousel[1].thumbnail_url);
       }
 
-      if (photosCarousel[7].thumbnail_url === currentImage && direction === 'up') {
+      if (photosCarousel[6].thumbnail_url === currentImage && direction === 'up') {
         imageIndex--;
-        changeImage(photosCarousel[6].thumbnail_url);
+        changeImage(photosCarousel[5].thumbnail_url);
       }
 
       changePhotosCarousel(photosArray);
@@ -82,7 +97,7 @@ const ImageGallery = ( { styles } ) => {
         changePhotosCarousel(photosArray);
       }
 
-      if (photosCarousel[7].thumbnail_url === currentImage && direction === 'right') {
+      if (photosCarousel[6].thumbnail_url === currentImage && direction === 'right') {
         start++;
         end++;
         var photosArray = styles.results[0].photos.slice(start, end);
@@ -92,7 +107,6 @@ const ImageGallery = ( { styles } ) => {
       changeImage(styles.results[0].photos[imageIndex].thumbnail_url);
 
     }
-
   }
 
   return (
@@ -105,7 +119,7 @@ const ImageGallery = ( { styles } ) => {
                                          backgroundPosition: 'center' }} >
       <div className='image-carousel'
             style={{ position: 'absolute',
-                     marginTop: 1.5 + 'rem',
+                     marginTop: 2.5 + 'rem',
                      marginLeft: 1.5 + 'rem',
                      background: 'rgba(226,226,226,0.5)',
                      float: 'left' }}>
@@ -152,13 +166,15 @@ const ImageGallery = ( { styles } ) => {
       <HorizontalButtons>
         <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
              onClick={() => horizontalClick('left')}>
-          <div style={{ marginLeft: 1 + 'rem',
-                        fontSize: 30 + 'px' }}>←</div>
+          {/* <div style={{ marginLeft: 1 + 'rem',
+                        fontSize: 30 + 'px' }}>←</div> */}
+          <ArrowLeft>←</ArrowLeft>
         </div>
         <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
              onClick={() => horizontalClick('right')}>
-          <div style={{ marginRight: 2 + 'rem',
-                        fontSize: 30 + 'px' }}>→</div>
+          {/* <div style={{ marginRight: 2 + 'rem',
+                        fontSize: 30 + 'px' }}>→</div> */}
+          <ArrowRight>→</ArrowRight>
         </div>
       </HorizontalButtons>
     </div>
