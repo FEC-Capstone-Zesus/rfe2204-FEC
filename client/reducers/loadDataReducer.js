@@ -1,12 +1,12 @@
-const loadData = (state = false, action) => {
+const loadDataReducer = (state = 0, action) => {
   switch (action.type) {
     case 'START':
-      return true
+      return 1
     case 'STOP':
-      return false
+      return 0
     default :
       return state
   }
 };
 
-export default loadData;
+export default loadDataReducer;

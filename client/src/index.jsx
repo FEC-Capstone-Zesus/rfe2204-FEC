@@ -10,38 +10,41 @@ import getRelatedProducts from "../actions/getRelatedProducts.js";
 import store from "../store/store.js";
 import axios from "axios";
 import AppContainer from "./containers/AppContainer.js"
+import RelateditemsContainer from "./containers/RelateditemsContainer.js"
 
 const retrieve = () => {
   store.dispatch({ type: 'START' });
-  axios.get('/products/37311')
-    .then((data) => { store.dispatch(getProduct(data.data))})
-    .catch((err)=>console.error(err));
 
-  axios.get('/reviews?product_id=37311&page=1&count=5&sort=helpful')
-    .then((data) => {
-      store.dispatch(getReviews(data.data))})
-    .catch((err)=>console.error(err));
+  var promises = [
+    axios.get('/products/37311'),
+    axios.get('/reviews?product_id=37311&page=1&count=5&sort=helpful'),
+    axios.get('/products/37311/styles'),
+    axios.get('/reviews/meta?product_id=37311'),
+    axios.get('/qa/questions?product_id=37311&page=1&count=5'),
+    axios.get('/products/37311/related')
+  ];
 
-  axios.get('/products/37311/styles')
-    .then((data) => {
-      store.dispatch(getStyles(data.data))})
-    .catch((err)=>console.error(err));
+  var actions = [
+    getProduct,
+    getReviews,
+    getStyles,
+    getMetaData,
+    getQuestions,
+    getRelatedProducts
+  ]
 
-  axios.get('/reviews/meta?product_id=37311')
-    .then((data) => {
-      store.dispatch(getMetaData(data.data))})
-    .catch((err)=>console.error(err));
+  Promise.all(promises).then(promises => {
 
-  axios.get('/qa/questions?product_id=37311&page=1&count=5')
-    .then((data) => {
-      store.dispatch(getQuestions(data.data.results))})
-    .catch((err)=>console.error(err));
+    promises.forEach((data, i) => {
+      store.dispatch(actions[i](data.data));
 
-  axios.get('/products/37311/related')
-    .then((data) => {
-      store.dispatch(getRelatedProducts(data.data))
-      store.dispatch({ type: 'STOP' })})
-    .catch((err)=>console.error(err));
+      if (i === promises.length - 1) {
+        store.dispatch({ type: 'STOP' })
+      }
+    });
+  })
+  .catch(err => console.log('retrieve data err: ', err));
+
 };
 
 render(
@@ -51,7 +54,3 @@ render(
   document.getElementById("root"),
   retrieve
 );
-
-
-
-
