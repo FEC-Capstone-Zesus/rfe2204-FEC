@@ -12,26 +12,28 @@ import axios from "axios";
 import AppContainer from "./containers/AppContainer.js"
 import RelateditemsContainer from "./containers/RelateditemsContainer.js"
 
+var actions = [
+  getProduct,
+  getReviews,
+  getStyles,
+  getMetaData,
+  getQuestions,
+  getRelatedProducts
+]
+
 const retrieve = () => {
   store.dispatch({ type: 'START' });
-
+  // var productID = '37311';
+  var productID = '37315';
   var promises = [
-    axios.get('/products/37311'),
-    axios.get('/reviews?product_id=37311&page=1&count=5&sort=helpful'),
-    axios.get('/products/37311/styles'),
-    axios.get('/reviews/meta?product_id=37311'),
-    axios.get('/qa/questions?product_id=37311&page=1&count=5'),
-    axios.get('/products/37311/related')
+    axios.get(`/products/${productID}`),
+    axios.get(`/reviews?product_id=${productID}&page=1&count=5&sort=helpful`),
+    axios.get(`/products/${productID}/styles`),
+    axios.get(`/reviews/meta?product_id=${productID}`),
+    axios.get(`/qa/questions?product_id=${productID}&page=1&count=5`),
+    axios.get(`/products/${productID}/related`)
   ];
 
-  var actions = [
-    getProduct,
-    getReviews,
-    getStyles,
-    getMetaData,
-    getQuestions,
-    getRelatedProducts
-  ]
 
   Promise.all(promises).then(promises => {
 
