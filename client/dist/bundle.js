@@ -133,6 +133,28 @@ var getStyles = function getStyles(styles) {
 
 /***/ }),
 
+/***/ "./client/actions/setCurrentStyle.js":
+/*!*******************************************!*\
+  !*** ./client/actions/setCurrentStyle.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var setCurrentStyle = function setCurrentStyle(currentStyle) {
+  return {
+    type: 'SET_STYLE',
+    currentStyle: currentStyle
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (setCurrentStyle);
+
+/***/ }),
+
 /***/ "./client/reducers/getMetaDataReducer.js":
 /*!***********************************************!*\
   !*** ./client/reducers/getMetaDataReducer.js ***!
@@ -17988,15 +18010,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_getProduct_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/getProduct.js */ "./client/actions/getProduct.js");
 /* harmony import */ var _actions_getReviews_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/getReviews.js */ "./client/actions/getReviews.js");
 /* harmony import */ var _actions_getStyles_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/getStyles.js */ "./client/actions/getStyles.js");
-/* harmony import */ var _actions_getMetaData_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions/getMetaData.js */ "./client/actions/getMetaData.js");
-/* harmony import */ var _actions_getQuestions_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/getQuestions.js */ "./client/actions/getQuestions.js");
-/* harmony import */ var _actions_getRelatedProducts_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../actions/getRelatedProducts.js */ "./client/actions/getRelatedProducts.js");
-/* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../store/store.js */ "./client/store/store.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _containers_AppContainer_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./containers/AppContainer.js */ "./client/src/containers/AppContainer.js");
-/* harmony import */ var _containers_RelateditemsContainer_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./containers/RelateditemsContainer.js */ "./client/src/containers/RelateditemsContainer.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _actions_setCurrentStyle_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions/setCurrentStyle.js */ "./client/actions/setCurrentStyle.js");
+/* harmony import */ var _actions_getMetaData_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/getMetaData.js */ "./client/actions/getMetaData.js");
+/* harmony import */ var _actions_getQuestions_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../actions/getQuestions.js */ "./client/actions/getQuestions.js");
+/* harmony import */ var _actions_getRelatedProducts_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../actions/getRelatedProducts.js */ "./client/actions/getRelatedProducts.js");
+/* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../store/store.js */ "./client/store/store.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _containers_AppContainer_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./containers/AppContainer.js */ "./client/src/containers/AppContainer.js");
+/* harmony import */ var _containers_RelateditemsContainer_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./containers/RelateditemsContainer.js */ "./client/src/containers/RelateditemsContainer.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -18011,19 +18034,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+var actions = [_actions_getProduct_js__WEBPACK_IMPORTED_MODULE_3__["default"], _actions_getReviews_js__WEBPACK_IMPORTED_MODULE_4__["default"], _actions_getStyles_js__WEBPACK_IMPORTED_MODULE_5__["default"], _actions_getMetaData_js__WEBPACK_IMPORTED_MODULE_7__["default"], _actions_getQuestions_js__WEBPACK_IMPORTED_MODULE_8__["default"], _actions_getRelatedProducts_js__WEBPACK_IMPORTED_MODULE_9__["default"]];
 
 var retrieve = function retrieve() {
-  _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch({
+  _store_store_js__WEBPACK_IMPORTED_MODULE_10__["default"].dispatch({
     type: 'START'
   });
-  var promises = [axios__WEBPACK_IMPORTED_MODULE_10___default().get('/products/37311'), axios__WEBPACK_IMPORTED_MODULE_10___default().get('/reviews?product_id=37311&page=1&count=5&sort=helpful'), axios__WEBPACK_IMPORTED_MODULE_10___default().get('/products/37311/styles'), axios__WEBPACK_IMPORTED_MODULE_10___default().get('/reviews/meta?product_id=37311'), axios__WEBPACK_IMPORTED_MODULE_10___default().get('/qa/questions?product_id=37311&page=1&count=5'), axios__WEBPACK_IMPORTED_MODULE_10___default().get('/products/37311/related')];
-  var actions = [_actions_getProduct_js__WEBPACK_IMPORTED_MODULE_3__["default"], _actions_getReviews_js__WEBPACK_IMPORTED_MODULE_4__["default"], _actions_getStyles_js__WEBPACK_IMPORTED_MODULE_5__["default"], _actions_getMetaData_js__WEBPACK_IMPORTED_MODULE_6__["default"], _actions_getQuestions_js__WEBPACK_IMPORTED_MODULE_7__["default"], _actions_getRelatedProducts_js__WEBPACK_IMPORTED_MODULE_8__["default"]];
+  var promises = [axios__WEBPACK_IMPORTED_MODULE_11___default().get('/products/37311'), axios__WEBPACK_IMPORTED_MODULE_11___default().get('/reviews?product_id=37311&page=1&count=5&sort=helpful'), axios__WEBPACK_IMPORTED_MODULE_11___default().get('/products/37311/styles'), axios__WEBPACK_IMPORTED_MODULE_11___default().get('/reviews/meta?product_id=37311'), axios__WEBPACK_IMPORTED_MODULE_11___default().get('/qa/questions?product_id=37311&page=1&count=5'), axios__WEBPACK_IMPORTED_MODULE_11___default().get('/products/37311/related')];
   Promise.all(promises).then(function (promises) {
     promises.forEach(function (data, i) {
-      _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch(actions[i](data.data));
+      _store_store_js__WEBPACK_IMPORTED_MODULE_10__["default"].dispatch(actions[i](data.data));
+
+      if (i === 2) {
+        _store_store_js__WEBPACK_IMPORTED_MODULE_10__["default"].dispatch((0,_actions_setCurrentStyle_js__WEBPACK_IMPORTED_MODULE_6__["default"])(data.data.results[0]));
+      }
 
       if (i === promises.length - 1) {
-        _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"].dispatch({
+        _store_store_js__WEBPACK_IMPORTED_MODULE_10__["default"].dispatch({
           type: 'STOP'
         });
       }
@@ -18033,9 +18061,9 @@ var retrieve = function retrieve() {
   });
 };
 
-(0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
-  store: _store_store_js__WEBPACK_IMPORTED_MODULE_9__["default"],
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_containers_AppContainer_js__WEBPACK_IMPORTED_MODULE_11__["default"], {})
+(0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
+  store: _store_store_js__WEBPACK_IMPORTED_MODULE_10__["default"],
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(_containers_AppContainer_js__WEBPACK_IMPORTED_MODULE_12__["default"], {})
 }), document.getElementById("root"), retrieve);
 })();
 
