@@ -6,11 +6,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-<<<<<<< HEAD
-*.DS*
-=======
 .DS_Store
->>>>>>> 46b9cb7fa902a0520556452ed9c7e6f37ac4689f
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

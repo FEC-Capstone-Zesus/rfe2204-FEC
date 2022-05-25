@@ -35,10 +35,6 @@ const retrieve = () => {
     axios.get(`/products/${productID}/related`)
   ];
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 46b9cb7fa902a0520556452ed9c7e6f37ac4689f
   Promise.all(promises).then(promises => {
 
     promises.forEach((data, i) => {
