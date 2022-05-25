@@ -27,11 +27,13 @@
     "redux-thunk": "^2.4.1",
     "regenerator-transform": "^0.15.0",
     "regexpu-core": "^5.0.1",
+    "shebang-command": "^2.0.0",
     "strip-final-newline": "^3.0.0",
     "to-fast-properties": "^4.0.0",
     "toidentifier": "^1.0.1",
     "unpipe": "^1.0.0",
-    "uri-js": "^4.4.1"
+    "uri-js": "^4.4.1",
+    "which": "^2.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.12",
