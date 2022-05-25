@@ -86,18 +86,17 @@ var start = 0;
 var end = 7;
 var imageIndex = 0;
 
-const ImageGallery = ( { styles } ) => {
+const ImageGallery = ( { currentStyle } ) => {
 
-  if (styles.product_id) {
-    var [currentStyle, changeStyle] = useState(styles.results[0]);
-    var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);
-    var [photosCarousel, changePhotosCarousel] = useState(styles.results[0].photos.slice(0, 7));
-    var max = styles.results[0].photos.length;
+  if (currentStyle) {
+    var [currentImage, changeImage] = useState(currentStyle.photos[0].thumbnail_url);
+    var [photosCarousel, changePhotosCarousel] = useState(currentStyle.photos.slice(start, end));
+    var max = currentStyle.photos.length;
   }
 
   const updateCurrentImage = (photo) => {
     if (photo.thumbnail_url !== currentImage) {
-      styles.results[0].photos.forEach((currentPhoto, i) => {
+      currentStyle.photos.forEach((currentPhoto, i) => {
         if (currentPhoto.thumbnail_url === photo.thumbnail_url) {
           imageIndex = i;
         }
@@ -111,7 +110,7 @@ const ImageGallery = ( { styles } ) => {
       start = direction === 'down' ? start + 1 : start - 1;
       end = direction === 'down' ? end + 1 : end - 1;
 
-      var photosArray = styles.results[0].photos.slice(start, end);
+      var photosArray = currentStyle.photos.slice(start, end);
 
       if (photosCarousel[0].thumbnail_url === currentImage && direction === 'down') {
         imageIndex++;
@@ -134,18 +133,18 @@ const ImageGallery = ( { styles } ) => {
       if (photosCarousel[0].thumbnail_url === currentImage && direction === 'left') {
         start--;
         end--;
-        var photosArray = styles.results[0].photos.slice(start, end);
+        var photosArray = currentStyle.photos.slice(start, end);
         changePhotosCarousel(photosArray);
       }
 
       if (photosCarousel[6].thumbnail_url === currentImage && direction === 'right') {
         start++;
         end++;
-        var photosArray = styles.results[0].photos.slice(start, end);
+        var photosArray = currentStyle.photos.slice(start, end);
         changePhotosCarousel(photosArray);
       }
 
-      changeImage(styles.results[0].photos[imageIndex].thumbnail_url);
+      changeImage(currentStyle.photos[imageIndex].thumbnail_url);
 
     }
   }
@@ -153,7 +152,7 @@ const ImageGallery = ( { styles } ) => {
   return (
     <MainImage currentImage={currentImage}>
       <ImageCarousel>
-        {currentStyle ? styles.results[0].photos.length > 7 ?
+        {currentStyle ? currentStyle.photos.length > 7 ?
           <CarouselArrow onClick={() => updateCarousel('up') }>
             <div className='arrow up'
                  style={{ marginLeft: 1.3 + 'rem' }}></div>
@@ -178,7 +177,7 @@ const ImageGallery = ( { styles } ) => {
             })
             : null}
         </div>
-        {currentStyle ? styles.results[0].photos.length > 7 ?
+        {currentStyle ? currentStyle.photos.length > 7 ?
           <CarouselArrow onClick={() => updateCarousel('down') }>
             <div className='arrow down'
                  style={{ marginLeft: 1.3 + 'rem', marginBottom: 0.5 + 'rem' }}></div>
