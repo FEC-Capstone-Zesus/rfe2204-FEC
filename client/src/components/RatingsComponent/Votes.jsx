@@ -57,21 +57,21 @@ const Votes = (props) => (
     <RateContainer>
       <Span>4 stars</Span>
       <BarContainer>
-      <Bar4/>
+        <Bar4/>
       </BarContainer>
     </RateContainer>
 
     <RateContainer>
       <Span>3 stars</Span>
       <BarContainer>
-      <Bar3/>
+        <Bar3/>
       </BarContainer>
     </RateContainer>
 
     <RateContainer>
       <Span>2 stars</Span>
       <BarContainer>
-      <Bar2/>
+        <Bar2/>
       </BarContainer>
     </RateContainer>
 
