@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from "styled-components";
-import ImageGallery from './ImageGallery.jsx';
-import RatingsAndStyles from './RatingsAndStyles.jsx'
+import ImageGalleryContainer from '../../containers/overview/ImageGalleryContainer.js';
+import RatingsAndStylesContainer from '../../containers/overview/RatingsAndStylesContainer.js'
 
 const OverviewDIV = styled.div`
   position: fixed;
@@ -34,7 +34,7 @@ const Overview = ( { product, reviews, styles } ) => {
     <>
       <div className='overview-container'>
         <ImagesStylesContainer>
-          <ImageGallery currentStyle={currentStyle} />
+          <ImageGalleryContainer />
           <div className='ratings-styles-container'>
             <div className='ratings'>
             </div>

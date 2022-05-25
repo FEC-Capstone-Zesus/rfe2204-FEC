@@ -760,8 +760,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var _ImageGallery_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ImageGallery.jsx */ "./client/src/components/overview/ImageGallery.jsx");
-/* harmony import */ var _RatingsAndStyles_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RatingsAndStyles.jsx */ "./client/src/components/overview/RatingsAndStyles.jsx");
+/* harmony import */ var _containers_overview_ImageGalleryContainer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../containers/overview/ImageGalleryContainer.js */ "./client/src/containers/overview/ImageGalleryContainer.js");
+/* harmony import */ var _containers_overview_RatingsAndStylesContainer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../containers/overview/RatingsAndStylesContainer.js */ "./client/src/containers/overview/RatingsAndStylesContainer.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -818,9 +818,7 @@ var Overview = function Overview(_ref) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "overview-container",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(ImagesStylesContainer, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ImageGallery_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          currentStyle: currentStyle
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_containers_overview_ImageGalleryContainer_js__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "ratings-styles-container",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "ratings"
@@ -1200,6 +1198,33 @@ var RelateditemsContainer = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)
 
 /***/ }),
 
+/***/ "./client/src/containers/overview/ImageGalleryContainer.js":
+/*!*****************************************************************!*\
+  !*** ./client/src/containers/overview/ImageGalleryContainer.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_overview_ImageGallery_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/overview/ImageGallery.jsx */ "./client/src/components/overview/ImageGallery.jsx");
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentStyle: state.currentStyle
+  };
+};
+
+var ImageGalleryContainer = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps)(_components_overview_ImageGallery_jsx__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ImageGalleryContainer);
+
+/***/ }),
+
 /***/ "./client/src/containers/overview/OverviewContainer.js":
 /*!*************************************************************!*\
   !*** ./client/src/containers/overview/OverviewContainer.js ***!
@@ -1226,6 +1251,44 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var OverviewContainer = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps)(_components_overview_Overview_jsx__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (OverviewContainer);
+
+/***/ }),
+
+/***/ "./client/src/containers/overview/RatingsAndStylesContainer.js":
+/*!*********************************************************************!*\
+  !*** ./client/src/containers/overview/RatingsAndStylesContainer.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_overview_RatingsAndStyles_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/overview/RatingsAndStyles.jsx */ "./client/src/components/overview/RatingsAndStyles.jsx");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions/setCurrentStyle.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    styles: state.styles,
+    reviews: state.reviews
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    changeCurrentStyle: function changeCurrentStyle(currentStyle) {
+      return dispatch(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions/setCurrentStyle.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(currentStyle));
+    }
+  };
+};
+
+var RatingsAndStylesContainer = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_components_overview_RatingsAndStyles_jsx__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RatingsAndStylesContainer);
 
 /***/ }),
 
