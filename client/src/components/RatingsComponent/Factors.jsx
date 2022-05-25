@@ -3,66 +3,69 @@ import styled from 'styled-components';
 
 const BarContainer = styled.div`
   width: 100%; 
-  height: 6px;
+  height: 5px;
   background-color: #f1f1f1;
   padding-left: 10px;
-  max-width: 90%;
+  max-width: 96%;
 `;
 
 const Indicator = styled.div`
   width: 0;
   height: 0;
-  border-top: 15px solid;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
+  border-top: 10px solid;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
   margin-left: 50%;
 `;
 
 const SizeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 20px;
 `;
 const FactorsLable = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  font-size: small;
+  font-size: 0.5em;
   margin-top: 10px;
 `;
-
 
 const WidthContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
+  margin-top: 10px;
 `;
 const ComfortContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
+  margin-top: 10px;
 `;
 const QualityContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
+  margin-top: 10px;
 `;
 const LengthContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
+  margin-top: 10px;
 `;
 const FitContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
+  margin-top: 10px;
+`;
+
+const Span = styled.span`
+  font-size: 0.75em;
 `;
 
 const Factors = () => (
   <>
     <SizeContainer>
-      <div><strong>Size</strong></div>
+      <Span>Size</Span>
       <BarContainer><Indicator/></BarContainer>
       <FactorsLable>
         <label>bad</label>
@@ -72,7 +75,7 @@ const Factors = () => (
     </SizeContainer>
 
     <WidthContainer>
-      <div><strong>Width</strong></div>
+      <Span>Width</Span>
       <BarContainer><Indicator/></BarContainer>
       <FactorsLable>
         <label>bad</label>
@@ -82,7 +85,7 @@ const Factors = () => (
     </WidthContainer>
 
     <ComfortContainer>
-      <div><strong>Comfort</strong></div>
+      <Span>Comfort</Span>
       <BarContainer><Indicator/></BarContainer>
       <FactorsLable>
         <label>bad</label>
@@ -92,7 +95,7 @@ const Factors = () => (
     </ComfortContainer>
 
     <QualityContainer>
-      <div><strong>Quality</strong></div>
+      <Span>Quality</Span>
       <BarContainer><Indicator/></BarContainer>
       <FactorsLable>
         <label>bad</label>
@@ -102,7 +105,7 @@ const Factors = () => (
     </QualityContainer>
 
     <LengthContainer>
-      <div><strong>Length</strong></div>
+      <Span>Length</Span>
       <BarContainer><Indicator/></BarContainer>
       <FactorsLable>
         <label>bad</label>
@@ -112,7 +115,7 @@ const Factors = () => (
     </LengthContainer>
 
     <FitContainer>
-      <div><strong>Fit</strong></div>
+      <Span>Fit</Span>
       <BarContainer><Indicator/></BarContainer>
       <FactorsLable>
         <label>bad</label>

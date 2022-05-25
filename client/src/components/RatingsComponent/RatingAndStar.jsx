@@ -5,13 +5,13 @@ const RatingAndStarStyle = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 20px;
+  height: 10px;
   gap: 20px;
 `;
 
 const RatingAndStar = (props) => (
   <RatingAndStarStyle>
-    <h1>3.5</h1>
+    <h2>3.5</h2>
     <span>*****</span>
   </RatingAndStarStyle>
 );
