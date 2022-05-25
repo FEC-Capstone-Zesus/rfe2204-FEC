@@ -1,20 +1,18 @@
 import { useState } from 'react';
 import styled from "styled-components";
 import ImageGallery from './ImageGallery.jsx';
+import RatingsAndStyles from './RatingsAndStyles.jsx'
 
-// Change these styled divs. Keeping here to remember syntax.
 const OverviewDIV = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   width:100vw;
-`;
-
+`
 const ImagesStylesContainer = styled.div`
   display: flex;
 `
-
 const ImageUnderline = styled.div`
   border: 1px solid rgba(0, 0, 0, 100);
   width: 3rem;
@@ -27,16 +25,8 @@ const ImageNoUnderline = styled.div`
 const Overview = ( { product, reviews, styles } ) => {
   if (styles.product_id) {
     var [currentStyle, changeStyle] = useState(styles.results[0]);
-    var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);
-    var [photosCarousel, changePhotosCarousel] = useState(styles.results[0].photos);
   }
 
-  const updateCurrentImage = (photo) => {
-    if (photo.thumbnail_url !== currentImage) {
-      changeImage(photo.thumbnail_url);
-      changePhotosCarousel(styles.results[0].photos);
-    }
-  }
   // console.log('product: ', product);
   // console.log('reviews: ', reviews);
   // console.log('styles: ', styles);
@@ -44,7 +34,7 @@ const Overview = ( { product, reviews, styles } ) => {
     <>
       <div className='overview-container'>
         <ImagesStylesContainer>
-          <ImageGallery styles={styles} />
+          <ImageGallery currentStyle={currentStyle} />
           <div className='ratings-styles-container'>
             <div className='ratings'>
             </div>
