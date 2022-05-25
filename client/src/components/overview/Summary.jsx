@@ -14,7 +14,6 @@ const Features = styled.div`
 `
 
 const Summary = ( { product } ) => {
-  console.log(product.features);
   return (
     <SummaryDiv>
       <Slogan>
@@ -24,7 +23,7 @@ const Summary = ( { product } ) => {
       <Features>
         <ul style={{ listStyle: 'none' }}>
           {product.id ? product.features.map(qualities =>
-            <li key={qualities}
+            <li key={qualities.feature}
                 style={{ fontSize: 80 + '%' }}>✓ {qualities.value} {qualities.feature}</li>)
           : null}
         </ul>
