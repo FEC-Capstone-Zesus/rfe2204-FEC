@@ -24,7 +24,7 @@ const ImageCarousel = styled.div`
 const ImageThumbnail = styled.div`
   width: 3rem;
   height: 3rem;
-  border: 1px solid;
+  border: 1.2px solid;
   background: rgba(226,226,226,100);
   background-image: ${({currentThumbnail}) => (currentThumbnail ? `url(${currentThumbnail})` : "url('')")};
   background-repeat: no-repeat;
@@ -42,8 +42,8 @@ const CarouselArrow = styled.div`
   }
 `
 const ImageUnderline = styled.div`
-  border: 1px solid rgba(0, 0, 0, 100);
-  width: 3rem;
+  border: 2px solid rgba(0, 0, 0, 100);
+  width: 2.9rem;
 `
 const ImageNoUnderline = styled.div`
   border: 1px solid rgba(0, 0, 0, 0);
