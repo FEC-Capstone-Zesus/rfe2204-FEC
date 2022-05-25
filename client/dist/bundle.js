@@ -343,14 +343,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _getProductReducer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./getProductReducer.js */ "./client/reducers/getProductReducer.js");
 /* harmony import */ var _getReviewsReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getReviewsReducer.js */ "./client/reducers/getReviewsReducer.js");
 /* harmony import */ var _getStylesReducer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getStylesReducer.js */ "./client/reducers/getStylesReducer.js");
 /* harmony import */ var _getMetaDataReducer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getMetaDataReducer.js */ "./client/reducers/getMetaDataReducer.js");
 /* harmony import */ var _getQuestionsReducer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getQuestionsReducer.js */ "./client/reducers/getQuestionsReducer.js");
 /* harmony import */ var _getRelatedProductsReducer_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./getRelatedProductsReducer.js */ "./client/reducers/getRelatedProductsReducer.js");
-/* harmony import */ var _loadDataReducer_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./loadDataReducer.js */ "./client/reducers/loadDataReducer.js");
+/* harmony import */ var _setCurrentStyleReducer_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./setCurrentStyleReducer.js */ "./client/reducers/setCurrentStyleReducer.js");
+/* harmony import */ var _loadDataReducer_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./loadDataReducer.js */ "./client/reducers/loadDataReducer.js");
 
 
 
@@ -358,19 +359,47 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // Need to import reducers once written in an actions dir
 
-var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_7__.combineReducers)({
-  // TODO: Add reducers as key/value pairs
+
+var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_8__.combineReducers)({
   product: _getProductReducer_js__WEBPACK_IMPORTED_MODULE_0__["default"],
   reviews: _getReviewsReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"],
   styles: _getStylesReducer_js__WEBPACK_IMPORTED_MODULE_2__["default"],
   metaData: _getMetaDataReducer_js__WEBPACK_IMPORTED_MODULE_3__["default"],
   questions: _getQuestionsReducer_js__WEBPACK_IMPORTED_MODULE_4__["default"],
   relatedProducts: _getRelatedProductsReducer_js__WEBPACK_IMPORTED_MODULE_5__["default"],
-  loading: _loadDataReducer_js__WEBPACK_IMPORTED_MODULE_6__["default"]
+  currentStyle: _setCurrentStyleReducer_js__WEBPACK_IMPORTED_MODULE_6__["default"],
+  loading: _loadDataReducer_js__WEBPACK_IMPORTED_MODULE_7__["default"]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootReducer);
+
+/***/ }),
+
+/***/ "./client/reducers/setCurrentStyleReducer.js":
+/*!***************************************************!*\
+  !*** ./client/reducers/setCurrentStyleReducer.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var setCurrentStyleReducer = function setCurrentStyleReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'SET_STYLE':
+      return action.currentStyle || {};
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (setCurrentStyleReducer);
 
 /***/ }),
 
@@ -562,11 +591,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var initialState = {
-  //TODO: key/value pairs with appropriate names and data types (empty)
   loading: 1,
   product: {},
   reviews: {},
   styles: {},
+  currentStyle: {},
   metaData: {},
   questions: [],
   relatedProducts: []
