@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import getProduct from "../actions/getProduct.js";
 import getReviews from "../actions/getReviews.js";
 import getStyles from "../actions/getStyles.js";
+import setCurrentStyle from "../actions/setCurrentStyle.js";
 import getMetaData from "../actions/getMetaData.js";
 import getQuestions from "../actions/getQuestions.js";
 import getRelatedProducts from "../actions/getRelatedProducts.js";
@@ -34,14 +35,17 @@ const retrieve = () => {
     axios.get(`/products/${productID}/related`)
   ];
 
-
   Promise.all(promises).then(promises => {
 
     promises.forEach((data, i) => {
       store.dispatch(actions[i](data.data));
 
+      if (i === 2) {
+        store.dispatch(setCurrentStyle(data.data.results[0]));
+      }
+
       if (i === promises.length - 1) {
-        store.dispatch({ type: 'STOP' })
+        store.dispatch({ type: 'STOP' });
       }
     });
   })

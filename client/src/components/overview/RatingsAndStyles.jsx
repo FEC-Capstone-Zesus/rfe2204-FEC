@@ -29,7 +29,9 @@ const RatingsAndStyles = ( { product, styles, currentStyle, reviews, changeCurre
 
   var averageRating = 0;
   if (reviews.product_id) {
+    var ratings = Object.entries(reviews.ratings);
     averageRating = reviews.ratings.reduce((total, rating) => {
+
       return total + rating;
     }, 0) / reviews.ratings.length;
   }
