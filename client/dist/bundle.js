@@ -558,48 +558,55 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
- // Change these styled divs. Keeping here to remember syntax.
 
 
 
 var MainImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__MainImage",
   componentId: "sc-1xqshsz-0"
-})(["width:45rem;height:35rem;background:rgba(226,226,226,100);background-image:", ";background-repeat:no-repeat;background-origin:content-box;background-size:75%;background-position:center;"], function (_ref) {
+})(["width:45rem;height:35rem;background:rgba(226,226,226,100);background-image:", ";background-repeat:no-repeat;background-origin:content-box;background-size:contain;background-position:center;&:hover{cursor:zoom-in;}"], function (_ref) {
   var currentImage = _ref.currentImage;
   return currentImage ? "url(".concat(currentImage, ")") : "url('')";
 });
 var ImageCarousel = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__ImageCarousel",
   componentId: "sc-1xqshsz-1"
-})(["position:absolute;margin-top:2.5rem;margin-left:1.5rem;background:rgba(226,226,226,0.5);float:left;"]);
+})(["background:rgba(226,226,226,0.5);position:absolute;margin-top:3.5rem;margin-left:1.5rem;float:left;"]);
 var ImageThumbnail = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__ImageThumbnail",
   componentId: "sc-1xqshsz-2"
-})(["width:3rem;height:3rem;border:1px solid;background:rgba(226,226,226,100);background-image:", ";background-repeat:no-repeat;background-size:contain;background-position:center;"], function (_ref2) {
+})(["width:3rem;height:3rem;border:1px solid;background:rgba(226,226,226,100);background-image:", ";background-repeat:no-repeat;background-size:contain;background-position:center;&:hover{cursor:pointer;}"], function (_ref2) {
   var currentThumbnail = _ref2.currentThumbnail;
   return currentThumbnail ? "url(".concat(currentThumbnail, ")") : "url('')";
 });
+var CarouselArrow = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "ImageGallery__CarouselArrow",
+  componentId: "sc-1xqshsz-3"
+})(["width:3rem;height:1rem;&:hover{cursor:pointer;}"]);
 var ImageUnderline = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__ImageUnderline",
-  componentId: "sc-1xqshsz-3"
+  componentId: "sc-1xqshsz-4"
 })(["border:1px solid rgba(0,0,0,100);width:3rem;"]);
 var ImageNoUnderline = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__ImageNoUnderline",
-  componentId: "sc-1xqshsz-4"
+  componentId: "sc-1xqshsz-5"
 })(["border:1px solid rgba(0,0,0,0);width:3rem;"]);
 var HorizontalButtons = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__HorizontalButtons",
-  componentId: "sc-1xqshsz-5"
-})(["float:'right';display:flex;justify-content:space-between;padding-right:1.5rem;"]);
+  componentId: "sc-1xqshsz-6"
+})(["float:right;display:flex;justify-content:space-between;width:38rem;padding-right:3rem;padding-top:16rem;"]);
+var ArrowContainer = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "ImageGallery__ArrowContainer",
+  componentId: "sc-1xqshsz-7"
+})(["z-position:1;width:1rem;height:3rem;"]);
 var ArrowLeft = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__ArrowLeft",
-  componentId: "sc-1xqshsz-6"
-})(["margin-left:1rem;font-size:30px;&:hover{cursor:pointer;}"]);
+  componentId: "sc-1xqshsz-8"
+})(["background:rgba(226,226,226,0.5);margin-left:1rem;padding-left:1rem;width:3rem;font-size:30px;&:hover{cursor:pointer;}"]);
 var ArrowRight = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__ArrowRight",
-  componentId: "sc-1xqshsz-7"
-})(["margin-right:1rem;font-size:30px;&:hover{cursor:pointer;}"]);
+  componentId: "sc-1xqshsz-9"
+})(["background:rgba(226,226,226,0.5);padding-left:1rem;width:3rem;font-size:30px;&:hover{cursor:pointer;}"]);
 var start = 0;
 var end = 7;
 var imageIndex = 0;
@@ -682,11 +689,7 @@ var ImageGallery = function ImageGallery(_ref3) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(MainImage, {
     currentImage: currentImage,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(ImageCarousel, {
-      children: [currentStyle ? styles.results[0].photos.length > 7 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        style: {
-          width: 3 + 'rem',
-          height: 1 + 'rem'
-        },
+      children: [currentStyle ? styles.results[0].photos.length > 7 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(CarouselArrow, {
         onClick: function onClick() {
           return updateCarousel('up');
         },
@@ -712,38 +715,27 @@ var ImageGallery = function ImageGallery(_ref3) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {}), photo.thumbnail_url === currentImage ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageUnderline, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {})]
           }, photo.thumbnail_url);
         }) : null
-      }), currentStyle ? styles.results[0].photos.length > 7 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        style: {
-          width: 3 + 'rem',
-          height: 1 + 'rem'
-        },
+      }), currentStyle ? styles.results[0].photos.length > 7 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(CarouselArrow, {
         onClick: function onClick() {
           return updateCarousel('down');
         },
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
           className: "arrow down",
           style: {
-            marginLeft: 1.3 + 'rem'
+            marginLeft: 1.3 + 'rem',
+            marginBottom: 0.5 + 'rem'
           }
         })
       }) : null : null]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(HorizontalButtons, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        style: {
-          width: 1 + 'rem',
-          height: 3 + 'rem'
-        },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ArrowContainer, {
         onClick: function onClick() {
           return horizontalClick('left');
         },
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ArrowLeft, {
           children: "\u2190"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        style: {
-          width: 1 + 'rem',
-          height: 3 + 'rem'
-        },
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ArrowContainer, {
         onClick: function onClick() {
           return horizontalClick('right');
         },

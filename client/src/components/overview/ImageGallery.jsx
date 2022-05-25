@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styled from "styled-components";
 
-// Change these styled divs. Keeping here to remember syntax.
 const MainImage = styled.div`
   width: 45rem;
   height: 35rem;
@@ -9,14 +8,17 @@ const MainImage = styled.div`
   background-image: ${({currentImage}) => (currentImage ? `url(${currentImage})` : "url('')")};
   background-repeat: no-repeat;
   background-origin: content-box;
-  background-size: 75%;
+  background-size: contain;
   background-position: center;
+  &:hover {
+    cursor: zoom-in;
+  }
 `
 const ImageCarousel = styled.div`
-  position: absolute;
-  margin-top: 2.5rem;
-  margin-left: 1.5rem;
   background: rgba(226,226,226,0.5);
+  position: absolute;
+  margin-top: 3.5rem;
+  margin-left: 1.5rem;
   float: left;
 `
 const ImageThumbnail = styled.div`
@@ -28,6 +30,16 @@ const ImageThumbnail = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  &:hover {
+    cursor: pointer;
+  }
+`
+const CarouselArrow = styled.div`
+  width: 3rem;
+  height: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
 `
 const ImageUnderline = styled.div`
   border: 1px solid rgba(0, 0, 0, 100);
@@ -38,20 +50,32 @@ const ImageNoUnderline = styled.div`
   width: 3rem;
 `
 const HorizontalButtons = styled.div`
-  float: 'right';
+  float: right;
   display: flex;
   justify-content: space-between;
-  padding-right: 1.5rem;
+  width: 38rem;
+  padding-right: 3rem;
+  padding-top: 16rem;
+`
+const ArrowContainer = styled.div`
+  z-position: 1;
+  width: 1rem;
+  height: 3rem;
 `
 const ArrowLeft = styled.div`
+  background: rgba(226,226,226,0.5);
   margin-left: 1rem;
+  padding-left: 1rem;
+  width: 3rem;
   font-size: 30px;
   &:hover {
     cursor: pointer;
   }
 `
 const ArrowRight = styled.div`
-  margin-right: 1rem;
+  background: rgba(226,226,226,0.5);
+  padding-left: 1rem;
+  width: 3rem;
   font-size: 30px;
   &:hover {
     cursor: pointer;
@@ -130,11 +154,10 @@ const ImageGallery = ( { styles } ) => {
     <MainImage currentImage={currentImage}>
       <ImageCarousel>
         {currentStyle ? styles.results[0].photos.length > 7 ?
-          <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}
-               onClick={() => updateCarousel('up') }>
+          <CarouselArrow onClick={() => updateCarousel('up') }>
             <div className='arrow up'
                  style={{ marginLeft: 1.3 + 'rem' }}></div>
-          </div>
+          </CarouselArrow>
           : <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}></div> : null}
         <ImageNoUnderline />
         <div>
@@ -156,22 +179,19 @@ const ImageGallery = ( { styles } ) => {
             : null}
         </div>
         {currentStyle ? styles.results[0].photos.length > 7 ?
-          <div style={{ width: 3 + 'rem', height: 1 + 'rem' }}
-               onClick={() => updateCarousel('down') }>
+          <CarouselArrow onClick={() => updateCarousel('down') }>
             <div className='arrow down'
-                 style={{ marginLeft: 1.3 + 'rem'}}></div>
-          </div>
+                 style={{ marginLeft: 1.3 + 'rem', marginBottom: 0.5 + 'rem' }}></div>
+          </CarouselArrow>
           : null : null}
       </ImageCarousel>
       <HorizontalButtons>
-        <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
-             onClick={() => horizontalClick('left')}>
+        <ArrowContainer onClick={() => horizontalClick('left')}>
           <ArrowLeft>←</ArrowLeft>
-        </div>
-        <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
-             onClick={() => horizontalClick('right')}>
+        </ArrowContainer>
+        <ArrowContainer onClick={() => horizontalClick('right')}>
           <ArrowRight>→</ArrowRight>
-        </div>
+        </ArrowContainer>
       </HorizontalButtons>
     </MainImage>
   );
