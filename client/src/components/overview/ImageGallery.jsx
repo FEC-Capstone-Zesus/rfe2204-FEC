@@ -15,9 +15,9 @@ const MainImage = styled.div`
   }
 `
 const ImageCarousel = styled.div`
-  background: rgba(226,226,226,0.5);
+  background: rgba(226,226,226,0.7);
   position: absolute;
-  margin-top: 3.5rem;
+  margin-top: 2rem;
   margin-left: 1.5rem;
   float: left;
 `
@@ -35,7 +35,10 @@ const ImageThumbnail = styled.div`
   }
 `
 const CarouselArrow = styled.div`
-  width: 3rem;
+  background: rgba(0,0,0,0.2);
+  border: 0.1px solid;
+  border-color: rgba(0,0,0);
+  width: 3.1rem;
   height: 1rem;
   &:hover {
     cursor: pointer;
@@ -46,8 +49,8 @@ const ImageUnderline = styled.div`
   width: 2.9rem;
 `
 const ImageNoUnderline = styled.div`
-  border: 1px solid rgba(0, 0, 0, 0);
-  width: 3rem;
+  border: 2px solid rgba(0, 0, 0, 0);
+  width: 2.9rem;
 `
 const HorizontalButtons = styled.div`
   float: right;
@@ -158,7 +161,6 @@ const ImageGallery = ( { currentStyle } ) => {
                  style={{ marginLeft: 1.3 + 'rem' }}></div>
           </CarouselArrow>
           : <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}></div> : null}
-        <ImageNoUnderline />
         <div>
           {currentStyle ?
             photosCarousel.map(photo => {
