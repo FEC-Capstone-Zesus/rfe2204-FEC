@@ -18,3 +18,4 @@ const Ratings = (props) => (
 );
 
 export default Ratings;
+

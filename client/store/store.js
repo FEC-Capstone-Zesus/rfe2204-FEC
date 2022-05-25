@@ -3,7 +3,8 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers/main.js';
 
 const initialState = {
-  loading: true,
+  //TODO: key/value pairs with appropriate names and data types (empty)
+  loading: 1,
   product: {},
   reviews: {},
   styles: {},
