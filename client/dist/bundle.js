@@ -562,36 +562,50 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var MainImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "ImageGallery__MainImage",
+  componentId: "sc-1xqshsz-0"
+})(["width:45rem;height:35rem;background:rgba(226,226,226,100);background-image:", ";background-repeat:no-repeat;background-origin:content-box;background-size:75%;background-position:center;"], function (_ref) {
+  var currentImage = _ref.currentImage;
+  return currentImage ? "url(".concat(currentImage, ")") : "url('')";
+});
+var ImageCarousel = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "ImageGallery__ImageCarousel",
+  componentId: "sc-1xqshsz-1"
+})(["position:absolute;margin-top:2.5rem;margin-left:1.5rem;background:rgba(226,226,226,0.5);float:left;"]);
+var ImageThumbnail = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "ImageGallery__ImageThumbnail",
+  componentId: "sc-1xqshsz-2"
+})(["width:3rem;height:3rem;border:1px solid;background:rgba(226,226,226,100);background-image:", ";background-repeat:no-repeat;background-size:contain;background-position:center;"], function (_ref2) {
+  var currentThumbnail = _ref2.currentThumbnail;
+  return currentThumbnail ? "url(".concat(currentThumbnail, ")") : "url('')";
+});
 var ImageUnderline = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__ImageUnderline",
-  componentId: "sc-1xqshsz-0"
+  componentId: "sc-1xqshsz-3"
 })(["border:1px solid rgba(0,0,0,100);width:3rem;"]);
 var ImageNoUnderline = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__ImageNoUnderline",
-  componentId: "sc-1xqshsz-1"
+  componentId: "sc-1xqshsz-4"
 })(["border:1px solid rgba(0,0,0,0);width:3rem;"]);
-var ImageCarousel = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
-  displayName: "ImageGallery__ImageCarousel",
-  componentId: "sc-1xqshsz-2"
-})(["position:absolute;margin-top:1.5rem;margin-left:1.5rem;background:rgba(226,226,226,0.5);float:'left';"]);
 var HorizontalButtons = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__HorizontalButtons",
-  componentId: "sc-1xqshsz-3"
+  componentId: "sc-1xqshsz-5"
 })(["float:'right';display:flex;justify-content:space-between;padding-right:1.5rem;"]);
 var ArrowLeft = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__ArrowLeft",
-  componentId: "sc-1xqshsz-4"
+  componentId: "sc-1xqshsz-6"
 })(["margin-left:1rem;font-size:30px;&:hover{cursor:pointer;}"]);
 var ArrowRight = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
   displayName: "ImageGallery__ArrowRight",
-  componentId: "sc-1xqshsz-5"
+  componentId: "sc-1xqshsz-7"
 })(["margin-right:1rem;font-size:30px;&:hover{cursor:pointer;}"]);
 var start = 0;
 var end = 7;
 var imageIndex = 0;
 
-var ImageGallery = function ImageGallery(_ref) {
-  var styles = _ref.styles;
+var ImageGallery = function ImageGallery(_ref3) {
+  var styles = _ref3.styles;
 
   if (styles.product_id) {
     var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(styles.results[0]),
@@ -665,27 +679,9 @@ var ImageGallery = function ImageGallery(_ref) {
     }
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: "main-image",
-    style: {
-      width: 45 + 'rem',
-      height: 35 + 'rem',
-      background: 'rgba(226,226,226,100)',
-      backgroundImage: "url(".concat(currentImage, ")"),
-      backgroundRepeat: 'no-repeat',
-      backgroundOrigin: 'content-box',
-      backgroundSize: 75 + '%',
-      backgroundPosition: 'center'
-    },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      className: "image-carousel",
-      style: {
-        position: 'absolute',
-        marginTop: 2.5 + 'rem',
-        marginLeft: 1.5 + 'rem',
-        background: 'rgba(226,226,226,0.5)',
-        "float": 'left'
-      },
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(MainImage, {
+    currentImage: currentImage,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(ImageCarousel, {
       children: [currentStyle ? styles.results[0].photos.length > 7 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         style: {
           width: 3 + 'rem',
@@ -700,24 +696,20 @@ var ImageGallery = function ImageGallery(_ref) {
             marginLeft: 1.3 + 'rem'
           }
         })
-      }) : null : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        style: {
+          width: 3 + 'rem',
+          height: 1 + 'rem'
+        }
+      }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         children: currentStyle ? photosCarousel.map(function (photo) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageThumbnail, {
               onClick: function onClick() {
                 return updateCurrentImage(photo);
               },
-              style: {
-                width: 3 + 'rem',
-                height: 3 + 'rem',
-                background: 'rgba(226,226,226,100)',
-                backgroundImage: "url(".concat(photo.thumbnail_url, ")"),
-                backgroundSize: 'contain',
-                border: '1px solid',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center'
-              }
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {}), photo.thumbnail_url === currentImage ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageUnderline, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {})]
+              currentThumbnail: photo.thumbnail_url
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {}), photo.thumbnail_url === currentImage ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageUnderline, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ImageNoUnderline, {})]
           }, photo.thumbnail_url);
         }) : null
       }), currentStyle ? styles.results[0].photos.length > 7 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {

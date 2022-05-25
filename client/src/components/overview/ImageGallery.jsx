@@ -2,6 +2,33 @@ import { useState } from 'react';
 import styled from "styled-components";
 
 // Change these styled divs. Keeping here to remember syntax.
+const MainImage = styled.div`
+  width: 45rem;
+  height: 35rem;
+  background: rgba(226,226,226,100);
+  background-image: ${({currentImage}) => (currentImage ? `url(${currentImage})` : "url('')")};
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-size: 75%;
+  background-position: center;
+`
+const ImageCarousel = styled.div`
+  position: absolute;
+  margin-top: 2.5rem;
+  margin-left: 1.5rem;
+  background: rgba(226,226,226,0.5);
+  float: left;
+`
+const ImageThumbnail = styled.div`
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid;
+  background: rgba(226,226,226,100);
+  background-image: ${({currentThumbnail}) => (currentThumbnail ? `url(${currentThumbnail})` : "url('')")};
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+`
 const ImageUnderline = styled.div`
   border: 1px solid rgba(0, 0, 0, 100);
   width: 3rem;
@@ -10,22 +37,12 @@ const ImageNoUnderline = styled.div`
   border: 1px solid rgba(0, 0, 0, 0);
   width: 3rem;
 `
-
-const ImageCarousel = styled.div`
-  position: absolute;
-  margin-top: 1.5rem;
-  margin-left: 1.5rem;
-  background: rgba(226,226,226,0.5);
-  float: 'left';
-`
-
 const HorizontalButtons = styled.div`
   float: 'right';
   display: flex;
   justify-content: space-between;
   padding-right: 1.5rem;
 `
-
 const ArrowLeft = styled.div`
   margin-left: 1rem;
   font-size: 30px;
@@ -110,45 +127,28 @@ const ImageGallery = ( { styles } ) => {
   }
 
   return (
-    <div className='main-image' style={{ width: 45 + 'rem', height: 35 + 'rem',
-                                         background: 'rgba(226,226,226,100)',
-                                         backgroundImage: `url(${currentImage})`,
-                                         backgroundRepeat: 'no-repeat',
-                                         backgroundOrigin: 'content-box',
-                                         backgroundSize: 75 + '%',
-                                         backgroundPosition: 'center' }} >
-      <div className='image-carousel'
-            style={{ position: 'absolute',
-                     marginTop: 2.5 + 'rem',
-                     marginLeft: 1.5 + 'rem',
-                     background: 'rgba(226,226,226,0.5)',
-                     float: 'left' }}>
+    <MainImage currentImage={currentImage}>
+      <ImageCarousel>
         {currentStyle ? styles.results[0].photos.length > 7 ?
           <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}
                onClick={() => updateCarousel('up') }>
             <div className='arrow up'
                  style={{ marginLeft: 1.3 + 'rem' }}></div>
           </div>
-          : null : null}
+          : <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}></div> : null}
         <ImageNoUnderline />
         <div>
           {currentStyle ?
             photosCarousel.map(photo => {
                 return (
                   <div key={photo.thumbnail_url}>
-                    <div onClick={() => updateCurrentImage(photo)}
-                          style={{ width: 3 + 'rem', height: 3 + 'rem',
-                                   background: 'rgba(226,226,226,100)',
-                                   backgroundImage: `url(${photo.thumbnail_url})`,
-                                   backgroundSize: 'contain',
-                                   border: '1px solid',
-                                   backgroundRepeat: 'no-repeat',
-                                   backgroundPosition: 'center' }}>
-                    </div>
+                    <ImageThumbnail onClick={() => updateCurrentImage(photo)}
+                                    currentThumbnail={photo.thumbnail_url}/>
                     <ImageNoUnderline />
                     {photo.thumbnail_url === currentImage ?
                       <ImageUnderline />
                       : <ImageNoUnderline /> }
+                    <ImageNoUnderline />
                     <ImageNoUnderline />
                   </div>
                 )
@@ -162,7 +162,7 @@ const ImageGallery = ( { styles } ) => {
                  style={{ marginLeft: 1.3 + 'rem'}}></div>
           </div>
           : null : null}
-      </div>
+      </ImageCarousel>
       <HorizontalButtons>
         <div style={{ width: 1 + 'rem', height: 3 + 'rem' }}
              onClick={() => horizontalClick('left')}>
@@ -173,7 +173,7 @@ const ImageGallery = ( { styles } ) => {
           <ArrowRight>→</ArrowRight>
         </div>
       </HorizontalButtons>
-    </div>
+    </MainImage>
   );
 };
 
