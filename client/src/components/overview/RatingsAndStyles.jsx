@@ -30,9 +30,11 @@ const RatingsAndStyles = ( { product, styles, currentStyle, reviews, changeCurre
   var averageRating = 0;
   if (reviews.product_id) {
     var ratings = Object.entries(reviews.ratings);
-    averageRating = ratings.reduce((total, rating) => {
-      return total + (rating[0] * rating[1]);
-    }, 0) / reviews.ratings.length;
+    var total = 0;
+    averageRating = ratings.reduce((stars, rating) => {
+      total = total + rating[1];
+      return stars + (rating[0] * rating[1]);
+    }, 0) / total;
   }
 
   const updateCurrentStyle = (style) => {
@@ -59,7 +61,7 @@ const RatingsAndStyles = ( { product, styles, currentStyle, reviews, changeCurre
           {reviews.product_id ?
             <>
               <h3>{Math.floor(averageRating)}</h3>
-              <p>{(⭐️).repeat(Math.floor(averageRating))}</p>
+              <p>{('⭐️').repeat(Math.floor(averageRating))}</p>
             </>
           : null}
         </span>

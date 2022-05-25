@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import RatingsAndStyles from "../../components/overview/RatingsAndStyles.jsx";
-import setCurrentStyle from "../../actions/setCurrentStyle.js"
+import setCurrentStyle from "../../../actions/setCurrentStyle.js"
 
 const mapStateToProps = (state) => (
   {
