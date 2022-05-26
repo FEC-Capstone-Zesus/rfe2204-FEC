@@ -6,15 +6,23 @@ const RatingsStyles = styled.div`
   height: 35rem;
   padding: 2rem 1.5rem 2rem 1.5rem;
 `
+const StyledImage = styled.img`
+  width: 4rem;
+  height: 4rem;
+  padding: 0 0.5rem 0 0.5rem;
+  border-radius: 50%;
+`
+
+StyledImage.defaultProps = {
+  src: '',
+};
 
 var totalQty = 0;
 
 const RatingsAndStyles = ( { product, styles, currentStyle, reviews, changeCurrentStyle } ) => {
 
   if (styles.product_id) {
-    var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);
-    var [photosCarousel, changePhotosCarousel] = useState(styles.results[0].photos.slice(0, 7));
-    var max = styles.results[0].photos.length;
+    // var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);
   }
 
   if (currentStyle.style_id) {
@@ -86,7 +94,8 @@ const RatingsAndStyles = ( { product, styles, currentStyle, reviews, changeCurre
         <h3 style={{ fontWeight: 'bolder' }}>STYLE > {currentStyle.style_id ?
             <p style={{ fontWeight: 'lighter' }}>{currentStyle.name.toUpperCase()}</p> : null}</h3>
         {styles.product_id ? styles.results.map(style =>
-        <img key={style.style_id} src={style.photos[0].thumbnail_url} ></img>) : null}
+        <StyledImage key={style.style_id} src={style.photos[0].thumbnail_url} />
+        /* <img key={style.style_id} src={style.photos[0].thumbnail_url} ></img> */) : null}
       </div>
       <div className='selector-container'>
         <select name='size' onChange={(e) => changeSelect(e)}>
