@@ -91,13 +91,14 @@ const ArrowRight = styled.div`
 var start = 0;
 var end = 7;
 var imageIndex = 0;
+var max = 0;
 
 const ImageGallery = ( { currentStyle } ) => {
+  var [currentImage, changeImage] = useState('');
+  var [photosCarousel, changePhotosCarousel] = useState([]);
 
   if (currentStyle.style_id) {
-    var [currentImage, changeImage] = useState(currentStyle.photos[0].thumbnail_url);
-    var [photosCarousel, changePhotosCarousel] = useState(currentStyle.photos.slice(start, end));
-    var max = currentStyle.photos.length;
+    max = currentStyle.photos.length;
   }
 
   const updateCurrentImage = (photo) => {
@@ -112,20 +113,22 @@ const ImageGallery = ( { currentStyle } ) => {
   }
 
   const updateCarousel = (direction) => {
+    var tempPhotosCarousel = photosCarousel.length ? [...photosCarousel] : currentStyle.photos.slice(start, end);
+
     if ((start > 0 && direction === 'up') || (end < max && direction === 'down')) {
       start = direction === 'down' ? start + 1 : start - 1;
       end = direction === 'down' ? end + 1 : end - 1;
 
       var photosArray = currentStyle.photos.slice(start, end);
 
-      if (photosCarousel[0].thumbnail_url === currentImage && direction === 'down') {
+      if (tempPhotosCarousel[0].thumbnail_url === currentImage && direction === 'down') {
         imageIndex++;
-        changeImage(photosCarousel[1].thumbnail_url);
+        changeImage(tempPhotosCarousel[1].thumbnail_url);
       }
 
-      if (photosCarousel[6].thumbnail_url === currentImage && direction === 'up') {
+      if (tempPhotosCarousel[6].thumbnail_url === currentImage && direction === 'up') {
         imageIndex--;
-        changeImage(photosCarousel[5].thumbnail_url);
+        changeImage(tempPhotosCarousel[5].thumbnail_url);
       }
 
       changePhotosCarousel(photosArray);
@@ -133,17 +136,19 @@ const ImageGallery = ( { currentStyle } ) => {
   }
 
   const horizontalClick = (direction) => {
+    var tempPhotosCarousel = photosCarousel.length ? [...photosCarousel] : currentStyle.photos.slice(start, end);
+
     if ((imageIndex > 0 && direction === 'left') || (imageIndex < max - 1 && direction === 'right')) {
       imageIndex = direction === 'right' ? imageIndex + 1 : imageIndex - 1;
 
-      if (photosCarousel[0].thumbnail_url === currentImage && direction === 'left') {
+      if (tempPhotosCarousel[0].thumbnail_url === currentImage && direction === 'left') {
         start--;
         end--;
         var photosArray = currentStyle.photos.slice(start, end);
         changePhotosCarousel(photosArray);
       }
 
-      if (photosCarousel[6].thumbnail_url === currentImage && direction === 'right') {
+      if (tempPhotosCarousel[6].thumbnail_url === currentImage && direction === 'right') {
         start++;
         end++;
         var photosArray = currentStyle.photos.slice(start, end);
@@ -156,7 +161,7 @@ const ImageGallery = ( { currentStyle } ) => {
   }
 
   return (
-    <MainImage currentImage={currentImage}>
+    <MainImage currentImage={currentStyle.style_id ? currentStyle.photos[0].thumbnail_url : ''}>
       <ImageCarousel>
         {currentStyle.style_id ? currentStyle.photos.length > 7 ?
           <CarouselArrow onClick={() => updateCarousel('up') }>
@@ -165,8 +170,7 @@ const ImageGallery = ( { currentStyle } ) => {
           </CarouselArrow>
           : <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}></div> : null}
         <div>
-          {currentStyle.style_id ?
-            photosCarousel.map((photo, i) => {
+          {photosCarousel.length ? photosCarousel.map((photo, i) => {
                 return (
                   <div key={photo.thumbnail_url}>
                     <ImageThumbnail onClick={() => updateCurrentImage(photo)}
@@ -178,9 +182,21 @@ const ImageGallery = ( { currentStyle } ) => {
                     <ImageNoUnderline />
                     {i < 6 ? <ImageNoUnderline /> : null}
                   </div>
-                )
-            })
-            : null}
+                )})
+           : currentStyle.style_id ? currentStyle.photos.slice(start, end).map((photo, i) => {
+                return (
+                  <div key={photo.thumbnail_url}>
+                    <ImageThumbnail onClick={() => updateCurrentImage(photo)}
+                                    currentThumbnail={photo.thumbnail_url}/>
+                    <ImageNoUnderline />
+                    {i === 0 ?
+                      <ImageUnderline />
+                      : <ImageNoUnderline /> }
+                    <ImageNoUnderline />
+                    {i < 6 ? <ImageNoUnderline /> : null}
+                  </div>
+                )})
+           : null}
         </div>
         {currentStyle.style_id ? currentStyle.photos.length > 7 ?
           <CarouselArrow onClick={() => updateCarousel('down') }>
