@@ -17,7 +17,7 @@ const MainImage = styled.div`
 const ImageCarousel = styled.div`
   background: rgba(226,226,226,0.7);
   position: absolute;
-  margin-top: 1.9rem;
+  margin-top: 2rem;
   margin-left: 1.5rem;
   float: left;
   &:hover {
@@ -176,7 +176,7 @@ const ImageGallery = ( { currentStyle } ) => {
                       <ImageUnderline />
                       : <ImageNoUnderline /> }
                     <ImageNoUnderline />
-                    <ImageNoUnderline />
+                    {i < 6 ? <ImageNoUnderline /> : null}
                   </div>
                 )
             })
