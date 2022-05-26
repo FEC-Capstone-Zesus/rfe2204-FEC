@@ -6,6 +6,8 @@ import getMetaDataReducer from './getMetaDataReducer.js';
 import getQuestionsReducer from './getQuestionsReducer.js';
 import getRelatedProductsReducer from './getRelatedProductsReducer.js';
 import setCurrentStyleReducer from './setCurrentStyleReducer.js';
+import setImagesArrayReducer from './setImagesArrayReducer.js';
+import setMainImageReducer from './setMainImageReducer.js';
 import loadDataReducer from './loadDataReducer.js';
 
 var rootReducer = combineReducers({
@@ -16,6 +18,8 @@ var rootReducer = combineReducers({
   questions: getQuestionsReducer,
   relatedProducts: getRelatedProductsReducer,
   currentStyle: setCurrentStyleReducer,
+  mainImage: setMainImageReducer,
+  imagesArray: setImagesArrayReducer,
   loading: loadDataReducer
 });
 
