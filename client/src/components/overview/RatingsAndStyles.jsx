@@ -6,23 +6,36 @@ const RatingsStyles = styled.div`
   height: 35rem;
   padding: 2rem 1.5rem 2rem 1.5rem;
 `
-const StyledImage = styled.img`
-  width: 4rem;
-  height: 4rem;
-  padding: 0 0.5rem 0 0.5rem;
-  border-radius: 50%;
+const StyledImagesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  width: 20rem;
 `
-
+const StyledImageDiv = styled.span`
+  display: inline-block;
+  position: relative;
+  margin-right: -1rem;
+  width: 6rem;
+  padding: 0.5rem 0;
+  overflow: hidden;
+`
+const StyledImage = styled.img`
+  width: 6rem;
+  object-fit: cover;
+  clip-path: circle();
+`
 StyledImage.defaultProps = {
   src: '',
 };
 
 var totalQty = 0;
 
-const RatingsAndStyles = ( { product, styles, currentStyle, reviews, changeCurrentStyle } ) => {
+const RatingsAndStyles = ( { product, styles, currentStyle, reviews, metaData, changeCurrentStyle } ) => {
 
   if (styles.product_id) {
-    // var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);
+    // var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);;
   }
 
   if (currentStyle.style_id) {
@@ -36,13 +49,14 @@ const RatingsAndStyles = ( { product, styles, currentStyle, reviews, changeCurre
   }
 
   var averageRating = 0;
-  if (reviews.product_id) {
-    var ratings = Object.entries(reviews.ratings);
+  if (metaData.product_id) {
+    var ratings = Object.entries(metaData.ratings);
     var total = 0;
     averageRating = ratings.reduce((stars, rating) => {
-      total = total + rating[1];
+      total = total + parseInt(rating[1]);
       return stars + (rating[0] * rating[1]);
     }, 0) / total;
+    console.log('averageRating: ', averageRating);
   }
 
   const updateCurrentStyle = (style) => {
@@ -66,20 +80,19 @@ const RatingsAndStyles = ( { product, styles, currentStyle, reviews, changeCurre
     <RatingsStyles>
       <div className='ratings'>
         <span>
-          {reviews.product_id ?
+          {metaData.product_id ?
             <>
-              <h3>{Math.floor(averageRating)}</h3>
-              <p>{('⭐️').repeat(Math.floor(averageRating))}</p>
+              <span>{('⭐️').repeat(Math.floor(averageRating))}</span>
             </>
           : null}
         </span>
+        &nbsp;
         <span>
           Read all reviews
         </span>
       </div>
-      <h3>{product.id ? product.category.toUpperCase() : null}</h3>
+      <div><h5>{product.id ? product.category.toUpperCase() : null}</h5></div>
       <h1>{product.id ? product.name : null}</h1>
-      &nbsp;
       {currentStyle.style_id ? !currentStyle.sale_price ?
         <p>${currentStyle.original_price}</p> :
         <>
@@ -91,20 +104,28 @@ const RatingsAndStyles = ( { product, styles, currentStyle, reviews, changeCurre
       : null}
       &nbsp;
       <div className='styles-container'>
-        <h3 style={{ fontWeight: 'bolder' }}>STYLE > {currentStyle.style_id ?
-            <p style={{ fontWeight: 'lighter' }}>{currentStyle.name.toUpperCase()}</p> : null}</h3>
-        {styles.product_id ? styles.results.map(style =>
-        <StyledImage key={style.style_id} src={style.photos[0].thumbnail_url} />
-        /* <img key={style.style_id} src={style.photos[0].thumbnail_url} ></img> */) : null}
+        <div>
+        <span style={{ fontWeight: 'bolder' }}>STYLE ></span> {currentStyle.style_id ?
+            <span style={{ fontWeight: 'lighter' }}>{currentStyle.name.toUpperCase()}</span>: null}
+        </div>
+        &nbsp;
+        <StyledImagesContainer>
+        {styles.product_id ? styles.results.map(style => {
+          return (<StyledImageDiv key={style.style_id}>
+                    <StyledImage src={style.photos[0].thumbnail_url} />
+                  </StyledImageDiv>)
+          })
+        : null}
+        </StyledImagesContainer>
       </div>
       <div className='selector-container'>
         <select name='size' onChange={(e) => changeSelect(e)}>
-          <option value='Select Size' >Select Size</option>
+          <option value='Select Size' >SELECT SIZE</option>
           {currentStyle.style_id ? skusArray.map(sku =>
           <option key={sku[0]} value={skus[0] + ' ' + sku[1].size} >{sku[1].size}</option>) : null}
         </select>
         <select name='qty' onChange={(e) => changeSelect(e)}>
-          <option value='Select Qty' >Select Qty</option>
+          <option value='Select Qty' ></option>
           {currentStyle.style_id ? styles.results.map((style, i) =>
           <option key={style.style_id} value={i + 1} >{i + 1}</option>) : null}
         </select>
