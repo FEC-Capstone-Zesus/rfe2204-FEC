@@ -8,6 +8,8 @@ const initialState = {
   reviews: {},
   styles: {},
   currentStyle: {},
+  mainImage: '',
+  imagesArray: [],
   metaData: {},
   questions: [],
   relatedProducts: []
