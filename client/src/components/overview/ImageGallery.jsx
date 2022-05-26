@@ -88,108 +88,83 @@ const ArrowRight = styled.div`
   }
 `
 
-var start = 0;
-var end = 7;
 var imageIndex = 0;
 var max = 0;
 
-const ImageGallery = ( { currentStyle } ) => {
-  var [currentImage, changeImage] = useState('');
-  var [photosCarousel, changePhotosCarousel] = useState([]);
+const ImageGallery = ( { mainImage, imagesArray, changeMainImage } ) => {
 
-  if (currentStyle.style_id) {
-    max = currentStyle.photos.length;
+  if (imagesArray.length) {
+    max = imagesArray.length;
   }
 
   const updateCurrentImage = (photo) => {
-    if (photo.thumbnail_url !== currentImage) {
-      currentStyle.photos.forEach((currentPhoto, i) => {
+    if (photo.thumbnail_url !== mainImage) {
+      imagesArray.forEach((currentPhoto, i) => {
         if (currentPhoto.thumbnail_url === photo.thumbnail_url) {
           imageIndex = i;
         }
       })
-      changeImage(photo.thumbnail_url);
+      changeMainImage(photo.thumbnail_url);
     }
   }
 
   const updateCarousel = (direction) => {
-    var tempPhotosCarousel = photosCarousel.length ? [...photosCarousel] : currentStyle.photos.slice(start, end);
-
     if ((start > 0 && direction === 'up') || (end < max && direction === 'down')) {
-      start = direction === 'down' ? start + 1 : start - 1;
-      end = direction === 'down' ? end + 1 : end - 1;
+      direction === 'down' ? setStart(start + 1) : setStart(start - 1);
+      direction === 'down' ? setEnd(end + 1) : setEnd(end - 1);
 
-      var photosArray = currentStyle.photos.slice(start, end);
-
-      if (tempPhotosCarousel[0].thumbnail_url === currentImage && direction === 'down') {
+      if (imagesArray[start].thumbnail_url === mainImage && direction === 'down') {
         imageIndex++;
-        changeImage(tempPhotosCarousel[1].thumbnail_url);
+        changeMainImage(imagesArray[start + 1].thumbnail_url);
       }
 
-      if (tempPhotosCarousel[6].thumbnail_url === currentImage && direction === 'up') {
+      if (imagesArray[end].thumbnail_url === mainImage && direction === 'up') {
         imageIndex--;
-        changeImage(tempPhotosCarousel[5].thumbnail_url);
+        changeMainImage(imagesArray[end - 1].thumbnail_url);
       }
-
-      changePhotosCarousel(photosArray);
     }
   }
 
   const horizontalClick = (direction) => {
-    var tempPhotosCarousel = photosCarousel.length ? [...photosCarousel] : currentStyle.photos.slice(start, end);
-
     if ((imageIndex > 0 && direction === 'left') || (imageIndex < max - 1 && direction === 'right')) {
       imageIndex = direction === 'right' ? imageIndex + 1 : imageIndex - 1;
-
-      if (tempPhotosCarousel[0].thumbnail_url === currentImage && direction === 'left') {
-        start--;
-        end--;
-        var photosArray = currentStyle.photos.slice(start, end);
-        changePhotosCarousel(photosArray);
+      console.log('start: ', start);
+      console.log('end: ', end);
+      console.log('imagesArray[start]: ', imagesArray[start]);
+      console.log('imagesArray[end]: ', imagesArray[end]);
+      console.log('mainImage: ', mainImage);
+      if (imagesArray[start].thumbnail_url === mainImage && direction === 'left') {
+        setStart(start - 1);
+        setEnd(end - 1);
       }
 
-      if (tempPhotosCarousel[6].thumbnail_url === currentImage && direction === 'right') {
-        start++;
-        end++;
-        var photosArray = currentStyle.photos.slice(start, end);
-        changePhotosCarousel(photosArray);
+      if (imagesArray[end - 1].thumbnail_url === mainImage && direction === 'right') {
+        setStart(start + 1);
+        setEnd(end + 1);
       }
 
-      changeImage(currentStyle.photos[imageIndex].thumbnail_url);
+      changeMainImage(imagesArray[imageIndex].thumbnail_url);
 
     }
   }
 
   return (
-    <MainImage currentImage={currentStyle.style_id ? currentStyle.photos[0].thumbnail_url : ''}>
+    <MainImage currentImage={mainImage ? mainImage : ''}>
       <ImageCarousel>
-        {currentStyle.style_id ? currentStyle.photos.length > 7 ?
+        {imagesArray.length ? imagesArray.length > 7 ?
           <CarouselArrow onClick={() => updateCarousel('up') }>
             <div className='arrow up'
                  style={{ marginLeft: 1.3 + 'rem' }}></div>
           </CarouselArrow>
           : <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}></div> : null}
         <div>
-          {photosCarousel.length ? photosCarousel.map((photo, i) => {
+          {imagesArray.length ? imagesArray.slice(start, end).map((photo, i) => {
                 return (
                   <div key={photo.thumbnail_url}>
                     <ImageThumbnail onClick={() => updateCurrentImage(photo)}
                                     currentThumbnail={photo.thumbnail_url}/>
                     <ImageNoUnderline />
-                    {photo.thumbnail_url === currentImage ?
-                      <ImageUnderline />
-                      : <ImageNoUnderline /> }
-                    <ImageNoUnderline />
-                    {i < 6 ? <ImageNoUnderline /> : null}
-                  </div>
-                )})
-           : currentStyle.style_id ? currentStyle.photos.slice(start, end).map((photo, i) => {
-                return (
-                  <div key={photo.thumbnail_url}>
-                    <ImageThumbnail onClick={() => updateCurrentImage(photo)}
-                                    currentThumbnail={photo.thumbnail_url}/>
-                    <ImageNoUnderline />
-                    {i === 0 ?
+                    {photo.thumbnail_url === mainImage ?
                       <ImageUnderline />
                       : <ImageNoUnderline /> }
                     <ImageNoUnderline />
@@ -198,7 +173,7 @@ const ImageGallery = ( { currentStyle } ) => {
                 )})
            : null}
         </div>
-        {currentStyle.style_id ? currentStyle.photos.length > 7 ?
+        {imagesArray.length ? imagesArray.length > 7 ?
           <CarouselArrow onClick={() => updateCarousel('down') }>
             <div className='arrow down'
                  style={{ marginLeft: 1.3 + 'rem', marginBottom: 0.5 + 'rem' }}></div>
