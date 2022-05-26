@@ -12,7 +12,9 @@ const initialState = {
   imagesArray: [],
   metaData: {},
   questions: [],
-  relatedProducts: []
+  relatedProducts: [],
+  start: 0,
+  end: 7
 };
 
 var store = createStore(
