@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
-import RatingsReviews from "./RatingsReviews.jsx";
+import RatingsReviewsContainer from "./RatingsReviewsContainer.js";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -54,7 +54,7 @@ const App = ({ loading, product, reviews, styles, metaData, questions, relatedPr
       {questions.length ? <p>{ JSON.stringify(questions)}</p> : null}
       {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null} */}
       <RelateditemsContainer />
-      <RatingsReviews />
+      <RatingsReviewsContainer />
     </>
   );
 };
