@@ -10,6 +10,7 @@ const initialState = {
   currentStyle: {},
   mainImage: '',
   imagesArray: [],
+  slice: [0, 7],
   metaData: {},
   questions: [],
   relatedProducts: []
