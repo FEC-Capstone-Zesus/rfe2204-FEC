@@ -1,7 +1,8 @@
 # Logs
 logs
 *.log
-*bundle.js*
+*bundle.js
+*bundle.js.map
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
