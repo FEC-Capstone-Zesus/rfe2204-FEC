@@ -3,7 +3,8 @@ import ImageGallery from "../../components/overview/ImageGallery.jsx";
 
 const mapStateToProps = (state) => (
   {
-    currentStyle: state.currentStyle
+    currentStyle: state.currentStyle,
+    currentStyleId: state.currentStyleId
   }
 );
 
