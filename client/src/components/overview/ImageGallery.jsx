@@ -17,9 +17,12 @@ const MainImage = styled.div`
 const ImageCarousel = styled.div`
   background: rgba(226,226,226,0.7);
   position: absolute;
-  margin-top: 2rem;
+  margin-top: 1.9rem;
   margin-left: 1.5rem;
   float: left;
+  &:hover {
+    cursor: default;
+  }
 `
 const ImageThumbnail = styled.div`
   width: 3rem;
@@ -67,7 +70,7 @@ const ArrowContainer = styled.div`
 `
 const ArrowLeft = styled.div`
   background: rgba(226,226,226,0.5);
-  margin-left: 1rem;
+  margin-left: 3rem;
   padding-left: 1rem;
   width: 3rem;
   font-size: 30px;
@@ -91,7 +94,7 @@ var imageIndex = 0;
 
 const ImageGallery = ( { currentStyle } ) => {
 
-  if (currentStyle) {
+  if (currentStyle.style_id) {
     var [currentImage, changeImage] = useState(currentStyle.photos[0].thumbnail_url);
     var [photosCarousel, changePhotosCarousel] = useState(currentStyle.photos.slice(start, end));
     var max = currentStyle.photos.length;
@@ -155,15 +158,15 @@ const ImageGallery = ( { currentStyle } ) => {
   return (
     <MainImage currentImage={currentImage}>
       <ImageCarousel>
-        {currentStyle ? currentStyle.photos.length > 7 ?
+        {currentStyle.style_id ? currentStyle.photos.length > 7 ?
           <CarouselArrow onClick={() => updateCarousel('up') }>
             <div className='arrow up'
                  style={{ marginLeft: 1.3 + 'rem' }}></div>
           </CarouselArrow>
           : <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}></div> : null}
         <div>
-          {currentStyle ?
-            photosCarousel.map(photo => {
+          {currentStyle.style_id ?
+            photosCarousel.map((photo, i) => {
                 return (
                   <div key={photo.thumbnail_url}>
                     <ImageThumbnail onClick={() => updateCurrentImage(photo)}
@@ -179,7 +182,7 @@ const ImageGallery = ( { currentStyle } ) => {
             })
             : null}
         </div>
-        {currentStyle ? currentStyle.photos.length > 7 ?
+        {currentStyle.style_id ? currentStyle.photos.length > 7 ?
           <CarouselArrow onClick={() => updateCarousel('down') }>
             <div className='arrow down'
                  style={{ marginLeft: 1.3 + 'rem', marginBottom: 0.5 + 'rem' }}></div>
