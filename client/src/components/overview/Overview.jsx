@@ -35,7 +35,8 @@ const Overview = ( { product, reviews, styles } ) => {
       <div className='overview-container'>
         <ImagesStylesContainer>
           <ImageGalleryContainer />
-          <div className='ratings-styles-container'>
+          <RatingsAndStylesContainer />
+          {/* <div className='ratings-styles-container'>
             <div className='ratings'>
             </div>
             <h3>{product.name}</h3>
@@ -57,7 +58,7 @@ const Overview = ( { product, reviews, styles } ) => {
             </div>
             <button style={{ width: 10 + 'rem', fontWeight: 500 }}>ADD TO CART</button>
             <div className='star-item'></div>
-          </div>
+          </div> */}
           {/* {product.id ? <p>{ JSON.stringify(product)}</p> : null}
           {reviews.product ? <p>{ JSON.stringify(reviews)}</p> : null}
           {styles.product_id ? <p>{ JSON.stringify(styles)}</p> : null} */}
