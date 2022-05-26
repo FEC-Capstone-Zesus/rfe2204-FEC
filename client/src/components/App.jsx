@@ -1,5 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
 import RatingsReviewsContainer from "./RatingsReviewsContainer.js";
+import RelateditemsContainer from "../containers/RelateditemsContainer.js";
+
 
 const GlobalStyle = createGlobalStyle`
   body {
