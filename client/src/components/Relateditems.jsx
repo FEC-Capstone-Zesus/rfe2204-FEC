@@ -1,5 +1,5 @@
 const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) => {
-  {console.log(styles)}
+  //{console.log(styles)}
   return (
     <div className = "card">
       <div className = "cardBody">

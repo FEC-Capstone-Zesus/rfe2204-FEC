@@ -260,7 +260,6 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
       res.sendStatus(201);
     })
     .catch((err) => {
-      //console.log(err);
       res.sendStatus(404)
     })
 })
