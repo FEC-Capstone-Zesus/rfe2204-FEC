@@ -5,6 +5,7 @@ import useAxios from 'axios-hooks'
 
 const Relatedcard = ({ item, currentProduct, metaData }) => {
   let starCount = 0;
+  let commonChars = []
 
   const [showModal, setshowModal] = useState(false);
 
@@ -26,14 +27,26 @@ const Relatedcard = ({ item, currentProduct, metaData }) => {
   if (errorReviews) return <p>Error!</p>
 
   if(reviewsRelated) {
+    let reviewsRelatedKeys = Object.keys(reviewsRelated.characteristics)
+    let metaDataKeys = Object.keys(metaData.characteristics)
     let reviewCount = Object.values(reviewsRelated.ratings).map((item) => Number(item))
     let total = reviewCount.reduce((a,b) => a + b)
     for(let i = 0; i < reviewCount.length; i++) {
       starCount += (reviewCount[i]/total) * (i + 1);
     }
+    if(reviewsRelatedKeys.length >= metaDataKeys.length) {
+      metaDataKeys.forEach(function(item) {if(reviewsRelatedKeys.includes(item)) {
+        commonChars.push(item);
+      }})
+    } else {
+      reviewsRelatedKeys.forEach(function(item) {if(metaDataKeys.includes(item)) {
+        commonChars.push(item);
+      }})
+    }
   }
   console.log(reviewsRelated)
   console.log(metaData)
+  console.log(commonChars)
 
   return (
     <div className = "card">
@@ -49,11 +62,11 @@ const Relatedcard = ({ item, currentProduct, metaData }) => {
               </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>hello</td>
-              <td>hello</td>
-              <td>hello</td>
-            </tr>
+            {commonChars.map((item) => <tr>
+              <td>{metaData.characteristics[item].value}</td>
+              <td>{item}</td>
+              <td>{reviewsRelated.characteristics[item].value}</td>
+              </tr>)}
             </tbody>
           </table>
           <button id = "close" onClick = {() => setshowModal(false)}> Close </button>
