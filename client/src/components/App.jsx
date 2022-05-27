@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
+import RatingsReviewsContainer from "../containers/RatingsReviewsContainer.js";
 import OverviewContainer from "../containers/overview/OverviewContainer.js";
 import Summary from './overview/Summary.jsx';
 import RelateditemsContainer from "../containers/RelateditemsContainer.js";
@@ -60,7 +61,7 @@ const SubOverview = styled.div`
 
 const Modal = styled.div`
   z-index: auto;
-  display: ${({loading}) => (loading ? 'block' : 'none')};
+  display: ${({ loading }) => (loading ? 'block' : 'none')};
   position: fixed;
   top: 0;
   left: 0;
@@ -126,6 +127,9 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
           {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null}
           <RelateditemsContainer />
         </SubOverview>
+        &nbsp;
+        <RatingsReviewsContainer />
+
     </>
   );
 };
