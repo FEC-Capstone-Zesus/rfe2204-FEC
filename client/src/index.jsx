@@ -5,6 +5,8 @@ import getProduct from "../actions/getProduct.js";
 import getReviews from "../actions/getReviews.js";
 import getStyles from "../actions/getStyles.js";
 import setCurrentStyle from "../actions/setCurrentStyle.js";
+import setImagesArray from "../actions/setImagesArray.js";
+import setMainImage from "../actions/setMainImage.js";
 import getMetaData from "../actions/getMetaData.js";
 import getQuestions from "../actions/getQuestions.js";
 import getRelatedProducts from "../actions/getRelatedProducts.js";
@@ -42,6 +44,8 @@ const retrieve = () => {
 
       if (i === 2) {
         store.dispatch(setCurrentStyle(data.data.results[0]));
+        store.dispatch(setImagesArray(data.data.results[0].photos));
+        store.dispatch(setMainImage(data.data.results[0].photos[0].thumbnail_url));
       }
 
       if (i === promises.length - 1) {
