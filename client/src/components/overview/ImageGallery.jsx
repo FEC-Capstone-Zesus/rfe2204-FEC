@@ -88,7 +88,6 @@ const ArrowRight = styled.div`
   }
 `
 
-var imageIndex = 0;
 var max = 0;
 
 const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice } ) => {
@@ -111,7 +110,7 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
   const updateCarousel = (direction) => {
     if ((slice[0] > 0 && direction === 'up') || (slice[1] < max && direction === 'down')) {
       var newSlice = direction === 'down' ? [slice[0] + 1, slice[1] + 1] : [slice[0] - 1, slice[1] - 1];
-      var newIndex = slice[2]
+      var newIndex = slice[2];
 
       if (imagesArray[slice[0]].thumbnail_url === mainImage && direction === 'down') {
         newIndex = slice[2] + 1;
