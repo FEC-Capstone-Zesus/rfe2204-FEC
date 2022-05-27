@@ -51,7 +51,7 @@ const retrieve = () => {
 
       if (i === promises.length - 1) {
         store.dispatch({ type: 'STOP' });
-        store.dispatch(setSlice([0, 7]));
+        store.dispatch(setSlice([0, 7, 0]));
       }
     });
   })
