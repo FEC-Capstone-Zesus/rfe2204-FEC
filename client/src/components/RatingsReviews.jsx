@@ -15,7 +15,7 @@ const RatingsContainer = styled.div`
   flex-basis: 25%; 
 `;
 const ReviewsContainer = styled.div`
-  flex-basis: 65%; 
+  flex-basis: 65%;
 `;
 const H4 = styled.h4`
   padding-left: 4%;
@@ -35,11 +35,11 @@ class RatingsReviews extends React.Component {
         <RatingsReviewsContainer>
 
           <RatingsContainer>
-            <Ratings /> 
+            <Ratings ratings={this.props.metaData.ratings} recommended={this.props.metaData.recommended} factors={this.props.metaData.characteristics}/> 
           </RatingsContainer>
 
           <ReviewsContainer>
-            <Reviews />
+            <Reviews reviews={this.props.reviews}/>
           </ReviewsContainer>
           
         </RatingsReviewsContainer>

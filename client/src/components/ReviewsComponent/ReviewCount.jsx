@@ -13,8 +13,8 @@ const H4 = styled.h4`
 
 const ReviewCount = (state) => (
   <H4># reviews, sorted by
-    <Select>
-      <option value="none" selected disabled hidden>Sort On</option>
+    <Select defaultValue={"DEFAULT"}>
+      <option value="DEFAULT" disabled>Sort On</option>
       <option value="helpful">Helpful</option>
       <option value="newest">Newest</option>
       <option value="relevant">Relevant</option>

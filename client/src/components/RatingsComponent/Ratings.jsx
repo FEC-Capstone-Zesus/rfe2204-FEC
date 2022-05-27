@@ -8,14 +8,15 @@ const RatingContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-const Ratings = (props) => (
-  <RatingContainer>
-    <RatingAndStar />
-    <Votes />
-    <Factors />
-  </RatingContainer>
-);
+const Ratings = ({ ratings, recommended, factors }) => {
+  return (
+    <RatingContainer>
+      <RatingAndStar rate={ ratings }/>
+      <Votes recommended={ recommended} rateNumber={ ratings }/>
+      <Factors factors={ factors }/>
+    </RatingContainer>
+  );
+};
 
 export default Ratings;
 

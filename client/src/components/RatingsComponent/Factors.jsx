@@ -15,7 +15,7 @@ const Indicator = styled.div`
   border-top: 10px solid;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  margin-left: 50%;
+  margin-left: ${props => props.score};
 `;
 
 const SizeContainer = styled.div`
@@ -32,27 +32,7 @@ const FactorsLable = styled.div`
   margin-top: 10px;
 `;
 
-const WidthContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-`;
-const ComfortContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-`;
-const QualityContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-`;
-const LengthContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-`;
-const FitContainer = styled.div`
+const FactorContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
@@ -62,68 +42,102 @@ const Span = styled.span`
   font-size: 0.75em;
 `;
 
-const Factors = () => (
-  <>
-    <SizeContainer>
-      <Span>Size</Span>
-      <BarContainer><Indicator/></BarContainer>
-      <FactorsLable>
-        <label>bad</label>
-        <label>perfect</label>
-        <label>good</label>
-      </FactorsLable>
-    </SizeContainer>
+const Factors = ({ factors }) => {
+  var size, width, comfort, quality, length, fit;
+  var sizeScore, widthScore, comfortScore, qualityScore, lengthScore, fitScore;
 
-    <WidthContainer>
-      <Span>Width</Span>
-      <BarContainer><Indicator/></BarContainer>
-      <FactorsLable>
-        <label>bad</label>
-        <label>perfect</label>
-        <label>good</label>
-      </FactorsLable>
-    </WidthContainer>
+  if (factors) {
+    var size = factors.Size ? factors.Size : null;
+    var width = factors.Width ? factors.Width : null;
+    var comfort = factors.Comfort ? factors.Comfort : null;
+    var quality = factors.Quality ? factors.Quality : null;
+    var length = factors.Length ? factors.Length : null;
+    var fit = factors.Fit ? factors.Fit : null;
 
-    <ComfortContainer>
-      <Span>Comfort</Span>
-      <BarContainer><Indicator/></BarContainer>
-      <FactorsLable>
-        <label>bad</label>
-        <label>perfect</label>
-        <label>good</label>
-      </FactorsLable>
-    </ComfortContainer>
+    var sizeScore = factors.Size ? Math.round(factors.Size.value * 20) : null;
+    var widthScore = factors.Width ? Math.round(factors.Width.value * 20) : null;
+    var comfortScore = factors.Comfort ? Math.round(factors.Comfort.value * 20) : null;
+    var qualityScore = factors.Quality ? Math.round(factors.Quality.value * 20) : null;
+    var lengthScore = factors.Length ? Math.round(factors.Length.value * 20) : null;
+    var fitScore = factors.Fit ? Math.round(factors.Fit.value * 20) : null;
 
-    <QualityContainer>
-      <Span>Quality</Span>
-      <BarContainer><Indicator/></BarContainer>
-      <FactorsLable>
-        <label>bad</label>
-        <label>perfect</label>
-        <label>good</label>
-      </FactorsLable>
-    </QualityContainer>
-
-    <LengthContainer>
-      <Span>Length</Span>
-      <BarContainer><Indicator/></BarContainer>
-      <FactorsLable>
-        <label>bad</label>
-        <label>perfect</label>
-        <label>good</label>
-      </FactorsLable>
-    </LengthContainer>
-
-    <FitContainer>
-      <Span>Fit</Span>
-      <BarContainer><Indicator/></BarContainer>
-      <FactorsLable>
-        <label>bad</label>
-        <label>perfect</label>
-        <label>good</label>
-      </FactorsLable>
-    </FitContainer>
-  </>
-);
+  }
+  return (
+    <>
+      {size 
+        ? <SizeContainer>
+            <Span>Size</Span>
+            <BarContainer><Indicator score={sizeScore+'%'}/></BarContainer>
+            <FactorsLable>
+              <label>Too small</label>
+              <label>perfect</label>
+              <label>Too big</label>
+            </FactorsLable>
+          </SizeContainer>
+        : null
+      }
+      {width 
+        ? <FactorContainer>
+            <Span>Width</Span>
+            <BarContainer><Indicator score={widthScore+'%'}/></BarContainer>
+            <FactorsLable>
+              <label>Too Narrow</label>
+              <label>perfect</label>
+              <label>Too wide</label>
+            </FactorsLable>
+          </FactorContainer>
+        : null
+      }
+      {comfort 
+        ? <FactorContainer>
+            <Span>Comfort</Span>
+            <BarContainer><Indicator score={comfortScore+'%'}/></BarContainer>
+            <FactorsLable>
+              <label>bad</label>
+              <label>perfect</label>
+              <label>good</label>
+            </FactorsLable>
+          </FactorContainer>
+        : null
+      }
+      {quality
+        ? <FactorContainer>
+            <Span>Quality</Span>
+            <BarContainer><Indicator score={qualityScore+'%'}/></BarContainer>
+            <FactorsLable>
+              <label>Poor</label>
+              <label>average</label>
+              <label>Great</label>
+            </FactorsLable>
+          </FactorContainer>
+        : null
+      }
+      {length
+        ? <FactorContainer>
+            <Span>Length</Span>
+            <BarContainer><Indicator score={lengthScore+'%'}/></BarContainer>
+            <FactorsLable>
+              <label>Too short</label>
+              <label>perfect</label>
+              <label>Too long</label>
+            </FactorsLable>
+          </FactorContainer>
+        : null
+      }
+      {fit
+        ? <FactorContainer>
+            <Span>Fit</Span>
+            <BarContainer><Indicator score={fitScore+'%'}/></BarContainer>
+            <FactorsLable>
+              <label>Too tight</label>
+              <label>perfect</label>
+              <label>Too loose</label>
+            </FactorsLable>
+          </FactorContainer>
+        : null
+      }
+    </>
+  );
+};
 
 export default Factors;

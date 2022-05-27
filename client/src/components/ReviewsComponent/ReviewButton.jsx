@@ -8,7 +8,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-  padding: 15px;
+  padding: 20px;
   background-color: white;
 `;
 
