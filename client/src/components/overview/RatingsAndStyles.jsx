@@ -53,13 +53,13 @@ var totalQty = 0;
 
 const RatingsAndStyles = ( { product,
                              styles,
-                            currentStyle,
-                            reviews,
-                            metaData,
-                            changeCurrentStyle,
-                            changeMainImage,
-                            changeImagesArray,
-                            changeSlice } ) => {
+                             currentStyle,
+                             slice,
+                             reviews,
+                             metaData,
+                             changeCurrentStyle,
+                             changeMainImage,
+                             changeImagesArray } ) => {
 
   if (styles.product_id) {
     // var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);;
@@ -88,9 +88,8 @@ const RatingsAndStyles = ( { product,
   const updateCurrentStyle = (style) => {
     if (style.style_id !== currentStyle.style_id) {
       changeCurrentStyle(style);
-      changeMainImage(style.photos[0].thumbnail_url);
+      changeMainImage(style.photos[slice[2]].thumbnail_url);
       changeImagesArray(style.photos);
-      changeSlice([0, 7]);
     }
   }
 
