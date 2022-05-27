@@ -51,7 +51,15 @@ const CheckMark = styled.div`
 
 var totalQty = 0;
 
-const RatingsAndStyles = ( { product, styles, currentStyle, reviews, metaData, changeCurrentStyle, changeMainImage, changeImagesArray } ) => {
+const RatingsAndStyles = ( { product,
+                             styles,
+                            currentStyle,
+                            reviews,
+                            metaData,
+                            changeCurrentStyle,
+                            changeMainImage,
+                            changeImagesArray,
+                            changeSlice } ) => {
 
   if (styles.product_id) {
     // var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);;
@@ -82,6 +90,7 @@ const RatingsAndStyles = ( { product, styles, currentStyle, reviews, metaData, c
       changeCurrentStyle(style);
       changeMainImage(style.photos[0].thumbnail_url);
       changeImagesArray(style.photos);
+      changeSlice([0, 7]);
     }
   }
 
