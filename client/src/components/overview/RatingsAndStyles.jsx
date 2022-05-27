@@ -66,13 +66,13 @@ const RatingsAndStyles = ( { product,
   }
 
   if (currentStyle.style_id) {
-    var skusArray = Object.entries(currentStyle.skus).sort((a, b) => a[1].size - b[1].size);
+    var [skusArray, setSkusArray] = useState(Object.entries(currentStyle.skus).sort((a, b) => a[1].size - b[1].size));
 
     totalQty = skusArray.reduce((total, sku) => {
-      return total + sku;
+      return total + sku[1].quantity;
     }, 0)
-    var [skus, changeSkus] = useState(skusArray);
-    var [qty, changeQty] = useState(0);
+    var [skus, setSkus] = useState(skusArray);
+    var [qty, setQty] = useState(totalQty);
   }
 
   var averageRating = 0;
@@ -90,13 +90,20 @@ const RatingsAndStyles = ( { product,
       changeCurrentStyle(style);
       changeMainImage(style.photos[slice[2]].thumbnail_url);
       changeImagesArray(style.photos);
+      setSkusArray(Object.entries(style.skus).sort((a, b) => a[1].size - b[1].size));
+
+      totalQty = skusArray.reduce((total, sku) => {
+        return total + sku[1].quantity;
+      }, 0)
+
+      setQty(totalQty);
     }
   }
 
   const changeSelect = (e) => {
     e.preventDefault();
-
-
+    var value = JSON.parse(e.target.value);
+    setQty(value[1].quantity);
   }
 
   return (
@@ -149,16 +156,23 @@ const RatingsAndStyles = ( { product,
 
       <div className='selector-container'>
 
+        {totalQty ?
         <select name='size' onChange={(e) => changeSelect(e)}>
           <option value='Select Size' >SELECT SIZE</option>
-          {currentStyle.style_id ? skusArray.map(sku =>
-          <option key={sku[0]} value={skus[0] + ' ' + sku[1].size} >{sku[1].size}</option>) : null}
-        </select>
+          {currentStyle.style_id ? skusArray.map(sku => {
+            if (sku[1].quantity) {
+              return (<option key={sku[0]} value={JSON.stringify(sku)} >{sku[1].size}</option>)
+            }
+          }) : null}
+        </select> :
+        <select name='size' disabled={true} >
+          <option value='' >OUT OF STOCK</option>
+        </select> }
 
         <select name='qty' onChange={(e) => changeSelect(e)}>
-          <option value='Select Qty' ></option>
-          {currentStyle.style_id ? styles.results.map((style, i) =>
-          <option key={style.style_id} value={i + 1} >{i + 1}</option>) : null}
+          <option value='Select Qty' >1</option>
+          {currentStyle.style_id ? Array.from(Array(qty).keys()).slice(1, 15).map((qty) =>
+          <option key={qty} value={qty + 1} >{qty + 1}</option>) : null}
         </select>
 
       </div>
