@@ -11,8 +11,8 @@ const H4 = styled.h4`
   font-size: 0.75em;
 `;
 
-const ReviewCount = (state) => (
-  <H4># reviews, sorted by
+const ReviewCount = ({ count }) => (
+  <H4>{count} reviews, sorted by
     <Select defaultValue={"DEFAULT"}>
       <option value="DEFAULT" disabled>Sort On</option>
       <option value="helpful">Helpful</option>

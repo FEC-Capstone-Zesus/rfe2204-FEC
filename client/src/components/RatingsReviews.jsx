@@ -39,7 +39,7 @@ class RatingsReviews extends React.Component {
           </RatingsContainer>
 
           <ReviewsContainer>
-            <Reviews reviews={this.props.reviews}/>
+            <Reviews reviews={this.props.reviews} totalReview={this.props.metaData.ratings} />
           </ReviewsContainer>
           
         </RatingsReviewsContainer>

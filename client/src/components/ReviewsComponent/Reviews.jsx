@@ -10,12 +10,20 @@ const ReviewContainer = styled.div`
   max-width: 70%;
 `;
 
-const Reviews = (props) => (
-  <ReviewContainer>
-    <ReviewCount />
-    <ReviewList />
-    <ReviewButton />
-  </ReviewContainer>
-);
+const Reviews = ({ reviews, totalReview }) => {
+  var ReviewsCount = 0;
+  if (totalReview) {
+    for (var key of Object.keys(totalReview)) {
+      ReviewsCount += Number(totalReview[key]);
+    }
+  }
+  return (
+    <ReviewContainer>
+      <ReviewCount count={ReviewsCount}/>
+      <ReviewList />
+      <ReviewButton />
+    </ReviewContainer>
+  );
+};
 
 export default Reviews;

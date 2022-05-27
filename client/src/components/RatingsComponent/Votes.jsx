@@ -9,7 +9,9 @@ const RateContainer = styled.div`
   font-size: 13px;
   align-items: center;
   padding-top: 5px;
-
+  &:hover {
+    border: 2px solid blue;
+  }
 `;
 
 const Span = styled.div`
@@ -35,8 +37,44 @@ const P = styled.p`
   padding-top: 5px;
   font-size: 0.58em;
 `;
+const FilterButton = styled.div`
+  border: 1px solid black;
+  border-radius: 15%;
+  width: 42px;
+  font-size: 0.55em;
+  text-align: center;
+  background-color: #90EE90;
+`;
 
-const Votes = ({ recommended, rateNumber }) => {
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flexwrap: wrap;
+`;
+
+
+const FilterButtonContainer = ({filter, handleClear}) => {
+  return (
+    <>
+      <ButtonContainer>
+        {filter['filter_5'] ? <FilterButton>5 stars</FilterButton> : null}
+        {filter['filter_4'] ? <FilterButton>4 stars</FilterButton> : null}
+        {filter['filter_3'] ? <FilterButton>3 stars</FilterButton> : null}
+        {filter['filter_2'] ? <FilterButton>2 stars</FilterButton> : null}
+        {filter['filter_1'] ? <FilterButton>1 stars</FilterButton> : null}
+      </ButtonContainer>
+      {filter['filter_1'] || 
+       filter['filter_2'] || 
+       filter['filter_3'] || 
+       filter['filter_4'] || 
+       filter['filter_5'] ? 
+       <FilterButton onClick={(event) => handleClear(event)}>Clear</FilterButton> : null
+      }
+    </>
+  );
+};
+
+const Votes = ({ recommended, rateNumber, filter, handleFilter, handleClear }) => {
   var percent;
   var ratingTotal = 0;
   if (recommended) {
@@ -60,7 +98,8 @@ const Votes = ({ recommended, rateNumber }) => {
   return (
     <>
       <P>{percent}% of reviews recommend this product</P>
-      <RateContainer>
+      <FilterButtonContainer filter={filter} handleClear={handleClear}/>
+      <RateContainer name="star_5" onClick={(event) => handleFilter(event, 'filter_5')}>
         <Span>5 stars</Span>
         <BarContainer>
           <Bar length={star_5+'%'} />
@@ -68,7 +107,7 @@ const Votes = ({ recommended, rateNumber }) => {
         <RateCount>{count5}</RateCount>
       </RateContainer>
 
-      <RateContainer>
+      <RateContainer onClick={(event) => handleFilter(event, 'filter_4')}>
         <Span>4 stars</Span>
         <BarContainer>
           <Bar length={star_4+'%'} />
@@ -76,7 +115,7 @@ const Votes = ({ recommended, rateNumber }) => {
         <RateCount>{count4}</RateCount>
       </RateContainer>
 
-      <RateContainer>
+      <RateContainer onClick={(event) => handleFilter(event, 'filter_3')}>
         <Span>3 stars</Span>
         <BarContainer>
           <Bar length={star_3+'%'} />
@@ -84,7 +123,7 @@ const Votes = ({ recommended, rateNumber }) => {
         <RateCount>{count3}</RateCount>
       </RateContainer>
 
-      <RateContainer>
+      <RateContainer onClick={(event) => handleFilter(event, 'filter_2')}>
         <Span>2 stars</Span>
         <BarContainer>
           <Bar length={star_2+'%'} />
@@ -92,7 +131,7 @@ const Votes = ({ recommended, rateNumber }) => {
         <RateCount>{count2}</RateCount>
       </RateContainer>
 
-      <RateContainer>
+      <RateContainer onClick={(event) => handleFilter(event, 'filter_1')}>
         <Span>1 stars</Span>
         <BarContainer>
           <Bar length={star_1+'%'} />
