@@ -3,6 +3,7 @@ import RatingsAndStyles from "../../components/overview/RatingsAndStyles.jsx";
 import setCurrentStyle from "../../../actions/setCurrentStyle.js"
 import setMainImage from "../../../actions/setMainImage.js"
 import setImagesArray from "../../../actions/setImagesArray.js"
+import setSlice from "../../../actions/setSlice.js"
 
 const mapStateToProps = (state) => (
   {
@@ -18,7 +19,8 @@ var mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentStyle: (currentStyle) => dispatch(setCurrentStyle(currentStyle)),
     changeMainImage: (mainImage) => dispatch(setMainImage(mainImage)),
-    changeImagesArray: (imagesArray) => dispatch(setImagesArray(imagesArray))
+    changeImagesArray: (imagesArray) => dispatch(setImagesArray(imagesArray)),
+    changeSlice: (slice) => dispatch(setSlice(slice))
   };
 };
 
