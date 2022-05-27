@@ -93,9 +93,8 @@ const Factors = ({ factors }) => {
             <Span>Comfort</Span>
             <BarContainer><Indicator score={comfortScore+'%'}/></BarContainer>
             <FactorsLable>
-              <label>bad</label>
-              <label>perfect</label>
-              <label>good</label>
+              <label>Bad</label>
+              <label>Perfect</label>
             </FactorsLable>
           </FactorContainer>
         : null
@@ -106,7 +105,6 @@ const Factors = ({ factors }) => {
             <BarContainer><Indicator score={qualityScore+'%'}/></BarContainer>
             <FactorsLable>
               <label>Poor</label>
-              <label>average</label>
               <label>Great</label>
             </FactorsLable>
           </FactorContainer>
