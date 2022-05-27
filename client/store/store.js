@@ -10,12 +10,10 @@ const initialState = {
   currentStyle: {},
   mainImage: '',
   imagesArray: [],
-  slice: [0, 7],
+  slice: [],
   metaData: {},
   questions: [],
-  relatedProducts: [],
-  start: 0,
-  end: 7
+  relatedProducts: []
 };
 
 var store = createStore(
