@@ -6,6 +6,7 @@ import getReviews from "../actions/getReviews.js";
 import getStyles from "../actions/getStyles.js";
 import setCurrentStyle from "../actions/setCurrentStyle.js";
 import setImagesArray from "../actions/setImagesArray.js";
+import setSlice from "../actions/setSlice.js";
 import setMainImage from "../actions/setMainImage.js";
 import getMetaData from "../actions/getMetaData.js";
 import getQuestions from "../actions/getQuestions.js";
@@ -50,6 +51,7 @@ const retrieve = () => {
 
       if (i === promises.length - 1) {
         store.dispatch({ type: 'STOP' });
+        store.dispatch(setSlice([0, 7, 0]));
       }
     });
   })
