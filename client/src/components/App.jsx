@@ -21,13 +21,13 @@ const GlobalStyle = createGlobalStyle`
   select {
     border: 1px solid rgba(0, 0, 0, 100);
     border-radius: 0;
-    height: 2rem;
+    height: 3rem;
   }
   button {
     border: 1px solid rgba(0, 0, 0, 100);
     border-radius: 0;
     background: white;
-    height: 2rem;
+    height: 3rem;
   }
   .arrow {
     border: solid black;
