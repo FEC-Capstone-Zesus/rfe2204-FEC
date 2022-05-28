@@ -38,7 +38,7 @@ const P = styled.p`
   font-size: 0.58em;
 `;
 const FilterButton = styled.div`
-  border: 1px solid black;
+  border: 1px solid #90EE90;
   border-radius: 15%;
   width: 42px;
   font-size: 0.55em;
@@ -50,6 +50,8 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   flexwrap: wrap;
+  gap: 3px;
+  padding: 3px;
 `;
 
 

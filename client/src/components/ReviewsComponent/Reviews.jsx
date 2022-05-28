@@ -7,23 +7,37 @@ import ReviewButton from './ReviewButton.jsx';
 const ReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 70%;
+  max-width: 550px;
 `;
 
-const Reviews = ({ reviews, totalReview }) => {
-  var ReviewsCount = 0;
-  if (totalReview) {
-    for (var key of Object.keys(totalReview)) {
-      ReviewsCount += Number(totalReview[key]);
-    }
+class Reviews extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { helpful: [], newest: [], relevant: [] };
+    this.handleSort = this.handleSort.bind(this);
   }
-  return (
-    <ReviewContainer>
-      <ReviewCount count={ReviewsCount}/>
-      <ReviewList />
-      <ReviewButton />
-    </ReviewContainer>
-  );
-};
+
+  handleSort(sort) {
+    var copyList = JSON.parse(JSON.stringify(this.props.reviews.results));
+  }
+  
+  render() {
+    var ReviewsCount = 0;
+    if (this.props.totalReview) {
+      for (var key of Object.keys(this.props.totalReview)) {
+        ReviewsCount += Number(this.props.totalReview[key]);
+      }
+    }
+    return (
+      <>
+        <ReviewContainer>
+          <ReviewCount count={ReviewsCount} handleSort={this.handleSort}/>
+          <ReviewList reviews={this.props.reviews.results}/>
+          <ReviewButton />
+        </ReviewContainer>
+      </>
+    );
+  }
+}
 
 export default Reviews;
