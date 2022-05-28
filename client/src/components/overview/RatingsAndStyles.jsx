@@ -61,9 +61,6 @@ const RatingsAndStyles = ( { product,
                              changeMainImage,
                              changeImagesArray } ) => {
 
-  if (styles.product_id) {
-    // var [currentImage, changeImage] = useState(styles.results[0].photos[0].thumbnail_url);;
-  }
 
   if (currentStyle.style_id) {
     var [skusArray, setSkusArray] = useState(Object.entries(currentStyle.skus).sort((a, b) => a[1].size - b[1].size));
@@ -71,8 +68,12 @@ const RatingsAndStyles = ( { product,
     totalQty = skusArray.reduce((total, sku) => {
       return total + sku[1].quantity;
     }, 0)
-    var [skus, setSkus] = useState(skusArray);
-    var [qty, setQty] = useState(totalQty);
+    var [sku, setSku] = useState('');
+    var [size, setSize] = useState('');
+    var [qty, setQty] = useState('');
+    var [sizeSelected, setSizeSelected] = useState(true);
+    var [qtySelect, setQtySelect] = useState(0);
+    var [inStock, setInStock] = totalQty ? useState(true) : useState(false);
   }
 
   var averageRating = 0;
@@ -91,19 +92,50 @@ const RatingsAndStyles = ( { product,
       changeMainImage(style.photos[slice[2]].thumbnail_url);
       changeImagesArray(style.photos);
       setSkusArray(Object.entries(style.skus).sort((a, b) => a[1].size - b[1].size));
+      setSku('');
+      setSize('');
+      setQty(0);
+      setQtySelect(0);
 
       totalQty = skusArray.reduce((total, sku) => {
         return total + sku[1].quantity;
       }, 0)
 
-      setQty(totalQty);
+      setInStock(totalQty ? true : false);
     }
   }
 
   const changeSelect = (e) => {
     e.preventDefault();
-    var value = JSON.parse(e.target.value);
-    setQty(value[1].quantity);
+
+    if (e.target.name === 'size') {
+      if (e.target.value === 'selectSize') {
+        setSku('');
+        setSize('');
+        setQty(0);
+        setQtySelect(0);
+      } else {
+        var value = JSON.parse(e.target.value);
+        setSku(value[0]);
+        setSize(value[1].size);
+        setSizeSelected(true);
+        setQty(1);
+        setQtySelect(value[1].quantity);
+      }
+    } else {
+      setQty(parseInt(e.target.value));
+    }
+  }
+
+  const addToCart = (e) => {
+    e.preventDefault();
+    if (!size) {
+      setSizeSelected(false);
+    } else {
+      console.log(size);
+      console.log(qty);
+      console.log(sku);
+    }
   }
 
   return (
@@ -130,8 +162,8 @@ const RatingsAndStyles = ( { product,
         <>
           <p style={{ color: 'red' }}>${currentStyle.sale_price}</p>
           <p style={{textDecorationLine: 'line-through',
-                    textDecorationStyle: 'solid'}}>
-                    ${currentStyle.original_price}</p>
+                     textDecorationStyle: 'solid'}}>
+                     ${currentStyle.original_price}</p>
         </>
       : null}
       &nbsp;
@@ -155,28 +187,37 @@ const RatingsAndStyles = ( { product,
       </div>
 
       <div className='selector-container'>
-
-        {totalQty ?
-        <select name='size' onChange={(e) => changeSelect(e)}>
-          <option value='Select Size' >SELECT SIZE</option>
-          {currentStyle.style_id ? skusArray.map(sku => {
-            if (sku[1].quantity) {
-              return (<option key={sku[0]} value={JSON.stringify(sku)} >{sku[1].size}</option>)
-            }
-          }) : null}
-        </select> :
-        <select name='size' disabled={true} >
-          <option value='' >OUT OF STOCK</option>
-        </select> }
-
+        {sizeSelected ? <div></div> : <div><h3 style={{ color: 'red' }}>Please select size</h3></div>}
+        <select name='size'
+                onChange={(e) => changeSelect(e)}
+                disabled={!inStock}>
+                <option value='selectSize' >SELECT SIZE</option>
+          {inStock ?
+            skusArray.map((sku, i) => {
+              if (sku[1].quantity) {
+                return (
+                  <option key={sku[0]} value={JSON.stringify(sku)} >{sku[1].size}</option>
+                )
+              }
+            }) :
+          <option value='' >OUT OF STOCK</option> }
+        </select>
+        &nbsp;
+        {size ?
         <select name='qty' onChange={(e) => changeSelect(e)}>
           <option value='Select Qty' >1</option>
-          {currentStyle.style_id ? Array.from(Array(qty).keys()).slice(1, 15).map((qty) =>
-          <option key={qty} value={qty + 1} >{qty + 1}</option>) : null}
-        </select>
+          {Array.from(Array(qtySelect).keys()).slice(1, 15).map((qty) =>
+          <option key={qty} value={qty + 1} >{qty + 1}</option>)}
+        </select> :
+        <select name='qty' disabled={true}>
+          <option value='Select Qty' >-</option>
+        </select>}
 
       </div>
-      <button style={{ width: 10 + 'rem', fontWeight: 500 }}>ADD TO CART</button>
+      <button style={{ width: 10 + 'rem', fontWeight: 500 }}
+              disabled={!inStock}
+              onClick={(e) => addToCart(e)}>ADD TO CART +</button>
+      &nbsp;
       <div className='star-item'></div>
     </RatingsStyles>
   );
