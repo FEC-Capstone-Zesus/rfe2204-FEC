@@ -48,6 +48,11 @@ const CheckMark = styled.div`
     cursor: pointer;
   }
 `
+const StarFraction = styled.span`
+ display: block;
+ overflow: hidden;
+ width: ${({starFraction}) => (starFraction ? `${starFraction}%` : '')};
+`
 
 var totalQty = 0;
 
@@ -77,6 +82,7 @@ const RatingsAndStyles = ( { product,
   }
 
   var averageRating = 0;
+  var starFraction = 0;
   if (metaData.product_id) {
     var ratings = Object.entries(metaData.ratings);
     var total = 0;
@@ -84,6 +90,7 @@ const RatingsAndStyles = ( { product,
       total = total + parseInt(rating[1]);
       return stars + (rating[0] * rating[1]);
     }, 0) / total;
+    starFraction = (Math.round((averageRating % 1) * 4) / 4) * 100;
   }
 
   const updateCurrentStyle = (style) => {
@@ -94,6 +101,7 @@ const RatingsAndStyles = ( { product,
       setSkusArray(Object.entries(style.skus).sort((a, b) => a[1].size - b[1].size));
       setSku('');
       setSize('');
+      setSizeSelected(true);
       setQty(0);
       setQtySelect(0);
 
@@ -144,7 +152,13 @@ const RatingsAndStyles = ( { product,
         <span>
           {metaData.product_id ?
             <>
-              <span>{('⭐️').repeat(Math.floor(averageRating))}</span>
+              <span>{('★').repeat(Math.floor(averageRating))}</span>
+              <span style={{ position: 'absolute' }}>
+                <StarFraction starFraction={starFraction}>
+                  <span>★</span>
+                </StarFraction>
+              </span>
+              <span>{('☆').repeat(5 - Math.floor(averageRating))}</span>
             </>
           : null}
         </span>
@@ -187,8 +201,14 @@ const RatingsAndStyles = ( { product,
       </div>
 
       <div className='selector-container'>
-        {sizeSelected ? <div></div> : <div><h3 style={{ color: 'red' }}>Please select size</h3></div>}
+        {sizeSelected ? <div style={{ height: 1.2 + 'rem' }} >
+                          <p style={{ height: 1.2 + 'rem' }} ></p>
+                        </div> :
+                        <div style={{ height: 1.2 + 'rem' }}>
+                          <p>Please select size</p>
+                        </div>}
         <select name='size'
+                style={{ width: 15 + 'rem' }}
                 onChange={(e) => changeSelect(e)}
                 disabled={!inStock}>
                 <option value='selectSize' >SELECT SIZE</option>
@@ -200,23 +220,36 @@ const RatingsAndStyles = ( { product,
                 )
               }
             }) :
-          <option value='' >OUT OF STOCK</option> }
+          <option value='outOfStock' >OUT OF STOCK</option> }
         </select>
         &nbsp;
+        &nbsp;
+        &nbsp;
         {size ?
-        <select name='qty' onChange={(e) => changeSelect(e)}>
+        <select name='qty'
+                onChange={(e) => changeSelect(e)}
+                style={{ width: 5 + 'rem' }}>
           <option value='Select Qty' >1</option>
           {Array.from(Array(qtySelect).keys()).slice(1, 15).map((qty) =>
           <option key={qty} value={qty + 1} >{qty + 1}</option>)}
         </select> :
-        <select name='qty' disabled={true}>
+        <select name='qty'
+                disabled={true}
+                style={{ width: 5 + 'rem' }}>
           <option value='Select Qty' >-</option>
         </select>}
 
       </div>
-      <button style={{ width: 10 + 'rem', fontWeight: 500 }}
+      <button style={{ width: 21.4 + 'rem',
+                       fontWeight: 500,
+                       marginTop: 1 + 'rem',
+                       display: 'flex',
+                       justifyContent: 'space-between' }}
               disabled={!inStock}
-              onClick={(e) => addToCart(e)}>ADD TO CART +</button>
+              onClick={(e) => addToCart(e)}>
+              <p style={{ top: 50 + '%' }}>ADD TO BAG</p>
+              <p style={{ top: 50 + '%' }}>+</p>
+      </button>
       &nbsp;
       <div className='star-item'></div>
     </RatingsStyles>
