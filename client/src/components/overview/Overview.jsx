@@ -19,15 +19,17 @@ const ImagesStylesContainer = styled.div`
 `
 
 const Overview = ( { product, styles, currentStyle, reviews, metaData, changeCurrentStyle } ) => {
-  var [expanded, setExpanded] = useState(false);
+  var [expanded, setExpanded] = useState(true);
 
   return (
     <>
       <div className='overview-container'>
         <ImagesStylesContainer>
           {expanded ?
-             <ImageGalleryContainer />
-             <RatingsAndStylesContainer />
+             <>
+              <ImageGalleryContainer />
+              <RatingsAndStylesContainer />
+             </>
              :
              <ExpandedContainer />
           }
