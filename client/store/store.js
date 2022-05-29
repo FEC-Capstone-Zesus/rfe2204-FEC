@@ -13,6 +13,7 @@ const initialState = {
   slice: [0, 7],
   metaData: {},
   questions: [],
+  expanded: false,
   relatedProducts: []
 };
 
