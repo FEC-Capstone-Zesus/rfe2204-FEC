@@ -21,10 +21,6 @@ const StarRating = ( { ratings } ) => {
     }, 0) / total;
 
     starFraction = (Math.round((averageRating % 1) * 4) / 4) * 100;
-<<<<<<< HEAD
-
-=======
->>>>>>> 1f3410a98688cb2258dd4bc35a61d8b7ba375108
   } else if (typeof ratings === 'number') {
     averageRating = ratings;
   }
