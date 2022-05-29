@@ -17,6 +17,13 @@ const OverviewDIV = styled.div`
 const ImagesStylesContainer = styled.div`
   display: flex;
 `
+const ImagesGalleryHoverDiv = styled.div`
+  width: 45rem;
+  height: 35rem;
+  &:hover {
+    cursor: zoom-in;
+  }
+`
 
 const Overview = ( { product, styles, currentStyle, reviews, metaData, changeCurrentStyle } ) => {
   var [expanded, setExpanded] = useState(true);
@@ -27,7 +34,9 @@ const Overview = ( { product, styles, currentStyle, reviews, metaData, changeCur
         <ImagesStylesContainer>
           {expanded ?
              <>
-              <ImageGalleryContainer />
+              <ImagesGalleryHoverDiv>
+               <ImageGalleryContainer />
+              </ImagesGalleryHoverDiv>
               <RatingsAndStylesContainer />
              </>
              :
