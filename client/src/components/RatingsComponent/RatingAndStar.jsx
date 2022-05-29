@@ -9,11 +9,22 @@ const RatingAndStarStyle = styled.div`
   gap: 20px;
 `;
 
-const RatingAndStar = (props) => (
-  <RatingAndStarStyle>
-    <h2>3.5</h2>
-    <span>*****</span>
-  </RatingAndStarStyle>
-);
+const RatingAndStar = ({ rate }) => {
+  var totalReview = 0;
+  var totalRating = 0;
+  if (rate) {
+    for (var key of Object.keys(rate)) {
+      totalRating += (Number(key) * Number(rate[key]));
+      totalReview += Number(rate[key]);
+    }
+    var Rating = (totalRating / totalReview).toFixed(1);
+  }
+  return (
+    <RatingAndStarStyle>
+      <h2>{Rating}</h2>
+      <span>*****</span>
+    </RatingAndStarStyle>
+  );
+};
 
 export default RatingAndStar;

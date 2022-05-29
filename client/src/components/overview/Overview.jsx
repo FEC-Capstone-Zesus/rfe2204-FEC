@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import styled from "styled-components";
+import ImageGallery from './ImageGallery.jsx';
+import RatingsAndStyles from './RatingsAndStyles.jsx';
 import ImageGalleryContainer from '../../containers/overview/ImageGalleryContainer.js';
-import RatingsAndStylesContainer from '../../containers/overview/RatingsAndStylesContainer.js'
+import RatingsAndStylesContainer from '../../containers/overview/RatingsAndStylesContainer.js';
+
 
 const OverviewDIV = styled.div`
   position: fixed;
@@ -13,23 +16,17 @@ const OverviewDIV = styled.div`
 const ImagesStylesContainer = styled.div`
   display: flex;
 `
-const ImageUnderline = styled.div`
-  border: 1px solid rgba(0, 0, 0, 100);
-  width: 3rem;
-`
-const ImageNoUnderline = styled.div`
-  border: 1px solid rgba(0, 0, 0, 0);
-  width: 3rem;
-`
 
-const Overview = ( { product, reviews, styles } ) => {
-  if (styles.product_id) {
-    var [currentStyle, changeStyle] = useState(styles.results[0]);
-  }
-
+const Overview = ( { product, styles, currentStyle, reviews, metaData, changeCurrentStyle } ) => {
+  // console.log(currentStyle)
   // console.log('product: ', product);
   // console.log('reviews: ', reviews);
   // console.log('styles: ', styles);
+
+  // var updateCurrentStyle = (style) => {
+  //   changeCurrentStyle(style);
+  // }
+
   return (
     <>
       <div className='overview-container'>
