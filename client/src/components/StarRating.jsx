@@ -23,7 +23,7 @@ const StarRating = ( { ratings } ) => {
 
     starFraction = (Math.round((averageRating % 1) * 4) / 4) * 100;
 
-    ariaRating = Math.floor(averageRating) + '.' + Math.round(averageRating % 1);
+    ariaRating = Math.floor(averageRating) + (Math.round((averageRating % 1) * 4) / 4);
   } else if (typeof ratings === 'number') {
     averageRating = ratings;
     ariaRating = ratings;
@@ -31,7 +31,7 @@ const StarRating = ( { ratings } ) => {
 
   return (
     <>
-      <span >{('★').repeat(Math.floor(averageRating))}</span>
+      <span aria-label={`Rated ${ariaRating} out of 5 stars.`}>{('★').repeat(Math.floor(averageRating))}</span>
       <span style={{ position: 'absolute' }}>
         <StarFraction starFraction={starFraction}>
           <span>★</span>
