@@ -9,6 +9,7 @@ import setCurrentStyleReducer from './setCurrentStyleReducer.js';
 import setImagesArrayReducer from './setImagesArrayReducer.js';
 import setMainImageReducer from './setMainImageReducer.js';
 import setSliceReducer from './setSliceReducer.js';
+import toggleExpandedReducer from './toggleExpandedReducer.js';
 import loadDataReducer from './loadDataReducer.js';
 
 var rootReducer = combineReducers({
@@ -22,6 +23,7 @@ var rootReducer = combineReducers({
   mainImage: setMainImageReducer,
   imagesArray: setImagesArrayReducer,
   slice: setSliceReducer,
+  expanded: toggleExpandedReducer,
   loading: loadDataReducer
 });
 
