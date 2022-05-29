@@ -61,7 +61,6 @@ const HorizontalButtons = styled.div`
   padding-top: 16rem;
 `
 const ArrowContainer = styled.div`
-  z-position: 1;
   width: 1rem;
   height: 3rem;
 `
@@ -92,8 +91,11 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
   if (imagesArray.length) {
     max = imagesArray.length;
   }
+  const stopParentOnClick = (e) => {
+    e.stopPropagation();
+  }
 
-  const updateCurrentImage = (photo) => {
+  const updateCurrentImage = (e, photo) => {
     if (photo.thumbnail_url !== mainImage) {
       imagesArray.forEach((currentPhoto, i) => {
         if (currentPhoto.thumbnail_url === photo.thumbnail_url) {
@@ -102,9 +104,10 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
       })
       changeMainImage(photo.thumbnail_url);
     }
+    e.stopPropagation();
   }
 
-  const updateCarousel = (direction) => {
+  const updateCarousel = (e, direction) => {
     if ((slice[0] > 0 && direction === 'up') || (slice[1] < max && direction === 'down')) {
       var newSlice = direction === 'down' ? [slice[0] + 1, slice[1] + 1] : [slice[0] - 1, slice[1] - 1];
       var newIndex = slice[2];
@@ -121,9 +124,10 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
 
       changeSlice([...newSlice, newIndex]);
     }
+    e.stopPropagation();
   }
 
-  const horizontalClick = (direction) => {
+  const horizontalClick = (e, direction) => {
     if ((slice[2] > 0 && direction === 'left') || (slice[2] < max - 1 && direction === 'right')) {
       var newIndex = direction === 'right' ? slice[2] + 1 : slice[2] - 1;
 
@@ -137,22 +141,23 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
 
       changeMainImage(imagesArray[newIndex].thumbnail_url);
     }
+    e.stopPropagation();
   }
 
   return (
     <MainImage currentImage={mainImage ? mainImage : ''}>
-      <ImageCarousel>
+      <ImageCarousel onClick={(e) => stopParentOnClick(e)}>
         {imagesArray.length ? imagesArray.length > 7 ?
-          <CarouselArrow onClick={() => updateCarousel('up') }>
+          <CarouselArrow onClick={(e) => updateCarousel(e, 'up') }>
             <div className='arrow up'
-                 style={{ marginLeft: 1.3 + 'rem' }}></div>
+                 style={{ marginLeft: 1.25 + 'rem' }}></div>
           </CarouselArrow>
           : <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}></div> : null}
         <div>
           {imagesArray.length ? imagesArray.slice(slice[0], slice[1]).map((photo, i) => {
                 return (
                   <div key={photo.thumbnail_url}>
-                    <ImageThumbnail onClick={() => updateCurrentImage(photo)}
+                    <ImageThumbnail onClick={(e) => updateCurrentImage(e, photo)}
                                     currentThumbnail={photo.thumbnail_url}/>
                     <ImageNoUnderline />
                     {photo.thumbnail_url === mainImage ?
@@ -165,19 +170,19 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
            : null}
         </div>
         {imagesArray.length ? imagesArray.length > 7 ?
-          <CarouselArrow onClick={() => updateCarousel('down') }>
+          <CarouselArrow onClick={(e) => updateCarousel(e, 'down') }>
             <div className='arrow down'
-                 style={{ marginLeft: 1.3 + 'rem', marginBottom: 0.5 + 'rem' }}></div>
+                 style={{ marginLeft: 1.25 + 'rem', marginBottom: 0.5 + 'rem' }}></div>
           </CarouselArrow>
           : null : null}
       </ImageCarousel>
       <HorizontalButtons>
         {slice[2] === 0 ? <ArrowContainer /> :
-        <ArrowContainer onClick={() => horizontalClick('left')}>
+        <ArrowContainer onClick={(e) => horizontalClick(e, 'left')}>
           <ArrowLeft>←</ArrowLeft>
         </ArrowContainer>}
         {slice[2] === max - 1 ? <ArrowContainer /> :
-        <ArrowContainer onClick={() => horizontalClick('right')}>
+        <ArrowContainer onClick={(e) => horizontalClick(e, 'right')}>
           <ArrowRight>→</ArrowRight>
         </ArrowContainer>}
       </HorizontalButtons>
