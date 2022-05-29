@@ -2,8 +2,8 @@ import { useState } from 'react';
 import styled from "styled-components";
 
 const MainImage = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 35rem;
+  width: 70rem;
   background: rgba(226,226,226,100);
   background-image: ${({currentImage}) => (currentImage ? `url(${currentImage})` : "url('')")};
   background-repeat: no-repeat;
