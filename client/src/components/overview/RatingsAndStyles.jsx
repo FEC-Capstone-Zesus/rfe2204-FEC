@@ -211,8 +211,8 @@ const RatingsAndStyles = ( { product,
                 onChange={(e) => changeSelect(e)}
                 style={{ width: 5 + 'rem' }}>
           <option value='Select Qty' >1</option>
-          {Array.from(Array(qtySelect).keys()).slice(1, 15).map((qty) =>
-          <option key={qty} value={qty + 1} >{qty + 1}</option>)}
+          {Array.from(Array(qtySelect).keys()).map(x => x + 1).slice(1, 15).map((qty) =>
+          <option key={qty} value={qty} >{qty}</option>)}
         </select> :
         <select name='qty'
                 disabled={true}
