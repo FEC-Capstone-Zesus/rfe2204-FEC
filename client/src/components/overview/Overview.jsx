@@ -4,7 +4,7 @@ import ImageGallery from './ImageGallery.jsx';
 import RatingsAndStyles from './RatingsAndStyles.jsx';
 import ImageGalleryContainer from '../../containers/overview/ImageGalleryContainer.js';
 import RatingsAndStylesContainer from '../../containers/overview/RatingsAndStylesContainer.js';
-import ExpandedContainer from '../../containers/overview/ExpandedContainer.js';
+import ExpandedViewContainer from '../../containers/overview/ExpandedViewContainer.js';
 
 
 const OverviewDIV = styled.div`
@@ -25,25 +25,26 @@ const ImagesGalleryHoverDiv = styled.div`
   }
 `
 
-const Overview = ( { product, styles, currentStyle, reviews, metaData, changeCurrentStyle } ) => {
-  var [expanded, setExpanded] = useState(true);
+const Overview = ( { expanded, toggleExpanded } ) => {
+
+  function clickImage (e) {
+    toggleExpanded(true);
+  }
 
   return (
     <>
-      <div className='overview-container'>
-        <ImagesStylesContainer>
-          {expanded ?
-             <>
-              <ImagesGalleryHoverDiv>
-               <ImageGalleryContainer />
-              </ImagesGalleryHoverDiv>
-              <RatingsAndStylesContainer />
-             </>
-             :
-             <ExpandedContainer />
-          }
-        </ImagesStylesContainer>
-      </div>
+      <ImagesStylesContainer>
+        {expanded ?
+            <ExpandedViewContainer />
+            :
+            <>
+            <ImagesGalleryHoverDiv onClick={(e) => clickImage(e)}>
+              <ImageGalleryContainer />
+            </ImagesGalleryHoverDiv>
+            <RatingsAndStylesContainer />
+          </>
+        }
+      </ImagesStylesContainer>
     </>
   );
 };
