@@ -6,13 +6,13 @@ const StarFraction = styled.span`
  width: ${({starFraction}) => (starFraction ? `${starFraction}%` : '')};
 `
 
-const StarRating = ( { metaData } ) => {
+const StarRating = ( { ratings } ) => {
 
   var averageRating = 0;
   var starFraction = 0;
 
-  if (metaData.product_id) {
-    var ratings = Object.entries(metaData.ratings);
+  if (ratings.product_id) {
+    var ratings = Object.entries(ratings.ratings);
     var total = 0;
 
     averageRating = ratings.reduce((stars, rating) => {
@@ -21,6 +21,8 @@ const StarRating = ( { metaData } ) => {
     }, 0) / total;
 
     starFraction = (Math.round((averageRating % 1) * 4) / 4) * 100;
+  } else {
+    averageRating = ratings;
   }
 
   return (
