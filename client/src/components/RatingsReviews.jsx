@@ -1,7 +1,7 @@
 import React from 'react';
 import Ratings from './RatingsComponent/Ratings.jsx';
 import Reviews from './ReviewsComponent/Reviews.jsx';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const RatingsReviewsContainer = styled.div` 
   display: flex;
@@ -39,7 +39,7 @@ class RatingsReviews extends React.Component {
           </RatingsContainer>
 
           <ReviewsContainer>
-            <Reviews reviews={this.props.reviews} totalReview={this.props.metaData.ratings} />
+            <Reviews reviews={this.props.reviews} />
           </ReviewsContainer>
           
         </RatingsReviewsContainer>

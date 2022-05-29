@@ -12,9 +12,10 @@ const Button = styled.button`
   background-color: white;
 `;
 
-const ReviewButton = () => (
+const ReviewButton = ({listLength, currLength, load}) => (
   <ButtonContainer>
-    <Button>MORE REVIEWS</Button>
+    {listLength > currLength || listLength > 2 ? 
+      <Button onClick={(e) => load(e)}>MORE REVIEWS</Button> : null}
     <Button>ADD A REVIEW  +</Button>
   </ButtonContainer>
 );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
@@ -93,43 +93,63 @@ const ResponseContainer = styled.div`
   background-color: #d3d3d3;
 `;
 
-const ReviewEntry = ({review}) => {
+const ReviewEntry = ({review, handleHelpful, handleReport}) => {
+  const [helpful, setHelpful] = useState(false);
+  const [report, setReport] = useState(false);
+
+  const handleHelpfulClick = (event, review_id) => {
+    if (!helpful) {
+      setHelpful(true);
+      handleHelpful(event, review_id, true);
+    }
+  };
+
+  const handleReportClick = (event, review_id) => {
+    if (!report) {
+      setReport(true);
+      handleReport(event, review_id, false);
+    }
+  };
+
   if (review) {
     var date = (new Date(review.date)).toString().slice(4, 16);
-  return (
-    <ReviewEntryContainer>
-      <Star>{review.rating}</Star>
-      <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
-      <ReviewTitle>{review.summary}</ReviewTitle>
-      <ReviewContent>
-        <ContentContainer>
-          {review.body}
-        </ContentContainer>
+    return (
+      <>
+        {!report ? <ReviewEntryContainer>
+          <Star>{review.rating}</Star>
+          <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
+          <ReviewTitle>{review.summary}</ReviewTitle>
+          <ReviewContent>
+            <ContentContainer>
+              {review.body}
+            </ContentContainer>
 
-        {review.recommend ? <RecommendContainer><FontAwesomeIcon icon={faCheck} /> I recommend this product</RecommendContainer> : null}
+            {review.recommend ? <RecommendContainer><FontAwesomeIcon icon={faCheck} /> I recommend this product</RecommendContainer> : null}
 
-        {review.photos ? 
-        <PhotoContainer>
-          <Photo photos={review.photos}></Photo>
-        </PhotoContainer>
-        : null}
-        {review.response ?
-        <ResponseContainer>
-          Response:
-          &nbsp;
-          {review.response}
-        </ResponseContainer>
-        : null}
-      </ReviewContent>
-      <ReviewButtonContainer>
-        Helpful?
-        <ReviewButton>Yes</ReviewButton>
-        ({review.helpfulness})
-        |
-        <ReviewButton>Report</ReviewButton>
-      </ReviewButtonContainer>
-      <EndLine/>
-    </ReviewEntryContainer>);
+            {review.photos ? 
+            <PhotoContainer>
+              <Photo photos={review.photos}></Photo>
+            </PhotoContainer>
+            : null}
+            {review.response ?
+            <ResponseContainer>
+              Response:
+              &nbsp;
+              {review.response}
+            </ResponseContainer>
+            : null}
+          </ReviewContent>
+          <ReviewButtonContainer>
+            Helpful?
+            <ReviewButton onClick={(event)=>handleHelpfulClick(event, review.review_id)}>Yes</ReviewButton>
+            ({helpful? review.helpfulness + 1 : review.helpfulness})
+            |
+            <ReviewButton onClick={(event)=>handleReportClick(event, review.review_id)}>Report</ReviewButton>
+          </ReviewButtonContainer>
+          <EndLine/>
+        </ReviewEntryContainer> : <div>REPORTED<EndLine/></div>}
+      </>
+    );
   }
 };
 

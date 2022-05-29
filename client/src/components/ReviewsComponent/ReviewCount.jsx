@@ -20,9 +20,9 @@ const ReviewCount = ({ count, handleSort }) => {
       <H4>{count} reviews, sorted by
         <Select defaultValue={"DEFAULT"} onChange={(event)=>handleSort(event.target.value)}>
           <option value="DEFAULT" disabled>Sort On</option>
-          <option value="helpful" >Helpful</option>
-          <option value="newest" >Newest</option>
-          <option value="relevant" >Relevant</option>
+          <option value="helpful">Helpful</option>
+          <option value="newest">Newest</option>
+          <option value="relevant">Relevant</option>
         </Select>
       </H4>
     );
