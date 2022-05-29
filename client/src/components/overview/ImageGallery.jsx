@@ -10,9 +10,6 @@ const MainImage = styled.div`
   background-origin: content-box;
   background-size: contain;
   background-position: center;
-  &:hover {
-    cursor: zoom-in;
-  }
 `
 const ImageCarousel = styled.div`
   background: rgba(226,226,226,0.7);
