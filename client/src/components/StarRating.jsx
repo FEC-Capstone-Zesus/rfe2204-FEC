@@ -9,9 +9,9 @@ const StarFraction = styled.span`
 const StarRating = ( { ratings } ) => {
 
   var averageRating = 0;
-  var starFraction = 0;
+  var starFraction = 0.01;
 
-  if (ratings.product_id) {
+  if (typeof ratings === 'object') {
     var ratings = Object.entries(ratings.ratings);
     var total = 0;
 
@@ -21,7 +21,7 @@ const StarRating = ( { ratings } ) => {
     }, 0) / total;
 
     starFraction = (Math.round((averageRating % 1) * 4) / 4) * 100;
-  } else {
+  } else if (typeof ratings === 'number') {
     averageRating = ratings;
   }
 
