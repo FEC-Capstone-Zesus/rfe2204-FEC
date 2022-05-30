@@ -1,11 +1,58 @@
 const axios = require('axios');
 import React, { useState } from 'react';
 import useAxios from 'axios-hooks'
+import styled from "styled-components";
 
 
-const Relatedcard = ({ item, currentProduct, metaData }) => {
+const CardImage = styled.img`
+  height:12rem;
+  width:100%;
+  object-fit: cover;
+`
+
+const CompareModal = styled.div`
+`
+
+const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
+
+  const Card_body = styled.li`
+  background: #ffffff;
+  border-radius: 2px;
+  border: 1px solid #eeeeee;
+  box-shadow: ${className === 'active' ? '0 30px 20px rgba(0, 0, 0, 0.2)' : '0 10px 5px rgba(0, 0, 0, 0.1)'};
+  overflow: auto;
+  width: 200px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: column;
+  cursor: pointer;
+  transition: all 0.75s ease;
+  opacity: ${className === 'active' || className === 'next' ? 1 : 0};
+  position: absolute;
+  transform: ${className === 'active' ? 'scale(1) translateY(0)' :
+   className === 'prev' ? 'scale(1.1) translateY(-50px)' :
+   'scale(0.85) translateY(50px)' };
+  z-index: ${className === 'active' ? 1 : className === 'prev' ? 2 : 0};
+  visibility: ${className === 'prev' ? 'hidden' : ''};
+  &:hover{
+    transform:scale(1.02);
+  }
+  `
+  const Button_Star = styled.button`
+  position: absolute;
+  top:0;
+  right:0;
+  border: none;
+  background: none;
+  &:hover{
+    transform:scale(1.02);
+  }
+  `
+
   let starCount = 0;
-  let commonChars = []
+  let commonChars = [];
+  console.log(className);
 
   const [showModal, setshowModal] = useState(false);
 
@@ -34,26 +81,21 @@ const Relatedcard = ({ item, currentProduct, metaData }) => {
     for(let i = 0; i < reviewCount.length; i++) {
       starCount += (reviewCount[i]/total) * (i + 1);
     }
-    if(reviewsRelatedKeys.length >= metaDataKeys.length) {
-      metaDataKeys.forEach(function(item) {if(reviewsRelatedKeys.includes(item)) {
-        commonChars.push(item);
-      }})
-    } else {
-      reviewsRelatedKeys.forEach(function(item) {if(metaDataKeys.includes(item)) {
-        commonChars.push(item);
-      }})
-    }
+    metaDataKeys.forEach((item) => commonChars.push(item))
+    reviewsRelatedKeys.forEach(function(item) {if(!commonChars.includes(item)) {
+      commonChars.push(item)
+    }})
   }
-  console.log(reviewsRelated)
-  console.log(metaData)
-  console.log(commonChars)
+  let round = function(number) {
+    return Math.round(number * 100)/100
+  }
 
   return (
-    <div className = "card">
-      <div className = "card_body" onClick = {() => console.log('hello')}>
-        <button id = "open" onClick = {() => setshowModal(true)}>☆</button>
-        {showModal ? <div className = "compModal">
-          <table>
+      <Card_body onClick = {() => console.log('hello')}>
+        <Button_Star id = "open" onClick = {() => setshowModal(true)}>☆</Button_Star>
+        {showModal ? <CompareModal className = "compModal">
+          <div className compModalContent>
+            <table>
             <thead>
               <tr>
                 <td>{currentProduct.name}</td>
@@ -62,22 +104,22 @@ const Relatedcard = ({ item, currentProduct, metaData }) => {
               </tr>
             </thead>
             <tbody>
-            {commonChars.map((item) => <tr>
-              <td>{metaData.characteristics[item].value}</td>
+            {commonChars.map((item, index) => <tr key = {index}>
+              <td>{metaData.characteristics[item] !== undefined ? round(metaData.characteristics[item].value) : null}</td>
               <td>{item}</td>
-              <td>{reviewsRelated.characteristics[item].value}</td>
+              <td>{reviewsRelated.characteristics[item] !== undefined ? round(reviewsRelated.characteristics[item].value) : null}</td>
               </tr>)}
             </tbody>
           </table>
-          <button id = "close" onClick = {() => setshowModal(false)}> Close </button>
-          </div> : null}
-        {reviewsRelated !== undefined ? starCount : null}
-        {styles !== undefined ? <img src = {styles.results[0].photos[0].thumbnail_url}/> : null}
-        <p>{products.name}</p>
-        <p>{products.category}</p>
-        <p>{products.default_price}</p>
-      </div>
-    </div>
+          <button id = "close" onClick = {() => setshowModal(false)}> Close </button></div>
+          </CompareModal> : null}
+        {styles !== undefined ? <CardImage src = {styles.results[0].photos[0].thumbnail_url}/> : null}
+        <p>{products.name}
+        <br></br>{products.category}
+        <br></br>{products.default_price}
+        <br></br>{reviewsRelated !== undefined ? starCount : null}
+        </p>
+      </Card_body>
   )
 };
 
