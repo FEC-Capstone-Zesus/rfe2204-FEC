@@ -92,9 +92,9 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
 
   if (imagesArray.length) {
     max = imagesArray.length;
-    iconArray = Array.from(Array(max).keys()).map((x, i) => {
-      return { photo: imagesArray[i],
-               value: x + 1}
+    iconArray = imagesArray.map((x, i) => {
+      return { photo: x,
+               value: i + 1}
     });
   }
 
