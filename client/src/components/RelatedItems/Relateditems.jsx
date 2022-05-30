@@ -49,6 +49,14 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
       }));
     }
   }, [indexes.currentIndex]);
+
+  const handleCardTransitionReverse = useCallback(() => {
+      setIndexes((prevState) => ({
+        previousIndex: prevState.currentIndex,
+        currentIndex: prevState.currentIndex - 1 < 0 ? relatedProducts.length - 1 : prevState.currentIndex - 1,
+        nextIndex: prevState.currentIndex - 2 < 0 ? (prevState.currentIndex - 1) + (relatedProducts.length - 1) : prevState.currentIndex - 2,
+      }));
+  }, [indexes.currentIndex]);
   console.log("this is indexes", indexes)
 
   // useEffect(() => {
@@ -74,6 +82,7 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
   return (
     <div className ="wrapper">
       <RelatedWrapper className ='relatedRow'>
+        <button onClick = {handleCardTransitionReverse}> This will go back</button>
         <CardWrapper>
           {relatedProducts.map((item, index) => <Relatedcard key = {index} className = {`${determineClasses(indexes,index)}`} item = {item} currentProduct = {product} metaData = {metaData}/>)}
         </CardWrapper>
