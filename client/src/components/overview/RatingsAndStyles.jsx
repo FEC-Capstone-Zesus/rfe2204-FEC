@@ -228,8 +228,8 @@ const RatingsAndStyles = ( { product,
                        justifyContent: 'space-between' }}
               disabled={!inStock}
               onClick={(e) => addToCart(e)}>
-              <p style={{ top: 50 + '%' }}>ADD TO BAG</p>
-              <p style={{ top: 50 + '%' }}>+</p>
+        <p style={{ top: 50 + '%' }}>ADD TO BAG</p>
+        <p style={{ top: 50 + '%' }}>+</p>
       </button>
       &nbsp;
       <div className='star-item'></div>
