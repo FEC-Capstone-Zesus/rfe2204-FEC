@@ -56,7 +56,7 @@ const HorizontalButtons = styled.div`
   float: right;
   display: flex;
   justify-content: space-between;
-  width: 38rem;
+  width: 40rem;
   padding-right: 3rem;
   padding-top: 16rem;
 `
