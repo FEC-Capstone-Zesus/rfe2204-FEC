@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ReviewCount from './ReviewCount.jsx';
 import ReviewList from './ReviewList.jsx';
+import ReviewForm from './ReviewForm.jsx';
 import axios from 'axios';
 
 
@@ -14,13 +15,15 @@ const ReviewContainer = styled.div`
 class Reviews extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { helpful: [], newest: [], relevant: [] };
+    this.state = { helpful: [], newest: [], relevant: [], openForm: false };
     this.reviewList = [];
     this.initialState = true;
     this.ReviewsCount = 0;
     this.handleSort = this.handleSort.bind(this);
     this.handleHelpful = this.handleHelpful.bind(this);
     this.handleReport = this.handleReport.bind(this);
+    this.handleOpenForm = this.handleOpenForm.bind(this);
+    this.handleCloseForm = this.handleCloseForm.bind(this);
   }
 
   handleSort(sort) {
@@ -48,21 +51,36 @@ class Reviews extends React.Component {
       axios.put(`/reviews/${review_id}/report`);
     }
   }
-  
+  handleOpenForm(event) {
+    event.preventDefault();
+    this.setState({openForm: true});
+  }
+
+  handleCloseForm(event) {
+    event.preventDefault();
+    this.setState({openForm: false});
+  };
+
+  // handleSubmit(Product, OverAllRating, Recommend, SizeRating, WidthRating, ComfortRating, QualityRating, LengthRating, FitRating,
+  //   ReviewTitle, ReviewBody, Image, NickName, Email) {
+  //   axios.post('/reviews')
+  // };
   render() {
+    
     if (this.props.reviews.results) {
       if (this.initialState) {
         this.ReviewsCount = this.props.reviews.results.length;
         this.reviewList = JSON.parse(JSON.stringify(this.props.reviews.results));
       }
     }
-    
+
     return (
       <>
         <ReviewContainer>
           <ReviewCount count={this.ReviewsCount} handleSort={this.handleSort}/>
-          <ReviewList reviews={this.reviewList} handleHelpful={this.handleHelpful} handleReport={this.handleReport}/>
+          <ReviewList reviews={this.reviewList} handleHelpful={this.handleHelpful} handleReport={this.handleReport} handleOpenForm={this.handleOpenForm}/>
         </ReviewContainer>
+        {this.state.openForm ? <ReviewForm productName={this.props.productName} factors={this.props.factors} handleCloseForm={this.handleCloseForm} handleSubmit={this.handleSubmit}></ReviewForm> : null}
       </>
     );
   }

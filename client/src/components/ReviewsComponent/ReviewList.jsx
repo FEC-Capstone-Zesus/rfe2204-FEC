@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReviewEntry from './ReviewEntry.jsx';
 import ReviewButton from './ReviewButton.jsx';
 
-const ReviewList = ({reviews, handleHelpful, handleReport}) => {
+const ReviewList = ({reviews, handleHelpful, handleReport, handleOpenForm}) => {
   // var listLength;
   // var index = 0;
   // var newItems = [];
@@ -31,7 +31,7 @@ const ReviewList = ({reviews, handleHelpful, handleReport}) => {
     return (
       <>
         {reviews.map((review, index) => <ReviewEntry review={review} key={index} handleHelpful={handleHelpful} handleReport={handleReport}/>)}
-        <ReviewButton />
+        <ReviewButton handleOpenForm={handleOpenForm}/>
       </> 
     );
   }
