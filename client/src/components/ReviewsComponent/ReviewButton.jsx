@@ -12,10 +12,10 @@ const Button = styled.button`
   background-color: white;
 `;
 
-const ReviewButton = ({handleOpenForm}) => {
+const ReviewButton = ({showMoreReviewButton, handleOpenForm, load}) => {
   return (
     <ButtonContainer>
-      <Button>MORE REVIEWS</Button>
+      {showMoreReviewButton ? <Button onClick={(event)=> load(event)}>MORE REVIEWS</Button> : null}
       <Button onClick={(event)=> handleOpenForm(event)}>ADD A REVIEW  +</Button>
     </ButtonContainer>
   );

@@ -102,16 +102,17 @@ const ImgInput = styled.img`
   padding: 10px;
 `;
 
-const ReviewSummary = ({Product, OverAllRating, Recommend, SizeRating, WidthRating, ComfortRating, QualityRating, LengthRating, FitRating,
-                        ReviewTitle, ReviewBody, Image, NickName, Email, handleSubmit}) => {
+const ReviewSummary = ({Product, ProductId, OverAllRating, Recommend, SizeRating, WidthRating, ComfortRating, QualityRating, LengthRating, FitRating,
+                        ReviewTitle, ReviewBody, Image, NickName, Email, handleSubmit, handleCloseForm}) => {
   const handleSubmitButton = (event) => {
     event.preventDefault();
-    handleSubmit(Product, OverAllRating, Recommend, SizeRating, WidthRating, ComfortRating, QualityRating, LengthRating, FitRating,
+    handleSubmit(ProductId, OverAllRating, Recommend, SizeRating, WidthRating, ComfortRating, QualityRating, LengthRating, FitRating,
                  ReviewTitle, ReviewBody, Image, NickName, Email);
   }
   
   return (
     <div>
+      <CloseButton onClick={(event) => handleCloseForm(event)}>x</CloseButton>
       <h3>Review Summary</h3>
       <h4>Your Overall Rating for -- {Product} -- is {OverAllRating}</h4>
       {Recommend ? <h4>You Recommend this Product</h4> : <h4>Your don't recommend this product</h4>}
@@ -128,12 +129,12 @@ const ReviewSummary = ({Product, OverAllRating, Recommend, SizeRating, WidthRati
       { Object.entries(Image).map((img,index) => <ImgInput src={img[1]} key={index} />) }
       <h4>Your Nick Name is: {NickName}</h4>
       <h4>Your E-mail is: {Email}</h4>
-      <button onclick={(event)=>handleSubmitButton(event)}>Submit</button>
+      <button onClick={(event)=>handleSubmitButton(event)}>Submit</button>
     </div>
   );
 }
 
-const ReviewForm = ({ productName, factors, handleCloseForm, handleSubmit }) => {
+const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleSubmit, created }) => {
 
   const handleNextButton = (event) => {
     event.preventDefault();
@@ -214,7 +215,7 @@ const ReviewForm = ({ productName, factors, handleCloseForm, handleSubmit }) => 
     setEmail(event.target.value);
   };
   const handleImage = (event, images) => {
-    event.preventDefault(images);
+    event.preventDefault();
     setImage(images);
   }
 
@@ -503,6 +504,7 @@ const ReviewForm = ({ productName, factors, handleCloseForm, handleSubmit }) => 
       : <SummaryContainer>
         <ReviewSummary
           Product={productName} 
+          ProductId={product_id}
           OverAllRating={overAllRate}
           Recommend={recommend}
           SizeRating={sizeRate}
@@ -517,6 +519,7 @@ const ReviewForm = ({ productName, factors, handleCloseForm, handleSubmit }) => 
           NickName={nickName}
           Email={email}
           handleSubmit={handleSubmit}
+          handleCloseForm={handleCloseForm}
         />  
       </SummaryContainer>}
     </Overlay>

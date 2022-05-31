@@ -30,17 +30,17 @@ class Reviews extends React.Component {
     if (this.state[sort].length > 0) {
       this.reviewList = JSON.parse(JSON.stringify(this.state[sort]));
     } else {
-      axios.get(`/reviews?product_id=${this.props.reviews.product}&page=1&count=50&sort=${sort}`).then((response)=> {
+      axios.get(`/reviews?product_id=${this.props.reviews.product}&page=1&count=50&sort=${sort}`).then((response) => {
         this.reviewList = JSON.parse(JSON.stringify(response.data.results));
         this.initialState = false;
-        this.setState({sort: JSON.parse(JSON.stringify(response.data.results))});
+        this.setState({ sort: JSON.parse(JSON.stringify(response.data.results)) });
         this.ReviewsCount = response.data.results.length;
       });
     }
   }
   handleHelpful(event, review_id, helpful) {
     event.preventDefault();
-    if(helpful) {
+    if (helpful) {
       axios.put(`/reviews/${review_id}/helpful`);
     }
   }
@@ -53,20 +53,66 @@ class Reviews extends React.Component {
   }
   handleOpenForm(event) {
     event.preventDefault();
-    this.setState({openForm: true});
+    this.setState({ openForm: true });
   }
 
   handleCloseForm(event) {
     event.preventDefault();
-    this.setState({openForm: false});
+    this.setState({ openForm: false });
   };
 
-  // handleSubmit(Product, OverAllRating, Recommend, SizeRating, WidthRating, ComfortRating, QualityRating, LengthRating, FitRating,
-  //   ReviewTitle, ReviewBody, Image, NickName, Email) {
-  //   axios.post('/reviews')
-  // };
+  handleSubmit(ProductId, OverAllRating, Recommend, SizeRating, WidthRating, ComfortRating, QualityRating, LengthRating, FitRating,
+    ReviewTitle, ReviewBody, Image, NickName, Email) {
+    var ImageArray = [];
+    var created = null;
+    for (var keys of Object.keys(Image)) {
+      ImageArray.push(Image[keys].slice(5));
+    }
+    axios.get(`/reviews/meta?product_id=${ProductId}`)
+      .then((response) => response.data.characteristics)
+      .then((factors) => {
+        for (var key of Object.keys(factors)) {
+          if (key === 'Size') {
+            factors[key].value = SizeRating;
+          } else if (key === 'Width') {
+            factors[key].value = WidthRating;
+          } else if (key === 'Comfort') {
+            factors[key].value = ComfortRating;
+          } else if (key === 'Quality') {
+            factors[key].value = QualityRating;
+          } else if (key === 'Length') {
+            factors[key].value = LengthRating;
+          } else if (key === 'Fit') {
+            factors[key].value = FitRating;
+          }
+        }
+        return factors;
+      })
+      .then((factors) => {
+        var newFactors = {};
+        for (var key of Object.keys(factors)) {
+          newFactors[factors[key]['id']] = Number(factors[key]['value']);
+        }
+        return newFactors;
+      })
+      .then((factors) => {
+        var variable = {
+          product_id: Number(ProductId),
+          rating: Number(OverAllRating),
+          summary: ReviewTitle,
+          recommend: Recommend,
+          name: NickName,
+          email: Email,
+          photos: ImageArray,
+          body: ReviewBody,
+          characteristics: factors
+        }
+        axios.post('/reviews', variable)
+          .then((response) => alert("Thank you! Your review has Submitted!"));
+      });
+  };
   render() {
-    
+
     if (this.props.reviews.results) {
       if (this.initialState) {
         this.ReviewsCount = this.props.reviews.results.length;
@@ -77,10 +123,10 @@ class Reviews extends React.Component {
     return (
       <>
         <ReviewContainer>
-          <ReviewCount count={this.ReviewsCount} handleSort={this.handleSort}/>
-          <ReviewList reviews={this.reviewList} handleHelpful={this.handleHelpful} handleReport={this.handleReport} handleOpenForm={this.handleOpenForm}/>
+          <ReviewCount count={this.ReviewsCount} handleSort={this.handleSort} />
+          <ReviewList reviews={this.reviewList} handleHelpful={this.handleHelpful} handleReport={this.handleReport} handleOpenForm={this.handleOpenForm} />
         </ReviewContainer>
-        {this.state.openForm ? <ReviewForm productName={this.props.productName} factors={this.props.factors} handleCloseForm={this.handleCloseForm} handleSubmit={this.handleSubmit}></ReviewForm> : null}
+        {this.state.openForm ? <ReviewForm productName={this.props.productName} product_id={this.props.reviews.product} factors={this.props.factors} handleCloseForm={this.handleCloseForm} handleSubmit={this.handleSubmit}></ReviewForm> : null}
       </>
     );
   }
