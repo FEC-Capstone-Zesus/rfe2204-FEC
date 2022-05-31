@@ -193,57 +193,41 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
     } else {
       toggleZoom(!zoomed);
 
-      var x = 0
-      var y = 0
-      var xPerc = 0
-      var yPerc = 0
-      var xPix = 0
-      var yPix = 0;
-
-      var a = container.getBoundingClientRect();
-
-      x = e.pageX - a.left;
-      y = e.pageY - a.top;
-
-      x = x - window.pageXOffset;
-      y = y - window.pageYOffset;
-
-      xPerc = x / 1040;
-      yPerc = y / 560;
-
-      xPix = xPerc * (cx - 1040);
-      yPix = yPerc * (cy - 560);
-
-      container.style.backgroundPosition = "-" + xPix + "px -" + yPix + "px";
+      moveImage(e, container);
     }
   }
 
-  const moveZoom = (e) => {
+  const moveOnZoom = (e) => {
     if (zoomed) {
+      var container = document.getElementById('imageContainer');
 
-      var x = 0
-      var y = 0
-      var xPerc = 0
-      var yPerc = 0
-      var xPix = 0
-      var yPix = 0;
-
-      var a = container.getBoundingClientRect();
-
-      x = e.pageX - a.left;
-      y = e.pageY - a.top;
-
-      x = x - window.pageXOffset;
-      y = y - window.pageYOffset;
-
-      xPerc = x / 1040;
-      yPerc = y / 560;
-
-      xPix = xPerc * (cx - 1040);
-      yPix = yPerc * (cy - 560);
-
-      container.style.backgroundPosition = "-" + xPix + "px -" + yPix + "px";
+      moveImage(e, container);
     }
+  }
+
+  const moveImage = (event, element) => {
+    var x = 0
+    var y = 0
+    var xPerc = 0
+    var yPerc = 0
+    var xPix = 0
+    var yPix = 0;
+
+    var a = element.getBoundingClientRect();
+
+    x = event.pageX - a.left;
+    y = event.pageY - a.top;
+
+    x = x - window.pageXOffset;
+    y = y - window.pageYOffset;
+
+    xPerc = x / 1040;
+    yPerc = y / 560;
+
+    xPix = xPerc * (cx - 1040);
+    yPix = yPerc * (cy - 560);
+
+    element.style.backgroundPosition = "-" + xPix + "px -" + yPix + "px";
   }
 
   return (
@@ -284,7 +268,7 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
       <MainImageContainer id='imageContainer'
                           zoomed={zoomed}
                           onClick={(e) => zoom(e)}
-                          onMouseMove={(e) => moveZoom(e)}
+                          onMouseMove={(e) => moveOnZoom(e)}
                           currentImage={mainImage ? mainImage : ''} >
           <HorizontalButtons>
             {slice[2] === 0 ? <ArrowContainer /> :
