@@ -9,7 +9,7 @@ box-shadow: 0 2px 20px #e1e5ee;
 border-radius 0.2rem;
 display: flex;
 flex-direction:column;
-justify-content:space-between;
+justify-content:column;
 cursor:pointer;
 transition: transform 200ms ease-in;
 position: absolute;
@@ -24,7 +24,6 @@ const CardImage = styled.img`
 `
 
 const OutfitCardAdd = ({ item, currentProduct, metaData, setOutfit, outfit, setOutfitStyle, styles, outfitStyle }) => {
-console.log(styles);
 
 let outfitAdd = function() {
   if(!outfit.includes(currentProduct))

@@ -28,16 +28,8 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
   justify-content: column;
   cursor: pointer;
   transition: all 0.75s ease;
-  opacity: ${className === 'active' || className === 'next' ? 1 : 0};
+  opacity: ${className === 'active' ? 1 : 0};
   position: absolute;
-  transform: ${className === 'active' ? 'scale(1) translateY(0)' :
-   className === 'prev' ? 'scale(1.1) translateY(-50px)' :
-   'scale(0.85) translateY(50px)' };
-  z-index: ${className === 'active' ? 1 : className === 'prev' ? 2 : 0};
-  visibility: ${className === 'prev' ? 'hidden' : ''};
-  &:hover{
-    transform:scale(1.02);
-  }
   `
   const Button_Star = styled.button`
   position: absolute;
@@ -52,7 +44,6 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
 
   let starCount = 0;
   let commonChars = [];
-  console.log(className);
 
   const [showModal, setshowModal] = useState(false);
 

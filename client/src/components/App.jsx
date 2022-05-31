@@ -21,13 +21,13 @@ const GlobalStyle = createGlobalStyle`
   select {
     border: 1px solid rgba(0, 0, 0, 100);
     border-radius: 0;
-    height: 2rem;
+    height: 3rem;
   }
   button {
     border: 1px solid rgba(0, 0, 0, 100);
     border-radius: 0;
     background: white;
-    height: 2rem;
+    height: 3rem;
   }
   .arrow {
     border: solid black;
@@ -78,8 +78,9 @@ const Loading = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Header = styled.div`
+const Header = styled.header`
   background: rgba(226,226,226,100);
+  margin-top: -0.5rem;
   height: 5rem;
   display: flex;
   justify-content: space-between;
@@ -114,22 +115,25 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
                           width: 1.5 + 'rem' }}src='/assets/magnifying_glass.png'></img>
           </div>
         </Header>
-        <h1>Hello World!!!!!</h1>
-        <OverviewContainer />
-        &nbsp;
-        <SubOverview>
-          <Summary product={product} />
-          {/* {product.id ? <p>{ JSON.stringify(product)}</p> : null}
-          {reviews.product ? <p>{ JSON.stringify(reviews)}</p> : null}
-          {styles.product_id ? <p>{ JSON.stringify(styles)}</p> : null}
-          {metaData.product_id ? <p>{ JSON.stringify(metaData)}</p> : null}
-          {questions.length ? <p>{ JSON.stringify(questions)}</p> : null}
-          {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null} */}
-          <RelateditemsContainer/>
-        </SubOverview>
-        &nbsp;
-        <RatingsReviewsContainer />
-
+        {!loading ?
+        <>
+          <h1>Hello World!!!!!</h1>
+          <OverviewContainer />
+          &nbsp;
+          <SubOverview>
+            <Summary product={product} />
+            {product.id ? <p>{ JSON.stringify(product)}</p> : null}
+            {reviews.product ? <p>{ JSON.stringify(reviews)}</p> : null}
+            {styles.product_id ? <p>{ JSON.stringify(styles)}</p> : null}
+            {metaData.product_id ? <p>{ JSON.stringify(metaData)}</p> : null}
+            {questions.length ? <p>{ JSON.stringify(questions)}</p> : null}
+            {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null}
+            <RelateditemsContainer />
+          </SubOverview>
+          &nbsp;
+          <RatingsReviewsContainer />
+        </>
+        : null}
     </>
   );
 };

@@ -8,12 +8,11 @@ const CardWrapper = styled.ul`
   list-style: none;
   padding: 20px;
   display: flex;
-  flex-direction: column;
-  height: 215px;
+  flex-direction: row;
+  height: 265px;
   width: 200px;
   margin: 0px;
   align-items: center;
-  position: relative;
 `
 const RelatedWrapper = styled.div`
   display: flex;
@@ -26,6 +25,13 @@ left: 50%;
 `
 
 const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) => {
+  console.log(product)
+  console.log(reviews)
+  console.log(styles)
+  console.log(metaData)
+  console.log(relatedProducts)
+
+
   const [indexes, setIndexes] = useState({
     previousIndex: 0,
     currentIndex: 0,
@@ -57,16 +63,6 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
         nextIndex: prevState.currentIndex - 2 < 0 ? (prevState.currentIndex - 1) + (relatedProducts.length - 1) : prevState.currentIndex - 2,
       }));
   }, [indexes.currentIndex]);
-  console.log("this is indexes", indexes)
-
-  // useEffect(() => {
-  //   const transitionInterval = setInterval(() => {
-  //     handleCardTransition();
-  //   }, 4000); // The interval value could also be a prop
-
-  //   // Clear the interval when the component unmounts!
-  //   return () => clearInterval(transitionInterval);
-  // }, [handleCardTransition, indexes]);
 
   let determineClasses = function(indexes, cardIndex) {
     if (indexes.currentIndex === cardIndex) {
@@ -78,7 +74,6 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
     }
     return 'inactive';
   };
-  console.log(relatedProducts);
   return (
     <div className ="wrapper">
       <RelatedWrapper className ='relatedRow'>
