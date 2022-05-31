@@ -115,7 +115,6 @@ var iconArray = [];
 const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice, toggleExpanded } ) => {
   var [zoomed, toggleZoom] = useState(false);
   var container = document.getElementById('imageContainer');
-  console.log(zoomed);
 
   var cx, cy;
   var i = new Image();
@@ -187,8 +186,6 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
 
   const zoom = (e) => {
     var container = document.getElementById('imageContainer');
-
-    console.log(zoomed);
 
     if (zoomed) {
       toggleZoom(!zoomed);
