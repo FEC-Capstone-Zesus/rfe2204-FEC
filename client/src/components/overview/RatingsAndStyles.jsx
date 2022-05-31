@@ -85,7 +85,7 @@ const RatingsAndStyles = ( { product,
   const updateCurrentStyle = (style) => {
     if (style.style_id !== currentStyle.style_id) {
       changeCurrentStyle(style);
-      changeMainImage(style.photos[slice[2]].thumbnail_url);
+      changeMainImage(style.photos[slice[2]].url);
       changeImagesArray(style.photos);
       setSkusArray(Object.entries(style.skus).sort((a, b) => a[1].size - b[1].size));
       setSku('');

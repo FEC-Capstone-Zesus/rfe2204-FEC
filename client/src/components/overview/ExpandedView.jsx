@@ -114,15 +114,6 @@ var iconArray = [];
 
 const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice, toggleExpanded } ) => {
   var [zoomed, toggleZoom] = useState(false);
-  var container = document.getElementById('imageContainer');
-
-  var cx, cy;
-  var i = new Image();
-  i.src = mainImage ? mainImage : '';
-  i.onload = function() {
-    cx = ((1040 * 2.5) / this.width) * this.width;
-    cy = ((1040 * 2.5) / this.width) * this.height;
-  }
 
   if (imagesArray.length) {
     max = imagesArray.length;
@@ -133,9 +124,9 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
   }
 
   const updateCurrentImage = (photo) => {
-    if (photo.thumbnail_url !== mainImage) {
+    if (photo.url !== mainImage) {
       imagesArray.forEach((currentPhoto, i) => {
-        if (currentPhoto.thumbnail_url === photo.thumbnail_url) {
+        if (currentPhoto.url === photo.url) {
           if (i > 6) {
             changeSlice([i - 6, i + 1, i]);
           } else {
@@ -143,7 +134,7 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
           }
         }
       })
-      changeMainImage(photo.thumbnail_url);
+      changeMainImage(photo.url);
     }
   }
 
@@ -152,14 +143,14 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
       var newSlice = direction === 'down' ? [slice[0] + 1, slice[1] + 1] : [slice[0] - 1, slice[1] - 1];
       var newIndex = slice[2];
 
-      if (imagesArray[slice[0]].thumbnail_url === mainImage && direction === 'down') {
+      if (imagesArray[slice[0]].url === mainImage && direction === 'down') {
         newIndex = slice[2] + 1;
-        changeMainImage(imagesArray[slice[0] + 1].thumbnail_url);
+        changeMainImage(imagesArray[slice[0] + 1].url);
       }
 
-      if (imagesArray[slice[1] - 1].thumbnail_url === mainImage && direction === 'up') {
+      if (imagesArray[slice[1] - 1].url === mainImage && direction === 'up') {
         newIndex = slice[2] - 1;
-        changeMainImage(imagesArray[slice[1] - 2].thumbnail_url);
+        changeMainImage(imagesArray[slice[1] - 2].url);
       }
 
       changeSlice([...newSlice, newIndex]);
@@ -170,15 +161,15 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
     if ((slice[2] > 0 && direction === 'left') || (slice[2] < max - 1 && direction === 'right')) {
       var newIndex = direction === 'right' ? slice[2] + 1 : slice[2] - 1;
 
-      if (imagesArray[slice[0]].thumbnail_url === mainImage && direction === 'left') {
+      if (imagesArray[slice[0]].url === mainImage && direction === 'left') {
         changeSlice([slice[0] - 1, slice[1] - 1, newIndex]);
-      } else if (imagesArray[slice[1] - 1].thumbnail_url === mainImage && direction === 'right') {
+      } else if (imagesArray[slice[1] - 1].url === mainImage && direction === 'right') {
         changeSlice([slice[0] + 1, slice[1] + 1, newIndex]);
       } else {
         changeSlice([slice[0], slice[1], newIndex]);
       }
 
-      changeMainImage(imagesArray[newIndex].thumbnail_url);
+      changeMainImage(imagesArray[newIndex].url);
     }
     e.stopPropagation();
 
@@ -224,14 +215,11 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
     xPerc = x / 1040;
     yPerc = y / 560;
 
-    xPix = xPerc * (cx - 1040);
-    yPix = yPerc * (cy - 560);
-
-    element.style.backgroundPosition = "-" + xPix + "px -" + yPix + "px";
+    element.style.backgroundPosition = "" + (xPerc * 100) + "% " + (yPerc * 100) + "%";
   }
 
   return (
-    <ExpandedDiv>
+    <ExpandedDiv id='expanded' >
       <CarouselDiv>
         <ImageCarousel >
           {iconArray.length ? iconArray.length > 11 ?
@@ -248,7 +236,7 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
                         <p style={{ marginTop: 7 + 'px' }}>{icon.value}</p>
                       </ImageIcon>
                       <ImageNoUnderline />
-                      {icon.photo.thumbnail_url === mainImage ?
+                      {icon.photo.url === mainImage ?
                         <ImageUnderline />
                         : <ImageNoUnderline /> }
                       <ImageNoUnderline />

@@ -1,52 +1,22 @@
-import React from 'react';
+import {cleanup, fireEvent, render, screen} from '@testing-library/react';
 import { Provider } from 'react-redux';
+import userEvent from '@testing-library/user-event';
 import renderer from 'react-test-renderer';
-import configureStore from 'redux-mock-store'
-const mockStore = configureStore([]);
-const axios = require('axios');
-import Relateditems from '../client/src/components/Relateditems.jsx'
-import RelateditemsContainer from '../client/src/containers/RelateditemsContainer.js'
-import Overview from '../client/src/components/overview/Overview.jsx'
+import configureStore from 'redux-mock-store';
+import Overview from '../client/src/components/overview/Overview.jsx';
 import OverviewContainer from '../client/src/containers/overview/OverviewContainer.js'
 import ImageGallery from '../client/src/components/overview/ImageGallery.jsx';
 import ImageGalleryContainer from '../client/src/containers/overview/ImageGalleryContainer.js';
 import RatingsAndStyles from '../client/src/components/overview/RatingsAndStyles.jsx';
-import RatingsAndStylesContainer from '../client/src/containers/overview/RatingsAndStylesContainer.js';
 import ExpandedView from '../client/src/components/overview/ExpandedView.jsx';
-import ExpandedViewContainer from '../client/src/containers/overview/ExpandedViewContainer.js';
 
-describe("Test related items redux components", () => {
-  let store;
-  let component;
 
+const mockStore = configureStore([]);
+
+describe('Overview User Events', () => {
+  afterEach(cleanup);
   beforeEach(() => {
-    store = mockStore({
-      product: {
-        category: "hello",
-        name: "test",
-        default_price: 100
-      },
-      styles: {results: [{photos: [{thumbnail_url: "hello"}]}]}
-    });
-
-    component = renderer.create(
-    <Provider store = {store}>
-      <RelateditemsContainer/>
-    </Provider>
-    );
-  });
-
-  it('should render with given state from Redux store', () => {
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-});
-
-describe("Test Overview redux components", () => {
-  let store;
-  let component;
-
-  beforeEach(() => {
-    store = mockStore({
+    var store = mockStore({
       product: {
         category: "hello",
         name: "test",
@@ -63,17 +33,23 @@ describe("Test Overview redux components", () => {
       relatedProducts: [37316,37316,37318,37319,37311,37313]
     });
 
-    component = renderer.create(
-    <Provider store = {store}>
-      <OverviewContainer/>
-      <ImageGalleryContainer/>
-      <RatingsAndStylesContainer/>
-      <ExpandedViewContainer/>
-    </Provider>
-    );
-  });
+    var component = renderer.create(
+      <Provider store = {store}>
+        {/* <ImageGalleryContainer/> */}
+      </Provider>
+      );
+    });
 
-  it('should render with given state from Redux store', () => {
-    expect(component.toJSON()).toMatchSnapshot();
+  it('Overview displays ExpandedView when mainImage is clicked', () => {
+    // render(<Overview />);
+    // render(<ImageGallery />);
+    // render(<RatingsAndStyles />);
+    // render(<ExpandedView />);
+
+    // const maingImage = screen.getByTestId('mainImage');
+
+    // userEvent.click(maingImage);
+
+    // expect(screen.getByTestId('expanded')).toBeInTheDocument();
   });
-});
+})

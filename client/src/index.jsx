@@ -46,7 +46,7 @@ const retrieve = () => {
       if (i === 2) {
         store.dispatch(setCurrentStyle(data.data.results[0]));
         store.dispatch(setImagesArray(data.data.results[0].photos));
-        store.dispatch(setMainImage(data.data.results[0].photos[0].thumbnail_url));
+        store.dispatch(setMainImage(data.data.results[0].photos[0].url));
       }
 
       if (i === promises.length - 1) {
