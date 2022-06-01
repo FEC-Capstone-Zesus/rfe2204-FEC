@@ -112,7 +112,9 @@ const ReviewSummary = ({Product, ProductId, OverAllRating, Recommend, SizeRating
   
   return (
     <div>
-      <CloseButton onClick={(event) => handleCloseForm(event)}>x</CloseButton>
+      
+      <CloseButton onClick={(event) => handleCloseForm(event)} id='closeButton'>x</CloseButton>
+
       <h3>Review Summary</h3>
       <h4>Your Overall Rating for -- {Product} -- is {OverAllRating}</h4>
       {Recommend ? <h4>You Recommend this Product</h4> : <h4>Your don't recommend this product</h4>}
@@ -267,7 +269,7 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
     {!showSummary ? 
       <>
         <FormContainer>
-          <CloseButton onClick={(event) => handleCloseForm(event)}>&times;</CloseButton>
+          <CloseButton onClick={(event) => handleCloseForm(event)} data-testid='closeButton'>&times;</CloseButton>
           <h3>Write Your Review</h3>
           <h5>About The Product -- {productName} --</h5>
           <div>
@@ -446,6 +448,7 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
               name="reviewSummary"
               placeholder='Example: Best purchase ever!'
               onChange={(event)=>handleSummaryInput(event)}
+              id="reviewSummary"
             />
             <InputStyle>input allowing up to 60 characters</InputStyle>
           </div>
@@ -462,6 +465,7 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
               name="reviewBody"
               placeholder='Why did you like the product or not?'
               onChange={(event) => handleBodyInput(event)}
+              id="reviewBody"
             />
             {reviewBody.length < 50 ? <InputStyle>Minimum required characters left: [{50 - reviewBody.length}]</InputStyle> : <InputStyle>Minimum reached</InputStyle>}
           </div>
@@ -498,7 +502,7 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
             <InputStyle>For authentication reasons, you will not be emailed</InputStyle>
           </div>
           <br/>
-          <button onClick={(event)=>handleNextButton(event)} data-testid='buttonNext'>Next</button>
+          <button onClick={(event)=>handleNextButton(event)} id='buttonNext'>Next</button>
         </FormContainer>
       </> 
       : <SummaryContainer>
