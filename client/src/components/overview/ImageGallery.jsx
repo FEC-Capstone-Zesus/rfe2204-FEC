@@ -10,9 +10,6 @@ const MainImage = styled.div`
   background-origin: content-box;
   background-size: contain;
   background-position: center;
-  &:hover {
-    cursor: zoom-in;
-  }
 `
 const ImageCarousel = styled.div`
   background: rgba(226,226,226,0.7);
@@ -59,12 +56,11 @@ const HorizontalButtons = styled.div`
   float: right;
   display: flex;
   justify-content: space-between;
-  width: 38rem;
+  width: 40rem;
   padding-right: 3rem;
   padding-top: 16rem;
 `
 const ArrowContainer = styled.div`
-  z-position: 1;
   width: 1rem;
   height: 3rem;
 `
@@ -95,70 +91,76 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
   if (imagesArray.length) {
     max = imagesArray.length;
   }
+  const stopParentOnClick = (e) => {
+    e.stopPropagation();
+  }
 
-  const updateCurrentImage = (photo) => {
-    if (photo.thumbnail_url !== mainImage) {
+  const updateCurrentImage = (e, photo) => {
+    if (photo.url !== mainImage) {
       imagesArray.forEach((currentPhoto, i) => {
-        if (currentPhoto.thumbnail_url === photo.thumbnail_url) {
+        if (currentPhoto.url === photo.url) {
           changeSlice([slice[0], slice[1], i]);
         }
       })
-      changeMainImage(photo.thumbnail_url);
+      changeMainImage(photo.url);
     }
+    e.stopPropagation();
   }
 
-  const updateCarousel = (direction) => {
+  const updateCarousel = (e, direction) => {
     if ((slice[0] > 0 && direction === 'up') || (slice[1] < max && direction === 'down')) {
       var newSlice = direction === 'down' ? [slice[0] + 1, slice[1] + 1] : [slice[0] - 1, slice[1] - 1];
       var newIndex = slice[2];
 
-      if (imagesArray[slice[0]].thumbnail_url === mainImage && direction === 'down') {
+      if (imagesArray[slice[0]].url === mainImage && direction === 'down') {
         newIndex = slice[2] + 1;
-        changeMainImage(imagesArray[slice[0] + 1].thumbnail_url);
+        changeMainImage(imagesArray[slice[0] + 1].url);
       }
 
-      if (imagesArray[slice[1] - 1].thumbnail_url === mainImage && direction === 'up') {
+      if (imagesArray[slice[1] - 1].url === mainImage && direction === 'up') {
         newIndex = slice[2] - 1;
-        changeMainImage(imagesArray[slice[1] - 2].thumbnail_url);
+        changeMainImage(imagesArray[slice[1] - 2].url);
       }
 
       changeSlice([...newSlice, newIndex]);
     }
+    e.stopPropagation();
   }
 
-  const horizontalClick = (direction) => {
+  const horizontalClick = (e, direction) => {
     if ((slice[2] > 0 && direction === 'left') || (slice[2] < max - 1 && direction === 'right')) {
       var newIndex = direction === 'right' ? slice[2] + 1 : slice[2] - 1;
 
-      if (imagesArray[slice[0]].thumbnail_url === mainImage && direction === 'left') {
+      if (imagesArray[slice[0]].url === mainImage && direction === 'left') {
         changeSlice([slice[0] - 1, slice[1] - 1, newIndex]);
-      } else if (imagesArray[slice[1] - 1].thumbnail_url === mainImage && direction === 'right') {
+      } else if (imagesArray[slice[1] - 1].url === mainImage && direction === 'right') {
         changeSlice([slice[0] + 1, slice[1] + 1, newIndex]);
       } else {
         changeSlice([slice[0], slice[1], newIndex]);
       }
 
-      changeMainImage(imagesArray[newIndex].thumbnail_url);
+      changeMainImage(imagesArray[newIndex].url);
     }
+    e.stopPropagation();
   }
 
   return (
-    <MainImage currentImage={mainImage ? mainImage : ''}>
-      <ImageCarousel>
+    <MainImage id='mainImage' currentImage={mainImage ? mainImage : ''}>
+      <ImageCarousel onClick={(e) => stopParentOnClick(e)}>
         {imagesArray.length ? imagesArray.length > 7 ?
-          <CarouselArrow onClick={() => updateCarousel('up') }>
+          <CarouselArrow onClick={(e) => updateCarousel(e, 'up') }>
             <div className='arrow up'
-                 style={{ marginLeft: 1.3 + 'rem' }}></div>
+                 style={{ marginLeft: 1.25 + 'rem' }}></div>
           </CarouselArrow>
           : <div style={{ width: 3 + 'rem', height: 1 + 'rem'}}></div> : null}
         <div>
           {imagesArray.length ? imagesArray.slice(slice[0], slice[1]).map((photo, i) => {
                 return (
                   <div key={photo.thumbnail_url}>
-                    <ImageThumbnail onClick={() => updateCurrentImage(photo)}
+                    <ImageThumbnail onClick={(e) => updateCurrentImage(e, photo)}
                                     currentThumbnail={photo.thumbnail_url}/>
                     <ImageNoUnderline />
-                    {photo.thumbnail_url === mainImage ?
+                    {photo.url === mainImage ?
                       <ImageUnderline />
                       : <ImageNoUnderline /> }
                     <ImageNoUnderline />
@@ -168,19 +170,19 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
            : null}
         </div>
         {imagesArray.length ? imagesArray.length > 7 ?
-          <CarouselArrow onClick={() => updateCarousel('down') }>
+          <CarouselArrow onClick={(e) => updateCarousel(e, 'down') }>
             <div className='arrow down'
-                 style={{ marginLeft: 1.3 + 'rem', marginBottom: 0.5 + 'rem' }}></div>
+                 style={{ marginLeft: 1.25 + 'rem', marginBottom: 0.5 + 'rem' }}></div>
           </CarouselArrow>
           : null : null}
       </ImageCarousel>
       <HorizontalButtons>
         {slice[2] === 0 ? <ArrowContainer /> :
-        <ArrowContainer onClick={() => horizontalClick('left')}>
+        <ArrowContainer onClick={(e) => horizontalClick(e, 'left')}>
           <ArrowLeft>←</ArrowLeft>
         </ArrowContainer>}
         {slice[2] === max - 1 ? <ArrowContainer /> :
-        <ArrowContainer onClick={() => horizontalClick('right')}>
+        <ArrowContainer onClick={(e) => horizontalClick(e, 'right')}>
           <ArrowRight>→</ArrowRight>
         </ArrowContainer>}
       </HorizontalButtons>
