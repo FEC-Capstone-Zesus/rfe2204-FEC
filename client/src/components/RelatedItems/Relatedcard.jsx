@@ -2,6 +2,7 @@ const axios = require('axios');
 import React, { useState } from 'react';
 import useAxios from 'axios-hooks'
 import styled from "styled-components";
+import StarRating from "../StarRating.jsx"
 
 
 const CardImage = styled.img`
@@ -41,7 +42,6 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
     transform:scale(1.02);
   }
   `
-
   let starCount = 0;
   let commonChars = [];
 
@@ -60,7 +60,7 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
   )
 
   if (loadingProducts) return <p>Loading...</p>
-  if (errorProducts) return <p>Error!</p>
+  if (errorProducts) return <p>Error! {`${errorProducts}`}</p>
   if (loadingReviews) return <p>Loading...</p>
   if (errorReviews) return <p>Error!</p>
 
@@ -108,7 +108,7 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
         <p>{products.name}
         <br></br>{products.category}
         <br></br>{products.default_price}
-        <br></br>{reviewsRelated !== undefined ? starCount : null}
+        <br></br><StarRating ratings = {reviewsRelated}/>
         </p>
       </Card_body>
   )

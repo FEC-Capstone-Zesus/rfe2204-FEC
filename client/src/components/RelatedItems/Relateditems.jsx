@@ -25,19 +25,20 @@ left: 50%;
 `
 
 const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) => {
-  console.log(product)
-  console.log(reviews)
-  console.log(styles)
-  console.log(metaData)
-  console.log(relatedProducts)
-
 
   const [indexes, setIndexes] = useState({
     previousIndex: 0,
     currentIndex: 0,
     nextIndex: 1
   });
-  const [outfit, setOutfit] = useState([]);
+
+  const [outfitIndexes, setOutfitIndexes] = useState({
+    previousIndex: 0,
+    currentIndex: 0,
+    nextIndex: 1
+  });
+
+  const [outfit, setOutfit] = useState(['add']);
   const [outfitStyle, setOutfitStyle] = useState([]);
 
   const handleCardTransition = useCallback(() => {
@@ -56,6 +57,22 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
     }
   }, [indexes.currentIndex]);
 
+  const handleOutfitCardTransition = useCallback(() => {
+    if (outfitIndexes.currentIndex === outfit.length - 1) {
+      setOutfitIndexes({
+        previousIndex: outfit.length - 1,
+        currentIndex: 0,
+        nextIndex: 1,
+      });
+    } else {
+      setOutfitIndexes((prevState) => ({
+        previousIndex: prevState.currentIndex,
+        currentIndex: prevState.currentIndex + 1,
+        nextIndex: prevState.currentIndex + 2 === outfit.length ? 0 : prevState.currentIndex + 2,
+      }));
+    }
+  }, [outfitIndexes.currentIndex]);
+
   const handleCardTransitionReverse = useCallback(() => {
       setIndexes((prevState) => ({
         previousIndex: prevState.currentIndex,
@@ -63,6 +80,14 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
         nextIndex: prevState.currentIndex - 2 < 0 ? (prevState.currentIndex - 1) + (relatedProducts.length - 1) : prevState.currentIndex - 2,
       }));
   }, [indexes.currentIndex]);
+
+  const handleOutfitCardTransitionReverse = useCallback(() => {
+    setOutfitIndexes((prevState) => ({
+      previousIndex: prevState.currentIndex,
+      currentIndex: prevState.currentIndex - 1 < 0 ? outfit.length - 1 : prevState.currentIndex - 1,
+      nextIndex: prevState.currentIndex - 2 < 0 ? (prevState.currentIndex - 1) + (outfit.length - 1) : prevState.currentIndex - 2,
+    }));
+  }, [outfitIndexes.currentIndex]);
 
   let determineClasses = function(indexes, cardIndex) {
     if (indexes.currentIndex === cardIndex) {
@@ -84,12 +109,26 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
         <Next_Button onClick = {handleCardTransition}>This will handle the next</Next_Button>
       </RelatedWrapper>
       <RelatedWrapper className ='outfitRow'>
-      <CardWrapper className = 'outfitRow'>
-        <OutfitAddCard outfitStyle = {outfitStyle} currentProduct = {product} setOutfit = {setOutfit} outfit = {outfit} styles = {styles} setOutfitStyle = {setOutfitStyle}/>
-        {outfit.map((item,index) => <Outfitcard key = {index} item = {item}
-        metaData = {metaData}
-        outfitStyle = {outfitStyle[index]}/>)}
-      </CardWrapper>
+        <button onClick = {handleOutfitCardTransitionReverse}> This will go back</button>
+        <CardWrapper className = 'outfitRow'>
+          {outfit.map((item,index) => item === 'add' ? <OutfitAddCard
+          key = {index}
+          outfitStyle = {outfitStyle}
+          currentProduct = {product}
+          setOutfit = {setOutfit}
+          outfit = {outfit}
+          styles = {styles}
+          setOutfitStyle = {setOutfitStyle}
+          className = {`${determineClasses(outfitIndexes,index)}`}/> :
+          <Outfitcard key = {index}
+          item = {item}
+          metaData = {metaData}
+          outfit = {outfit[index]}
+          outfitStyle = {outfitStyle}
+          className = {`${determineClasses(outfitIndexes,index)}`}
+          />)}
+        </CardWrapper>
+        <button onClick = {handleOutfitCardTransition}> This will go forward</button>
       </RelatedWrapper>
     </div>
   );

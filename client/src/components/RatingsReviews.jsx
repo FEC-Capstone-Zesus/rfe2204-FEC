@@ -3,7 +3,7 @@ import Ratings from './RatingsComponent/Ratings.jsx';
 import Reviews from './ReviewsComponent/Reviews.jsx';
 import styled from 'styled-components';
 
-const RatingsReviewsContainer = styled.div` 
+const RatingsReviewsContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -12,7 +12,7 @@ const RatingsReviewsContainer = styled.div`
 `;
 
 const RatingsContainer = styled.div`
-  flex-basis: 25%; 
+  flex-basis: 25%;
 `;
 const ReviewsContainer = styled.div`
   flex-basis: 65%;
@@ -31,17 +31,17 @@ class RatingsReviews extends React.Component {
   render () {
     return (
       <>
-        <H4>Ratings & Reviews</H4>
+        <H4>Ratings and Reviews</H4>
         <RatingsReviewsContainer>
 
           <RatingsContainer>
-            <Ratings ratings={this.props.metaData.ratings} recommended={this.props.metaData.recommended} factors={this.props.metaData.characteristics}/> 
+            <Ratings ratings={this.props.metaData.ratings} recommended={this.props.metaData.recommended} factors={this.props.metaData.characteristics}/>
           </RatingsContainer>
 
           <ReviewsContainer>
             <Reviews reviews={this.props.reviews} />
           </ReviewsContainer>
-          
+
         </RatingsReviewsContainer>
       </>
     );
