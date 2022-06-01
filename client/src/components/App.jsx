@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     background: white;
     font-family: 'Inter', sans-serif;
   }
-  a {
+  a.reviews {
     color: black;
   }
   select {
@@ -59,6 +59,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const SubOverview = styled.div`
+  width: 55rem;
   margin-left: 7rem;
   margin-right 7rem;
   padding: 0;
@@ -83,9 +84,26 @@ const Loading = styled.div`
   transform: translate(-50%, -50%);
 `;
 
+const Headline = styled.div`
+  width: 75rem;
+  height: 2rem;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+`;
+
+const HeadlineSpan = styled.span`
+  margin-top: 0.5rem;
+  font-size: 0.8em;
+  font-weight: ${({ bold }) => (bold ? 'bold' : '')};
+  font-style: ${({ italic }) => (italic ? 'italic' : '')};
+  text-decoration:${({ underline }) => (underline ? 'underline' : '')};
+`
+
 const Header = styled.header`
   background: rgba(226,226,226,100);
   margin-top: -0.5rem;
+  width: 75rem;
   height: 5rem;
   display: flex;
   justify-content: space-between;
@@ -122,7 +140,19 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
         </Header>
         {!loading ?
         <>
-          <h1>Hello World!!!!!</h1>
+          <Headline>
+            <HeadlineSpan italic={true} >SITE-WIDE ANNOUNCEMENT MESSAGE!</HeadlineSpan>
+            &nbsp;
+            <HeadlineSpan>--</HeadlineSpan>
+            &nbsp;
+            <HeadlineSpan>SALE / DISCOUNT</HeadlineSpan>
+            &nbsp;
+            <HeadlineSpan bold={true}>OFFER</HeadlineSpan>
+            &nbsp;
+            <HeadlineSpan>--</HeadlineSpan>
+            &nbsp;
+            <HeadlineSpan underline={true}>NEW PRODUCT HIGHLIGHT</HeadlineSpan>
+          </Headline>
           <OverviewContainer />
           <SubOverview>
           <Summary product={product} />
@@ -133,7 +163,9 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
             {questions.length ? <p>{ JSON.stringify(questions)}</p> : null}
             {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null} */}
           <RelateditemsContainer />
-          <a id='allRatings'><RatingsReviewsContainer/></a>
+          <a id='allRatings'>
+            <RatingsReviewsContainer/>
+          </a>
           </SubOverview>
         </>
         : null}
