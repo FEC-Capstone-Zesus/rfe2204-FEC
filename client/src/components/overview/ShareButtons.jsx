@@ -30,7 +30,7 @@ const Summary = ( { product } ) => {
         &nbsp;
         &nbsp;
         <a data-pin-do="buttonBookmark" data-pin-tall="true" data-pin-round="true" href="https://www.pinterest.com/pin/create/button/">
-          <img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_round_red_32.png" />
+          <img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_round_red_16.png" />
         </a>
       </Buttons>
     </SummaryDiv>
