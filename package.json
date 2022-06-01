@@ -14,6 +14,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "jest-environment-jsdom": "^28.1.0",
     "jsesc": "^3.0.2",
     "json-schema-traverse": "^1.0.0",
     "loader-utils": "^3.2.0",
@@ -30,6 +31,7 @@
     "react-redux": "^8.0.1",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
+    "regenerator-runtime": "^0.13.9",
     "regenerator-transform": "^0.15.0",
     "regexpu-core": "^5.0.1",
     "shebang-command": "^2.0.0",
@@ -44,6 +46,7 @@
     "@babel/core": "^7.17.12",
     "@babel/preset-env": "^7.17.12",
     "@babel/preset-react": "^7.17.12",
+    "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/dom": "^8.13.0",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.0",
@@ -58,7 +61,7 @@
     "webpack-cli": "^4.9.2"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "server-dev": "npx nodemon --watch server server/index.js",
     "build": "webpack --config webpack.config.js",
     "client-dev": "npx webpack --watch"

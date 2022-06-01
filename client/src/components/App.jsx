@@ -119,44 +119,23 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
                           width: 1.5 + 'rem' }}src='/assets/magnifying_glass.png'></img>
           </div>
         </Header>
-<<<<<<< HEAD
         {!loading ?
         <>
           <h1>Hello World!!!!!</h1>
           <OverviewContainer />
-          &nbsp;
           <SubOverview>
             <Summary product={product} />
-            {product.id ? <p>{ JSON.stringify(product)}</p> : null}
+            {/* {product.id ? <p>{ JSON.stringify(product)}</p> : null}
             {reviews.product ? <p>{ JSON.stringify(reviews)}</p> : null}
             {styles.product_id ? <p>{ JSON.stringify(styles)}</p> : null}
             {metaData.product_id ? <p>{ JSON.stringify(metaData)}</p> : null}
             {questions.length ? <p>{ JSON.stringify(questions)}</p> : null}
-            {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null}
-            <RelateditemsContainer />
-          </SubOverview>
-          &nbsp;
+            {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null} */}
+          <RelateditemsContainer />
           <RatingsReviewsContainer />
+          </SubOverview>
         </>
         : null}
-=======
-        <h1>Hello World!!!!!</h1>
-        <OverviewContainer />
-        &nbsp;
-        <SubOverview>
-          <Summary product={product} />
-          {/* {product.id ? <p>{ JSON.stringify(product)}</p> : null}
-          {reviews.product ? <p>{ JSON.stringify(reviews)}</p> : null}
-          {styles.product_id ? <p>{ JSON.stringify(styles)}</p> : null}
-          {metaData.product_id ? <p>{ JSON.stringify(metaData)}</p> : null}
-          {questions.length ? <p>{ JSON.stringify(questions)}</p> : null}
-          {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null} */}
-          <RelateditemsContainer/>
-        </SubOverview>
-        &nbsp;
-        <RatingsReviewsContainer />
-
->>>>>>> 98b4b53ade3a7b0e3f052d2f9e5e9ba0eb0d76a3
     </>
   );
 };
