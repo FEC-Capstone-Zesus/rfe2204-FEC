@@ -59,7 +59,7 @@ describe("Test related items redux components", () => {
 
   it('should render with given state from Redux store', async () => {
     await waitFor(() => {
-      expect(screen.getByText('Morning Joggers')).toBeInTheDocument()
+      expect(screen.getByText("★★★★")).toBeInTheDocument()
     });
   });
 
