@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const SummaryDiv = styled.div`
-  margin-top: -4rem;
+  margin-top: -3.9rem;
   margin-right: 1rem;
   width: 70rem;
   height: 5rem;
