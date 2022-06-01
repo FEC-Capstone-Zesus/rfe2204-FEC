@@ -4,9 +4,11 @@ const app = express()
 const port = 3000
 const axios = require('axios')
 const path = require('path')
+const cors = require('cors')
 
 const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe'
 
+app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/dist')))
 app.use(express.urlencoded({extended:true}))
@@ -81,7 +83,6 @@ app.get('/products/:product_id/related', (req, res) => {
 
 
 app.get('/reviews', (req, res) => {
-  console.log("this is the req.params", req.params.product_id)
   axios({
     url: `${apiURL}/reviews`,
     method: "GET",
@@ -259,7 +260,6 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
       res.sendStatus(201);
     })
     .catch((err) => {
-      //console.log(err);
       res.sendStatus(404)
     })
 })
@@ -397,3 +397,5 @@ app.post('/interactions', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+module.exports = app;
