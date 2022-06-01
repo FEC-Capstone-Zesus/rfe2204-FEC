@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Relateditems from "../components/Relateditems.jsx";
+import Relateditems from "../components/RelatedItems/Relateditems.jsx";
 
 const mapStateToProps = (state) => (
   {
