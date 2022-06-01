@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     border: 1px solid rgba(0, 0, 0, 100);
     border-radius: 0;
     height: 3rem;
+    font-weight: bold;
   }
   button {
     border: 1px solid rgba(0, 0, 0, 100);

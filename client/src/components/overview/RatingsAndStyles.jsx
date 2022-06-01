@@ -180,6 +180,7 @@ const RatingsAndStyles = ( { product,
         <StyledImagesContainer>
         {styles.product_id ? styles.results.map(style => {
           return (<StyledImageSpan key={style.style_id}
+                                   data-testid={style.name}
                                    id={style.name}
                                    length={styles.results.length}
                                    onClick={() => updateCurrentStyle(style)}>
@@ -243,8 +244,8 @@ const RatingsAndStyles = ( { product,
               disabled={!inStock}
               id='addToBag'
               onClick={(e) => addToCart(e)}>
-        <p style={{ top: 50 + '%' }}>ADD TO BAG</p>
-        <p style={{ top: 50 + '%' }}>+</p>
+        <p style={{ fontWeight: 'bold', top: 50 + '%' }}>ADD TO BAG</p>
+        <p style={{ fontWeight: 'bold', top: 50 + '%' }}>+</p>
       </button>
       &nbsp;
       <div className='star-item'></div>

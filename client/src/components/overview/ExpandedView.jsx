@@ -97,13 +97,13 @@ const ArrowRight = styled.div`
 `
 const ExitExpanded = styled.div`
   float: left;
-  width: 1rem;
+  width: 2rem;
   height: 1rem;
   margin-top: -19rem;
-  background-color: white;
+  background: rgba(226,226,226,0.5);
   position: relative;
   text-align: center;
-  left: 98.5%;
+  left: 97%;
   &:hover {
     cursor: pointer;
   }
@@ -232,8 +232,9 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
             {iconArray.length ? iconArray.slice(Math.max(slice[0] - 4, 0), slice[1] + 4).map((icon, i) => {
                   return (
                     <div key={icon.photo.thumbnail_url}>
-                      <ImageIcon onClick={() => updateCurrentImage(icon.photo)}>
-                        <p id={`${icon.photo.thumbnail_url}`} style={{ marginTop: 7 + 'px' }}>{icon.value}</p>
+                      <ImageIcon data-testid={icon.photo.thumbnail_url}
+                                 onClick={() => updateCurrentImage(icon.photo)}>
+                        <p style={{ marginTop: 7 + 'px' }}>{icon.value}</p>
                       </ImageIcon>
                       <ImageNoUnderline />
                       {icon.photo.url === mainImage ?
@@ -254,22 +255,27 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
         </ImageCarousel>
       </CarouselDiv>
       <MainImageContainer id='imageContainer'
+                          data-testid='imageContainer'
                           zoomed={zoomed}
                           onClick={(e) => zoom(e)}
                           onMouseMove={(e) => moveOnZoom(e)}
                           currentImage={mainImage ? mainImage : ''} >
           <HorizontalButtons>
             {slice[2] === 0 ? <ArrowContainer /> :
-            <ArrowContainer id='expandedLeft' onClick={(e) => horizontalClick(e, 'left')}>
-              <ArrowLeft>←</ArrowLeft>
+            <ArrowContainer id='expandedLeft'
+                            data-testid='expandedLeftContainer'
+                            onClick={(e) => horizontalClick(e, 'left')}>
+              <ArrowLeft data-testid='expandedLeft' >←</ArrowLeft>
             </ArrowContainer>}
             {slice[2] === max - 1 ? <ArrowContainer /> :
-            <ArrowContainer id='expandedRight' onClick={(e) => horizontalClick(e, 'right')}>
-              <ArrowRight>→</ArrowRight>
+            <ArrowContainer id='expandedRight'
+                            data-testid='expandedRightContainer'
+                            onClick={(e) => horizontalClick(e, 'right')}>
+              <ArrowRight data-testid='expandedRight' >→</ArrowRight>
             </ArrowContainer>}
           </HorizontalButtons>
           <ExitExpanded onClick={(e) => { toggleExpanded(false); e.stopPropagation(); }}>
-            <div>X</div>
+            <div data-testid='Exit' >Exit</div>
           </ExitExpanded>
       </MainImageContainer>
     </ExpandedDiv>
