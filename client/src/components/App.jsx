@@ -6,7 +6,7 @@ import RelateditemsContainer from "../containers/RelateditemsContainer.js";
 
 const GlobalStyle = createGlobalStyle`
   body {
-    margin-left: 12rem;
+    margin-left: 10rem;
     margin-right 12rem;
     padding: 0;
     background: white;
