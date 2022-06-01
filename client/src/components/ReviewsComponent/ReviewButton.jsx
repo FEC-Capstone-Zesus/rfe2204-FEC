@@ -16,7 +16,7 @@ const ReviewButton = ({showMoreReviewButton, handleOpenForm, load}) => {
   return (
     <ButtonContainer>
       {showMoreReviewButton ? <Button onClick={(event)=> load(event)}>MORE REVIEWS</Button> : null}
-      <Button onClick={(event)=> handleOpenForm(event)}>ADD A REVIEW  +</Button>
+      <Button onClick={(event)=> handleOpenForm(event)} data-testid='addreview'>ADD A REVIEW  +</Button>
     </ButtonContainer>
   );
 };

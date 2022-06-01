@@ -498,7 +498,7 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
             <InputStyle>For authentication reasons, you will not be emailed</InputStyle>
           </div>
           <br/>
-          <button onClick={(event)=>handleNextButton(event)}>Next</button>
+          <button onClick={(event)=>handleNextButton(event)} data-testid='buttonNext'>Next</button>
         </FormContainer>
       </> 
       : <SummaryContainer>
