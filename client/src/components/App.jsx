@@ -28,6 +28,10 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 0;
     background: white;
     height: 3rem;
+    &:active:hover {
+      background: black;
+      color: white;
+    }
   }
   .arrow {
     border: solid black;

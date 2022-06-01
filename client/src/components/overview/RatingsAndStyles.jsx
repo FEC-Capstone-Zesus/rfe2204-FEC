@@ -85,7 +85,7 @@ const RatingsAndStyles = ( { product,
   const updateCurrentStyle = (style) => {
     if (style.style_id !== currentStyle.style_id) {
       changeCurrentStyle(style);
-      changeMainImage(style.photos[slice[2]].thumbnail_url);
+      changeMainImage(style.photos[slice[2]].url);
       changeImagesArray(style.photos);
       setSkusArray(Object.entries(style.skus).sort((a, b) => a[1].size - b[1].size));
       setSku('');
@@ -211,8 +211,8 @@ const RatingsAndStyles = ( { product,
                 onChange={(e) => changeSelect(e)}
                 style={{ width: 5 + 'rem' }}>
           <option value='Select Qty' >1</option>
-          {Array.from(Array(qtySelect).keys()).slice(1, 15).map((qty) =>
-          <option key={qty} value={qty + 1} >{qty + 1}</option>)}
+          {Array.from(Array(qtySelect).keys()).map(x => x + 1).slice(1, 15).map((qty) =>
+          <option key={qty} value={qty} >{qty}</option>)}
         </select> :
         <select name='qty'
                 disabled={true}
@@ -228,8 +228,8 @@ const RatingsAndStyles = ( { product,
                        justifyContent: 'space-between' }}
               disabled={!inStock}
               onClick={(e) => addToCart(e)}>
-              <p style={{ top: 50 + '%' }}>ADD TO BAG</p>
-              <p style={{ top: 50 + '%' }}>+</p>
+        <p style={{ top: 50 + '%' }}>ADD TO BAG</p>
+        <p style={{ top: 50 + '%' }}>+</p>
       </button>
       &nbsp;
       <div className='star-item'></div>
