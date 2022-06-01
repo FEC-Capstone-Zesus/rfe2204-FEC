@@ -20,6 +20,9 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 0;
     height: 3rem;
     font-weight: bold;
+    &:focus {
+      outline: none
+    }
   }
   button {
     border: 1px solid rgba(0, 0, 0, 100);
