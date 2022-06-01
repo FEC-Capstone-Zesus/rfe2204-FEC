@@ -140,7 +140,7 @@ const RatingsAndStyles = ( { product,
       <div className='ratings'>
         <span>
           {metaData.product_id ?
-            <StarRating metaData={metaData} />
+            <StarRating ratings={metaData} />
           : null}
         </span>
         &nbsp;
