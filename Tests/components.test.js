@@ -71,6 +71,7 @@ describe("Test related items redux components", () => {
       expect(screen.getByText("★★★★")).toBeInTheDocument()
     })
   });
+});
 describe("Test Overview redux components", () => {
   let store;
   let component;
