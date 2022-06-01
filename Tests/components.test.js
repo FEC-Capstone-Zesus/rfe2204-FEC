@@ -822,4 +822,4 @@ describe("Test Ratings & Reviews redux components", () => {
     })
   })
 
-});
+
