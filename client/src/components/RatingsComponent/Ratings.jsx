@@ -45,7 +45,7 @@ class Ratings extends React.Component {
   render() {
     return (
       <RatingContainer>
-        <RatingAndStar rate={ this.props.ratings } />
+        <RatingAndStar rate={ this.props.ratings } meta={this.props}/>
         <Votes recommended={ this.props.recommended } rateNumber={ this.props.ratings } filter={this.state.filter} handleFilter={this.handlefilter} handleClear={this.handleClear}/>
         <Factors factors={ this.props.factors }/>
       </RatingContainer>

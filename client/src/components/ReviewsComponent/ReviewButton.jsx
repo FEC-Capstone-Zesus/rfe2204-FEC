@@ -8,16 +8,17 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-  padding: 20px;
+  padding: 10px;
   background-color: white;
 `;
 
-const ReviewButton = ({listLength, currLength, load}) => (
-  <ButtonContainer>
-    {listLength > currLength || listLength > 2 ? 
-      <Button onClick={(e) => load(e)}>MORE REVIEWS</Button> : null}
-    <Button>ADD A REVIEW  +</Button>
-  </ButtonContainer>
-);
+const ReviewButton = ({showMoreReviewButton, handleOpenForm, load}) => {
+  return (
+    <ButtonContainer>
+      {showMoreReviewButton ? <Button onClick={(event)=> load(event)}>MORE REVIEWS</Button> : null}
+      <Button onClick={(event)=> handleOpenForm(event)} data-testid='addreview'>ADD A REVIEW  +</Button>
+    </ButtonContainer>
+  );
+};
 
 export default ReviewButton;
