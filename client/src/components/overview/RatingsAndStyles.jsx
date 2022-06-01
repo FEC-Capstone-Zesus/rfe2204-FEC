@@ -8,6 +8,17 @@ const RatingsStyles = styled.div`
   height: 35rem;
   padding: 2rem 1.5rem 2rem 1.5rem;
 `
+const Ratings = styled.div`
+  margin-top: ${({length}) => (length > 8 ? `-2rem` : '0')};
+`
+const ProductName = styled.h1`
+  margin-top: ${({length}) => (length > 8 ? '0.7rem' : '' )};
+  margin-bottom: ${({length}) => (length > 8 ? '0.7rem' : '' )};
+`
+const ProductCatgory = styled.h5`
+  margin-top: ${({length}) => (length > 8 ? '0.7rem' : '' )};
+  margin-bottom: ${({length}) => (length > 8 ? '0.7rem' : '' )};
+`
 const StyledImagesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -23,8 +34,13 @@ const StyledImageSpan = styled.span`
   padding: ${({length}) => (length > 4 ? `0.1rem 0` : '0.5rem 0')};
   overflow: hidden;
 `
-const StyledImage = styled.img`
+const StyledImageParent = styled.div`
   width: 6rem;
+  height: 6rem;
+`
+const StyledImage = styled.img`
+  width:  4rem;
+  height: 4rem;
   border: 1px solid;
   object-fit: cover;
   clip-path: circle();
@@ -39,8 +55,8 @@ const CheckMark = styled.div`
   z-index: 1;
   background: rgba(250,250,250,100);
   position: absolute;
-  top: 0.7rem;
-  left: 4rem;
+  top: 0.5rem;
+  left: 3rem;
   text-align: center;
   border: 1px solid;
   width: 1rem;
@@ -145,7 +161,7 @@ const RatingsAndStyles = ( { product,
   return (
     <RatingsStyles>
       {totalReviews ?
-      <div className='ratings'>
+      <Ratings length={styles.results.length}>
         <span>
           <StarRating ratings={metaData} />
         </span>
@@ -153,11 +169,15 @@ const RatingsAndStyles = ( { product,
         <span>
           <a style={{ fontSize: 0.6 + 'em' }} href='#allRatings'>Read all {totalReviews} reviews</a>
         </span>
-      </div> :
+      </Ratings> :
       null }
 
-      <div><h5>{product.id ? product.category.toUpperCase() : null}</h5></div>
-      <h1>{product.id ? product.name : null}</h1>
+      <div>
+        <ProductCatgory length={styles.results.length}>
+          {product.id ? product.category.toUpperCase() : null}
+        </ProductCatgory>
+      </div>
+      <ProductName length={styles.results.length}>{product.id ? product.name : null}</ProductName>
 
       {currentStyle.style_id ? !currentStyle.sale_price ?
         <span>${currentStyle.original_price}</span> :
@@ -185,7 +205,9 @@ const RatingsAndStyles = ( { product,
                                    length={styles.results.length}
                                    onClick={() => updateCurrentStyle(style)}>
                     {style.style_id === currentStyle.style_id ? <CheckMark>✓</CheckMark> : null}
-                    <StyledImage src={style.photos[0].thumbnail_url} />
+                    {/* <StyledImageParent> */}
+                      <StyledImage src={style.photos[0].thumbnail_url} />
+                    {/* </StyledImageParent> */}
                   </StyledImageSpan>)
           })
         : null}
@@ -214,7 +236,7 @@ const RatingsAndStyles = ( { product,
                 )
               }
             }) :
-          <option value='outOfStock' >OUT OF STOCK</option> }
+            <option value='outOfStock' >OUT OF STOCK</option> }
         </select>
         &nbsp;
         &nbsp;
