@@ -223,7 +223,7 @@ describe("Test ImageGallery redux components", () => {
       },
       styles: {results: [{photos: [{thumbnail_url: "hello"}]}]},
       loading: 1,
-      currentStyle: {'style_id':221023,'name':'White & White','original_price':'99.00','sale_price':null,'default?':true,'photos':[{'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'}],'skus':{'1281158':{'quantity':10,'size':'7'},'1281159':{'quantity':30,'size':'7.5'}}},
+      currentStyle: {'style_id':221023,'name':'White & White','original_price':'99.00','sale_price':null,'default?':true,'photos':[{'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'test'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'test'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'test'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'test'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'test'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'test'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'test'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'test'}, {'thumbnail_url':'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80','url':'test'}],'skus':{'1281158':{'quantity':10,'size':'7'},'1281159':{'quantity':30,'size':'7.5'}}},
       mainImage: 'https://images.unsplash.com/photo-1514590734052-344a18719611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
       imagesArray: [{"thumbnail_url":"https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80","url":"https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"}],
       slice: [0, 7, 0],
@@ -249,33 +249,65 @@ describe("Test ImageGallery redux components", () => {
   it('should change the main image when arrow right is clicked and then left', async () => {
     const user = userEvent.setup()
 
-    await user.click(document.getElementById('galleryRight'))
-    await user.click(document.getElementById('galleryLeft'))
+    await user.click(screen.getByTestId('galleryRight'))
+    await user.click(screen.getByTestId('galleryLeft'))
+  })
+
+  it('should change the main image when container for arrow right is clicked and then left', async () => {
+    const user = userEvent.setup()
+
+    await user.click(screen.getByTestId('galleryRightContainer'))
+    await user.click(screen.getByTestId('galleryLeftContainer'))
+  })
+
+  it('arrow left should not display on first load', async () => {
+
+    await waitFor(() => {
+      expect(screen.getByTestId('galleryLeftContainer')).toBe(false);
+    })
   })
 
   it('should change the main image when a carousel image is clicked', async () => {
     const user = userEvent.setup()
 
-    await user.click(document.getElementById('https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80'))
+    await user.click(screen.getByTestId('https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80'))
   })
 
-  it('should change the mainImage when a carousel down is clicked', async () => {
+  it('should change the mainImage when carousel down is clicked', async () => {
     const user = userEvent.setup()
 
     await user.click(document.getElementById('carouselDown'))
   })
 
-  it('should change the mainImage when a carousel up is clicked', async () => {
+  it('should change the mainImage when carousel up is clicked', async () => {
     const user = userEvent.setup()
 
     await user.click(document.getElementById('carouselDown'))
     await user.click(document.getElementById('carouselUp'))
   })
 
-  it('should change to ExpandedView when a carousel image is clicked', async () => {
+  it('should not change the mainImage when a carousel up is clicked on first load', async () => {
+    const user = userEvent.setup()
+
+    await user.click(document.getElementById('carouselUp'))
+  })
+
+  it('should change to ExpandedView when a main image is clicked', async () => {
     const user = userEvent.setup()
 
     await user.click(document.getElementById('mainImage'))
+  })
+
+  it('should do nothing when horizontalContainer is clicked', async () => {
+    const user = userEvent.setup()
+
+    await user.click(screen.getByTestId('horizontalContainer'))
+  })
+
+  it('should do nothing when imageCarousel is clicked', async () => {
+    const user = userEvent.setup()
+
+    await user.click(screen.getByTestId('imageCarousel'))
   })
 
 });
@@ -333,6 +365,12 @@ describe("Test RatingsAndStyles redux components", () => {
     const user = userEvent.setup()
 
     await user.click(document.getElementById('testName2'))
+  })
+
+  it('should change style when style clicked testId', async () => {
+    const user = userEvent.setup()
+
+    await user.click(screen.getByTestId('testName2'))
   })
 
   it('should change size when size selector clicked', async () => {
@@ -405,27 +443,33 @@ describe("Test ExpandedView redux components", () => {
 
   it('should render with given state from Redux store', async () => {
     await waitFor(() => {
-      expect(screen.getByText('X')).toBeInTheDocument()
+      expect(screen.getByTestId('Exit')).toBeInTheDocument()
     })
   });
 
   it('should change the mainImage when carousel clicked', async () => {
     const user = userEvent.setup()
 
-    await user.click(document.getElementById('https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80'))
+    await user.click(screen.getByTestId('https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80'))
   })
 
   it('should zoom in when mainImage is clicked', async () => {
     const user = userEvent.setup()
 
-    await user.click(document.getElementById('imageContainer'))
+    await user.click(screen.getByTestId('imageContainer'))
   })
 
   it('should change the main image when arrow right is clicked and then left', async () => {
     const user = userEvent.setup()
 
-    await user.click(document.getElementById('expandedRight'))
-    await user.click(document.getElementById('expandedLeft'))
+    await user.click(screen.getByTestId('expandedRightContainer'))
+    await user.click(screen.getByTestId('expandedLeftContainer'))
+  })
+
+  it('should change the main image when arrow right is clicked', async () => {
+    const user = userEvent.setup()
+
+    await user.click(screen.getByTestId('expandedRightContainer'))
   })
 });
 
@@ -768,4 +812,14 @@ describe("Test Ratings & Reviews redux components", () => {
   // });
   
   
+});
+
+  it('arrow left should not appear on first load', async () => {
+    const user = userEvent.setup()
+
+    await waitFor(() => {
+      expect(screen.getByTestId('expandedLeft')).toBeNull()
+    })
+  })
+
 });

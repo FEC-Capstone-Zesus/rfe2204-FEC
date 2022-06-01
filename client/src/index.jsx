@@ -15,6 +15,7 @@ import store from "../store/store.js";
 import axios from "axios";
 import AppContainer from "./containers/AppContainer.js"
 import RelateditemsContainer from "./containers/RelateditemsContainer.js"
+import retrieve from "./retrieve.js"
 
 var actions = [
   getProduct,
@@ -25,39 +26,39 @@ var actions = [
   getRelatedProducts
 ]
 
-const retrieve = () => {
-  store.dispatch({ type: 'START' });
-  // var productID = '37311';
-  var productID = '37315';
-  var promises = [
-    axios.get(`/products/${productID}`),
-    axios.get(`/reviews?product_id=${productID}&page=1&count=5&sort=helpful`),
-    axios.get(`/products/${productID}/styles`),
-    axios.get(`/reviews/meta?product_id=${productID}`),
-    axios.get(`/qa/questions?product_id=${productID}&page=1&count=5`),
-    axios.get(`/products/${productID}/related`)
-  ];
+// const retrieve = () => {
+//   store.dispatch({ type: 'START' });
+//   // var productID = '37311';
+//   var productID = '37315';
+//   var promises = [
+//     axios.get(`/products/${productID}`),
+//     axios.get(`/reviews?product_id=${productID}&page=1&count=5&sort=helpful`),
+//     axios.get(`/products/${productID}/styles`),
+//     axios.get(`/reviews/meta?product_id=${productID}`),
+//     axios.get(`/qa/questions?product_id=${productID}&page=1&count=5`),
+//     axios.get(`/products/${productID}/related`)
+//   ];
 
-  Promise.all(promises).then(promises => {
+//   Promise.all(promises).then(promises => {
 
-    promises.forEach((data, i) => {
-      store.dispatch(actions[i](data.data));
+//     promises.forEach((data, i) => {
+//       store.dispatch(actions[i](data.data));
 
-      if (i === 2) {
-        store.dispatch(setCurrentStyle(data.data.results[0]));
-        store.dispatch(setImagesArray(data.data.results[0].photos));
-        store.dispatch(setMainImage(data.data.results[0].photos[0].url));
-      }
+//       if (i === 2) {
+//         store.dispatch(setCurrentStyle(data.data.results[0]));
+//         store.dispatch(setImagesArray(data.data.results[0].photos));
+//         store.dispatch(setMainImage(data.data.results[0].photos[0].url));
+//       }
 
-      if (i === promises.length - 1) {
-        store.dispatch({ type: 'STOP' });
-        store.dispatch(setSlice([0, 7, 0]));
-      }
-    });
-  })
-  .catch(err => console.log('retrieve data err: ', err));
+//       if (i === promises.length - 1) {
+//         store.dispatch({ type: 'STOP' });
+//         store.dispatch(setSlice([0, 7, 0]));
+//       }
+//     });
+//   })
+//   .catch(err => console.log('retrieve data err: ', err));
 
-};
+// };
 
 render(
   <Provider store={store}>
