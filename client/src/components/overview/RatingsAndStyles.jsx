@@ -172,6 +172,7 @@ const RatingsAndStyles = ( { product,
         <StyledImagesContainer>
         {styles.product_id ? styles.results.map(style => {
           return (<StyledImageSpan key={style.style_id}
+                                   id={style.name}
                                    onClick={() => updateCurrentStyle(style)}>
                     {style.style_id === currentStyle.style_id ? <CheckMark>✓</CheckMark> : null}
                     <StyledImage src={style.photos[0].thumbnail_url} />
@@ -189,6 +190,8 @@ const RatingsAndStyles = ( { product,
                           <p>Please select size</p>
                         </div>}
         <select name='size'
+                data-testid='size'
+                id='size'
                 style={{ width: 15 + 'rem' }}
                 onChange={(e) => changeSelect(e)}
                 disabled={!inStock}>
@@ -208,6 +211,8 @@ const RatingsAndStyles = ( { product,
         &nbsp;
         {size ?
         <select name='qty'
+                data-testid='qty'
+                id='qty'
                 onChange={(e) => changeSelect(e)}
                 style={{ width: 5 + 'rem' }}>
           <option value='Select Qty' >1</option>
@@ -227,6 +232,7 @@ const RatingsAndStyles = ( { product,
                        display: 'flex',
                        justifyContent: 'space-between' }}
               disabled={!inStock}
+              id='addToBag'
               onClick={(e) => addToCart(e)}>
         <p style={{ top: 50 + '%' }}>ADD TO BAG</p>
         <p style={{ top: 50 + '%' }}>+</p>

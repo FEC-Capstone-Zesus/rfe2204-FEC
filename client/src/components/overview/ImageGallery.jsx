@@ -148,7 +148,7 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
     <MainImage id='mainImage' currentImage={mainImage ? mainImage : ''}>
       <ImageCarousel onClick={(e) => stopParentOnClick(e)}>
         {imagesArray.length ? imagesArray.length > 7 ?
-          <CarouselArrow onClick={(e) => updateCarousel(e, 'up') }>
+          <CarouselArrow id='carouselUp' onClick={(e) => updateCarousel(e, 'up') }>
             <div className='arrow up'
                  style={{ marginLeft: 1.25 + 'rem' }}></div>
           </CarouselArrow>
@@ -170,7 +170,7 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
            : null}
         </div>
         {imagesArray.length ? imagesArray.length > 7 ?
-          <CarouselArrow onClick={(e) => updateCarousel(e, 'down') }>
+          <CarouselArrow id='carouselDown' onClick={(e) => updateCarousel(e, 'down') }>
             <div className='arrow down'
                  style={{ marginLeft: 1.25 + 'rem', marginBottom: 0.5 + 'rem' }}></div>
           </CarouselArrow>
@@ -178,11 +178,11 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
       </ImageCarousel>
       <HorizontalButtons>
         {slice[2] === 0 ? <ArrowContainer /> :
-        <ArrowContainer onClick={(e) => horizontalClick(e, 'left')}>
+        <ArrowContainer id='galleryLeft' onClick={(e) => horizontalClick(e, 'left')}>
           <ArrowLeft>←</ArrowLeft>
         </ArrowContainer>}
         {slice[2] === max - 1 ? <ArrowContainer /> :
-        <ArrowContainer onClick={(e) => horizontalClick(e, 'right')}>
+        <ArrowContainer id='galleryRight' onClick={(e) => horizontalClick(e, 'right')}>
           <ArrowRight>→</ArrowRight>
         </ArrowContainer>}
       </HorizontalButtons>
