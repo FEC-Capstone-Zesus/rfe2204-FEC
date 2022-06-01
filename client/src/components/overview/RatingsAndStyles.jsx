@@ -66,6 +66,8 @@ const CheckMark = styled.div`
     cursor: pointer;
   }
 `
+const SelectorContainer = styled.div`
+`
 const StarFraction = styled.span`
  display: block;
  overflow: hidden;
@@ -167,7 +169,7 @@ const RatingsAndStyles = ( { product,
         </span>
         &nbsp;
         <span>
-          <a style={{ fontSize: 0.6 + 'em' }} href='#allRatings'>Read all {totalReviews} reviews</a>
+          <a className='reviews' style={{ fontSize: 0.6 + 'em' }} href='#allRatings'>Read all {totalReviews} reviews</a>
         </span>
       </Ratings> :
       null }
@@ -214,7 +216,7 @@ const RatingsAndStyles = ( { product,
         </StyledImagesContainer>
       </div>
 
-      <div className='selector-container'>
+      <SelectorContainer>
         {sizeSelected ? <div style={{ marginTop: -0.5 + 'rem', height: 1.2 + 'rem' }} >
                           <p style={{ height: 1.2 + 'rem' }} ></p>
                         </div> :
@@ -257,7 +259,6 @@ const RatingsAndStyles = ( { product,
           <option value='Select Qty' >-</option>
         </select>}
 
-      </div>
       <button style={{ width: 21.4 + 'rem',
                        fontWeight: 500,
                        marginTop: 1 + 'rem',
@@ -269,6 +270,7 @@ const RatingsAndStyles = ( { product,
         <p style={{ fontWeight: 'bold', top: 50 + '%' }}>ADD TO BAG</p>
         <p style={{ fontWeight: 'bold', top: 50 + '%' }}>+</p>
       </button>
+      </SelectorContainer>
       &nbsp;
       <div className='star-item'></div>
     </RatingsStyles>
