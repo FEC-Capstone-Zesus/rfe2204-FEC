@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import styled from "styled-components";
 
 const SummaryDiv = styled.div`
+  margin-top: -2rem;
   display: flex;
   justify-content: space-between;
 `
