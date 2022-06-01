@@ -51,6 +51,11 @@ const StyledImage = styled.img`
 StyledImage.defaultProps = {
   src: '',
 };
+const StyledImageEmpty = styled.span`
+  margin: 1rem;
+  width:  4rem;
+  height: 4rem;
+`
 const CheckMark = styled.div`
   z-index: 1;
   background: rgba(250,250,250,100);
@@ -207,12 +212,17 @@ const RatingsAndStyles = ( { product,
                                    length={styles.results.length}
                                    onClick={() => updateCurrentStyle(style)}>
                     {style.style_id === currentStyle.style_id ? <CheckMark>✓</CheckMark> : null}
-                    {/* <StyledImageParent> */}
-                      <StyledImage src={style.photos[0].thumbnail_url} />
-                    {/* </StyledImageParent> */}
+                    <StyledImage src={style.photos[0].thumbnail_url} />
                   </StyledImageSpan>)
           })
         : null}
+        {styles.product_id ? styles.results.length < 5 ?
+         styles.results.map(style => {
+          return (<StyledImageSpan>
+                    <StyledImageEmpty/>
+                  </StyledImageSpan>)
+          })
+        : null : null}
         </StyledImagesContainer>
       </div>
 
@@ -226,7 +236,7 @@ const RatingsAndStyles = ( { product,
         <select name='size'
                 data-testid='size'
                 id='size'
-                style={{ width: 15 + 'rem' }}
+                style={{ width: 16 + 'rem' }}
                 onChange={(e) => changeSelect(e)}
                 disabled={!inStock}>
                 <option value='selectSize' >SELECT SIZE</option>
@@ -248,18 +258,18 @@ const RatingsAndStyles = ( { product,
                 data-testid='qty'
                 id='qty'
                 onChange={(e) => changeSelect(e)}
-                style={{ width: 5 + 'rem' }}>
+                style={{ width: 7 + 'rem' }}>
           <option value='Select Qty' >1</option>
           {Array.from(Array(qtySelect).keys()).map(x => x + 1).slice(1, 15).map((qty) =>
           <option key={qty} value={qty} >{qty}</option>)}
         </select> :
         <select name='qty'
                 disabled={true}
-                style={{ width: 5 + 'rem' }}>
+                style={{ width: 7 + 'rem' }}>
           <option value='Select Qty' >-</option>
         </select>}
 
-      <button style={{ width: 21.4 + 'rem',
+      <button style={{ width: 24.3 + 'rem',
                        fontWeight: 500,
                        marginTop: 1 + 'rem',
                        display: 'flex',
