@@ -12,6 +12,11 @@ const Slogan = styled.div`
 const Features = styled.div`
   width: 25%;
 `
+const ListItem = styled.li`
+  margin-top: 0.3rem;
+  font-size: 80%;
+  font-weight: light;
+`
 
 const Summary = ( { product } ) => {
   return (
@@ -23,8 +28,7 @@ const Summary = ( { product } ) => {
       <Features>
         <ul style={{ listStyle: 'none' }}>
           {product.id ? product.features.map(qualities =>
-            <li key={qualities.feature}
-                style={{ fontSize: 80 + '%' }}>✓ {qualities.value} {qualities.feature}</li>)
+            <ListItem key={qualities.feature} >✓ {qualities.value} {qualities.feature}</ListItem>)
           : null}
         </ul>
       </Features>
