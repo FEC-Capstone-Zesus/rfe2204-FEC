@@ -233,7 +233,7 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
                   return (
                     <div key={icon.photo.thumbnail_url}>
                       <ImageIcon onClick={() => updateCurrentImage(icon.photo)}>
-                        <p style={{ marginTop: 7 + 'px' }}>{icon.value}</p>
+                        <p id={`${icon.photo.thumbnail_url}`} style={{ marginTop: 7 + 'px' }}>{icon.value}</p>
                       </ImageIcon>
                       <ImageNoUnderline />
                       {icon.photo.url === mainImage ?
@@ -260,11 +260,11 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
                           currentImage={mainImage ? mainImage : ''} >
           <HorizontalButtons>
             {slice[2] === 0 ? <ArrowContainer /> :
-            <ArrowContainer onClick={(e) => horizontalClick(e, 'left')}>
+            <ArrowContainer id='expandedLeft' onClick={(e) => horizontalClick(e, 'left')}>
               <ArrowLeft>←</ArrowLeft>
             </ArrowContainer>}
             {slice[2] === max - 1 ? <ArrowContainer /> :
-            <ArrowContainer onClick={(e) => horizontalClick(e, 'right')}>
+            <ArrowContainer id='expandedRight' onClick={(e) => horizontalClick(e, 'right')}>
               <ArrowRight>→</ArrowRight>
             </ArrowContainer>}
           </HorizontalButtons>
