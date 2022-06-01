@@ -4,8 +4,9 @@ import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store'
 const mockStore = configureStore([]);
 const axios = require('axios');
-import Relateditems from '../client/src/components/Relateditems.jsx'
+import Relateditems from '../client/src/components/RelatedItems/Relateditems.jsx'
 import RelateditemsContainer from '../client/src/containers/RelateditemsContainer.js'
+<<<<<<< HEAD
 import Overview from '../client/src/components/overview/Overview.jsx'
 import OverviewContainer from '../client/src/containers/overview/OverviewContainer.js'
 import ImageGallery from '../client/src/components/overview/ImageGallery.jsx';
@@ -14,6 +15,8 @@ import RatingsAndStyles from '../client/src/components/overview/RatingsAndStyles
 import RatingsAndStylesContainer from '../client/src/containers/overview/RatingsAndStylesContainer.js';
 import ExpandedView from '../client/src/components/overview/ExpandedView.jsx';
 import ExpandedViewContainer from '../client/src/containers/overview/ExpandedViewContainer.js';
+=======
+>>>>>>> 98b4b53ade3a7b0e3f052d2f9e5e9ba0eb0d76a3
 
 describe("Test related items redux components", () => {
   let store;
@@ -39,6 +42,7 @@ describe("Test related items redux components", () => {
   it('should render with given state from Redux store', () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
+<<<<<<< HEAD
 });
 
 
@@ -70,12 +74,12 @@ describe("Test Overview redux components", () => {
     </Provider>
     );
   });
+=======
+>>>>>>> 98b4b53ade3a7b0e3f052d2f9e5e9ba0eb0d76a3
 
-  it('should render with given state from Redux store', () => {
-    expect(component.toJSON()).toMatchSnapshot();
-  });
 });
 
+<<<<<<< HEAD
 
 describe("Test ImageGallery redux components", () => {
   let store;
@@ -179,3 +183,5 @@ describe("Test ExpandedView redux components", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 });
+=======
+>>>>>>> 98b4b53ade3a7b0e3f052d2f9e5e9ba0eb0d76a3
