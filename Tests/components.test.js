@@ -1,3 +1,4 @@
+
 /**
  * @jest-environment jsdom
  */
@@ -26,6 +27,7 @@ import OverviewContainer from '../client/src/containers/overview/OverviewContain
 import ImageGalleryContainer from '../client/src/containers/overview/ImageGalleryContainer.js';
 import RatingsAndStylesContainer from '../client/src/containers/overview/RatingsAndStylesContainer.js';
 import ExpandedViewContainer from '../client/src/containers/overview/ExpandedViewContainer.js';
+import RatingsReviewsContainer from '../client/src/containers/RatingsReviewsContainer.js';
 
 axios.defaults.baseURL = "http://localhost:3000"
 
@@ -469,6 +471,348 @@ describe("Test ExpandedView redux components", () => {
 
     await user.click(screen.getByTestId('expandedRightContainer'))
   })
+});
+
+describe("Test Ratings & Reviews redux components", () => {
+  let store;
+
+  beforeEach(() => {
+    store = mockStore({
+      product: [
+          {
+              "id": 37311,
+              "campus": "hr-rfe",
+              "name": "Camo Onesie",
+              "slogan": "Blend in to your crowd",
+              "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+              "category": "Jackets",
+              "default_price": "140.00",
+              "created_at": "2021-08-13T14:37:33.145Z",
+              "updated_at": "2021-08-13T14:37:33.145Z"
+          },
+          {
+              "id": 37312,
+              "campus": "hr-rfe",
+              "name": "Bright Future Sunglasses",
+              "slogan": "You've got to wear shades",
+              "description": "Where you're going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.",
+              "category": "Accessories",
+              "default_price": "69.00",
+              "created_at": "2021-08-13T14:37:33.145Z",
+              "updated_at": "2021-08-13T14:37:33.145Z"
+          },
+          {
+              "id": 37313,
+              "campus": "hr-rfe",
+              "name": "Morning Joggers",
+              "slogan": "Make yourself a morning person",
+              "description": "Whether you're a morning person or not.  Whether you're gym bound or not.  Everyone looks good in joggers.",
+              "category": "Pants",
+              "default_price": "40.00",
+              "created_at": "2021-08-13T14:37:33.145Z",
+              "updated_at": "2021-08-13T14:37:33.145Z"
+          },
+          {
+              "id": 37314,
+              "campus": "hr-rfe",
+              "name": "Slacker's Slacks",
+              "slogan": "Comfortable for everything, or nothing",
+              "description": "I'll tell you how great they are after I nap for a bit.",
+              "category": "Pants",
+              "default_price": "65.00",
+              "created_at": "2021-08-13T14:37:33.145Z",
+              "updated_at": "2021-08-13T14:37:33.145Z"
+          },
+          {
+              "id": 37315,
+              "campus": "hr-rfe",
+              "name": "Heir Force Ones",
+              "slogan": "A sneaker dynasty",
+              "description": "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
+              "category": "Kicks",
+              "default_price": "99.00",
+              "created_at": "2021-08-13T14:37:33.145Z",
+              "updated_at": "2021-08-13T14:37:33.145Z"
+          }
+      ],
+      reviews: {
+          "product": "37315",
+          "page": 0,
+          "count": 5,
+          "results": [
+              {
+                  "review_id": 1115847,
+                  "rating": 2,
+                  "summary": "Misleading Title",
+                  "recommend": false,
+                  "response": null,
+                  "body": "I thought I was buying the movie Air Force One with Harrison Ford. That is a great movie. These are shoes",
+                  "date": "2022-01-06T00:00:00.000Z",
+                  "reviewer_name": "FordFan",
+                  "helpfulness": 12,
+                  "photos": []
+              },
+              {
+                  "review_id": 1155746,
+                  "rating": 4,
+                  "summary": "SO GOOD!",
+                  "recommend": true,
+                  "response": null,
+                  "body": "buy this",
+                  "date": "2022-03-31T00:00:00.000Z",
+                  "reviewer_name": "guesswho",
+                  "helpfulness": 6,
+                  "photos": [
+                      {
+                          "id": 2219414,
+                          "url": "https://static.toiimg.com/thumb/msid-67586673,width-800,height-600,resizemode-75,imgsize-3918697,pt-32,y_pad-40/67586673.jpg"
+                      }
+                  ]
+              },
+              {
+                  "review_id": 1115845,
+                  "rating": 3,
+                  "summary": "Shoes go on my feet",
+                  "recommend": false,
+                  "response": null,
+                  "body": "These shoes do the job as described and cover my footskin from outside debris",
+                  "date": "2022-01-06T00:00:00.000Z",
+                  "reviewer_name": "FootGuy",
+                  "helpfulness": 4,
+                  "photos": []
+              },
+              {
+                  "review_id": 1155744,
+                  "rating": 4,
+                  "summary": "SO GOOD!",
+                  "recommend": true,
+                  "response": null,
+                  "body": "buy this",
+                  "date": "2022-03-31T00:00:00.000Z",
+                  "reviewer_name": "guesswho",
+                  "helpfulness": 3,
+                  "photos": [
+                      {
+                          "id": 2219412,
+                          "url": "https://static.toiimg.com/thumb/msid-67586673,width-800,height-600,resizemode-75,imgsize-3918697,pt-32,y_pad-40/67586673.jpg"
+                      }
+                  ]
+              },
+              {
+                  "review_id": 1274893,
+                  "rating": 4,
+                  "summary": "test ReviewTitle",
+                  "recommend": true,
+                  "response": null,
+                  "body": "test Review Body",
+                  "date": "2022-05-31T00:00:00.000Z",
+                  "reviewer_name": "test NickName",
+                  "helpfulness": 0,
+                  "photos": []
+              }
+          ]
+        },
+        metaData: {
+          "product_id": "37315",
+          "ratings": {
+              "1": "33",
+              "2": "6",
+              "3": "3",
+              "4": "14",
+              "5": "14"
+          },
+          "recommended": {
+              "false": "40",
+              "true": "30"
+          },
+          "characteristics": {
+              "Size": {
+                  "id": 125044,
+                  "value": "2.8000000000000000"
+              },
+              "Width": {
+                  "id": 125045,
+                  "value": "3.1944444444444444"
+              },
+              "Comfort": {
+                  "id": 125046,
+                  "value": "2.9354838709677419"
+              },
+              "Quality": {
+                  "id": 125047,
+                  "value": "3.1290322580645161"
+              }
+          }
+      },
+    });
+
+    render(
+    <Provider store = {store}>
+      <RatingsReviewsContainer/>
+    </Provider>
+    );
+
+  });
+
+  // it('should render with given state from Redux store', async () => {
+  //   await waitFor(() => {
+  //     expect(screen.getAllByText("test")).toBeInTheDocument();
+  //   })
+  // });
+  test('select Relevant should update list', async () => {
+    userEvent.selectOptions(screen.getByTestId('sort'), "Relevant");
+    await waitFor(() => {
+      expect(screen.getByTestId('sort')).toHaveValue('relevant');
+    })
+  });
+
+  test('select Newest should update list', async () => {
+    userEvent.selectOptions(screen.getByTestId('sort'), "Newest");
+    await waitFor(() => {
+      expect(screen.getByTestId('sort')).toHaveValue('newest');
+    })
+  });
+  test('select Helpful should update list', async () => {
+    userEvent.selectOptions(screen.getByTestId('sort'), "Helpful");
+    await waitFor(() => {
+      expect(screen.getByTestId('sort')).toHaveValue('helpful');
+    })
+  });
+  test('should display the element 5-stars', async () => {
+    userEvent.click(screen.getByTestId("star_5"));
+    await waitFor(() => {
+      expect(screen.getAllByText('5-stars')[0]).toBeInTheDocument();
+    })
+  });
+  test('should remove the element 5-stars when click again', async () => {
+    userEvent.click(screen.getByTestId("star_5"));
+    userEvent.click(screen.getByTestId("star_5"));
+    await waitFor(() => {
+      expect(screen.queryByText('5-stars')).not.toBeInTheDocument();
+    })
+  });
+
+  test('should display the element 4-stars', async () => {
+    userEvent.click(screen.getByTestId("star_4"));
+    await waitFor(() => {
+      expect(screen.getAllByText('4-stars')[0]).toBeInTheDocument();
+    })
+  });
+  test('should remove the element 4-stars when click again', async () => {
+    userEvent.click(screen.getByTestId("star_4"));
+    userEvent.click(screen.getByTestId("star_4"));
+    await waitFor(() => {
+      expect(screen.queryByText('4-stars')).not.toBeInTheDocument();
+    })
+  });
+
+  test('should display the element 3-stars', async () => {
+    userEvent.click(screen.getByTestId("star_3"));
+    await waitFor(() => {
+      expect(screen.getAllByText('3-stars')[0]).toBeInTheDocument();
+    })
+  });
+  test('should remove the element 3-stars when click again', async () => {
+    userEvent.click(screen.getByTestId("star_3"));
+    userEvent.click(screen.getByTestId("star_3"));
+    await waitFor(() => {
+      expect(screen.queryByText('3-stars')).not.toBeInTheDocument();
+    })
+  });
+
+  test('should display the element 2-stars', async () => {
+      userEvent.click(screen.getByTestId("star_2"));
+      await waitFor(() => {
+        expect(screen.getAllByText('2-stars')[0]).toBeInTheDocument();
+      })
+    });
+  test('should remove the element 2-stars when click again', async () => {
+      userEvent.click(screen.getByTestId("star_2"));
+      userEvent.click(screen.getByTestId("star_2"));
+      await waitFor(() => {
+        expect(screen.queryByText('2-stars')).not.toBeInTheDocument();
+      })
+    });
+
+  test('should display the element 1-stars', async () => {
+      userEvent.click(screen.getByTestId("star_1"));
+      await waitFor(() => {
+        expect(screen.getAllByText('1-stars')[0]).toBeInTheDocument();
+      })
+    });
+  test('should remove the element 1-stars when click again', async () => {
+      userEvent.click(screen.getByTestId("star_1"));
+      userEvent.click(screen.getByTestId("star_1"));
+      await waitFor(() => {
+        expect(screen.queryByText('1-stars')).not.toBeInTheDocument();
+      })
+  });
+
+  // test('should remove all the tag when click on clear', async () => {
+  //     userEvent.click(screen.getByTestId("star_1"));
+  //     userEvent.click(screen.getByTestId("star_2"));
+  //     userEvent.click(screen.getByText("clear"));
+  //     await waitFor(() => {
+  //       expect(screen.queryByText('1-stars')).not.toBeInTheDocument();
+  //       expect(screen.queryByText('2-stars')).not.toBeInTheDocument();
+  //     })
+  // });
+
+  test('should show review form when click on ADD REVIEW', async () => {
+      userEvent.click(screen.getByTestId("addreview"));
+      await waitFor(() => {
+        expect(screen.getByText("Write Your Review")).toBeInTheDocument();
+        expect(screen.getByText("Overall Rating")).toBeInTheDocument();
+        expect(screen.getByText("Review Summary:")).toBeInTheDocument();
+      })
+  });
+
+  // test('should alert user when some fields missing', async () => {
+  //   userEvent.click(screen.getByTestId("addreview"));
+  //   userEvent.click(document.getElementById("buttonNext"));
+  //   await waitFor(() => screen.getByRole('alert'))
+  //   expect(screen.getByRole('alert')).toHaveTextContent('Please Modify the Mandatory Field labeled in Red')
+  // });
+
+  test('should close the review form when click on close button', async () => {
+    userEvent.click(screen.getByTestId("addreview"));
+    userEvent.click(document.getElementById("closeButton"));
+    await waitFor(() => {
+      expect(screen.queryByText("About The Product -- Heir Force Ones --")).not.toBeInTheDocument();
+    })
+  });
+
+  test('next button should be enabled', async () => {
+    userEvent.click(screen.getByTestId("addreview"));
+    await waitFor(() => {
+      expect(document.getElementById("buttonNext")).toBeEnabled();
+    })
+  });
+  
+  test('correct summary input function', () => {
+    fireEvent.change(document.getElementById("reviewSummary"), {
+      target: { value: 'test{space}test{space}summary'},
+    });
+    
+    expect(document.getElementById("reviewSummary")).toHaveValue('test{space}test{space}summary')
+  });
+  test('correct body input function', () => {
+    fireEvent.change(document.getElementById("reviewBody"), {
+      target: { value: 'test{space}test{space}body{space}test{space}test{space}test{space}body{space}test{space}test{space}body{space}test{space}test{space}test{space}body'},
+    });
+    
+    expect(document.getElementById("reviewBody")).toHaveValue('test{space}test{space}body{space}test{space}test{space}test{space}body{space}test{space}test{space}body{space}test{space}test{space}test{space}body');
+  });
+
+  // test('should select overall rating', async () => {
+  //   userEvent.change(screen.getByText('Poor'), { target: { value: "3" } });
+  //   await waitFor(() => {
+  //     expect(radio.value).toBe('3');
+  //   })
+  // });
+  
+  
+});
 
   it('arrow left should not appear on first load', async () => {
     const user = userEvent.setup()
@@ -478,4 +822,4 @@ describe("Test ExpandedView redux components", () => {
     })
   })
 
-});
+

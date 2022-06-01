@@ -59,18 +59,18 @@ const FilterButtonContainer = ({filter, handleClear}) => {
   return (
     <>
       <ButtonContainer>
-        {filter['filter_5'] ? <FilterButton>5 stars</FilterButton> : null}
-        {filter['filter_4'] ? <FilterButton>4 stars</FilterButton> : null}
-        {filter['filter_3'] ? <FilterButton>3 stars</FilterButton> : null}
-        {filter['filter_2'] ? <FilterButton>2 stars</FilterButton> : null}
-        {filter['filter_1'] ? <FilterButton>1 stars</FilterButton> : null}
+        {filter['filter_5'] ? <FilterButton>5-stars</FilterButton> : null}
+        {filter['filter_4'] ? <FilterButton>4-stars</FilterButton> : null}
+        {filter['filter_3'] ? <FilterButton>3-stars</FilterButton> : null}
+        {filter['filter_2'] ? <FilterButton>2-stars</FilterButton> : null}
+        {filter['filter_1'] ? <FilterButton>1-stars</FilterButton> : null}
       </ButtonContainer>
       {filter['filter_1'] || 
        filter['filter_2'] || 
        filter['filter_3'] || 
        filter['filter_4'] || 
        filter['filter_5'] ? 
-       <FilterButton onClick={(event) => handleClear(event)}>Clear</FilterButton> : null
+       <FilterButton onClick={(event) => handleClear(event)} data-testid='clear'>Clear</FilterButton> : null
       }
     </>
   );
@@ -101,7 +101,7 @@ const Votes = ({ recommended, rateNumber, filter, handleFilter, handleClear }) =
     <>
       <P>{percent}% of reviews recommend this product</P>
       <FilterButtonContainer filter={filter} handleClear={handleClear}/>
-      <RateContainer name="star_5" onClick={(event) => handleFilter(event, 'filter_5')}>
+      <RateContainer name="star_5" onClick={(event) => handleFilter(event, 'filter_5')} data-testid='star_5'>
         <Span>5 stars</Span>
         <BarContainer>
           <Bar length={star_5+'%'} />
@@ -109,7 +109,7 @@ const Votes = ({ recommended, rateNumber, filter, handleFilter, handleClear }) =
         <RateCount>{count5}</RateCount>
       </RateContainer>
 
-      <RateContainer onClick={(event) => handleFilter(event, 'filter_4')}>
+      <RateContainer onClick={(event) => handleFilter(event, 'filter_4')} data-testid='star_4'>
         <Span>4 stars</Span>
         <BarContainer>
           <Bar length={star_4+'%'} />
@@ -117,7 +117,7 @@ const Votes = ({ recommended, rateNumber, filter, handleFilter, handleClear }) =
         <RateCount>{count4}</RateCount>
       </RateContainer>
 
-      <RateContainer onClick={(event) => handleFilter(event, 'filter_3')}>
+      <RateContainer onClick={(event) => handleFilter(event, 'filter_3')} data-testid='star_3'>
         <Span>3 stars</Span>
         <BarContainer>
           <Bar length={star_3+'%'} />
@@ -125,7 +125,7 @@ const Votes = ({ recommended, rateNumber, filter, handleFilter, handleClear }) =
         <RateCount>{count3}</RateCount>
       </RateContainer>
 
-      <RateContainer onClick={(event) => handleFilter(event, 'filter_2')}>
+      <RateContainer onClick={(event) => handleFilter(event, 'filter_2')} data-testid='star_2'>
         <Span>2 stars</Span>
         <BarContainer>
           <Bar length={star_2+'%'} />
@@ -133,7 +133,7 @@ const Votes = ({ recommended, rateNumber, filter, handleFilter, handleClear }) =
         <RateCount>{count2}</RateCount>
       </RateContainer>
 
-      <RateContainer onClick={(event) => handleFilter(event, 'filter_1')}>
+      <RateContainer onClick={(event) => handleFilter(event, 'filter_1')} data-testid='star_1'>
         <Span>1 stars</Span>
         <BarContainer>
           <Bar length={star_1+'%'} />
