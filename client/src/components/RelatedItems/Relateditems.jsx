@@ -17,11 +17,27 @@ const CardWrapper = styled.ul`
 const RelatedWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `
 
 const Next_Button = styled.button `
-top: 50%;
-left: 50%;
+outline: none;
+border: none;
+`
+const Prev_Arrow = styled.img `
+max-width:100%;
+max-height:100%;
+-webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const Next_Arrow = styled.img `
+max-width:100%;
+max-height:100%;
 `
 
 const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) => {
@@ -38,7 +54,7 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
     nextIndex: 1
   });
 
-  const [outfit, setOutfit] = useState(['add']);
+  const [outfit, setOutfit] = useState(['add', 'add']);
   const [outfitStyle, setOutfitStyle] = useState([]);
 
   const handleCardTransition = useCallback(() => {
@@ -102,14 +118,14 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
   return (
     <div className ="wrapper">
       <RelatedWrapper className ='relatedRow'>
-        <button onClick = {handleCardTransitionReverse}> This will go back</button>
+        <Next_Button><Prev_Arrow src = '../assets/toppng.com-file-scroll-right-arrow-ico-554x981.png' onClick = {handleCardTransitionReverse}/></Next_Button>
         <CardWrapper>
           {relatedProducts.map((item, index) => <Relatedcard key = {index} className = {`${determineClasses(indexes,index)}`} item = {item} currentProduct = {product} metaData = {metaData}/>)}
         </CardWrapper>
-        <Next_Button onClick = {handleCardTransition}>This will handle the next</Next_Button>
+        <Next_Button><Next_Arrow src = '../assets/toppng.com-file-scroll-right-arrow-ico-554x981.png' onClick = {handleCardTransition}/></Next_Button>
       </RelatedWrapper>
       <RelatedWrapper className ='outfitRow'>
-        <button onClick = {handleOutfitCardTransitionReverse}> This will go back</button>
+      <Next_Button><Prev_Arrow src = '../assets/toppng.com-file-scroll-right-arrow-ico-554x981.png' onClick = {handleOutfitCardTransitionReverse}/></Next_Button>
         <CardWrapper className = 'outfitRow'>
           {outfit.map((item,index) => item === 'add' ? <OutfitAddCard
           key = {index}
@@ -128,7 +144,7 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
           className = {`${determineClasses(outfitIndexes,index)}`}
           />)}
         </CardWrapper>
-        <button onClick = {handleOutfitCardTransition}> This will go forward</button>
+        <Next_Button><Next_Arrow src = '../assets/toppng.com-file-scroll-right-arrow-ico-554x981.png' onClick = {handleOutfitCardTransition}/></Next_Button>
       </RelatedWrapper>
     </div>
   );

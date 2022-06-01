@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import useAxios from 'axios-hooks'
 import styled from "styled-components";
 import StarRating from "../StarRating.jsx"
+import retrieve from "../../retrieve.js"
 
 
 const CardImage = styled.img`
-  height:12rem;
+  height:60%;
   width:100%;
   object-fit: cover;
 `
@@ -82,10 +83,10 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
   }
 
   return (
-      <Card_body onClick = {() => console.log('hello')}>
+      <Card_body onClick = {() => retrieve(`${item}`)}>
         <Button_Star id = "open" onClick = {() => setshowModal(true)}>☆</Button_Star>
         {showModal ? <CompareModal className = "compModal">
-          <div className compModalContent>
+          <div className = 'compModalContent'>
             <table>
             <thead>
               <tr>
