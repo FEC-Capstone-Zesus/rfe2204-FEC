@@ -9,6 +9,7 @@ import ShareButtons from './ShareButtons.jsx';
 
 
 const ImagesStylesContainer = styled.div`
+  width: 75rem;
   display: flex;
 `
 const ImagesGalleryHoverDiv = styled.div`
