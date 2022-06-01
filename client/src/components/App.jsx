@@ -12,10 +12,7 @@ const GlobalStyle = createGlobalStyle`
     background: white;
     font-family: 'Inter', sans-serif;
   }
-  h1 {
-    color: blue;
-  }
-  h1.loading {
+  a {
     color: black;
   }
   select {
@@ -132,7 +129,7 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
             {questions.length ? <p>{ JSON.stringify(questions)}</p> : null}
             {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null} */}
           <RelateditemsContainer />
-          <RatingsReviewsContainer />
+          <a id='allRatings'><RatingsReviewsContainer/></a>
           </SubOverview>
         </>
         : null}
