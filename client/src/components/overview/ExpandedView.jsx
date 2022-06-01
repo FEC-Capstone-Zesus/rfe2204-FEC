@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 
 const ExpandedDiv = styled.div`
+  margin-bottom: 4rem;
   height: 35rem;
-  width: 70rem;
+  width: 80rem;
   background: rgba(226,226,226,100);
   display: flex;
 `
