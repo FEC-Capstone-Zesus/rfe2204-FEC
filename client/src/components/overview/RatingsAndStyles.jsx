@@ -175,7 +175,7 @@ const RatingsAndStyles = ( { product,
         </span>
         &nbsp;
         <span>
-          <a className='reviews' style={{ fontSize: 0.6 + 'em' }} href='#allRatings'>Read all {totalReviews} reviews</a>
+          <a className='reviews' style={{ fontSize: 0.7 + 'em' }} href='#allRatings'>Read all {totalReviews} reviews</a>
         </span>
       </Ratings> :
       null }
