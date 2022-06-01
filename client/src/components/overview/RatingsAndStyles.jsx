@@ -29,9 +29,10 @@ const StyledImagesContainer = styled.div`
 const StyledImageSpan = styled.span`
   display: inline-block;
   position: relative;
+  margin-left: ${({length}) => (length < 2 ? '-9rem' : '')};
   margin-right: -1rem;
   width: 6rem;
-  padding: ${({length}) => (length > 4 ? `0.1rem 0` : '0.5rem 0')};
+  padding: ${({length}) => (length > 4 ? '0.1rem 0' : '0.5rem 0')};
   overflow: hidden;
 `
 const StyledImageParent = styled.div`
