@@ -31,7 +31,7 @@ class RatingsReviews extends React.Component {
   render () {
     return (
       <>
-        <H4>Ratings and Reviews</H4>
+        <H4>Ratings & Reviews</H4>
         <RatingsReviewsContainer>
 
           <RatingsContainer>
