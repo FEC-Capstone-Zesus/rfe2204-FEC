@@ -98,13 +98,13 @@ const ArrowRight = styled.div`
 `
 const ExitExpanded = styled.div`
   float: left;
-  width: 2rem;
+  width: 3rem;
   height: 1rem;
   margin-top: -19rem;
   background: rgba(226,226,226,0.5);
   position: relative;
   text-align: center;
-  left: 97%;
+  left: 95.5%;
   &:hover {
     cursor: pointer;
   }
@@ -276,7 +276,7 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
             </ArrowContainer>}
           </HorizontalButtons>
           <ExitExpanded onClick={(e) => { toggleExpanded(false); e.stopPropagation(); }}>
-            <div data-testid='Exit' >Exit</div>
+            <div data-testid='Exit' >Close</div>
           </ExitExpanded>
       </MainImageContainer>
     </ExpandedDiv>
