@@ -12,16 +12,14 @@ const GlobalStyle = createGlobalStyle`
     background: white;
     font-family: 'Inter', sans-serif;
   }
-  h1 {
-    color: blue;
-  }
-  h1.loading {
+  a {
     color: black;
   }
   select {
     border: 1px solid rgba(0, 0, 0, 100);
     border-radius: 0;
     height: 3rem;
+    font-weight: bold;
   }
   button {
     border: 1px solid rgba(0, 0, 0, 100);
@@ -132,7 +130,7 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
             {questions.length ? <p>{ JSON.stringify(questions)}</p> : null}
             {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null} */}
           <RelateditemsContainer />
-          <RatingsReviewsContainer />
+          <a id='allRatings'><RatingsReviewsContainer/></a>
           </SubOverview>
         </>
         : null}

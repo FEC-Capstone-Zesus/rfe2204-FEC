@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from "styled-components";
 import StarRating from '../StarRating.jsx'
+const axios = require('axios')
 
 const RatingsStyles = styled.div`
   width: 25rem;
@@ -19,7 +20,7 @@ const StyledImageSpan = styled.span`
   position: relative;
   margin-right: -1rem;
   width: 6rem;
-  padding: 0.5rem 0;
+  padding: ${({length}) => (length > 4 ? `0.1rem 0` : '0.5rem 0')};
   overflow: hidden;
 `
 const StyledImage = styled.img`
@@ -74,6 +75,13 @@ const RatingsAndStyles = ( { product,
     totalQty = skusArray.reduce((total, sku) => {
       return total + sku[1].quantity;
     }, 0)
+
+    var ratings = Object.entries(metaData.ratings);
+
+    var totalReviews = ratings.reduce((total, rating) => {
+      return total + parseInt(rating[1]);
+    }, 0);
+
     var [sku, setSku] = useState('');
     var [size, setSize] = useState('');
     var [qty, setQty] = useState('');
@@ -129,40 +137,40 @@ const RatingsAndStyles = ( { product,
     if (!size) {
       setSizeSelected(false);
     } else {
-      console.log(size);
-      console.log(qty);
-      console.log(sku);
+      axios.post('/cart', { count: qty, sku_id: sku })
+      .then(() => console.log('success'))
     }
   }
 
   return (
     <RatingsStyles>
+      {totalReviews ?
       <div className='ratings'>
         <span>
-          {metaData.product_id ?
-            <StarRating ratings={metaData} />
-          : null}
+          <StarRating ratings={metaData} />
         </span>
         &nbsp;
         <span>
-          Read all reviews
+          <a style={{ fontSize: 0.6 + 'em' }} href='#allRatings'>Read all {totalReviews} reviews</a>
         </span>
-      </div>
+      </div> :
+      null }
 
       <div><h5>{product.id ? product.category.toUpperCase() : null}</h5></div>
       <h1>{product.id ? product.name : null}</h1>
 
       {currentStyle.style_id ? !currentStyle.sale_price ?
-        <p>${currentStyle.original_price}</p> :
+        <span>${currentStyle.original_price}</span> :
         <>
-          <p style={{ color: 'red' }}>${currentStyle.sale_price}</p>
-          <p style={{textDecorationLine: 'line-through',
+          <span style={{ color: 'red' }}>${currentStyle.sale_price}</span>
+          &nbsp;
+          &nbsp;
+          <span style={{textDecorationLine: 'line-through',
                      textDecorationStyle: 'solid'}}>
-                     ${currentStyle.original_price}</p>
+                     ${currentStyle.original_price}</span>
         </>
       : null}
-      &nbsp;
-
+      <div style={{ height: 1 + 'rem' }}></div>
       <div className='styles-container'>
         <div>
         <span style={{ fontWeight: 'bolder' }}>STYLE ></span> {currentStyle.style_id ?
@@ -172,7 +180,9 @@ const RatingsAndStyles = ( { product,
         <StyledImagesContainer>
         {styles.product_id ? styles.results.map(style => {
           return (<StyledImageSpan key={style.style_id}
+                                   data-testid={style.name}
                                    id={style.name}
+                                   length={styles.results.length}
                                    onClick={() => updateCurrentStyle(style)}>
                     {style.style_id === currentStyle.style_id ? <CheckMark>✓</CheckMark> : null}
                     <StyledImage src={style.photos[0].thumbnail_url} />
@@ -183,10 +193,10 @@ const RatingsAndStyles = ( { product,
       </div>
 
       <div className='selector-container'>
-        {sizeSelected ? <div style={{ height: 1.2 + 'rem' }} >
+        {sizeSelected ? <div style={{ marginTop: -0.5 + 'rem', height: 1.2 + 'rem' }} >
                           <p style={{ height: 1.2 + 'rem' }} ></p>
                         </div> :
-                        <div style={{ height: 1.2 + 'rem' }}>
+                        <div style={{ marginTop: -0.5 + 'rem', height: 1.2 + 'rem' }}>
                           <p>Please select size</p>
                         </div>}
         <select name='size'
@@ -234,8 +244,8 @@ const RatingsAndStyles = ( { product,
               disabled={!inStock}
               id='addToBag'
               onClick={(e) => addToCart(e)}>
-        <p style={{ top: 50 + '%' }}>ADD TO BAG</p>
-        <p style={{ top: 50 + '%' }}>+</p>
+        <p style={{ fontWeight: 'bold', top: 50 + '%' }}>ADD TO BAG</p>
+        <p style={{ fontWeight: 'bold', top: 50 + '%' }}>+</p>
       </button>
       &nbsp;
       <div className='star-item'></div>

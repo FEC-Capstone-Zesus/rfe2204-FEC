@@ -146,9 +146,11 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
 
   return (
     <MainImage id='mainImage' currentImage={mainImage ? mainImage : ''}>
-      <ImageCarousel onClick={(e) => stopParentOnClick(e)}>
+      <ImageCarousel data-testid='imageCarousel' onClick={(e) => stopParentOnClick(e)}>
         {imagesArray.length ? imagesArray.length > 7 ?
-          <CarouselArrow id='carouselUp' onClick={(e) => updateCarousel(e, 'up') }>
+          <CarouselArrow id='carouselUp'
+                         data-testid='carouselUp'
+                         onClick={(e) => updateCarousel(e, 'up') }>
             <div className='arrow up'
                  style={{ marginLeft: 1.25 + 'rem' }}></div>
           </CarouselArrow>
@@ -157,7 +159,8 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
           {imagesArray.length ? imagesArray.slice(slice[0], slice[1]).map((photo, i) => {
                 return (
                   <div key={photo.thumbnail_url}>
-                    <ImageThumbnail onClick={(e) => updateCurrentImage(e, photo)}
+                    <ImageThumbnail data-testid={photo.thumbnail_url}
+                                    onClick={(e) => updateCurrentImage(e, photo)}
                                     currentThumbnail={photo.thumbnail_url}/>
                     <ImageNoUnderline />
                     {photo.url === mainImage ?
@@ -170,20 +173,26 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
            : null}
         </div>
         {imagesArray.length ? imagesArray.length > 7 ?
-          <CarouselArrow id='carouselDown' onClick={(e) => updateCarousel(e, 'down') }>
+          <CarouselArrow id='carouselDown'
+                         data-testid='carouselDown'
+                         onClick={(e) => updateCarousel(e, 'down') }>
             <div className='arrow down'
                  style={{ marginLeft: 1.25 + 'rem', marginBottom: 0.5 + 'rem' }}></div>
           </CarouselArrow>
           : null : null}
       </ImageCarousel>
-      <HorizontalButtons>
-        {slice[2] === 0 ? <ArrowContainer /> :
-        <ArrowContainer id='galleryLeft' onClick={(e) => horizontalClick(e, 'left')}>
-          <ArrowLeft>←</ArrowLeft>
+      <HorizontalButtons data-testid='horizontalContainer' >
+        {slice[2] === 0 ? <ArrowContainer data-testid='galleryLeftContainerEmpty' /> :
+        <ArrowContainer id='galleryLeft'
+                        data-testid='galleryLeftContainer'
+                        onClick={(e) => horizontalClick(e, 'left')}>
+          <ArrowLeft data-testid='galleryLeft' >←</ArrowLeft>
         </ArrowContainer>}
-        {slice[2] === max - 1 ? <ArrowContainer /> :
-        <ArrowContainer id='galleryRight' onClick={(e) => horizontalClick(e, 'right')}>
-          <ArrowRight>→</ArrowRight>
+        {slice[2] === max - 1 ? <ArrowContainer data-testid='galleryRightContainerEmpty' /> :
+        <ArrowContainer id='galleryRight'
+                        data-testid='galleryRightContainer'
+                        onClick={(e) => horizontalClick(e, 'right')}>
+          <ArrowRight data-testid='galleryRight' >→</ArrowRight>
         </ArrowContainer>}
       </HorizontalButtons>
     </MainImage>
