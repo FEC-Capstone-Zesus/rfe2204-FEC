@@ -137,9 +137,8 @@ const RatingsAndStyles = ( { product,
     if (!size) {
       setSizeSelected(false);
     } else {
-      console.log(size);
-      console.log(qty);
-      console.log(sku);
+      axios.post('/cart', { count: qty, sku_id: sku })
+      .then(() => console.log('success'))
     }
   }
 
@@ -155,21 +154,23 @@ const RatingsAndStyles = ( { product,
           <a style={{ fontSize: 0.6 + 'em' }} href='#allRatings'>Read all {totalReviews} reviews</a>
         </span>
       </div> :
-      <div style={{ height: 1.2 + 'rem' }}></div>}
+      null }
 
       <div><h5>{product.id ? product.category.toUpperCase() : null}</h5></div>
       <h1>{product.id ? product.name : null}</h1>
 
       {currentStyle.style_id ? !currentStyle.sale_price ?
-        <p>${currentStyle.original_price}</p> :
+        <span>${currentStyle.original_price}</span> :
         <>
-          <p style={{ color: 'red' }}>${currentStyle.sale_price}</p>
-          <p style={{textDecorationLine: 'line-through',
+          <span style={{ color: 'red' }}>${currentStyle.sale_price}</span>
+          &nbsp;
+          &nbsp;
+          <span style={{textDecorationLine: 'line-through',
                      textDecorationStyle: 'solid'}}>
-                     ${currentStyle.original_price}</p>
+                     ${currentStyle.original_price}</span>
         </>
       : null}
-
+      <div style={{ height: 1 + 'rem' }}></div>
       <div className='styles-container'>
         <div>
         <span style={{ fontWeight: 'bolder' }}>STYLE ></span> {currentStyle.style_id ?
