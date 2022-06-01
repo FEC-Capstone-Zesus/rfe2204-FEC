@@ -3,6 +3,7 @@ import ImageGallery from "../../components/overview/ImageGallery.jsx";
 import setMainImage from "../../../actions/setMainImage.js"
 import setSlice from "../../../actions/setSlice.js"
 
+
 const mapStateToProps = (state) => (
   {
     currentStyle: state.currentStyle,
@@ -11,7 +12,6 @@ const mapStateToProps = (state) => (
     slice: state.slice
   }
 );
-
 
 var mapDispatchToProps = (dispatch) => {
   return {
