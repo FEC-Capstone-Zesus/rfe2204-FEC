@@ -112,9 +112,7 @@ const ReviewSummary = ({Product, ProductId, OverAllRating, Recommend, SizeRating
   
   return (
     <div>
-      
-      <CloseButton onClick={(event) => handleCloseForm(event)} id='closeButton'>x</CloseButton>
-
+      <CloseButton onClick={(event) => handleCloseForm(event)} data-testid='closeButton'>x</CloseButton>
       <h3>Review Summary</h3>
       <h4>Your Overall Rating for -- {Product} -- is {OverAllRating}</h4>
       {Recommend ? <h4>You Recommend this Product</h4> : <h4>Your don't recommend this product</h4>}
@@ -280,16 +278,20 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
               </>
                : <><Mandatory>*</Mandatory>Overall Rating<br/></>  
             }
-            <input type='radio' value='1' name='overall_score' onClick={(event)=>handleRating(event)}/>
-            <LabelStyle>Poor</LabelStyle><br />
-            <input type='radio' value='2' name='overall_score' onClick={(event)=>handleRating(event)}/>
-            <LabelStyle>Fair</LabelStyle><br />
-            <input type='radio' value='3' name='overall_score' onClick={(event)=>handleRating(event)}/>
-            <LabelStyle>Average</LabelStyle><br />
-            <input type='radio' value='4' name='overall_score' onClick={(event)=>handleRating(event)}/>
-            <LabelStyle>Good</LabelStyle><br /> 
-            <input type='radio' value='5' name='overall_score' onClick={(event)=>handleRating(event)}/>
-            <LabelStyle>Great</LabelStyle><br />
+            <input type='radio' value='1' id='poor' name='overall_score' onClick={(event)=>handleRating(event)}/>
+            <LabelStyle for='poor'>Poor</LabelStyle><br />
+
+            <input type='radio' value='2' id='fair' name='overall_score' onClick={(event)=>handleRating(event)}/>
+            <LabelStyle for='fair'>Fair</LabelStyle><br />
+
+            <input type='radio' value='3' id='average' name='overall_score' onClick={(event)=>handleRating(event)} data-testid='average'/>
+            <LabelStyle for='average'>Average</LabelStyle><br />
+
+            <input type='radio' value='4' id='good' name='overall_score' onClick={(event)=>handleRating(event)}/>
+            <LabelStyle for='good'>Good</LabelStyle><br /> 
+
+            <input type='radio' value='5' id='great' name='overall_score' onClick={(event)=>handleRating(event)}/>
+            <LabelStyle for='great'>Great</LabelStyle><br />
           </div>
           <br/>
           <div className='recommend'><Mandatory>*</Mandatory>Do you recommend this product ?
@@ -315,16 +317,16 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
                       needSize ? <RedTitle><Mandatory>*</Mandatory>Size</RedTitle> : <Title><Mandatory>*</Mandatory>Size</Title>
                     }
                     <TD>
-                      <input type='radio' value='1' name='size_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>A size too samll</LabelStyle><br />
-                      <input type='radio' value='2' name='size_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>1/2 a size too samll</LabelStyle><br />
-                      <input type='radio' value='3' name='size_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Perfect</LabelStyle><br />
-                      <input type='radio' value='4' name='size_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>1/2 a size too big</LabelStyle><br />
-                      <input type='radio' value='5' name='size_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>A size too wide</LabelStyle><br />
+                      <input type='radio' value='1' id='size_1' name='size_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='size_1'>A size too samll</LabelStyle><br />
+                      <input type='radio' value='2' id='size_2' name='size_score' onClick={(event)=>handleRating(event)} data-testid='small'/>
+                      <LabelStyle for='size_2'>1/2 a size too samll</LabelStyle><br />
+                      <input type='radio' value='3' id='size_3' name='size_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='size_3'>Perfect</LabelStyle><br />
+                      <input type='radio' value='4' id='size_4' name='size_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='size_4'>1/2 a size too big</LabelStyle><br />
+                      <input type='radio' value='5' id='size_5' name='size_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='size_5'>A size too wide</LabelStyle><br />
                     </TD>
                   </tr>
                   : null
@@ -336,16 +338,16 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
                       needWidth ? <RedTitle><Mandatory>*</Mandatory>Width</RedTitle> : <Title><Mandatory>*</Mandatory>Width</Title>
                     }
                     <TD>
-                      <input type='radio' value='1' name='width_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Too narrow</LabelStyle><br />
-                      <input type='radio' value='2' name='width_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Slightly narrow</LabelStyle><br />
-                      <input type='radio' value='3' name='width_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Perfect</LabelStyle><br />
-                      <input type='radio' value='4' name='width_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Slightly wide</LabelStyle><br />
-                      <input type='radio' value='5' name='width_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Too wide</LabelStyle><br />
+                      <input type='radio' value='1' id='width_1' name='width_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='width_1'>Too narrow</LabelStyle><br />
+                      <input type='radio' value='2' id='width_2' name='width_score' onClick={(event)=>handleRating(event)} data-testid='narrow'/>
+                      <LabelStyle for='width_2'>Slightly narrow</LabelStyle><br />
+                      <input type='radio' value='3' id='width_3' name='width_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='width_3'>Perfect</LabelStyle><br />
+                      <input type='radio' value='4' id='width_4' name='width_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='width_4'>Slightly wide</LabelStyle><br />
+                      <input type='radio' value='5' id='width_5' name='width_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='width_5'>Too wide</LabelStyle><br />
                     </TD>
                   </tr>
                   : null
@@ -357,16 +359,16 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
                       needComfort ? <RedTitle><Mandatory>*</Mandatory>Comfort</RedTitle> : <Title><Mandatory>*</Mandatory>Comfort</Title>
                     }
                     <TD>
-                      <input type='radio' value='1' name='comfort_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Uncomfortable</LabelStyle><br />
-                      <input type='radio' value='2' name='comfort_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Slightly uncomfortable</LabelStyle><br />
-                      <input type='radio' value='3' name='comfort_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Ok</LabelStyle><br />
-                      <input type='radio' value='4' name='comfort_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Comfortable</LabelStyle><br />
-                      <input type='radio' value='5' name='comfort_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Perfect</LabelStyle><br />
+                      <input type='radio' value='1' id='c_1' name='comfort_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='c_1'>Uncomfortable</LabelStyle><br />
+                      <input type='radio' value='2' id='c_2' name='comfort_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='c_2'>Slightly uncomfortable</LabelStyle><br />
+                      <input type='radio' value='3' id='c_3' name='comfort_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='c_3'>Ok</LabelStyle><br />
+                      <input type='radio' value='4' id='c_4' name='comfort_score' onClick={(event)=>handleRating(event)} data-testid='comfortable'/>
+                      <LabelStyle for='c_4'>Comfortable</LabelStyle><br />
+                      <input type='radio' value='5' id='c_5' name='comfort_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='c_5'>Perfect</LabelStyle><br />
                     </TD>
                   </tr>
                   : null
@@ -378,16 +380,16 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
                       needQuality ? <RedTitle><Mandatory>*</Mandatory>Quality</RedTitle> : <Title><Mandatory>*</Mandatory>Quality</Title>
                     }
                     <TD>
-                      <input type='radio' value='1' name='quality_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Poor</LabelStyle><br />
-                      <input type='radio' value='2' name='quality_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Below average</LabelStyle><br />
-                      <input type='radio' value='3' name='quality_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>What I expected</LabelStyle><br />
-                      <input type='radio' value='4' name='quality_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Pretty great</LabelStyle><br />
-                      <input type='radio' value='5' name='quality_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Perfect</LabelStyle><br />
+                      <input type='radio' value='1' id='q_1' name='quality_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='q_1'>Poor</LabelStyle><br />
+                      <input type='radio' value='2' id='q_2' name='quality_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='q_2'>Below average</LabelStyle><br />
+                      <input type='radio' value='3' id='q_3' name='quality_score' onClick={(event)=>handleRating(event)} data-testid='expect'/>
+                      <LabelStyle for='q_3'>What I expected</LabelStyle><br />
+                      <input type='radio' value='4' id='q_4' name='quality_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='q_4'>Pretty great</LabelStyle><br />
+                      <input type='radio' value='5' id='q_5' name='quality_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='q_5'>Perfect</LabelStyle><br />
                     </TD>
                   </tr>
                   : null
@@ -399,16 +401,16 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
                       needLength ? <RedTitle><Mandatory>*</Mandatory>Length</RedTitle> : <Title><Mandatory>*</Mandatory>Length</Title>
                     }
                     <TD>
-                      <input type='radio' value='1' name='length_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Runs Short</LabelStyle><br />
-                      <input type='radio' value='2' name='length_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Runs slightly short</LabelStyle><br />
-                      <input type='radio' value='3' name='length_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Perfect</LabelStyle><br />
-                      <input type='radio' value='4' name='length_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Runs slightly long</LabelStyle><br />
-                      <input type='radio' value='5' name='length_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Runs long</LabelStyle><br />
+                      <input type='radio' value='1' id='l_1' name='length_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='l_1'>Runs Short</LabelStyle><br />
+                      <input type='radio' value='2' id='l_2' name='length_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='l_2'>Runs slightly short</LabelStyle><br />
+                      <input type='radio' value='3' id='l_3' name='length_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='l_3'>Perfect</LabelStyle><br />
+                      <input type='radio' value='4' id='l_4' name='length_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='l_4'>Runs slightly long</LabelStyle><br />
+                      <input type='radio' value='5' id='l_5' name='length_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='l_5'>Runs long</LabelStyle><br />
                     </TD>
                   </tr>
                   : null
@@ -420,16 +422,16 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
                       needFit ? <RedTitle><Mandatory>*</Mandatory>Fit</RedTitle> : <Title><Mandatory>*</Mandatory>Fit</Title>
                     }
                     <TD>
-                      <input type='radio' value='1' name='fit_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Runs tight</LabelStyle><br />
-                      <input type='radio' value='2' name='fit_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Runs slightly tight</LabelStyle><br />
-                      <input type='radio' value='3' name='fit_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Perfect</LabelStyle><br />
-                      <input type='radio' value='4' name='fit_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Runs slightly long</LabelStyle><br />
-                      <input type='radio' value='5' name='fit_score' onClick={(event)=>handleRating(event)}/>
-                      <LabelStyle>Runs long</LabelStyle><br />
+                      <input type='radio' value='1' id='f_1' name='fit_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='f_1'>Runs tight</LabelStyle><br />
+                      <input type='radio' value='2' id='f_2' name='fit_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='f_2'>Runs slightly tight</LabelStyle><br />
+                      <input type='radio' value='3' id='f_3' name='fit_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='f_3'>Perfect</LabelStyle><br />
+                      <input type='radio' value='4' id='f_4' name='fit_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='f_4'>Runs slightly long</LabelStyle><br />
+                      <input type='radio' value='5' id='f_5' name='fit_score' onClick={(event)=>handleRating(event)}/>
+                      <LabelStyle for='f_5'>Runs long</LabelStyle><br />
                     </TD>
                   </tr>
                   : null
@@ -440,15 +442,16 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
           <div>
             {
               needReviewSummary ? 
-              <RedLabel><label>Review Summary: </label><br /></RedLabel> 
-              : <><label>Review Summary: </label><br /></>
+              <RedLabel><label for='reviewSummary'>Review Summary:</label><br /></RedLabel> 
+              : <><label for='reviewSummary'>Review Summary:</label><br /></>
             }
             <TextArea
               maxLength="60"
               name="reviewSummary"
               placeholder='Example: Best purchase ever!'
               onChange={(event)=>handleSummaryInput(event)}
-              id="reviewSummary"
+              id='reviewSummary'
+              data-testid="reviewSummary"
             />
             <InputStyle>input allowing up to 60 characters</InputStyle>
           </div>
@@ -456,8 +459,8 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
           <div>
             {
               needReviewBody ? 
-              <RedLabel><label><Mandatory>*</Mandatory>Review Body: </label><br /></RedLabel> 
-              : <><label><Mandatory>*</Mandatory>Review Body: </label><br /></>
+              <RedLabel><label for='reviewBody'><Mandatory>*</Mandatory>Review Body:</label><br /></RedLabel> 
+              : <><label for='reviewBody'><Mandatory>*</Mandatory>Review Body:</label><br /></>
             }
             <BodyTextArea
               minLength="50"
@@ -465,7 +468,8 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
               name="reviewBody"
               placeholder='Why did you like the product or not?'
               onChange={(event) => handleBodyInput(event)}
-              id="reviewBody"
+              data-testid="reviewBody"
+              id='reviewBody'
             />
             {reviewBody.length < 50 ? <InputStyle>Minimum required characters left: [{50 - reviewBody.length}]</InputStyle> : <InputStyle>Minimum reached</InputStyle>}
           </div>
@@ -475,14 +479,16 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
           <div>
             {
               needNickname ? 
-              <RedLabel><label><Mandatory>*</Mandatory>Your Nickname:</label><br /></RedLabel> 
-              : <><label><Mandatory>*</Mandatory>Your Nickname:</label><br /></>
+              <RedLabel><label for='nickname'><Mandatory>*</Mandatory>Your Nickname:</label><br /></RedLabel> 
+              : <><label for='nickname'><Mandatory>*</Mandatory>Your Nickname:</label><br /></>
             }
             <TextArea
               maxLength="60"
               name="nickName"
               placeholder='Example: jackson11'
               onChange={(event) => handleNickname(event)}
+              id='nickname'
+              data-testid='nickname'
             />
             <InputStyle>For privacy reasons, do not use your full name or email address</InputStyle>
           </div>
@@ -498,11 +504,12 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
               name="email"
               placeholder='Example: jackson11@email.com'
               onChange={(event) => handleEmail(event)}
+              data-testid='email'
             />
             <InputStyle>For authentication reasons, you will not be emailed</InputStyle>
           </div>
           <br/>
-          <button onClick={(event)=>handleNextButton(event)} id='buttonNext'>Next</button>
+          <button onClick={(event)=>handleNextButton(event)} data-testid='buttonNext'>Next</button>
         </FormContainer>
       </> 
       : <SummaryContainer>
