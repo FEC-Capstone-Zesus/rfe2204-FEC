@@ -51,11 +51,14 @@ const StyledImage = styled.img`
 StyledImage.defaultProps = {
   src: '',
 };
-const StyledImageEmpty = styled.span`
-  margin: 1rem;
+const StyledImageEmpty = styled.img`
   width:  4rem;
   height: 4rem;
+  object-fit: cover;
 `
+StyledImageEmpty.defaultProps = {
+  src: '',
+};
 const CheckMark = styled.div`
   z-index: 1;
   background: rgba(250,250,250,100);
@@ -216,9 +219,9 @@ const RatingsAndStyles = ( { product,
           })
         : null}
         {styles.product_id ? styles.results.length < 5 ?
-         Array.from('fill').map(style => {
-          return (<StyledImageSpan>
-                    <StyledImageEmpty/>
+         Array.from('abcd').map(style => {
+          return (<StyledImageSpan key={style}>
+                    <StyledImageEmpty src='/assets/white_filler.jpeg'/>
                   </StyledImageSpan>)
           })
         : null : null}
