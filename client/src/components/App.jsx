@@ -6,28 +6,33 @@ import RelateditemsContainer from "../containers/RelateditemsContainer.js";
 
 const GlobalStyle = createGlobalStyle`
   body {
-    margin-left: 12rem;
+    margin-left: 10rem;
     margin-right 12rem;
     padding: 0;
     background: white;
     font-family: 'Inter', sans-serif;
   }
-  h1 {
-    color: blue;
-  }
-  h1.loading {
+  a.reviews {
     color: black;
   }
   select {
     border: 1px solid rgba(0, 0, 0, 100);
     border-radius: 0;
-    height: 2rem;
+    height: 3rem;
+    font-weight: bold;
+    &:focus {
+      outline: none
+    }
   }
   button {
     border: 1px solid rgba(0, 0, 0, 100);
     border-radius: 0;
     background: white;
-    height: 2rem;
+    height: 3rem;
+    &:active:hover {
+      background: black;
+      color: white;
+    }
   }
   .arrow {
     border: solid black;
@@ -54,6 +59,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const SubOverview = styled.div`
+  width: 55rem;
   margin-left: 7rem;
   margin-right 7rem;
   padding: 0;
@@ -78,8 +84,26 @@ const Loading = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Header = styled.div`
+const Headline = styled.div`
+  width: 75rem;
+  height: 2rem;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+`;
+
+const HeadlineSpan = styled.span`
+  margin-top: 0.5rem;
+  font-size: 0.8em;
+  font-weight: ${({ bold }) => (bold ? 'bold' : '')};
+  font-style: ${({ italic }) => (italic ? 'italic' : '')};
+  text-decoration:${({ underline }) => (underline ? 'underline' : '')};
+`
+
+const Header = styled.header`
   background: rgba(226,226,226,100);
+  margin-top: -0.5rem;
+  width: 75rem;
   height: 5rem;
   display: flex;
   justify-content: space-between;
@@ -114,22 +138,31 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
                           width: 1.5 + 'rem' }}src='/assets/magnifying_glass.png'></img>
           </div>
         </Header>
-        <h1>Hello World!!!!!</h1>
-        <OverviewContainer />
-        &nbsp;
-        <SubOverview>
+        {!loading ?
+        <>
+          <Headline>
+            <HeadlineSpan italic={true} >SITE-WIDE ANNOUNCEMENT MESSAGE!</HeadlineSpan>
+            &nbsp;
+            <HeadlineSpan>--</HeadlineSpan>
+            &nbsp;
+            <HeadlineSpan>SALE / DISCOUNT</HeadlineSpan>
+            &nbsp;
+            <HeadlineSpan bold={true}>OFFER</HeadlineSpan>
+            &nbsp;
+            <HeadlineSpan>--</HeadlineSpan>
+            &nbsp;
+            <HeadlineSpan underline={true}>NEW PRODUCT HIGHLIGHT</HeadlineSpan>
+          </Headline>
+          <OverviewContainer />
+          <SubOverview>
           <Summary product={product} />
-          {/* {product.id ? <p>{ JSON.stringify(product)}</p> : null}
-          {reviews.product ? <p>{ JSON.stringify(reviews)}</p> : null}
-          {styles.product_id ? <p>{ JSON.stringify(styles)}</p> : null}
-          {metaData.product_id ? <p>{ JSON.stringify(metaData)}</p> : null}
-          {questions.length ? <p>{ JSON.stringify(questions)}</p> : null}
-          {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null} */}
-          <RelateditemsContainer/>
-        </SubOverview>
-        &nbsp;
-        <RatingsReviewsContainer />
-
+          <RelateditemsContainer />
+          <a id='allRatings'>
+            <RatingsReviewsContainer/>
+          </a>
+          </SubOverview>
+        </>
+        : null}
     </>
   );
 };
