@@ -8,6 +8,17 @@ const RatingsStyles = styled.div`
   height: 35rem;
   padding: 2rem 1.5rem 2rem 1.5rem;
 `
+const Ratings = styled.div`
+  margin-top: ${({length}) => (length > 8 ? `-2rem` : '0')};
+`
+const ProductName = styled.h1`
+  margin-top: ${({length}) => (length > 8 ? '0.7rem' : '' )};
+  margin-bottom: ${({length}) => (length > 8 ? '0.7rem' : '' )};
+`
+const ProductCatgory = styled.h5`
+  margin-top: ${({length}) => (length > 8 ? '0.7rem' : '' )};
+  margin-bottom: ${({length}) => (length > 8 ? '0.7rem' : '' )};
+`
 const StyledImagesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -20,11 +31,16 @@ const StyledImageSpan = styled.span`
   position: relative;
   margin-right: -1rem;
   width: 6rem;
-  padding: ${({length}) => (length > 4 ? `0.1rem 0` : '0.5rem 0')};
+  padding: ${({length}) => (length > 4 ? '0.1rem 0' : '0.5rem 0')};
   overflow: hidden;
 `
-const StyledImage = styled.img`
+const StyledImageParent = styled.div`
   width: 6rem;
+  height: 6rem;
+`
+const StyledImage = styled.img`
+  width:  4rem;
+  height: 4rem;
   border: 1px solid;
   object-fit: cover;
   clip-path: circle();
@@ -35,12 +51,20 @@ const StyledImage = styled.img`
 StyledImage.defaultProps = {
   src: '',
 };
+const StyledImageEmpty = styled.img`
+  width:  4rem;
+  height: 4rem;
+  object-fit: cover;
+`
+StyledImageEmpty.defaultProps = {
+  src: '',
+};
 const CheckMark = styled.div`
   z-index: 1;
   background: rgba(250,250,250,100);
   position: absolute;
-  top: 0.7rem;
-  left: 4rem;
+  top: 0.5rem;
+  left: 3rem;
   text-align: center;
   border: 1px solid;
   width: 1rem;
@@ -49,6 +73,8 @@ const CheckMark = styled.div`
   &:hover {
     cursor: pointer;
   }
+`
+const SelectorContainer = styled.div`
 `
 const StarFraction = styled.span`
  display: block;
@@ -145,19 +171,23 @@ const RatingsAndStyles = ( { product,
   return (
     <RatingsStyles>
       {totalReviews ?
-      <div className='ratings'>
+      <Ratings length={styles.results.length}>
         <span>
           <StarRating ratings={metaData} />
         </span>
         &nbsp;
         <span>
-          <a style={{ fontSize: 0.6 + 'em' }} href='#allRatings'>Read all {totalReviews} reviews</a>
+          <a className='reviews' style={{ fontSize: 0.7 + 'em' }} href='#allRatings'>Read all {totalReviews} reviews</a>
         </span>
-      </div> :
+      </Ratings> :
       null }
 
-      <div><h5>{product.id ? product.category.toUpperCase() : null}</h5></div>
-      <h1>{product.id ? product.name : null}</h1>
+      <div>
+        <ProductCatgory length={styles.results.length}>
+          {product.id ? product.category.toUpperCase() : null}
+        </ProductCatgory>
+      </div>
+      <ProductName length={styles.results.length}>{product.id ? product.name : null}</ProductName>
 
       {currentStyle.style_id ? !currentStyle.sale_price ?
         <span>${currentStyle.original_price}</span> :
@@ -182,17 +212,23 @@ const RatingsAndStyles = ( { product,
           return (<StyledImageSpan key={style.style_id}
                                    data-testid={style.name}
                                    id={style.name}
-                                   length={styles.results.length}
                                    onClick={() => updateCurrentStyle(style)}>
                     {style.style_id === currentStyle.style_id ? <CheckMark>✓</CheckMark> : null}
                     <StyledImage src={style.photos[0].thumbnail_url} />
                   </StyledImageSpan>)
           })
         : null}
+        {styles.product_id ? styles.results.length < 5 ?
+         Array.from('abcd').map(style => {
+          return (<StyledImageSpan key={style}>
+                    <StyledImageEmpty src='/assets/white_filler.jpeg'/>
+                  </StyledImageSpan>)
+          })
+        : null : null}
         </StyledImagesContainer>
       </div>
 
-      <div className='selector-container'>
+      <SelectorContainer>
         {sizeSelected ? <div style={{ marginTop: -0.5 + 'rem', height: 1.2 + 'rem' }} >
                           <p style={{ height: 1.2 + 'rem' }} ></p>
                         </div> :
@@ -202,7 +238,7 @@ const RatingsAndStyles = ( { product,
         <select name='size'
                 data-testid='size'
                 id='size'
-                style={{ width: 15 + 'rem' }}
+                style={{ width: 16 + 'rem' }}
                 onChange={(e) => changeSelect(e)}
                 disabled={!inStock}>
                 <option value='selectSize' >SELECT SIZE</option>
@@ -214,7 +250,7 @@ const RatingsAndStyles = ( { product,
                 )
               }
             }) :
-          <option value='outOfStock' >OUT OF STOCK</option> }
+            <option value='outOfStock' >OUT OF STOCK</option> }
         </select>
         &nbsp;
         &nbsp;
@@ -224,29 +260,29 @@ const RatingsAndStyles = ( { product,
                 data-testid='qty'
                 id='qty'
                 onChange={(e) => changeSelect(e)}
-                style={{ width: 5 + 'rem' }}>
+                style={{ width: 7 + 'rem' }}>
           <option value='Select Qty' >1</option>
           {Array.from(Array(qtySelect).keys()).map(x => x + 1).slice(1, 15).map((qty) =>
           <option key={qty} value={qty} >{qty}</option>)}
         </select> :
         <select name='qty'
                 disabled={true}
-                style={{ width: 5 + 'rem' }}>
+                style={{ width: 7 + 'rem' }}>
           <option value='Select Qty' >-</option>
         </select>}
 
-      </div>
-      <button style={{ width: 21.4 + 'rem',
+      <button style={{ width: 24.3 + 'rem',
                        fontWeight: 500,
-                       marginTop: 1 + 'rem',
+                       marginTop: 0.5 + 'rem',
                        display: 'flex',
                        justifyContent: 'space-between' }}
               disabled={!inStock}
               id='addToBag'
               onClick={(e) => addToCart(e)}>
-        <p style={{ fontWeight: 'bold', top: 50 + '%' }}>ADD TO BAG</p>
+        <p style={{ fontWeight: 'bold', top: 50 + '%' }}>ADD TO CART</p>
         <p style={{ fontWeight: 'bold', top: 50 + '%' }}>+</p>
       </button>
+      </SelectorContainer>
       &nbsp;
       <div className='star-item'></div>
     </RatingsStyles>
