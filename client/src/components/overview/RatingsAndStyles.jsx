@@ -79,11 +79,16 @@ const StylesContainer = styled.div`
 `
 const SelectorContainer = styled.div`
 `
-const StarFraction = styled.span`
- display: block;
- overflow: hidden;
- width: ${({starFraction}) => (starFraction ? `${starFraction}%` : '')};
+const AddToCart = styled.button`
+  width: 24.3rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
 `
+AddToCart.defaultProps = {
+  disabled: '',
+};
 
 var totalQty = 0;
 
@@ -237,16 +242,18 @@ const RatingsAndStyles = ( { product,
                 style={{ width: 16 + 'rem' }}
                 onChange={(e) => changeSelect(e)}
                 disabled={!inStock}>
-                <option value='selectSize' >SELECT SIZE</option>
           {inStock ?
-            skusArray.map((sku, i) => {
+          <>
+            <option value='selectSize' >SELECT SIZE</option>
+            {skusArray.map((sku, i) => {
               if (sku[1].quantity) {
                 return (
                   <option key={sku[0]} value={JSON.stringify(sku)} >{sku[1].size}</option>
                 )
               }
-            }) :
-            <option value='outOfStock' >OUT OF STOCK</option> }
+            })}
+          </>
+          : <option value='outOfStock' >OUT OF STOCK</option> }
         </select>
         &nbsp;
         &nbsp;
@@ -267,17 +274,18 @@ const RatingsAndStyles = ( { product,
           <option value='Select Qty' >-</option>
         </select>}
 
-      <button style={{ width: 24.3 + 'rem',
+      {/* <button style={{ width: 24.3 + 'rem',
                        fontWeight: 500,
                        marginTop: 0.5 + 'rem',
                        display: 'flex',
-                       justifyContent: 'space-between' }}
+                       justifyContent: 'space-between' }} */}
+      <AddToCart
               disabled={!inStock}
               id='addToBag'
               onClick={(e) => addToCart(e)}>
         <p style={{ fontWeight: 'bold', top: 50 + '%' }}>ADD TO CART</p>
         <p style={{ fontWeight: 'bold', top: 50 + '%' }}>+</p>
-      </button>
+      </AddToCart>
       </SelectorContainer>
       &nbsp;
       <div className='star-item'></div>
