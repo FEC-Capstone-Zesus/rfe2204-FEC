@@ -121,6 +121,7 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
         <>
           <h1>Hello World!!!!!</h1>
           <OverviewContainer />
+          <RelateditemsContainer />
           <SubOverview>
           <Summary product={product} />
             {/* {product.id ? <p>{ JSON.stringify(product)}</p> : null}
@@ -129,7 +130,6 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
             {metaData.product_id ? <p>{ JSON.stringify(metaData)}</p> : null}
             {questions.length ? <p>{ JSON.stringify(questions)}</p> : null}
             {relatedProducts.length ? <p>{ JSON.stringify(relatedProducts)}</p> : null} */}
-          <RelateditemsContainer />
           <a id='allRatings'><RatingsReviewsContainer/></a>
           </SubOverview>
         </>

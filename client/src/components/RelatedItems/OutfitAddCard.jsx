@@ -5,21 +5,20 @@ import styled from "styled-components";
 
 const OutfitCardAdd = ({ item, currentProduct, metaData, setOutfit, outfit, setOutfitStyle, styles, outfitStyle, className }) => {
 
-  const Card_body = styled.li`
-  background: #ffffff;
-  border-radius: 2px;
-  border: 1px solid #eeeeee;
-  box-shadow: ${className === 'active' ? '0 30px 20px rgba(0, 0, 0, 0.2)' : '0 10px 5px rgba(0, 0, 0, 0.1)'};
-  overflow: auto;
-  width: 200px;
-  height: 300px;
+  const CardImage = styled.img`
+  height:12rem;
+  width:100%;
+  object-fit: cover;
+`
+
+  const Card_body = styled.li `
   display: flex;
   flex-direction: column;
-  justify-content: column;
-  cursor: pointer;
-  transition: all 0.75s ease;
-  opacity: ${className === 'active' ? 1 : 0};
-  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
   `
   const Button_Star = styled.button`
   position: absolute;
@@ -42,9 +41,9 @@ let outfitAdd = function() {
 
 
   return (
-    <Card_body onClick = {() => outfitAdd()}>
+    <Card_body>
+        <CardImage onClick = {() => outfitAdd()} src = "../assets/plus-icon-163243.png"/>
         <p>Add to Outfit</p>
-        <img src = "../assets/plus-icon-163243.png"/>
     </Card_body>
   )
 };

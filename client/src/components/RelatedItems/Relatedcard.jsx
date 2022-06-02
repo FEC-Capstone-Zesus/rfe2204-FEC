@@ -5,40 +5,24 @@ import styled from "styled-components";
 import StarRating from "../StarRating.jsx"
 import retrieve from "../../retrieve.js"
 
-
-const CardImage = styled.img`
+const CardImage = styled.img `
   height:60%;
   width:100%;
   object-fit: cover;
 `
 
-const CompareModal = styled.div`
-`
+const Relatedcard = ({ item, currentProduct, metaData, index }) => {
 
-const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
-
-  const Card_body = styled.li`
-  background: #ffffff;
-  border-radius: 2px;
-  border: 1px solid #eeeeee;
-  box-shadow: ${className === 'active' ? '0 30px 20px rgba(0, 0, 0, 0.2)' : '0 10px 5px rgba(0, 0, 0, 0.1)'};
-  overflow: auto;
-  width: 200px;
-  height: 300px;
+  const Cardbody = styled.li `
   display: flex;
   flex-direction: column;
-  justify-content: column;
-  cursor: pointer;
-  transition: all 0.75s ease;
-  opacity: ${className === 'active' ? 1 : 0};
-  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
   `
   const Button_Star = styled.button`
-  position: absolute;
-  top:0;
-  right:0;
-  border: none;
-  background: none;
   &:hover{
     transform:scale(1.02);
   }
@@ -59,9 +43,8 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
   const [{ data: reviewsRelated, loading: loadingReviews, error: errorReviews }, reReview] = useAxios(
     `/reviews/meta?product_id=${item}`
   )
-
   if (loadingProducts) return <p>Loading...</p>
-  if (errorProducts) return <p>Error! {`${errorProducts}`}</p>
+  if (errorProducts) return <p>Error! </p>
   if (loadingReviews) return <p>Loading...</p>
   if (errorReviews) return <p>Error!</p>
 
@@ -83,9 +66,9 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
   }
 
   return (
-      <Card_body onClick = {() => retrieve(`${item}`)}>
+      <Cardbody>
         <Button_Star id = "open" onClick = {() => setshowModal(true)}>☆</Button_Star>
-        {showModal ? <CompareModal className = "compModal">
+        {showModal ? <div className = "compModal">
           <div className = 'compModalContent'>
             <table>
             <thead>
@@ -104,14 +87,14 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
             </tbody>
           </table>
           <button id = "close" onClick = {() => setshowModal(false)}> Close </button></div>
-          </CompareModal> : null}
-        {styles !== undefined ? <CardImage src = {styles.results[0].photos[0].thumbnail_url}/> : null}
+          </div> : null}
+        {styles !== undefined ? <CardImage src = {styles.results[0].photos[0].thumbnail_url} onClick = {() => retrieve(`${item}`)}/> : null}
         <p>{products.name}
         <br></br>{products.category}
         <br></br>{products.default_price}
         <br></br><StarRating ratings = {reviewsRelated}/>
         </p>
-      </Card_body>
+      </Cardbody>
   )
 };
 
