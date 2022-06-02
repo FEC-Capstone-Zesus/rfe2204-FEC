@@ -34,10 +34,6 @@ const StyledImageSpan = styled.span`
   padding: ${({length}) => (length > 4 ? '0.1rem 0' : '0.5rem 0')};
   overflow: hidden;
 `
-const StyledImageParent = styled.div`
-  width: 6rem;
-  height: 6rem;
-`
 const StyledImage = styled.img`
   width:  4rem;
   height: 4rem;
@@ -49,14 +45,6 @@ const StyledImage = styled.img`
   }
 `
 StyledImage.defaultProps = {
-  src: '',
-};
-const StyledImageEmpty = styled.img`
-  width:  4rem;
-  height: 4rem;
-  object-fit: cover;
-`
-StyledImageEmpty.defaultProps = {
   src: '',
 };
 const CheckMark = styled.div`
@@ -71,13 +59,11 @@ const CheckMark = styled.div`
   font-size: 70%;
   border-radius: 50%;
   &:hover {
-    cursor: pointer;
+    cursor: default;
   }
 `
 const StylesContainer = styled.div`
   height: ${({length}) => (length > 8 ? '17rem' : '13rem')};
-`
-const SelectorContainer = styled.div`
 `
 const AddToCart = styled.button`
   width: 24.3rem;
@@ -204,7 +190,7 @@ const RatingsAndStyles = ( { product,
           &nbsp;
           &nbsp;
           <span style={{textDecorationLine: 'line-through',
-                     textDecorationStyle: 'solid'}}>
+                        textDecorationStyle: 'solid'}}>
                      ${currentStyle.original_price}</span>
         </>
       : null}
@@ -229,7 +215,7 @@ const RatingsAndStyles = ( { product,
         </StyledImagesContainer>
       </StylesContainer>
 
-      <SelectorContainer>
+      <div>
         {sizeSelected ? <div style={{ marginTop: -0.5 + 'rem', height: 1.2 + 'rem' }} >
                           <p style={{ height: 1.2 + 'rem' }} ></p>
                         </div> :
@@ -274,11 +260,6 @@ const RatingsAndStyles = ( { product,
           <option value='Select Qty' >-</option>
         </select>}
 
-      {/* <button style={{ width: 24.3 + 'rem',
-                       fontWeight: 500,
-                       marginTop: 0.5 + 'rem',
-                       display: 'flex',
-                       justifyContent: 'space-between' }} */}
       <AddToCart
               disabled={!inStock}
               id='addToBag'
@@ -286,9 +267,7 @@ const RatingsAndStyles = ( { product,
         <p style={{ fontWeight: 'bold', top: 50 + '%' }}>ADD TO CART</p>
         <p style={{ fontWeight: 'bold', top: 50 + '%' }}>+</p>
       </AddToCart>
-      </SelectorContainer>
-      &nbsp;
-      <div className='star-item'></div>
+      </div>
     </RatingsStyles>
   );
 };
