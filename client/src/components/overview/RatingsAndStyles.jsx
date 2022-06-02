@@ -29,7 +29,6 @@ const StyledImagesContainer = styled.div`
 const StyledImageSpan = styled.span`
   display: inline-block;
   position: relative;
-  margin-left: ${({length}) => (length < 2 ? '-9rem' : '')};
   margin-right: -1rem;
   width: 6rem;
   padding: ${({length}) => (length > 4 ? '0.1rem 0' : '0.5rem 0')};
@@ -210,7 +209,6 @@ const RatingsAndStyles = ( { product,
           return (<StyledImageSpan key={style.style_id}
                                    data-testid={style.name}
                                    id={style.name}
-                                   length={styles.results.length}
                                    onClick={() => updateCurrentStyle(style)}>
                     {style.style_id === currentStyle.style_id ? <CheckMark>✓</CheckMark> : null}
                     <StyledImage src={style.photos[0].thumbnail_url} />
@@ -218,7 +216,7 @@ const RatingsAndStyles = ( { product,
           })
         : null}
         {styles.product_id ? styles.results.length < 5 ?
-         styles.results.map(style => {
+         Array.from('fill').map(style => {
           return (<StyledImageSpan>
                     <StyledImageEmpty/>
                   </StyledImageSpan>)
