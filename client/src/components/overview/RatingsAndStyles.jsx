@@ -270,7 +270,7 @@ const RatingsAndStyles = ( { product,
 
       <button style={{ width: 24.3 + 'rem',
                        fontWeight: 500,
-                       marginTop: 1 + 'rem',
+                       marginTop: 0.5 + 'rem',
                        display: 'flex',
                        justifyContent: 'space-between' }}
               disabled={!inStock}
