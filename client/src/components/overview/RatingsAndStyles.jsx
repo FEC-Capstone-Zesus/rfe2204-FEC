@@ -74,6 +74,9 @@ const CheckMark = styled.div`
     cursor: pointer;
   }
 `
+const StylesContainer = styled.div`
+  height: 13rem;
+`
 const SelectorContainer = styled.div`
 `
 const StarFraction = styled.span`
@@ -201,7 +204,7 @@ const RatingsAndStyles = ( { product,
         </>
       : null}
       <div style={{ height: 1 + 'rem' }}></div>
-      <div className='styles-container'>
+      <StylesContainer>
         <div>
         <span style={{ fontWeight: 'bolder' }}>STYLE ></span> {currentStyle.style_id ?
             <span style={{ fontWeight: 'lighter' }}>{currentStyle.name.toUpperCase()}</span>: null}
@@ -218,15 +221,8 @@ const RatingsAndStyles = ( { product,
                   </StyledImageSpan>)
           })
         : null}
-        {styles.product_id ? styles.results.length < 5 ?
-         Array.from('abcd').map(style => {
-          return (<StyledImageSpan key={style}>
-                    <StyledImageEmpty src='/assets/white_filler.jpeg'/>
-                  </StyledImageSpan>)
-          })
-        : null : null}
         </StyledImagesContainer>
-      </div>
+      </StylesContainer>
 
       <SelectorContainer>
         {sizeSelected ? <div style={{ marginTop: -0.5 + 'rem', height: 1.2 + 'rem' }} >
