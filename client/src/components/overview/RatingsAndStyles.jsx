@@ -276,7 +276,7 @@ const RatingsAndStyles = ( { product,
               disabled={!inStock}
               id='addToBag'
               onClick={(e) => addToCart(e)}>
-        <p style={{ fontWeight: 'bold', top: 50 + '%' }}>ADD TO BAG</p>
+        <p style={{ fontWeight: 'bold', top: 50 + '%' }}>ADD TO CART</p>
         <p style={{ fontWeight: 'bold', top: 50 + '%' }}>+</p>
       </button>
       </SelectorContainer>
