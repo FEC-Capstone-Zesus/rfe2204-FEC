@@ -75,7 +75,7 @@ const CheckMark = styled.div`
   }
 `
 const StylesContainer = styled.div`
-  height: 13rem;
+  height: ${({length}) => (length > 8 ? '17rem' : '13rem')};
 `
 const SelectorContainer = styled.div`
 `
@@ -209,7 +209,7 @@ const RatingsAndStyles = ( { product,
         </>
       : null}
       <div style={{ height: 1 + 'rem' }}></div>
-      <StylesContainer>
+      <StylesContainer length={styles.results.length}>
         <div>
         <span style={{ fontWeight: 'bolder' }}>STYLE ></span> {currentStyle.style_id ?
             <span style={{ fontWeight: 'lighter' }}>{currentStyle.name.toUpperCase()}</span>: null}
