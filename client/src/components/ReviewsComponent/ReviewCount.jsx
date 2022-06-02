@@ -35,25 +35,4 @@ class ReviewCount extends React.Component {
   }
 }
 
-// const ReviewCount = ({ count, handleSort }) => {
-//   // const [options, setOptions] = useState('');
-//   // const handleSelection = (value) => {
-//   //   setOptions(value);
-//   //   handleSort(value);
-//   //   console.log(options);
-//   // };
-  
-//   if (count) {
-//     return (
-//       <H4>{count} reviews, sorted by
-//         <Select value={} onChange={(event)=>{handleSort(event.target.value)}} data-testid='sort'>
-//           <option value="helpful" name='helpfulOption'>Helpful</option>
-//           <option value="newest" name='newestOption'>Newest</option>
-//           <option value="relevant" name='relevantOption'>Relevant</option>
-//         </Select>
-//       </H4>
-//     );
-//   }
-// };
-
 export default ReviewCount;
