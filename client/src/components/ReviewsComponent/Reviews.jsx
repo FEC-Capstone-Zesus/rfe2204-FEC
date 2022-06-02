@@ -33,7 +33,8 @@ class Reviews extends React.Component {
       axios.get(`/reviews?product_id=${this.props.reviews.product}&page=1&count=50&sort=${sort}`).then((response) => {
         this.reviewList = JSON.parse(JSON.stringify(response.data.results));
         this.initialState = false;
-        this.setState({ sort: JSON.parse(JSON.stringify(response.data.results)) });
+        var newValue = JSON.parse(JSON.stringify(response.data.results));
+        this.setState({ sort: newValue});
         this.ReviewsCount = response.data.results.length;
       });
     }
@@ -108,7 +109,7 @@ class Reviews extends React.Component {
           characteristics: factors
         }
         axios.post('/reviews', variable)
-          .then((response) => alert("Thank you! Your review has Submitted!"));
+          .then((response) => window.alert("Thank you! Your review has Submitted!"));
       });
   };
   render() {

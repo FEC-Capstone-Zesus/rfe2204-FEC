@@ -3,11 +3,12 @@
  * @jest-environment jsdom
  */
 const {defaults} = require('jest-config');
-require('dotenv').config()
+require('dotenv').config();
+debugger;
 import React from 'react';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
-import configureStore from 'redux-mock-store'
+import configureStore from 'redux-mock-store';
 import "babel-polyfill";
 import {
   fireEvent,
@@ -473,9 +474,10 @@ describe("Test ExpandedView redux components", () => {
   })
 });
 
+import { cleanup, act } from '@testing-library/react';
 describe("Test Ratings & Reviews redux components", () => {
   let store;
-
+  
   beforeEach(() => {
     store = mockStore({
       product: [
@@ -645,20 +647,17 @@ describe("Test Ratings & Reviews redux components", () => {
           }
       },
     });
+    
 
     render(
     <Provider store = {store}>
       <RatingsReviewsContainer/>
     </Provider>
     );
-
+    
   });
+  afterEach(cleanup);
 
-  // it('should render with given state from Redux store', async () => {
-  //   await waitFor(() => {
-  //     expect(screen.getAllByText("test")).toBeInTheDocument();
-  //   })
-  // });
   test('select Relevant should update list', async () => {
     userEvent.selectOptions(screen.getByTestId('sort'), "Relevant");
     await waitFor(() => {
@@ -748,16 +747,6 @@ describe("Test Ratings & Reviews redux components", () => {
       })
   });
 
-  // test('should remove all the tag when click on clear', async () => {
-  //     userEvent.click(screen.getByTestId("star_1"));
-  //     userEvent.click(screen.getByTestId("star_2"));
-  //     userEvent.click(screen.getByText("clear"));
-  //     await waitFor(() => {
-  //       expect(screen.queryByText('1-stars')).not.toBeInTheDocument();
-  //       expect(screen.queryByText('2-stars')).not.toBeInTheDocument();
-  //     })
-  // });
-
   test('should show review form when click on ADD REVIEW', async () => {
       userEvent.click(screen.getByTestId("addreview"));
       await waitFor(() => {
@@ -767,13 +756,6 @@ describe("Test Ratings & Reviews redux components", () => {
       })
   });
 
-  // test('should alert user when some fields missing', async () => {
-  //   userEvent.click(screen.getByTestId("addreview"));
-  //   userEvent.click(document.getElementById("buttonNext"));
-  //   await waitFor(() => screen.getByRole('alert'))
-  //   expect(screen.getByRole('alert')).toHaveTextContent('Please Modify the Mandatory Field labeled in Red')
-  // });
-
   test('should close the review form when click on close button', async () => {
     userEvent.click(screen.getByTestId("addreview"));
     userEvent.click(document.getElementById("closeButton"));
@@ -782,36 +764,91 @@ describe("Test Ratings & Reviews redux components", () => {
     })
   });
 
-  test('next button should be enabled', async () => {
+  test('should enable NEXT button when add review button is clicked', async () => {
     userEvent.click(screen.getByTestId("addreview"));
     await waitFor(() => {
-      expect(document.getElementById("buttonNext")).toBeEnabled();
+      expect(screen.getByTestId("buttonNext")).toBeEnabled();
     })
   });
-  
-  test('correct summary input function', () => {
-    fireEvent.change(document.getElementById("reviewSummary"), {
-      target: { value: 'test{space}test{space}summary'},
+
+  test('should open the summary when finish input', async ()=> {
+    userEvent.click(screen.getByTestId("addreview"));
+    await waitFor(()=>{
+      expect(screen.getByText("Overall Rating")).toBeInTheDocument();
     });
-    
-    expect(document.getElementById("reviewSummary")).toHaveValue('test{space}test{space}summary')
-  });
-  test('correct body input function', () => {
-    fireEvent.change(document.getElementById("reviewBody"), {
-      target: { value: 'test{space}test{space}body{space}test{space}test{space}test{space}body{space}test{space}test{space}body{space}test{space}test{space}test{space}body'},
+    userEvent.click(screen.getByTestId("average"));
+    userEvent.click(screen.getByTestId('small'));
+    userEvent.click(screen.getByTestId('narrow'));
+    userEvent.click(screen.getByTestId('comfortable'));
+    userEvent.click(screen.getByTestId('expect'));
+    userEvent.type(screen.getByTestId('reviewSummary'), 'I Like');
+    await waitFor(()=>{
+      expect(screen.getByTestId('reviewSummary')).toHaveValue('I Like');
     });
-    
-    expect(document.getElementById("reviewBody")).toHaveValue('test{space}test{space}body{space}test{space}test{space}test{space}body{space}test{space}test{space}body{space}test{space}test{space}test{space}body');
+    userEvent.type(screen.getByTestId("reviewBody"), 'testtestbodytesttesttestbodytesttestbodytesttesttestbody');
+    await waitFor(()=>{
+      expect(screen.getByTestId("reviewBody")).toHaveValue('testtestbodytesttesttestbodytesttestbodytesttesttestbody');
+    });
+    userEvent.type(screen.getByTestId("nickname"), 'testnickname');
+    await waitFor(()=>{
+      expect(screen.getByTestId("nickname")).toHaveValue('testnickname');
+    });
+    userEvent.type(screen.getByTestId('email'), 'testemail@gmail.com');
+    await waitFor(()=> {
+      expect(screen.getByTestId("email")).toHaveValue('testemail@gmail.com');
+    })
+    userEvent.click(screen.getByTestId("buttonNext"));
+    await waitFor(()=> {
+      expect(screen.getByText("Submit")).toBeInTheDocument();
+    })
   });
 
-  // test('should select overall rating', async () => {
-  //   userEvent.change(screen.getByText('Poor'), { target: { value: "3" } });
-  //   await waitFor(() => {
-  //     expect(radio.value).toBe('3');
-  //   })
-  // });
-  
-  
+  test('should open the summary when finish input', async ()=> {
+    userEvent.click(screen.getByTestId("addreview"));
+    await waitFor(()=>{
+      expect(screen.getByText("Overall Rating")).toBeInTheDocument();
+    });
+    userEvent.click(screen.getByTestId("average"));
+    userEvent.click(screen.getByTestId('small'));
+    userEvent.click(screen.getByTestId('narrow'));
+    userEvent.click(screen.getByTestId('comfortable'));
+    userEvent.click(screen.getByTestId('expect'));
+    userEvent.type(screen.getByTestId('reviewSummary'), 'I Like');
+    await waitFor(()=>{
+      expect(screen.getByTestId('reviewSummary')).toHaveValue('I Like');
+    });
+    userEvent.type(screen.getByTestId("reviewBody"), 'testtestbodytesttesttestbodytesttestbodytesttesttestbody');
+    await waitFor(()=>{
+      expect(screen.getByTestId("reviewBody")).toHaveValue('testtestbodytesttesttestbodytesttestbodytesttesttestbody');
+    });
+    userEvent.type(screen.getByTestId("nickname"), 'testnickname');
+    await waitFor(()=>{
+      expect(screen.getByTestId("nickname")).toHaveValue('testnickname');
+    });
+    userEvent.type(screen.getByTestId('email'), 'testemail000@gmail.com');
+    await waitFor(()=> {
+      expect(screen.getByTestId("email")).toHaveValue('testemail000@gmail.com');
+    })
+    userEvent.click(screen.getByTestId("buttonNext"));
+    await waitFor(()=> {
+      expect(screen.getByText("Submit")).toBeInTheDocument();
+    })
+    userEvent.click(screen.getByText("Submit"));
+    await waitFor(()=> {
+      expect(window.alert).toHaveBeenCalled();
+    })
+  });
+
+  test('should post the form on submit', async ()=> {
+    userEvent.click(screen.getByTestId("addreview"));
+    await waitFor(()=>{
+      userEvent.click(screen.getByTestId("closeButton"));
+    });
+    await waitFor(()=>{
+      expect(screen.queryByText("Do you recommend this product ?")).toBeNull();
+    });
+  });
+
 });
 
   it('arrow left should not appear on first load', async () => {
@@ -821,5 +858,3 @@ describe("Test Ratings & Reviews redux components", () => {
       expect(screen.getByTestId('expandedLeft')).toBeNull()
     })
   })
-
-
