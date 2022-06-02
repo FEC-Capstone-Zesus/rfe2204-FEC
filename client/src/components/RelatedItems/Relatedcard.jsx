@@ -2,10 +2,12 @@ const axios = require('axios');
 import React, { useState } from 'react';
 import useAxios from 'axios-hooks'
 import styled from "styled-components";
+import StarRating from "../StarRating.jsx"
+import retrieve from "../../retrieve.js"
 
 
 const CardImage = styled.img`
-  height:12rem;
+  height:60%;
   width:100%;
   object-fit: cover;
 `
@@ -28,16 +30,8 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
   justify-content: column;
   cursor: pointer;
   transition: all 0.75s ease;
-  opacity: ${className === 'active' || className === 'next' ? 1 : 0};
+  opacity: ${className === 'active' ? 1 : 0};
   position: absolute;
-  transform: ${className === 'active' ? 'scale(1) translateY(0)' :
-   className === 'prev' ? 'scale(1.1) translateY(-50px)' :
-   'scale(0.85) translateY(50px)' };
-  z-index: ${className === 'active' ? 1 : className === 'prev' ? 2 : 0};
-  visibility: ${className === 'prev' ? 'hidden' : ''};
-  &:hover{
-    transform:scale(1.02);
-  }
   `
   const Button_Star = styled.button`
   position: absolute;
@@ -49,10 +43,8 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
     transform:scale(1.02);
   }
   `
-
   let starCount = 0;
   let commonChars = [];
-  console.log(className);
 
   const [showModal, setshowModal] = useState(false);
 
@@ -69,7 +61,7 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
   )
 
   if (loadingProducts) return <p>Loading...</p>
-  if (errorProducts) return <p>Error!</p>
+  if (errorProducts) return <p>Error! {`${errorProducts}`}</p>
   if (loadingReviews) return <p>Loading...</p>
   if (errorReviews) return <p>Error!</p>
 
@@ -91,10 +83,10 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
   }
 
   return (
-      <Card_body onClick = {() => console.log('hello')}>
+      <Card_body onClick = {() => retrieve(`${item}`)}>
         <Button_Star id = "open" onClick = {() => setshowModal(true)}>☆</Button_Star>
         {showModal ? <CompareModal className = "compModal">
-          <div className compModalContent>
+          <div className = 'compModalContent'>
             <table>
             <thead>
               <tr>
@@ -117,7 +109,7 @@ const Relatedcard = ({ item, currentProduct, metaData, className, index }) => {
         <p>{products.name}
         <br></br>{products.category}
         <br></br>{products.default_price}
-        <br></br>{reviewsRelated !== undefined ? starCount : null}
+        <br></br><StarRating ratings = {reviewsRelated}/>
         </p>
       </Card_body>
   )

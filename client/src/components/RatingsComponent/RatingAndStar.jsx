@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import StarRating from '../StarRating.jsx';
 
 const RatingAndStarStyle = styled.div` 
   display: flex;
@@ -9,7 +10,7 @@ const RatingAndStarStyle = styled.div`
   gap: 20px;
 `;
 
-const RatingAndStar = ({ rate }) => {
+const RatingAndStar = ({ rate, meta }) => {
   var totalReview = 0;
   var totalRating = 0;
   if (rate) {
@@ -18,13 +19,15 @@ const RatingAndStar = ({ rate }) => {
       totalReview += Number(rate[key]);
     }
     var Rating = (totalRating / totalReview).toFixed(1);
+    return (
+      <RatingAndStarStyle>
+        <h2>{Rating}</h2>
+        <div>
+          <StarRating ratings={meta}/>
+        </div>
+      </RatingAndStarStyle>
+    );
   }
-  return (
-    <RatingAndStarStyle>
-      <h2>{Rating}</h2>
-      <span>*****</span>
-    </RatingAndStarStyle>
-  );
 };
 
 export default RatingAndStar;

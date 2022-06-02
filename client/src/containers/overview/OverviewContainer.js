@@ -1,21 +1,16 @@
 import { connect } from "react-redux";
 import Overview from "../../components/overview/Overview.jsx";
-import setCurrentStyle from "../../../actions/setCurrentStyle.js"
+import toggleExpanded from "../../../actions/toggleExpanded.js"
 
 const mapStateToProps = (state) => (
   {
-    product: state.product,
-    styles: state.styles,
-    currentStyle: state.currentStyle,
-    reviews: state.reviews,
-    metaData: state.metaData,
-    toggle: state.toggle
+    expanded: state.expanded,
   }
 );
 
 var mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentStyle: (currentStyle) => dispatch(setCurrentStyle(currentStyle))
+    toggleExpanded: (expanded) => dispatch(toggleExpanded(expanded))
   };
 };
 

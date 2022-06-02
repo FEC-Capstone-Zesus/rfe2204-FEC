@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import StarRating from '../StarRating.jsx';
 
 const ReviewEntryContainer = styled.div`
   display: grid;
@@ -71,11 +72,31 @@ const Img = styled.img`
   width: 70px;
   height: auto;
 `;
-const Photo = ({photos}) => (
-  <>
-    {photos.map((photo, index) => <Img src={photo.url} alt="Review Photo" key={index}/>)}
-  </>
-);
+
+const ImgModal = styled.div`
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.9); 
+`;
+  
+const Photo = ({photos}) => {
+  const handleClick = (e) => {
+    e.preventDefault();
+  };
+  return (
+    <>
+      {photos.map((photo, index) => <Img src={photo.url} alt="Review Photo" key={index} onClick={(e)=>handleClick(e)}/>)}
+    </>
+  );
+};
 
 const PhotoContainer = styled.div`
   display: flex;
@@ -116,7 +137,7 @@ const ReviewEntry = ({review, handleHelpful, handleReport}) => {
     return (
       <>
         {!report ? <ReviewEntryContainer>
-          <Star>{review.rating}</Star>
+          <Star><StarRating ratings={review.rating}/></Star>
           <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
           <ReviewTitle>{review.summary}</ReviewTitle>
           <ReviewContent>

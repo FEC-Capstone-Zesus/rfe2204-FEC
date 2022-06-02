@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Select = styled.select`
@@ -14,19 +14,25 @@ const H4 = styled.h4`
   margin: 0;
 `;
 
-const ReviewCount = ({ count, handleSort }) => {
-  if (count) {
-    return (
-      <H4>{count} reviews, sorted by
-        <Select defaultValue={"DEFAULT"} onChange={(event)=>handleSort(event.target.value)}>
-          <option value="DEFAULT" disabled>Sort On</option>
-          <option value="helpful">Helpful</option>
-          <option value="newest">Newest</option>
-          <option value="relevant">Relevant</option>
-        </Select>
-      </H4>
-    );
+class ReviewCount extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+    this.value = '';
   }
-};
+  render() {
+    if (this.props.count) {
+      return (
+        <H4>{this.props.count} reviews, sorted by
+          <Select value={this.value} onChange={(event)=>{this.props.handleSort(event.target.value); this.value = event.target.value}} data-testid='sort'>
+            <option value="helpful" name='helpfulOption'>Helpful</option>
+            <option value="newest" name='newestOption'>Newest</option>
+            <option value="relevant" name='relevantOption'>Relevant</option>
+          </Select>
+        </H4>
+      );
+    }
+  }
+}
 
 export default ReviewCount;

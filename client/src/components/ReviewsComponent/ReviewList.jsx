@@ -2,36 +2,29 @@ import React, { useState } from 'react';
 import ReviewEntry from './ReviewEntry.jsx';
 import ReviewButton from './ReviewButton.jsx';
 
-const ReviewList = ({reviews, handleHelpful, handleReport}) => {
-  // var listLength;
-  // var index = 0;
-  // var newItems = [];
+const ReviewList = ({reviews, handleHelpful, handleReport, handleOpenForm}) => {
+  const [showButton, setShowButton] = useState(true);
+  var listItem = [];
+
+  const load = (e) => {
+    e.preventDefault();
+    listItem = reviews;
+    setShowButton(false);
+  }
+
   if (reviews) {
-    // listLength = reviews.length;
-
-    // const load = (e) => {
-    //   e.preventDefault();
-    //   var newItems = JSON.parse(JSON.stringify(display));
-      
-    //   for (var i = index; i < index + 2; i++) {
-    //     newItems.push(reviews[i]);
-    //   }
-    //   index += 2;
-    //   setDisplay(newItems);
-    // };
-
-    // if (listLength > 2) {
-    //   newItems.push(reviews[0], reviews[1]);
-    //   index += 2;
-    // } else {
-    //   newItems = JSON.parse(JSON.stringify(reviews));
-    // }
-    // const [display, setDisplay] = useState(newItems);
+    if (reviews.length > 2 && showButton === true) {
+      listItem = [reviews[0], reviews[1]];
+    } else {
+      listItem = reviews;
+    }
+  } 
   
+  if (listItem.length) {
     return (
       <>
-        {reviews.map((review, index) => <ReviewEntry review={review} key={index} handleHelpful={handleHelpful} handleReport={handleReport}/>)}
-        <ReviewButton />
+        {listItem.map((review, index) => <ReviewEntry review={review} key={index} handleHelpful={handleHelpful} handleReport={handleReport}/>)}
+        <ReviewButton showMoreReviewButton={showButton} handleOpenForm={handleOpenForm} load={load}/>
       </> 
     );
   }

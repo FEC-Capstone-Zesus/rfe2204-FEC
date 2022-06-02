@@ -3,28 +3,35 @@ import React, { useState } from 'react';
 import useAxios from 'axios-hooks'
 import styled from "styled-components";
 
-const Card = styled.div`
-overflow:hidden;
-box-shadow: 0 2px 20px #e1e5ee;
-border-radius 0.2rem;
-display: flex;
-flex-direction:column;
-justify-content:space-between;
-cursor:pointer;
-transition: transform 200ms ease-in;
-position: absolute;
-&:hover{
-  transform:scale(1.02);
-}
-`
-const CardImage = styled.img`
-  height:12rem;
-  width:100%;
-  object-fit: cover;
-`
+const OutfitCardAdd = ({ item, currentProduct, metaData, setOutfit, outfit, setOutfitStyle, styles, outfitStyle, className }) => {
 
-const OutfitCardAdd = ({ item, currentProduct, metaData, setOutfit, outfit, setOutfitStyle, styles, outfitStyle }) => {
-console.log(styles);
+  const Card_body = styled.li`
+  background: #ffffff;
+  border-radius: 2px;
+  border: 1px solid #eeeeee;
+  box-shadow: ${className === 'active' ? '0 30px 20px rgba(0, 0, 0, 0.2)' : '0 10px 5px rgba(0, 0, 0, 0.1)'};
+  overflow: auto;
+  width: 200px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: column;
+  cursor: pointer;
+  transition: all 0.75s ease;
+  opacity: ${className === 'active' ? 1 : 0};
+  position: absolute;
+  `
+  const Button_Star = styled.button`
+  position: absolute;
+  top:0;
+  right:0;
+  border: none;
+  background: none;
+  &:hover{
+    transform:scale(1.02);
+  }
+  `
+console.log(styles)
 
 let outfitAdd = function() {
   if(!outfit.includes(currentProduct))
@@ -35,12 +42,10 @@ let outfitAdd = function() {
 
 
   return (
-    <div className = "card">
-      <div className = "card_body" onClick = {() => outfitAdd()}>
+    <Card_body onClick = {() => outfitAdd()}>
         <p>Add to Outfit</p>
-        <CardImage src = "../assets/plus-icon-163243.png"/>
-      </div>
-    </div>
+        <img src = "../assets/plus-icon-163243.png"/>
+    </Card_body>
   )
 };
 
