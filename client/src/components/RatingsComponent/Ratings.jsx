@@ -9,21 +9,22 @@ const RatingContainer = styled.div`
   flex-direction: column;
 `;
 
-const Ratings = ({ratings, recommended, factors}) => {
-  const [filter, setFilter] = useState({ 'filter_5': false, 'filter_4': false, 'filter_3': false, 'filter_2': false, 'filter_1': false });
-  const [userfilter, setUserFilter] = useState('');
+const Ratings = ({ratings, recommended, factors, handleUserSelect }) => {
+  const [filter, setFilter] = useState({ '5': false, '4': false, '3': false, '2': false, '1': false });
+  const [userfilter, setUserFilter] = useState([]);
   const [meta, setMeta] = useState({ratings, recommended, factors});
 
   const handlefilter = (event, star) => {
     event.preventDefault();
-    let newState = filter;
+    let newState = JSON.parse(JSON.stringify(filter));
     newState[star] = !filter[star];
     setFilter(newState);
+    handleUserSelect(filter);
   };
 
   const handleClear = (event) => {
     event.preventDefault();
-    setUserFilter({ 'filter_5': false, 'filter_4': false, 'filter_3': false, 'filter_2': false, 'filter_1': false });
+    setFilter({ '5': false, '4': false, '3': false, '2': false, '1': false });
   };
 
   return (
@@ -35,47 +36,3 @@ const Ratings = ({ratings, recommended, factors}) => {
   );
 };
 export default Ratings;
-// class Ratings extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       filter: {
-//         'filter_5': false,
-//         'filter_4': false,
-//         'filter_3': false,
-//         'filter_2': false,
-//         'filter_1': false
-//       }
-//     };
-//     this.handlefilter = this.handlefilter.bind(this);
-//     this.handleClear = this.handleClear.bind(this);
-//   }
-
-//   handlefilter(event, star) {
-//     event.preventDefault();
-//     const { filter } = this.state;
-//     filter[star] = !this.state.filter[star];
-//     this.setState({ filter });
-//   }
-//   handleClear(event) {
-//     event.preventDefault();
-//     this.setState({ filter: {
-//       'filter_5': false,
-//       'filter_4': false,
-//       'filter_3': false,
-//       'filter_2': false,
-//       'filter_1': false
-//     }});
-//   }
-
-//   render() {
-//     return (
-//       <RatingContainer>
-//         <RatingAndStar rate={ this.props.ratings } meta={this.props}/>
-//         <Votes recommended={ this.props.recommended } rateNumber={ this.props.ratings } filter={this.state.filter} handleFilter={this.handlefilter} handleClear={this.handleClear}/>
-//         <Factors factors={ this.props.factors }/>
-//       </RatingContainer>
-//     );
-//   }
-// }
-

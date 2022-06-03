@@ -536,6 +536,4 @@ const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleS
     </Overlay>
   );
 };
-
 export default ReviewForm;
-

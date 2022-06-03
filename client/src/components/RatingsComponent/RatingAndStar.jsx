@@ -29,5 +29,4 @@ const RatingAndStar = ({ rate, meta }) => {
     );
   }
 };
-
 export default RatingAndStar;
