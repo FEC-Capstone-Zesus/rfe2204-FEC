@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import StarRating from '../StarRating.jsx';
 
 const ReviewEntryContainer = styled.div`
@@ -74,19 +72,19 @@ const Img = styled.img`
 `;
 
 const ImgModal = styled.div`
-  display: none; 
-  position: fixed; 
-  z-index: 1; 
-  padding-top: 100px; 
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.9); 
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9);
 `;
-  
+
 const Photo = ({photos}) => {
   const handleClick = (e) => {
     e.preventDefault();
@@ -136,7 +134,7 @@ const ReviewEntry = ({review, handleHelpful, handleReport, userFilter}) => {
     var date = (new Date(review.date)).toString().slice(4, 16);
     return (
       <>
-        {!report ? 
+        {!report ?
         <ReviewEntryContainer>
           <Star><StarRating ratings={review.rating}/></Star>
           <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
@@ -148,7 +146,7 @@ const ReviewEntry = ({review, handleHelpful, handleReport, userFilter}) => {
 
             {review.recommend ? <RecommendContainer><FontAwesomeIcon icon={faCheck} /> I recommend this product</RecommendContainer> : null}
 
-            {review.photos ? 
+            {review.photos ?
             <PhotoContainer>
               <Photo photos={review.photos}></Photo>
             </PhotoContainer>
