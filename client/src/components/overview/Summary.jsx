@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const SummaryDiv = styled.div`
+  width: 59rem;
   margin-top: -2rem;
   display: flex;
   justify-content: space-between;
