@@ -12,9 +12,7 @@ const CardImage = styled.img`
 
 const Outfitcard = ({ item, currentProduct, metaData, setOutfit, outfit, outfitStyle, className }) => {
 
-  console.log(className);
-  console.log(metaData);
-
+  console.log({item})
   const Card_body = styled.li `
   display: flex;
   flex-direction: column;
@@ -35,11 +33,11 @@ const Outfitcard = ({ item, currentProduct, metaData, setOutfit, outfit, outfitS
   }
   `
   return (
-    <Card_body onClick = {() => console.log('hello')}>
-      {outfitStyle !== undefined ? <CardImage src = {outfitStyle}/> : null}
-        <p>{item.name}
-        <br></br>{item.category}
-        <br></br>{item.default_price}
+    <Card_body onClick = {() => retrieve(`${item}`)}>
+      {item.photo !== undefined ? <CardImage src = {item.photo}/> : null}
+        <p>{item.productInfo.currentProduct.name}
+        <br></br>{item.productInfo.currentProduct.category}
+        <br></br>{item.productInfo.currentProduct.default_price}
         <br></br><StarRating ratings = {metaData}/>
         </p>
     </Card_body>

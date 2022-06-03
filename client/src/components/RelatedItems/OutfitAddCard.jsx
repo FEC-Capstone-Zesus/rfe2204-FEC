@@ -32,11 +32,11 @@ const OutfitCardAdd = ({ item, currentProduct, metaData, setOutfit, outfit, setO
   `
 console.log(styles)
 
+console.log([...outfit, {photo: styles.results[0].photos[0].thumbnail_url, add: false, id: currentProduct.id }])
+
 let outfitAdd = function() {
-  if(!outfit.includes(currentProduct))
-  {setOutfit(outfit => [...outfit, currentProduct])}
-  if(!outfitStyle.includes(styles.results[0].photos[0].thumbnail_url))
-  {setOutfitStyle(outfitStyle => [...outfitStyle, styles.results[0].photos[0].thumbnail_url])}
+  if(!Object.values(outfit).includes(currentProduct.id)) {
+  setOutfit([...outfit, {photo: styles.results[0].photos[0].thumbnail_url, add: false, id: currentProduct.id, productInfo: {currentProduct}}])}
 };
 
 

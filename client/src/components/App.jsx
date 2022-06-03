@@ -154,9 +154,9 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
             <HeadlineSpan underline={true}>NEW PRODUCT HIGHLIGHT</HeadlineSpan>
           </Headline>
           <OverviewContainer />
-          <RelateditemsContainer />
           <SubOverview>
           <Summary product={product} />
+          <RelateditemsContainer />
           <a id='allRatings'>
             <RatingsReviewsContainer/>
           </a>

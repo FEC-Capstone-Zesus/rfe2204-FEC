@@ -19,7 +19,7 @@ const Carouselinner = styled.div `
 //transform: ${trackMove ? 'translateX(-1040'}
 
 const Cardcontainer = styled.ul`
-  width: 254px;
+  width: 260px;
   flex-shrink: 0;
   display: flex;
   height: 400px;
@@ -29,6 +29,10 @@ const Cardcontainer = styled.ul`
   &: hover{
     transform: scale(1.02)
   };
+`
+const Wrapper = styled.div`
+display: flex;
+flex-direction: column;
 `
 
 const Next_Button = styled.button `
@@ -55,13 +59,10 @@ left: -30px;
 cursor: pointer;
 `
 
-const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) => {
+const Relateditems = ({product, reviews, styles, metaData, relatedProducts, setOutfit, outfit}) => {
 
-  const [outfit, setOutfit] = useState(['add']);
-  const [outfitStyle, setOutfitStyle] = useState([]);
   const [trackMove, settrackMove] = useState(0);
   const [outfitTrackMove, setOutfitTrackMove] = useState(0);
-
   const ref = useRef(null);
 
   const Carouseltrack = styled.div`
@@ -76,11 +77,8 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
 `
 
   let relatedProductsUnique = relatedProducts.filter((v, i, a) => a.indexOf(v) === i)
-  console.log(relatedProductsUnique)
 
   const trackMover = useCallback((input) => {
-    console.log(input)
-    console.log(ref.current.offsetWidth)
     if(input === 'next') {
       settrackMove((prevState) => prevState += 1);
     } else {
@@ -97,7 +95,7 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
   }, [outfitTrackMove]);
 
   return (
-    <div className ="wrapper">
+    <Wrapper>
       <Carouselcontainer ref = {ref}>
       <Carouselinner>
       <Carouseltrack>
@@ -107,42 +105,33 @@ const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) 
       </Carouselinner>
         <nav>
         {relatedProductsUnique.length > 4 && trackMove > 0 ? <Prev_Button onClick = {() => trackMover('prev')}>prev</Prev_Button> : null}
-        {relatedProductsUnique.length > 4 && trackMove <= 0 ? <Next_Button onClick = {() => trackMover('next')}>next</Next_Button> : null}
+        {relatedProductsUnique.length > 4 && trackMove < (Math.floor(relatedProductsUnique.length/4)) ? <Next_Button onClick = {() => trackMover('next')}>next</Next_Button> : null}
         </nav>
       </Carouselcontainer>
 
       <Carouselcontainer ref = {ref}>
       <Carouselinner>
       <CarouselOutfittrack>
-      {outfit.map((item,index) => item === 'add' ? <Cardcontainer><OutfitAddCard
+      {outfit.map((item,index) => item.add ? <Cardcontainer><OutfitAddCard
           key = {index}
-          outfitStyle = {outfitStyle}
           currentProduct = {product}
           setOutfit = {setOutfit}
           outfit = {outfit}
-          styles = {styles}
-          setOutfitStyle = {setOutfitStyle}/> </Cardcontainer> :
+          styles = {styles}/> </Cardcontainer> :
           <Cardcontainer><Outfitcard key = {index}
           item = {item}
           metaData = {metaData}
           outfit = {outfit[index]}
-          outfitStyle = {outfitStyle}
+          outfitStyle = {outfit.outfitStyle}
           /></Cardcontainer>)}
       </CarouselOutfittrack>
       </Carouselinner>
         <nav>
-        {outfit.length > 4 && trackMove > 0 ? <Prev_Button onClick = {() => outfitTrackMover('prev')}>prev</Prev_Button> : null}
-        {outfit.length > 4 && trackMove <= 0 ? <Next_Button onClick = {() => outfitTrackMover('next')}>next</Next_Button> : null}
+        {outfit.length > 4 && outfitTrackMove > 0 ? <Prev_Button onClick = {() => outfitTrackMover('prev')}>prev</Prev_Button> : null}
+        {outfit.length > 4 && outfitTrackMove < (Math.floor(outfit.length/4)) ? <Next_Button onClick = {() => outfitTrackMover('next')}>next</Next_Button> : null}
         </nav>
       </Carouselcontainer>
-
-      {/*<div className ='outfitRow'>
-      <Next_Button><Prev_Arrow src = '../assets/toppng.com-file-scroll-right-arrow-ico-554x981.png' onClick = {handleOutfitCardTransitionReverse}/></Next_Button>
-        <CardWrapper className = 'outfitRow'>
-        </CardWrapper>
-        <Next_Button><Next_Arrow src = '../assets/toppng.com-file-scroll-right-arrow-ico-554x981.png' onClick = {handleOutfitCardTransition}/></Next_Button>
-  </div>*/}
-    </div>
+    </Wrapper>
   );
 };
 
