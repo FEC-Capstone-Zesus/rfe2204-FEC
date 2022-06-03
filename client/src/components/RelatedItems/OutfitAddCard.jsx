@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import useAxios from 'axios-hooks'
 import styled from "styled-components";
 
-const OutfitCardAdd = ({ item, currentProduct, metaData, setOutfit, outfit, setOutfitStyle, styles, outfitStyle, className }) => {
+const OutfitCardAdd = ({ item, currentProduct, metaData, setOutfit, outfit, setOutfitStyle, styles, outfitStyle, className, key }) => {
 
   const CardImage = styled.img`
   height:12rem;
@@ -30,6 +30,7 @@ const OutfitCardAdd = ({ item, currentProduct, metaData, setOutfit, outfit, setO
     transform:scale(1.02);
   }
   `
+  console.log(key)
 
 let outfitAdd = function() {
   if(!Object.values(outfit).includes(currentProduct.id)) {
