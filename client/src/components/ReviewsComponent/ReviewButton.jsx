@@ -20,5 +20,4 @@ const ReviewButton = ({showMoreReviewButton, handleOpenForm, load}) => {
     </ButtonContainer>
   );
 };
-
 export default ReviewButton;

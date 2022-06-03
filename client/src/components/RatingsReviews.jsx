@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Ratings from './RatingsComponent/Ratings.jsx';
 import Reviews from './ReviewsComponent/Reviews.jsx';
 import styled from 'styled-components';
@@ -21,31 +21,27 @@ const H4 = styled.h4`
   padding-left: 4%;
 `;
 
-
-class RatingsReviews extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+const RatingsReviews = ({product, reviews, metaData}) => {
+  const [userFilter, setUserFilter] = useState({});
+  const handleUserSelect = (filter) => {
+    setUserFilter(filter);
   }
+  
+  return (
+    <>
+      <H4>Ratings & Reviews</H4>
+      <RatingsReviewsContainer>
 
-  render () {
-    return (
-      <>
-        <H4>Ratings & Reviews</H4>
-        <RatingsReviewsContainer>
+        <RatingsContainer>
+          <Ratings ratings={metaData.ratings} recommended={metaData.recommended} factors={metaData.characteristics} handleUserSelect={handleUserSelect}/>
+        </RatingsContainer>
 
-          <RatingsContainer>
-            <Ratings ratings={this.props.metaData.ratings} recommended={this.props.metaData.recommended} factors={this.props.metaData.characteristics}/>
-          </RatingsContainer>
+        <ReviewsContainer>
+          <Reviews reviews={reviews} productName={product.name} factors={metaData.characteristics} userFilter={userFilter}/>
+        </ReviewsContainer>
 
-          <ReviewsContainer>
-            <Reviews reviews={this.props.reviews} productName={this.props.product.name} factors={this.props.metaData.characteristics}/>
-          </ReviewsContainer>
-
-        </RatingsReviewsContainer>
-      </>
-    );
-  }
-}
-
+      </RatingsReviewsContainer>
+    </>
+  );
+};
 export default RatingsReviews;
