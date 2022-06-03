@@ -21,31 +21,48 @@ const H4 = styled.h4`
   padding-left: 4%;
 `;
 
+const RatingsReviews = ({product, reviews, metaData}) => {
+  return (
+    <>
+      <H4>Ratings & Reviews</H4>
+      <RatingsReviewsContainer>
 
-class RatingsReviews extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+        <RatingsContainer>
+          <Ratings ratings={metaData.ratings} recommended={metaData.recommended} factors={metaData.characteristics}/>
+        </RatingsContainer>
 
-  render () {
-    return (
-      <>
-        <H4>Ratings & Reviews</H4>
-        <RatingsReviewsContainer>
+        <ReviewsContainer>
+          <Reviews reviews={reviews} productName={product.name} factors={metaData.characteristics}/>
+        </ReviewsContainer>
 
-          <RatingsContainer>
-            <Ratings ratings={this.props.metaData.ratings} recommended={this.props.metaData.recommended} factors={this.props.metaData.characteristics}/>
-          </RatingsContainer>
-
-          <ReviewsContainer>
-            <Reviews reviews={this.props.reviews} productName={this.props.product.name} factors={this.props.metaData.characteristics}/>
-          </ReviewsContainer>
-
-        </RatingsReviewsContainer>
-      </>
-    );
-  }
-}
-
+      </RatingsReviewsContainer>
+    </>
+  );
+};
 export default RatingsReviews;
+
+// class RatingsReviews extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {};
+//   }
+
+//   render () {
+//     return (
+//       <>
+//         <H4>Ratings & Reviews</H4>
+//         <RatingsReviewsContainer>
+
+//           <RatingsContainer>
+//             <Ratings ratings={this.props.metaData.ratings} recommended={this.props.metaData.recommended} factors={this.props.metaData.characteristics}/>
+//           </RatingsContainer>
+
+//           <ReviewsContainer>
+//             <Reviews reviews={this.props.reviews} productName={this.props.product.name} factors={this.props.metaData.characteristics}/>
+//           </ReviewsContainer>
+
+//         </RatingsReviewsContainer>
+//       </>
+//     );
+//   }
+// }

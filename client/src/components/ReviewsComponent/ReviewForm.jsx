@@ -134,7 +134,7 @@ const ReviewSummary = ({Product, ProductId, OverAllRating, Recommend, SizeRating
   );
 }
 
-const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleSubmit, created }) => {
+const ReviewForm = ({ productName, product_id, factors, handleCloseForm, handleSubmit }) => {
 
   const handleNextButton = (event) => {
     event.preventDefault();
