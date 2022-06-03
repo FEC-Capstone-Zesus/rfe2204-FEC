@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+const StarRatingContainer = styled.span`
+  &:hover {
+    cursor: default;
+  }
+`
 const StarFraction = styled.span`
  display: block;
  overflow: hidden;
@@ -32,7 +37,7 @@ const StarRating = ( { ratings } ) => {
   }
 
   return (
-    <>
+    <StarRatingContainer>
       <span aria-label={`Rated ${ariaRating} out of 5 stars.`}>{('★').repeat(Math.floor(averageRating))}</span>
       <span style={{ position: 'absolute' }}>
         <StarFraction starFraction={starFraction}>
@@ -40,7 +45,7 @@ const StarRating = ( { ratings } ) => {
         </StarFraction>
       </span>
       <span>{('☆').repeat(5 - Math.floor(averageRating))}</span>
-    </>
+    </StarRatingContainer>
   );
 }
 

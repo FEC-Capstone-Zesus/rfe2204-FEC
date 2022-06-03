@@ -1,5 +1,7 @@
 # Logs
 logs
+config.js
+*.pem
 *.log
 *bundle.js
 *bundle.js.map
