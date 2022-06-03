@@ -12,24 +12,15 @@ const CardImage = styled.img`
 
 const Outfitcard = ({ item, currentProduct, metaData, setOutfit, outfit, outfitStyle, className }) => {
 
-  console.log(className);
-  console.log(metaData);
-
-  const Card_body = styled.li`
-  background: #ffffff;
-  border-radius: 2px;
-  border: 1px solid #eeeeee;
-  box-shadow: ${className === 'active' ? '0 30px 20px rgba(0, 0, 0, 0.2)' : '0 10px 5px rgba(0, 0, 0, 0.1)'};
-  overflow: auto;
-  width: 200px;
-  height: 300px;
+  console.log({item})
+  const Card_body = styled.li `
   display: flex;
   flex-direction: column;
-  justify-content: column;
-  cursor: pointer;
-  transition: all 0.75s ease;
-  opacity: ${className === 'active' ? 1 : 0};
-  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
   `
   const Button_Star = styled.button`
   position: absolute;
@@ -42,11 +33,11 @@ const Outfitcard = ({ item, currentProduct, metaData, setOutfit, outfit, outfitS
   }
   `
   return (
-    <Card_body onClick = {() => console.log('hello')}>
-      {outfitStyle !== undefined ? <CardImage src = {outfitStyle}/> : null}
-        <p>{item.name}
-        <br></br>{item.category}
-        <br></br>{item.default_price}
+    <Card_body onClick = {() => retrieve(`${item}`)}>
+      {item.photo !== undefined ? <CardImage src = {item.photo}/> : null}
+        <p>{item.productInfo.currentProduct.name}
+        <br></br>{item.productInfo.currentProduct.category}
+        <br></br>{item.productInfo.currentProduct.default_price}
         <br></br><StarRating ratings = {metaData}/>
         </p>
     </Card_body>

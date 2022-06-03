@@ -1,152 +1,137 @@
 import Relatedcard from './Relatedcard.jsx';
 import Outfitcard from './Outfitcard.jsx';
 import OutfitAddCard from './OutfitAddCard.jsx';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled from "styled-components";
 
-const CardWrapper = styled.ul`
-  list-style: none;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  height: 265px;
-  width: 200px;
-  margin: 0px;
-  align-items: center;
+const Carouselcontainer = styled.div `
+  width: 1040px;
+  margin: 50px auto;
+  min-height: 200px;
+  position: relative;
 `
-const RelatedWrapper = styled.div`
+const nav = styled.div `
+
+`
+const Carouselinner = styled.div `
+  overflow: hidden;
+`
+//transform: ${trackMove ? 'translateX(-1040'}
+
+const Cardcontainer = styled.ul`
+  width: 260px;
+  flex-shrink: 0;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  height: 400px;
+  padding-right: 15px;
+  box-sizing: border-box;
+  transition: transform 0.2s;
+  &: hover{
+    transform: scale(1.02)
+  };
+`
+const Wrapper = styled.div`
+display: flex;
+flex-direction: column;
 `
 
 const Next_Button = styled.button `
-outline: none;
-border: none;
+width: 60px;
+height: 60px;
+border-radius: 50%;
+border: 1px solid #aaa;
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+right: -30px;
+cursor: pointer;
 `
-const Prev_Arrow = styled.img `
-max-width:100%;
-max-height:100%;
--webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
+
+const Prev_Button = styled.button `
+width: 60px;
+height: 60px;
+border-radius: 50%;
+border: 1px solid #aaa;
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+left: -30px;
+cursor: pointer;
+`
+
+const Relateditems = ({product, reviews, styles, metaData, relatedProducts, setOutfit, outfit}) => {
+
+  const [trackMove, settrackMove] = useState(0);
+  const [outfitTrackMove, setOutfitTrackMove] = useState(0);
+  const ref = useRef(null);
+
+  const Carouseltrack = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  transform:  translateX(-${trackMove === 0 ? 0 : trackMove * ref.current.offsetWidth}px);
+  transition: transform 0.3s;
+`
+  const CarouselOutfittrack = styled.div`
+  display: flex;
+  transform:  translateX(-${outfitTrackMove === 0 ? 0 : outfitTrackMove * 1040}px);
+  transition: transform 0.3s;
 `
 
-const Next_Arrow = styled.img `
-max-width:100%;
-max-height:100%;
-`
+  let relatedProductsUnique = relatedProducts.filter((v, i, a) => a.indexOf(v) === i)
 
-const Relateditems = ( {product, reviews, styles, metaData, relatedProducts } ) => {
-
-  const [indexes, setIndexes] = useState({
-    previousIndex: 0,
-    currentIndex: 0,
-    nextIndex: 1
-  });
-
-  const [outfitIndexes, setOutfitIndexes] = useState({
-    previousIndex: 0,
-    currentIndex: 0,
-    nextIndex: 1
-  });
-
-  const [outfit, setOutfit] = useState(['add', 'add']);
-  const [outfitStyle, setOutfitStyle] = useState([]);
-
-  const handleCardTransition = useCallback(() => {
-    if (indexes.currentIndex === relatedProducts.length - 1) {
-      setIndexes({
-        previousIndex: relatedProducts.length - 1,
-        currentIndex: 0,
-        nextIndex: 1,
-      });
+  const trackMover = useCallback((input) => {
+    if(input === 'next') {
+      settrackMove((prevState) => prevState += 1);
     } else {
-      setIndexes((prevState) => ({
-        previousIndex: prevState.currentIndex,
-        currentIndex: prevState.currentIndex + 1,
-        nextIndex: prevState.currentIndex + 2 === relatedProducts.length ? 0 : prevState.currentIndex + 2,
-      }));
+      settrackMove((prevState) => prevState -= 1);
     }
-  }, [indexes.currentIndex]);
+  }, [trackMove]);
 
-  const handleOutfitCardTransition = useCallback(() => {
-    if (outfitIndexes.currentIndex === outfit.length - 1) {
-      setOutfitIndexes({
-        previousIndex: outfit.length - 1,
-        currentIndex: 0,
-        nextIndex: 1,
-      });
+  const outfitTrackMover = useCallback((input) => {
+    if(input === 'next') {
+      setOutfitTrackMove((prevState) => prevState += 1);
     } else {
-      setOutfitIndexes((prevState) => ({
-        previousIndex: prevState.currentIndex,
-        currentIndex: prevState.currentIndex + 1,
-        nextIndex: prevState.currentIndex + 2 === outfit.length ? 0 : prevState.currentIndex + 2,
-      }));
+      setOutfitTrackMove((prevState) => prevState -= 1);
     }
-  }, [outfitIndexes.currentIndex]);
+  }, [outfitTrackMove]);
 
-  const handleCardTransitionReverse = useCallback(() => {
-      setIndexes((prevState) => ({
-        previousIndex: prevState.currentIndex,
-        currentIndex: prevState.currentIndex - 1 < 0 ? relatedProducts.length - 1 : prevState.currentIndex - 1,
-        nextIndex: prevState.currentIndex - 2 < 0 ? (prevState.currentIndex - 1) + (relatedProducts.length - 1) : prevState.currentIndex - 2,
-      }));
-  }, [indexes.currentIndex]);
-
-  const handleOutfitCardTransitionReverse = useCallback(() => {
-    setOutfitIndexes((prevState) => ({
-      previousIndex: prevState.currentIndex,
-      currentIndex: prevState.currentIndex - 1 < 0 ? outfit.length - 1 : prevState.currentIndex - 1,
-      nextIndex: prevState.currentIndex - 2 < 0 ? (prevState.currentIndex - 1) + (outfit.length - 1) : prevState.currentIndex - 2,
-    }));
-  }, [outfitIndexes.currentIndex]);
-
-  let determineClasses = function(indexes, cardIndex) {
-    if (indexes.currentIndex === cardIndex) {
-      return 'active';
-    } else if (indexes.nextIndex === cardIndex) {
-      return 'next';
-    } else if (indexes.previousIndex === cardIndex) {
-      return 'prev';
-    }
-    return 'inactive';
-  };
   return (
-    <div className ="wrapper">
-      <RelatedWrapper className ='relatedRow'>
-        <Next_Button><Prev_Arrow src = '../assets/toppng.com-file-scroll-right-arrow-ico-554x981.png' onClick = {handleCardTransitionReverse}/></Next_Button>
-        <CardWrapper>
-          {relatedProducts.map((item, index) => <Relatedcard key = {index} className = {`${determineClasses(indexes,index)}`} item = {item} currentProduct = {product} metaData = {metaData}/>)}
-        </CardWrapper>
-        <Next_Button><Next_Arrow src = '../assets/toppng.com-file-scroll-right-arrow-ico-554x981.png' onClick = {handleCardTransition}/></Next_Button>
-      </RelatedWrapper>
-      <RelatedWrapper className ='outfitRow'>
-      <Next_Button><Prev_Arrow src = '../assets/toppng.com-file-scroll-right-arrow-ico-554x981.png' onClick = {handleOutfitCardTransitionReverse}/></Next_Button>
-        <CardWrapper className = 'outfitRow'>
-          {outfit.map((item,index) => item === 'add' ? <OutfitAddCard
+    <Wrapper>
+      <Carouselcontainer ref = {ref}>
+      <Carouselinner>
+      <Carouseltrack>
+          {relatedProductsUnique ? relatedProductsUnique.map((item, index) => <Cardcontainer><Relatedcard key = {index} item = {item} currentProduct = {product} metaData = {metaData}/></Cardcontainer>)
+          : <p>related products not found</p> }
+      </Carouseltrack>
+      </Carouselinner>
+        <nav>
+        {relatedProductsUnique.length > 4 && trackMove > 0 ? <Prev_Button onClick = {() => trackMover('prev')}>prev</Prev_Button> : null}
+        {relatedProductsUnique.length > 4 && trackMove < (Math.floor(relatedProductsUnique.length/4)) ? <Next_Button onClick = {() => trackMover('next')}>next</Next_Button> : null}
+        </nav>
+      </Carouselcontainer>
+
+      <Carouselcontainer ref = {ref}>
+      <Carouselinner>
+      <CarouselOutfittrack>
+      {outfit.map((item,index) => item.add ? <Cardcontainer><OutfitAddCard
           key = {index}
-          outfitStyle = {outfitStyle}
           currentProduct = {product}
           setOutfit = {setOutfit}
           outfit = {outfit}
-          styles = {styles}
-          setOutfitStyle = {setOutfitStyle}
-          className = {`${determineClasses(outfitIndexes,index)}`}/> :
-          <Outfitcard key = {index}
+          styles = {styles}/> </Cardcontainer> :
+          <Cardcontainer><Outfitcard key = {index}
           item = {item}
           metaData = {metaData}
           outfit = {outfit[index]}
-          outfitStyle = {outfitStyle}
-          className = {`${determineClasses(outfitIndexes,index)}`}
-          />)}
-        </CardWrapper>
-        <Next_Button><Next_Arrow src = '../assets/toppng.com-file-scroll-right-arrow-ico-554x981.png' onClick = {handleOutfitCardTransition}/></Next_Button>
-      </RelatedWrapper>
-    </div>
+          outfitStyle = {outfit.outfitStyle}
+          /></Cardcontainer>)}
+      </CarouselOutfittrack>
+      </Carouselinner>
+        <nav>
+        {outfit.length > 4 && outfitTrackMove > 0 ? <Prev_Button onClick = {() => outfitTrackMover('prev')}>prev</Prev_Button> : null}
+        {outfit.length > 4 && outfitTrackMove < (Math.floor(outfit.length/4)) ? <Next_Button onClick = {() => outfitTrackMover('next')}>next</Next_Button> : null}
+        </nav>
+      </Carouselcontainer>
+    </Wrapper>
   );
 };
 
