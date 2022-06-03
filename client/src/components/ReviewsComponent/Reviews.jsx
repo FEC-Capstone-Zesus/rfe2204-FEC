@@ -13,26 +13,26 @@ const ReviewContainer = styled.div`
 `;
 
 const Reviews = ({reviews, productName, factors, userFilter}) => {
-  const [helpful, setHelpful] = useState([]);
-  const [newest, setNewest] = useState([]);
-  const [relevant, setRelevant] = useState([]);
+  const [helpful, setHelpful] = useState('');
+  const [newest, setNewest] = useState('');
+  const [relevant, setRelevant] = useState('');
   const [openForm, setOpenForm] = useState(false);
   const [reviewList, setReviewList] = useState(reviews.results);
   const [reviewsCount, setReviewsCount] = useState(reviews.results.length);
 
   const handleSort = (sort) => {
     if ((sort === 'helpful' && helpful.length > 0) || (sort === 'newest' && newest.length > 0) || (sort === 'relevant' && relevant.length > 0)) {
-      if (sort === 'helpful') { setReviewList(helpful) }
-      else if (sort === 'newest') { setReviewList(newest) }
-      else if (sort === 'relevant') { setReviewList(relevant) };
+      if (sort === 'helpful') { setReviewList(JSON.parse(JSON.stringify(helpful))) }
+      else if (sort === 'newest') { setReviewList(JSON.parse(JSON.stringify(newest))) }
+      else if (sort === 'relevant') { setReviewList(JSON.parse(JSON.stringify(relevant))) };
     } else {
       axios
       .get(`/reviews?product_id=${reviews.product}&page=1&count=50&sort=${sort}`)
       .then((response) => {
-        setReviewList(response.data.results);
-        if (sort === 'helpful') { setHelpful(response.data.results) }
-        else if (sort === 'newest') { setNewest(response.data.results) }
-        else if (sort === 'relevant') { setRelevant(response.data.results) };
+        if (sort === 'helpful') { setHelpful(JSON.parse(JSON.stringify(response.data.results))) }
+        else if (sort === 'newest') { setNewest(JSON.parse(JSON.stringify(response.data.results))) }
+        else if (sort === 'relevant') { setRelevant(JSON.parse(JSON.stringify(response.data.results))) };
+        setReviewList(JSON.parse(JSON.stringify(response.data.results)));
         setReviewsCount(response.data.results.length);
       });
     }
