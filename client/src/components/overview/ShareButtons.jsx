@@ -3,7 +3,7 @@ import styled from "styled-components";
 const SummaryDiv = styled.div`
   margin-top: -3.9rem;
   margin-right: 1rem;
-  width: 70rem;
+  width: 73rem;
   height: 5rem;
   display: flex;
   justify-content: space-between;

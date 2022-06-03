@@ -12,7 +12,7 @@ const ImagesStylesContainer = styled.div`
   display: flex;
 `
 const ImagesGalleryHoverDiv = styled.div`
-  width: 45rem;
+  width: 50rem;
   height: 35rem;
   &:hover {
     cursor: zoom-in;

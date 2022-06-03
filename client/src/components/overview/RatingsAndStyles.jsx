@@ -67,7 +67,7 @@ const StylesContainer = styled.div`
   height: ${({length}) => (length > 8 ? '17rem' : '13rem')};
 `
 const AddToCart = styled.button`
-  width: 24.3rem;
+  width: 21.8rem;
   font-weight: 500;
   margin-top: 0.5rem;
   display: flex;
@@ -234,20 +234,17 @@ const RatingsAndStyles = ( { product,
                 style={{ width: 16 + 'rem' }}
                 onChange={(e) => changeSelect(e)}
                 disabled={!inStock}>
+          {inStock ? <option value='selectSize' >SELECT SIZE</option> : <option value='outOfStock' >OUT OF STOCK</option> }
           {inStock ?
-          <>
-            <option value='selectSize' >SELECT SIZE</option>
-            {skusArray.map((sku, i) => {
+            skusArray.map((sku, i) => {
               if (sku[1].quantity) {
                 return (
                   <option key={sku[0]} value={JSON.stringify(sku)} >{sku[1].size}</option>
                 )
               }
-            })}
-          </>
-          : <option value='outOfStock' >OUT OF STOCK</option> }
+            })
+          : null }
         </select>
-        &nbsp;
         &nbsp;
         &nbsp;
         {size ?
@@ -255,14 +252,14 @@ const RatingsAndStyles = ( { product,
                 data-testid='qty'
                 id='qty'
                 onChange={(e) => changeSelect(e)}
-                style={{ width: 7 + 'rem' }}>
+                style={{ width: 5 + 'rem' }}>
           <option value='Select Qty' >1</option>
           {Array.from(Array(qtySelect).keys()).map(x => x + 1).slice(1, 15).map((qty) =>
           <option key={qty} value={qty} >{qty}</option>)}
         </select> :
         <select name='qty'
                 disabled={true}
-                style={{ width: 7 + 'rem' }}>
+                style={{ width: 5 + 'rem' }}>
           <option value='Select Qty' >-</option>
         </select>}
 
