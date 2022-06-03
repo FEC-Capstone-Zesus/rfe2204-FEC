@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { updateCarousel, horizontalClick } from './helperFuncs.js';
 
 const MainImage = styled.div`
-  width: 45rem;
+  width: 50rem;
   height: 35rem;
   background: rgba(226,226,226,100);
   background-image: ${({currentImage}) => (currentImage ? `url(${currentImage})` : "url('')")};
@@ -62,7 +62,7 @@ const HorizontalButtons = styled.div`
   float: right;
   display: flex;
   justify-content: space-between;
-  width: 40rem;
+  width: 42rem;
   padding-right: 3rem;
   padding-top: 16rem;
 `
@@ -72,7 +72,6 @@ const ArrowContainer = styled.div`
 `
 const ArrowLeft = styled.div`
   background: rgba(226,226,226,0.5);
-  margin-left: 3rem;
   padding-left: 1rem;
   width: 3rem;
   font-size: 30px;
