@@ -30,9 +30,6 @@ const OutfitCardAdd = ({ item, currentProduct, metaData, setOutfit, outfit, setO
     transform:scale(1.02);
   }
   `
-console.log(styles)
-
-console.log([...outfit, {photo: styles.results[0].photos[0].thumbnail_url, add: false, id: currentProduct.id }])
 
 let outfitAdd = function() {
   if(!Object.values(outfit).includes(currentProduct.id)) {
