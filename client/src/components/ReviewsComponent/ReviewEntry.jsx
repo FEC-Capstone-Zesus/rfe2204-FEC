@@ -85,13 +85,17 @@ const ImgModal = styled.div`
   background-color: rgba(0,0,0,0.9);
 `;
 
+<<<<<<< HEAD
 const Photo = ({photos}) => {
+=======
+const Photo = ({ photos }) => {
+>>>>>>> a0a7ffdf46bedba2f17c1c4cbc44c5f185f0463b
   const handleClick = (e) => {
     e.preventDefault();
   };
   return (
     <>
-      {photos.map((photo, index) => <Img src={photo.url} alt="Review Photo" key={index} onClick={(e)=>handleClick(e)}/>)}
+      {photos.map((photo, index) => <Img src={photo.url} alt="Review Photo" key={index} onClick={(e) => handleClick(e)} />)}
     </>
   );
 };
@@ -112,9 +116,10 @@ const ResponseContainer = styled.div`
   background-color: #d3d3d3;
 `;
 
-const ReviewEntry = ({review, handleHelpful, handleReport, userFilter}) => {
+const ReviewEntry = ({ review, handleHelpful, handleReport}) => {
   const [helpful, setHelpful] = useState(false);
   const [report, setReport] = useState(false);
+  //const [showReviewTile, setShowReviewTile] = useState(userFilter);
 
   const handleHelpfulClick = (event, review_id) => {
     if (!helpful) {
@@ -134,40 +139,37 @@ const ReviewEntry = ({review, handleHelpful, handleReport, userFilter}) => {
     var date = (new Date(review.date)).toString().slice(4, 16);
     return (
       <>
-        {!report ?
         <ReviewEntryContainer>
-          <Star><StarRating ratings={review.rating}/></Star>
+          <Star><StarRating ratings={review.rating} /></Star>
           <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
           <ReviewTitle>{review.summary}</ReviewTitle>
           <ReviewContent>
             <ContentContainer>
               {review.body}
             </ContentContainer>
-
-            {review.recommend ? <RecommendContainer><FontAwesomeIcon icon={faCheck} /> I recommend this product</RecommendContainer> : null}
-
+            {review.recommend ? <RecommendContainer>&#x2713; I recommend this product</RecommendContainer> : null}
             {review.photos ?
-            <PhotoContainer>
-              <Photo photos={review.photos}></Photo>
-            </PhotoContainer>
-            : null}
+              <PhotoContainer>
+                <Photo photos={review.photos}></Photo>
+              </PhotoContainer>
+              : null}
             {review.response ?
-            <ResponseContainer>
-              Response:
-              &nbsp;
-              {review.response}
-            </ResponseContainer>
-            : null}
+              <ResponseContainer>
+                Response:
+                &nbsp;
+                {review.response}
+              </ResponseContainer>
+              : null}
           </ReviewContent>
           <ReviewButtonContainer>
             Helpful?
-            <ReviewButton onClick={(event)=>handleHelpfulClick(event, review.review_id)}>Yes</ReviewButton>
-            ({helpful? review.helpfulness + 1 : review.helpfulness})
+            <ReviewButton onClick={(event) => handleHelpfulClick(event, review.review_id)}>Yes</ReviewButton>
+            ({helpful ? review.helpfulness + 1 : review.helpfulness})
             |
-            <ReviewButton onClick={(event)=>handleReportClick(event, review.review_id)}>Report</ReviewButton>
+            {report ? <ReviewButton>REPORTED</ReviewButton> : <ReviewButton onClick={(event) => handleReportClick(event, review.review_id)}>Report</ReviewButton>}
           </ReviewButtonContainer>
-          <EndLine/>
-        </ReviewEntryContainer> : <div>REPORTED<EndLine/></div>}
+          <EndLine />
+        </ReviewEntryContainer>
       </>
     );
   }
