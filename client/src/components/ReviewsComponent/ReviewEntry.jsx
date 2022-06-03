@@ -85,11 +85,7 @@ const ImgModal = styled.div`
   background-color: rgba(0,0,0,0.9);
 `;
 
-<<<<<<< HEAD
-const Photo = ({photos}) => {
-=======
 const Photo = ({ photos }) => {
->>>>>>> a0a7ffdf46bedba2f17c1c4cbc44c5f185f0463b
   const handleClick = (e) => {
     e.preventDefault();
   };
