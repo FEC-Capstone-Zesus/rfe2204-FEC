@@ -117,6 +117,7 @@ const ResponseContainer = styled.div`
 const ReviewEntry = ({review, handleHelpful, handleReport, userFilter}) => {
   const [helpful, setHelpful] = useState(false);
   const [report, setReport] = useState(false);
+  const [showReviewTile, setShowReviewTile] = useState(userFilter);
 
   const handleHelpfulClick = (event, review_id) => {
     if (!helpful) {
@@ -131,47 +132,87 @@ const ReviewEntry = ({review, handleHelpful, handleReport, userFilter}) => {
       handleReport(event, review_id, false);
     }
   };
-
+  
   if (review) {
     var date = (new Date(review.date)).toString().slice(4, 16);
-    return (
-      <>
-        {!report ? 
-        <ReviewEntryContainer>
-          <Star><StarRating ratings={review.rating}/></Star>
-          <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
-          <ReviewTitle>{review.summary}</ReviewTitle>
-          <ReviewContent>
-            <ContentContainer>
-              {review.body}
-            </ContentContainer>
-
-            {review.recommend ? <RecommendContainer><FontAwesomeIcon icon={faCheck} /> I recommend this product</RecommendContainer> : null}
-
-            {review.photos ? 
-            <PhotoContainer>
-              <Photo photos={review.photos}></Photo>
-            </PhotoContainer>
-            : null}
-            {review.response ?
-            <ResponseContainer>
-              Response:
-              &nbsp;
-              {review.response}
-            </ResponseContainer>
-            : null}
-          </ReviewContent>
-          <ReviewButtonContainer>
-            Helpful?
-            <ReviewButton onClick={(event)=>handleHelpfulClick(event, review.review_id)}>Yes</ReviewButton>
-            ({helpful? review.helpfulness + 1 : review.helpfulness})
-            |
-            <ReviewButton onClick={(event)=>handleReportClick(event, review.review_id)}>Report</ReviewButton>
-          </ReviewButtonContainer>
-          <EndLine/>
-        </ReviewEntryContainer> : <div>REPORTED<EndLine/></div>}
-      </>
-    );
+    if (Object.keys(userFilter).length === 0) {
+      return (
+        <>
+          <ReviewEntryContainer>
+            <Star><StarRating ratings={review.rating}/></Star>
+            <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
+            <ReviewTitle>{review.summary}</ReviewTitle>
+            <ReviewContent>
+              <ContentContainer>
+                {review.body}
+              </ContentContainer>
+  
+              {review.recommend ? <RecommendContainer><FontAwesomeIcon icon={faCheck} /> I recommend this product</RecommendContainer> : null}
+  
+              {review.photos ? 
+              <PhotoContainer>
+                <Photo photos={review.photos}></Photo>
+              </PhotoContainer>
+              : null}
+              {review.response ?
+              <ResponseContainer>
+                Response:
+                &nbsp;
+                {review.response}
+              </ResponseContainer>
+              : null}
+            </ReviewContent>
+            <ReviewButtonContainer>
+              Helpful?
+              <ReviewButton onClick={(event)=>handleHelpfulClick(event, review.review_id)}>Yes</ReviewButton>
+              ({helpful? review.helpfulness + 1 : review.helpfulness})
+              |
+              {report ? <ReviewButton>REPORTED</ReviewButton> :<ReviewButton onClick={(event)=>handleReportClick(event, review.review_id)}>Report</ReviewButton>}
+            </ReviewButtonContainer>
+            <EndLine/>
+          </ReviewEntryContainer>
+        </>
+      );
+    } else {
+      return (
+        <>
+          {userFilter[review.rating] ?
+          <ReviewEntryContainer>
+            <Star><StarRating ratings={review.rating}/></Star>
+            <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
+            <ReviewTitle>{review.summary}</ReviewTitle>
+            <ReviewContent>
+              <ContentContainer>
+                {review.body}
+              </ContentContainer>
+  
+              {review.recommend ? <RecommendContainer><FontAwesomeIcon icon={faCheck} /> I recommend this product</RecommendContainer> : null}
+  
+              {review.photos ? 
+              <PhotoContainer>
+                <Photo photos={review.photos}></Photo>
+              </PhotoContainer>
+              : null}
+              {review.response ?
+              <ResponseContainer>
+                Response:
+                &nbsp;
+                {review.response}
+              </ResponseContainer>
+              : null}
+            </ReviewContent>
+            <ReviewButtonContainer>
+              Helpful?
+              <ReviewButton onClick={(event)=>handleHelpfulClick(event, review.review_id)}>Yes</ReviewButton>
+              ({helpful? review.helpfulness + 1 : review.helpfulness})
+              |
+              {report ? <ReviewButton>REPORTED</ReviewButton> :<ReviewButton onClick={(event)=>handleReportClick(event, review.review_id)}>Report</ReviewButton>}
+            </ReviewButtonContainer>
+            <EndLine/>
+          </ReviewEntryContainer> : null}
+        </>
+      );
+    }
   }
 };
 export default ReviewEntry;
