@@ -129,13 +129,17 @@ const App = ( { loading, product, reviews, styles, metaData, questions, relatedP
           <img style={{ marginTop: 1.3 + 'rem',
                         marginLeft: 0.5 + 'rem',
                         height: 3 + 'rem',
-                        width: 7.5 + 'rem' }}src='/assets/Zeus_Logo.png'></img>
+                        width: 7.5 + 'rem' }}
+                src='/assets/Zeus_Logo.png'
+                alt='Cool company logo'></img>
           <div>
             <SearchBar />
             <img style={{ marginTop: 2 + 'rem',
                           marginRight: 0.5 + 'rem',
                           height: 1.5 + 'rem',
-                          width: 1.5 + 'rem' }}src='/assets/magnifying_glass.png'></img>
+                          width: 1.5 + 'rem' }}
+                 src='/assets/magnifying_glass.png'
+                 alt='Search icon'></img>
           </div>
         </Header>
         {!loading ?
