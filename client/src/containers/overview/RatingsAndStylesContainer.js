@@ -10,7 +10,6 @@ const mapStateToProps = (state) => (
     styles: state.styles,
     currentStyle: state.currentStyle,
     slice: state.slice,
-    reviews: state.reviews,
     metaData: state.metaData
   }
 );

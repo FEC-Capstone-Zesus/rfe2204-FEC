@@ -6,7 +6,6 @@ import setSlice from "../../../actions/setSlice.js"
 
 const mapStateToProps = (state) => (
   {
-    currentStyle: state.currentStyle,
     mainImage: state.mainImage,
     imagesArray: state.imagesArray,
     slice: state.slice
