@@ -27,8 +27,8 @@ const StarRating = ( { ratings } ) => {
     }, 0) / total;
 
     starFraction = Math.max((Math.round((averageRating % 1) * 4) / 4) * 100, 0.01);
-    starFraction = starFraction === 75 ? 65 : starFraction;
-    starFraction = starFraction === 25 ? 35 : starFraction;
+    starFraction = starFraction === 75 ? 62 : starFraction;
+    starFraction = starFraction === 25 ? 40 : starFraction;
 
     ariaRating = Math.floor(averageRating) + (Math.round((averageRating % 1) * 4) / 4);
   } else if (typeof ratings === 'number') {
