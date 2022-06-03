@@ -23,6 +23,9 @@ const MainImageContainer = styled.div`
     cursor: ${({zoomed}) => (zoomed ? `url('/assets/minus-cursor.png') 0 8, auto` : 'crosshair')};
   }
 `
+MainImageContainer.defaultProps = {
+  alt: ''
+}
 const CarouselDiv = styled.div`
   height: 35rem;
   width: 5rem;
@@ -47,6 +50,9 @@ const ImageIcon = styled.div`
     cursor: pointer;
   }
 `
+ImageIcon.defaultProps = {
+  alt: ''
+}
 const CarouselArrow = styled.div`
   background: rgba(0,0,0,0.2);
   border: 0.1px solid;
@@ -205,6 +211,7 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
                   return (
                     <div key={icon.photo.thumbnail_url}>
                       <ImageIcon data-testid={icon.photo.thumbnail_url}
+                                 alt={`Image icon ${icon.value}`}
                                  onClick={() => updateCurrentImage(icon.photo)}>
                         <p style={{ marginTop: 7 + 'px' }}>{icon.value}</p>
                       </ImageIcon>
@@ -229,6 +236,7 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
       <MainImageContainer id='imageContainer'
                           data-testid='imageContainer'
                           zoomed={zoomed}
+                          alt="Main image of product"
                           onClick={(e) => zoom(e)}
                           onMouseMove={(e) => moveOnZoom(e)}
                           currentImage={mainImage ? mainImage : ''} >

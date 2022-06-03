@@ -11,6 +11,9 @@ const MainImage = styled.div`
   background-size: contain;
   background-position: center;
 `
+MainImage.defaultProps = {
+  alt: ''
+}
 const ImageCarousel = styled.div`
   background: rgba(226,226,226,0.7);
   position: absolute;
@@ -34,6 +37,9 @@ const ImageThumbnail = styled.div`
     cursor: pointer;
   }
 `
+ImageThumbnail.defaultProps = {
+  alt: ''
+}
 const CarouselArrow = styled.div`
   background: rgba(0,0,0,0.2);
   border: 0.1px solid;
@@ -116,7 +122,7 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
   }
 
   return (
-    <MainImage id='mainImage' currentImage={mainImage ? mainImage : ''}>
+    <MainImage id='mainImage' alt='Main image of product' currentImage={mainImage ? mainImage : ''}>
       <ImageCarousel data-testid='imageCarousel' onClick={(e) => stopParentOnClick(e)}>
         {imagesArray.length ? imagesArray.length > 7 ?
           <CarouselArrow id='carouselUp'
@@ -131,6 +137,7 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
                 return (
                   <div key={photo.thumbnail_url}>
                     <ImageThumbnail data-testid={photo.thumbnail_url}
+                                    alt={`Thumbnail image ${i + 1}`}
                                     onClick={(e) => updateCurrentImage(e, photo)}
                                     currentThumbnail={photo.thumbnail_url}/>
                     <ImageNoUnderline />

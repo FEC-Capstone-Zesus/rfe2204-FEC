@@ -46,6 +46,7 @@ const StyledImage = styled.img`
 `
 StyledImage.defaultProps = {
   src: '',
+  alt: ''
 };
 const CheckMark = styled.div`
   z-index: 1;
@@ -74,6 +75,7 @@ const AddToCart = styled.button`
 `
 AddToCart.defaultProps = {
   disabled: '',
+  alt: ''
 };
 
 var totalQty = 0;
@@ -82,7 +84,6 @@ const RatingsAndStyles = ( { product,
                              styles,
                              currentStyle,
                              slice,
-                             reviews,
                              metaData,
                              changeCurrentStyle,
                              changeMainImage,
@@ -171,7 +172,12 @@ const RatingsAndStyles = ( { product,
         </span>
         &nbsp;
         <span>
-          <a className='reviews' style={{ fontSize: 0.7 + 'em' }} href='#allRatings'>Read all {totalReviews} reviews</a>
+          <a className='reviews'
+             alt='Real all reviews'
+             style={{ fontSize: 0.7 + 'em' }}
+             href='#allRatings'>
+            Read all {totalReviews} reviews
+          </a>
         </span>
       </Ratings> :
       null }
@@ -208,7 +214,7 @@ const RatingsAndStyles = ( { product,
                                    id={style.name}
                                    onClick={() => updateCurrentStyle(style)}>
                     {style.style_id === currentStyle.style_id ? <CheckMark>✓</CheckMark> : null}
-                    <StyledImage src={style.photos[0].thumbnail_url} />
+                    <StyledImage alt={`Choose style ${style.name}`} src={style.photos[0].thumbnail_url} />
                   </StyledImageSpan>)
           })
         : null}
@@ -262,6 +268,7 @@ const RatingsAndStyles = ( { product,
 
       <AddToCart
               disabled={!inStock}
+              alt='Add to Cart Button'
               id='addToBag'
               onClick={(e) => addToCart(e)}>
         <p style={{ fontWeight: 'bold', top: 50 + '%' }}>ADD TO CART</p>

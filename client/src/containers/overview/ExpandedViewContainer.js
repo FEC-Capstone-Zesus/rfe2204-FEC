@@ -6,7 +6,6 @@ import toggleExpanded from "../../../actions/toggleExpanded.js";
 
 const mapStateToProps = (state) => (
   {
-    currentStyle: state.currentStyle,
     mainImage: state.mainImage,
     imagesArray: state.imagesArray,
     slice: state.slice
