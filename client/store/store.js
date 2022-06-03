@@ -14,7 +14,8 @@ const initialState = {
   metaData: {},
   questions: [],
   expanded: false,
-  relatedProducts: []
+  relatedProducts: [],
+  outfit: [{add: true}]
 };
 
 var store = createStore(

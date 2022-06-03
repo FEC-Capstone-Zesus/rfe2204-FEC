@@ -114,7 +114,7 @@ const ResponseContainer = styled.div`
   background-color: #d3d3d3;
 `;
 
-const ReviewEntry = ({review, handleHelpful, handleReport}) => {
+const ReviewEntry = ({review, handleHelpful, handleReport, userFilter}) => {
   const [helpful, setHelpful] = useState(false);
   const [report, setReport] = useState(false);
 
@@ -136,7 +136,8 @@ const ReviewEntry = ({review, handleHelpful, handleReport}) => {
     var date = (new Date(review.date)).toString().slice(4, 16);
     return (
       <>
-        {!report ? <ReviewEntryContainer>
+        {!report ? 
+        <ReviewEntryContainer>
           <Star><StarRating ratings={review.rating}/></Star>
           <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
           <ReviewTitle>{review.summary}</ReviewTitle>
@@ -173,5 +174,4 @@ const ReviewEntry = ({review, handleHelpful, handleReport}) => {
     );
   }
 };
-
 export default ReviewEntry;

@@ -34,53 +34,49 @@ const StyledImageSpan = styled.span`
   padding: ${({length}) => (length > 4 ? '0.1rem 0' : '0.5rem 0')};
   overflow: hidden;
 `
-const StyledImageParent = styled.div`
-  width: 6rem;
-  height: 6rem;
-`
 const StyledImage = styled.img`
   width:  4rem;
   height: 4rem;
   border: 1px solid;
   object-fit: cover;
-  clip-path: circle();
+  clip-path: circle(49%);
   &:hover {
     cursor: pointer;
   }
 `
 StyledImage.defaultProps = {
   src: '',
-};
-const StyledImageEmpty = styled.img`
-  width:  4rem;
-  height: 4rem;
-  object-fit: cover;
-`
-StyledImageEmpty.defaultProps = {
-  src: '',
+  alt: ''
 };
 const CheckMark = styled.div`
   z-index: 1;
   background: rgba(250,250,250,100);
   position: absolute;
   top: 0.5rem;
-  left: 3rem;
+  left: 2.8rem;
   text-align: center;
   border: 1px solid;
   width: 1rem;
   font-size: 70%;
   border-radius: 50%;
   &:hover {
-    cursor: pointer;
+    cursor: default;
   }
 `
-const SelectorContainer = styled.div`
+const StylesContainer = styled.div`
+  height: ${({length}) => (length > 8 ? '17rem' : '13rem')};
 `
-const StarFraction = styled.span`
- display: block;
- overflow: hidden;
- width: ${({starFraction}) => (starFraction ? `${starFraction}%` : '')};
+const AddToCart = styled.button`
+  width: 24.3rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
 `
+AddToCart.defaultProps = {
+  disabled: '',
+  alt: ''
+};
 
 var totalQty = 0;
 
@@ -88,7 +84,6 @@ const RatingsAndStyles = ( { product,
                              styles,
                              currentStyle,
                              slice,
-                             reviews,
                              metaData,
                              changeCurrentStyle,
                              changeMainImage,
@@ -177,7 +172,12 @@ const RatingsAndStyles = ( { product,
         </span>
         &nbsp;
         <span>
-          <a className='reviews' style={{ fontSize: 0.7 + 'em' }} href='#allRatings'>Read all {totalReviews} reviews</a>
+          <a className='reviews'
+             alt='Real all reviews'
+             style={{ fontSize: 0.7 + 'em' }}
+             href='#allRatings'>
+            Read all {totalReviews} reviews
+          </a>
         </span>
       </Ratings> :
       null }
@@ -196,12 +196,12 @@ const RatingsAndStyles = ( { product,
           &nbsp;
           &nbsp;
           <span style={{textDecorationLine: 'line-through',
-                     textDecorationStyle: 'solid'}}>
+                        textDecorationStyle: 'solid'}}>
                      ${currentStyle.original_price}</span>
         </>
       : null}
       <div style={{ height: 1 + 'rem' }}></div>
-      <div className='styles-container'>
+      <StylesContainer length={styles.results.length}>
         <div>
         <span style={{ fontWeight: 'bolder' }}>STYLE ></span> {currentStyle.style_id ?
             <span style={{ fontWeight: 'lighter' }}>{currentStyle.name.toUpperCase()}</span>: null}
@@ -214,21 +214,14 @@ const RatingsAndStyles = ( { product,
                                    id={style.name}
                                    onClick={() => updateCurrentStyle(style)}>
                     {style.style_id === currentStyle.style_id ? <CheckMark>✓</CheckMark> : null}
-                    <StyledImage src={style.photos[0].thumbnail_url} />
+                    <StyledImage alt={`Choose style ${style.name}`} src={style.photos[0].thumbnail_url} />
                   </StyledImageSpan>)
           })
         : null}
-        {styles.product_id ? styles.results.length < 5 ?
-         Array.from('abcd').map(style => {
-          return (<StyledImageSpan key={style}>
-                    <StyledImageEmpty src='/assets/white_filler.jpeg'/>
-                  </StyledImageSpan>)
-          })
-        : null : null}
         </StyledImagesContainer>
-      </div>
+      </StylesContainer>
 
-      <SelectorContainer>
+      <div>
         {sizeSelected ? <div style={{ marginTop: -0.5 + 'rem', height: 1.2 + 'rem' }} >
                           <p style={{ height: 1.2 + 'rem' }} ></p>
                         </div> :
@@ -241,16 +234,18 @@ const RatingsAndStyles = ( { product,
                 style={{ width: 16 + 'rem' }}
                 onChange={(e) => changeSelect(e)}
                 disabled={!inStock}>
-                <option value='selectSize' >SELECT SIZE</option>
           {inStock ?
-            skusArray.map((sku, i) => {
+          <>
+            <option value='selectSize' >SELECT SIZE</option>
+            {skusArray.map((sku, i) => {
               if (sku[1].quantity) {
                 return (
                   <option key={sku[0]} value={JSON.stringify(sku)} >{sku[1].size}</option>
                 )
               }
-            }) :
-            <option value='outOfStock' >OUT OF STOCK</option> }
+            })}
+          </>
+          : <option value='outOfStock' >OUT OF STOCK</option> }
         </select>
         &nbsp;
         &nbsp;
@@ -271,20 +266,15 @@ const RatingsAndStyles = ( { product,
           <option value='Select Qty' >-</option>
         </select>}
 
-      <button style={{ width: 24.3 + 'rem',
-                       fontWeight: 500,
-                       marginTop: 0.5 + 'rem',
-                       display: 'flex',
-                       justifyContent: 'space-between' }}
+      <AddToCart
               disabled={!inStock}
+              alt='Add to Cart Button'
               id='addToBag'
               onClick={(e) => addToCart(e)}>
         <p style={{ fontWeight: 'bold', top: 50 + '%' }}>ADD TO CART</p>
         <p style={{ fontWeight: 'bold', top: 50 + '%' }}>+</p>
-      </button>
-      </SelectorContainer>
-      &nbsp;
-      <div className='star-item'></div>
+      </AddToCart>
+      </div>
     </RatingsStyles>
   );
 };

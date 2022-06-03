@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from "styled-components";
+import { updateCarousel, horizontalClick } from './helperFuncs.js';
 
 
 const ExpandedDiv = styled.div`
@@ -22,6 +23,9 @@ const MainImageContainer = styled.div`
     cursor: ${({zoomed}) => (zoomed ? `url('/assets/minus-cursor.png') 0 8, auto` : 'crosshair')};
   }
 `
+MainImageContainer.defaultProps = {
+  alt: ''
+}
 const CarouselDiv = styled.div`
   height: 35rem;
   width: 5rem;
@@ -46,6 +50,9 @@ const ImageIcon = styled.div`
     cursor: pointer;
   }
 `
+ImageIcon.defaultProps = {
+  alt: ''
+}
 const CarouselArrow = styled.div`
   background: rgba(0,0,0,0.2);
   border: 0.1px solid;
@@ -103,7 +110,6 @@ const ExitExpanded = styled.div`
   margin-top: -19rem;
   background: rgba(226,226,226,0.5);
   position: relative;
-  text-align: center;
   left: 95.5%;
   &:hover {
     cursor: pointer;
@@ -139,41 +145,12 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
     }
   }
 
-  const updateCarousel = (direction) => {
-    if ((slice[0] > 0 && direction === 'up') || (slice[1] < max && direction === 'down')) {
-      var newSlice = direction === 'down' ? [slice[0] + 1, slice[1] + 1] : [slice[0] - 1, slice[1] - 1];
-      var newIndex = slice[2];
-
-      if (imagesArray[slice[0]].url === mainImage && direction === 'down') {
-        newIndex = slice[2] + 1;
-        changeMainImage(imagesArray[slice[0] + 1].url);
-      }
-
-      if (imagesArray[slice[1] - 1].url === mainImage && direction === 'up') {
-        newIndex = slice[2] - 1;
-        changeMainImage(imagesArray[slice[1] - 2].url);
-      }
-
-      changeSlice([...newSlice, newIndex]);
-    }
+  const carouselClick = (e, direction) => {
+    updateCarousel(e, direction, imagesArray, mainImage, max, slice, changeMainImage, changeSlice);
   }
 
-  const horizontalClick = (e, direction) => {
-    if ((slice[2] > 0 && direction === 'left') || (slice[2] < max - 1 && direction === 'right')) {
-      var newIndex = direction === 'right' ? slice[2] + 1 : slice[2] - 1;
-
-      if (imagesArray[slice[0]].url === mainImage && direction === 'left') {
-        changeSlice([slice[0] - 1, slice[1] - 1, newIndex]);
-      } else if (imagesArray[slice[1] - 1].url === mainImage && direction === 'right') {
-        changeSlice([slice[0] + 1, slice[1] + 1, newIndex]);
-      } else {
-        changeSlice([slice[0], slice[1], newIndex]);
-      }
-
-      changeMainImage(imagesArray[newIndex].url);
-    }
-    e.stopPropagation();
-
+  const leftRightClick = (e, direction) => {
+    horizontalClick(e, direction, imagesArray, mainImage, max, slice, changeMainImage, changeSlice)
   }
 
   const zoom = (e) => {
@@ -224,7 +201,7 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
       <CarouselDiv>
         <ImageCarousel >
           {iconArray.length ? iconArray.length > 11 ?
-            <CarouselArrow onClick={() => updateCarousel('up') }>
+            <CarouselArrow onClick={(e) => carouselClick(e, 'up') }>
               <div className='arrow up'
                     style={{ marginLeft: 0.75 + 'rem', marginBottom: 0.15 + 'rem' }}></div>
             </CarouselArrow>
@@ -234,6 +211,7 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
                   return (
                     <div key={icon.photo.thumbnail_url}>
                       <ImageIcon data-testid={icon.photo.thumbnail_url}
+                                 alt={`Image icon ${icon.value}`}
                                  onClick={() => updateCurrentImage(icon.photo)}>
                         <p style={{ marginTop: 7 + 'px' }}>{icon.value}</p>
                       </ImageIcon>
@@ -248,7 +226,7 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
               : null}
           </div>
           {iconArray.length ? iconArray.length > 11 ?
-            <CarouselArrow onClick={() => updateCarousel('down') }>
+            <CarouselArrow onClick={(e) => carouselClick(e, 'down') }>
               <div className='arrow down'
                     style={{ marginLeft: 0.75 + 'rem', marginBottom: 0.5 + 'rem' }}></div>
             </CarouselArrow>
@@ -258,6 +236,7 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
       <MainImageContainer id='imageContainer'
                           data-testid='imageContainer'
                           zoomed={zoomed}
+                          alt="Main image of product"
                           onClick={(e) => zoom(e)}
                           onMouseMove={(e) => moveOnZoom(e)}
                           currentImage={mainImage ? mainImage : ''} >
@@ -265,13 +244,13 @@ const Expanded = ( { mainImage, imagesArray, slice, changeMainImage, changeSlice
             {slice[2] === 0 ? <ArrowContainer /> :
             <ArrowContainer id='expandedLeft'
                             data-testid='expandedLeftContainer'
-                            onClick={(e) => horizontalClick(e, 'left')}>
+                            onClick={(e) => leftRightClick(e, 'left')}>
               <ArrowLeft data-testid='expandedLeft' >←</ArrowLeft>
             </ArrowContainer>}
             {slice[2] === max - 1 ? <ArrowContainer /> :
             <ArrowContainer id='expandedRight'
                             data-testid='expandedRightContainer'
-                            onClick={(e) => horizontalClick(e, 'right')}>
+                            onClick={(e) => leftRightClick(e, 'right')}>
               <ArrowRight data-testid='expandedRight' >→</ArrowRight>
             </ArrowContainer>}
           </HorizontalButtons>

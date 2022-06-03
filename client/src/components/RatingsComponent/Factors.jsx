@@ -137,5 +137,4 @@ const Factors = ({ factors }) => {
     </>
   );
 };
-
 export default Factors;
