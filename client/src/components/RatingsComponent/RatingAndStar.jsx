@@ -18,7 +18,6 @@ const RatingAndStar = ({ rate, meta }) => {
       totalRating += (Number(key) * Number(rate[key]));
       totalReview += Number(rate[key]);
     }
-    //var Rating = (Math.round(totalRating / totalReview)).toFixed(2);
     var Rating = (Math.round((totalRating / totalReview) * 4) / 4).toFixed(2);
     return (
       <RatingAndStarStyle>
