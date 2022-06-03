@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from "styled-components";
 import ImageGallery from './ImageGallery.jsx';
 import RatingsAndStyles from './RatingsAndStyles.jsx';
