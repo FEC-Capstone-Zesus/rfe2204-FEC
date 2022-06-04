@@ -12,6 +12,8 @@ import setSliceReducer from './setSliceReducer.js';
 import toggleExpandedReducer from './toggleExpandedReducer.js';
 import loadDataReducer from './loadDataReducer.js';
 import setOutfitReducer from './setOutfitReducer.js';
+import setNewFilterReducer from './setNewFilterReducer.js';
+import setUserIsSortReducer from './setUserIsSortReducer.js';
 
 var rootReducer = combineReducers({
   product: getProductReducer,
@@ -26,7 +28,9 @@ var rootReducer = combineReducers({
   slice: setSliceReducer,
   expanded: toggleExpandedReducer,
   loading: loadDataReducer,
-  outfit: setOutfitReducer
+  outfit: setOutfitReducer,
+  filter: setNewFilterReducer,
+  userIsSort: setUserIsSortReducer
 });
 
 export default rootReducer;

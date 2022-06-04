@@ -112,10 +112,9 @@ const ResponseContainer = styled.div`
   background-color: #d3d3d3;
 `;
 
-const ReviewEntry = ({ review, handleHelpful, handleReport}) => {
+const ReviewEntry = ({ review, handleHelpful, handleReport, userFilter, userIsSort }) => {
   const [helpful, setHelpful] = useState(false);
   const [report, setReport] = useState(false);
-  //const [showReviewTile, setShowReviewTile] = useState(userFilter);
 
   const handleHelpfulClick = (event, review_id) => {
     if (!helpful) {
@@ -135,37 +134,67 @@ const ReviewEntry = ({ review, handleHelpful, handleReport}) => {
     var date = (new Date(review.date)).toString().slice(4, 16);
     return (
       <>
-        <ReviewEntryContainer>
-          <Star><StarRating ratings={review.rating} /></Star>
-          <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
-          <ReviewTitle>{review.summary}</ReviewTitle>
-          <ReviewContent>
-            <ContentContainer>
-              {review.body}
-            </ContentContainer>
-            {review.recommend ? <RecommendContainer>&#x2713; I recommend this product</RecommendContainer> : null}
-            {review.photos ?
-              <PhotoContainer>
-                <Photo photos={review.photos}></Photo>
-              </PhotoContainer>
-              : null}
-            {review.response ?
-              <ResponseContainer>
-                Response:
-                &nbsp;
-                {review.response}
-              </ResponseContainer>
-              : null}
-          </ReviewContent>
-          <ReviewButtonContainer>
-            Helpful?
-            <ReviewButton onClick={(event) => handleHelpfulClick(event, review.review_id)}>Yes</ReviewButton>
-            ({helpful ? review.helpfulness + 1 : review.helpfulness})
-            |
-            {report ? <ReviewButton>REPORTED</ReviewButton> : <ReviewButton onClick={(event) => handleReportClick(event, review.review_id)}>Report</ReviewButton>}
-          </ReviewButtonContainer>
-          <EndLine />
-        </ReviewEntryContainer>
+        {!userIsSort ?
+          <ReviewEntryContainer>
+            <Star><StarRating ratings={review.rating} /></Star>
+            <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
+            <ReviewTitle>{review.summary}</ReviewTitle>
+            <ReviewContent>
+              <ContentContainer>
+                {review.body}
+              </ContentContainer>
+              {review.recommend ? <RecommendContainer>&#x2713; I recommend this product</RecommendContainer> : null}
+              {review.photos ?
+                <PhotoContainer>
+                  <Photo photos={review.photos}></Photo>
+                </PhotoContainer>
+                : null}
+              {review.response ?
+                <ResponseContainer>
+                  Response:&nbsp;{review.response}
+                </ResponseContainer> : null}
+            </ReviewContent>
+            <ReviewButtonContainer>Helpful?
+              <ReviewButton onClick={(event) => handleHelpfulClick(event, review.review_id)}>Yes</ReviewButton>
+              ({helpful ? review.helpfulness + 1 : review.helpfulness})
+              |
+              {report ? <ReviewButton>REPORTED</ReviewButton> : <ReviewButton onClick={(event) => handleReportClick(event, review.review_id)}>Report</ReviewButton>}
+            </ReviewButtonContainer>
+            <EndLine />
+          </ReviewEntryContainer>
+          : userIsSort && userFilter[review.ratings] ? 
+            <ReviewEntryContainer>
+              <Star><StarRating ratings={review.rating} /></Star>
+              <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
+              <ReviewTitle>{review.summary}</ReviewTitle>
+              <ReviewContent>
+                <ContentContainer>
+                  {review.body}
+                </ContentContainer>
+                {review.recommend ? <RecommendContainer>&#x2713; I recommend this product</RecommendContainer> : null}
+                {review.photos ?
+                  <PhotoContainer>
+                    <Photo photos={review.photos}></Photo>
+                  </PhotoContainer>
+                  : null}
+                {review.response ?
+                  <ResponseContainer>
+                    Response:
+                    &nbsp;
+                    {review.response}
+                  </ResponseContainer>
+                  : null}
+              </ReviewContent>
+              <ReviewButtonContainer>Helpful?
+                <ReviewButton onClick={(event) => handleHelpfulClick(event, review.review_id)}>Yes</ReviewButton>
+                ({helpful ? review.helpfulness + 1 : review.helpfulness})
+                |
+                {report ? <ReviewButton>REPORTED</ReviewButton> : <ReviewButton onClick={(event) => handleReportClick(event, review.review_id)}>Report</ReviewButton>}
+              </ReviewButtonContainer>
+              <EndLine />
+            </ReviewEntryContainer>
+         : null
+        }
       </>
     );
   }
