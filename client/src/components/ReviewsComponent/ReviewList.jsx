@@ -5,7 +5,6 @@ import ReviewButton from './ReviewButton.jsx';
 
 const ListContainer = styled.div`
   height: 300px;
-  width: 100%;
   overflow: auto;
 `;
 
