@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import StarRating from '../StarRating.jsx';
 
 const ReviewEntryContainer = styled.div`
@@ -86,14 +84,14 @@ const ImgModal = styled.div`
   background-color: rgb(0,0,0); 
   background-color: rgba(0,0,0,0.9); 
 `;
-  
-const Photo = ({photos}) => {
+
+const Photo = ({ photos }) => {
   const handleClick = (e) => {
     e.preventDefault();
   };
   return (
     <>
-      {photos.map((photo, index) => <Img src={photo.url} alt="Review Photo" key={index} onClick={(e)=>handleClick(e)}/>)}
+      {photos.map((photo, index) => <Img src={photo.url} alt="Review Photo" key={index} onClick={(e) => handleClick(e)} />)}
     </>
   );
 };
@@ -114,10 +112,10 @@ const ResponseContainer = styled.div`
   background-color: #d3d3d3;
 `;
 
-const ReviewEntry = ({review, handleHelpful, handleReport, userFilter}) => {
+const ReviewEntry = ({ review, handleHelpful, handleReport}) => {
   const [helpful, setHelpful] = useState(false);
   const [report, setReport] = useState(false);
-  const [showReviewTile, setShowReviewTile] = useState(userFilter);
+  //const [showReviewTile, setShowReviewTile] = useState(userFilter);
 
   const handleHelpfulClick = (event, review_id) => {
     if (!helpful) {
@@ -132,87 +130,44 @@ const ReviewEntry = ({review, handleHelpful, handleReport, userFilter}) => {
       handleReport(event, review_id, false);
     }
   };
-  
+
   if (review) {
     var date = (new Date(review.date)).toString().slice(4, 16);
-    if (Object.keys(userFilter).length === 0) {
-      return (
-        <>
-          <ReviewEntryContainer>
-            <Star><StarRating ratings={review.rating}/></Star>
-            <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
-            <ReviewTitle>{review.summary}</ReviewTitle>
-            <ReviewContent>
-              <ContentContainer>
-                {review.body}
-              </ContentContainer>
-  
-              {review.recommend ? <RecommendContainer><FontAwesomeIcon icon={faCheck} /> I recommend this product</RecommendContainer> : null}
-  
-              {review.photos ? 
+    return (
+      <>
+        <ReviewEntryContainer>
+          <Star><StarRating ratings={review.rating} /></Star>
+          <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
+          <ReviewTitle>{review.summary}</ReviewTitle>
+          <ReviewContent>
+            <ContentContainer>
+              {review.body}
+            </ContentContainer>
+            {review.recommend ? <RecommendContainer>&#x2713; I recommend this product</RecommendContainer> : null}
+            {review.photos ?
               <PhotoContainer>
                 <Photo photos={review.photos}></Photo>
               </PhotoContainer>
               : null}
-              {review.response ?
+            {review.response ?
               <ResponseContainer>
                 Response:
                 &nbsp;
                 {review.response}
               </ResponseContainer>
               : null}
-            </ReviewContent>
-            <ReviewButtonContainer>
-              Helpful?
-              <ReviewButton onClick={(event)=>handleHelpfulClick(event, review.review_id)}>Yes</ReviewButton>
-              ({helpful? review.helpfulness + 1 : review.helpfulness})
-              |
-              {report ? <ReviewButton>REPORTED</ReviewButton> :<ReviewButton onClick={(event)=>handleReportClick(event, review.review_id)}>Report</ReviewButton>}
-            </ReviewButtonContainer>
-            <EndLine/>
-          </ReviewEntryContainer>
-        </>
-      );
-    } else {
-      return (
-        <>
-          {userFilter[review.rating] ?
-          <ReviewEntryContainer>
-            <Star><StarRating ratings={review.rating}/></Star>
-            <NameAndtime>{review.reviewer_name}, {date}</NameAndtime>
-            <ReviewTitle>{review.summary}</ReviewTitle>
-            <ReviewContent>
-              <ContentContainer>
-                {review.body}
-              </ContentContainer>
-  
-              {review.recommend ? <RecommendContainer><FontAwesomeIcon icon={faCheck} /> I recommend this product</RecommendContainer> : null}
-  
-              {review.photos ? 
-              <PhotoContainer>
-                <Photo photos={review.photos}></Photo>
-              </PhotoContainer>
-              : null}
-              {review.response ?
-              <ResponseContainer>
-                Response:
-                &nbsp;
-                {review.response}
-              </ResponseContainer>
-              : null}
-            </ReviewContent>
-            <ReviewButtonContainer>
-              Helpful?
-              <ReviewButton onClick={(event)=>handleHelpfulClick(event, review.review_id)}>Yes</ReviewButton>
-              ({helpful? review.helpfulness + 1 : review.helpfulness})
-              |
-              {report ? <ReviewButton>REPORTED</ReviewButton> :<ReviewButton onClick={(event)=>handleReportClick(event, review.review_id)}>Report</ReviewButton>}
-            </ReviewButtonContainer>
-            <EndLine/>
-          </ReviewEntryContainer> : null}
-        </>
-      );
-    }
+          </ReviewContent>
+          <ReviewButtonContainer>
+            Helpful?
+            <ReviewButton onClick={(event) => handleHelpfulClick(event, review.review_id)}>Yes</ReviewButton>
+            ({helpful ? review.helpfulness + 1 : review.helpfulness})
+            |
+            {report ? <ReviewButton>REPORTED</ReviewButton> : <ReviewButton onClick={(event) => handleReportClick(event, review.review_id)}>Report</ReviewButton>}
+          </ReviewButtonContainer>
+          <EndLine />
+        </ReviewEntryContainer>
+      </>
+    );
   }
 };
 export default ReviewEntry;
