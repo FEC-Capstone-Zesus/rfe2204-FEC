@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ReviewEntryUI from './ReviewEntryUI.jsx'
 
-
 const ReviewEntry = ({ review, handleHelpful, handleReport, userFilter, userIsSort }) => {
   const [helpful, setHelpful] = useState(false);
   const [report, setReport] = useState(false);
