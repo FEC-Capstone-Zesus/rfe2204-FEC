@@ -32,19 +32,20 @@ function retrieve(productID = '37315') {
   ];
 
   Promise.all(promises).then(promises => {
-
+    var sliceEnd;
     promises.forEach((data, i) => {
       store.dispatch(actions[i](data.data));
 
       if (i === 2) {
         store.dispatch(setCurrentStyle(data.data.results[0]));
         store.dispatch(setImagesArray(data.data.results[0].photos));
+        sliceEnd = Math.min(data.data.results[0].photos.length, 7);
         store.dispatch(setMainImage(data.data.results[0].photos[0].url));
       }
 
       if (i === promises.length - 1) {
         store.dispatch({ type: 'STOP' });
-        store.dispatch(setSlice([0, 7, 0]));
+        store.dispatch(setSlice([0, sliceEnd, 0]));
       }
     });
   })

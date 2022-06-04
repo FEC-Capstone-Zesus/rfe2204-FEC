@@ -39,7 +39,7 @@ const StyledImage = styled.img`
   height: 4rem;
   border: 1px solid;
   object-fit: cover;
-  clip-path: circle(49%);
+  clip-path: circle(46%);
   &:hover {
     cursor: pointer;
   }
@@ -50,7 +50,7 @@ StyledImage.defaultProps = {
 };
 const CheckMark = styled.div`
   z-index: 1;
-  background: rgba(250,250,250,100);
+  background: rgba(250,250,250,1);
   position: absolute;
   top: 0.5rem;
   left: 2.8rem;

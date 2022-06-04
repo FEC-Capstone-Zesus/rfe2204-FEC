@@ -7,7 +7,7 @@ const ExpandedDiv = styled.div`
   margin-bottom: 4rem;
   height: 35rem;
   width: 80rem;
-  background: rgba(226,226,226,100);
+  background: rgba(226,226,226,1);
   display: flex;
 `
 const MainImageContainer = styled.div`
@@ -29,7 +29,7 @@ MainImageContainer.defaultProps = {
 const CarouselDiv = styled.div`
   height: 35rem;
   width: 5rem;
-  background: rgba(226,226,226,100);
+  background: rgba(226,226,226,1);
 `
 const ImageCarousel = styled.div`
   background: rgba(226,226,226,0.7);
@@ -44,7 +44,7 @@ const ImageIcon = styled.div`
   width: 2rem;
   height: 2rem;
   border: 1.2px solid;
-  background: rgba(226,226,226,100);
+  background: rgba(226,226,226,1);
   text-align: center;
   &:hover {
     cursor: pointer;
@@ -64,7 +64,7 @@ const CarouselArrow = styled.div`
   }
 `
 const ImageUnderline = styled.div`
-  border: 2px solid rgba(0, 0, 0, 100);
+  border: 2px solid rgba(0, 0, 0, 1);
   width: 1.9rem;
 `
 const ImageNoUnderline = styled.div`

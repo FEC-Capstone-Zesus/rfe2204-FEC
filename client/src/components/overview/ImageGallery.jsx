@@ -4,7 +4,7 @@ import { updateCarousel, horizontalClick } from './helperFuncs.js';
 const MainImage = styled.div`
   width: 50rem;
   height: 35rem;
-  background: rgba(226,226,226,100);
+  background: rgba(226,226,226,1);
   background-image: ${({currentImage}) => (currentImage ? `url(${currentImage})` : "url('')")};
   background-repeat: no-repeat;
   background-origin: content-box;
@@ -28,7 +28,7 @@ const ImageThumbnail = styled.div`
   width: 3rem;
   height: 3rem;
   border: 1.2px solid;
-  background: rgba(226,226,226,100);
+  background: rgba(226,226,226,1);
   background-image: ${({currentThumbnail}) => (currentThumbnail ? `url(${currentThumbnail})` : "url('')")};
   background-repeat: no-repeat;
   background-size: contain;
@@ -51,7 +51,7 @@ const CarouselArrow = styled.div`
   }
 `
 const ImageUnderline = styled.div`
-  border: 2px solid rgba(0, 0, 0, 100);
+  border: 2px solid rgba(0, 0, 0, 1);
   width: 2.9rem;
 `
 const ImageNoUnderline = styled.div`
