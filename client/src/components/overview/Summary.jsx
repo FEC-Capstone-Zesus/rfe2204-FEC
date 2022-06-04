@@ -7,7 +7,7 @@ const SummaryDiv = styled.div`
   justify-content: space-between;
 `
 const Slogan = styled.div`
-  border-right: 2px solid rgba(0, 0, 0, 100);
+  border-right: 2px solid rgba(0, 0, 0, 1);
   width: 75%;
 `
 const Features = styled.div`

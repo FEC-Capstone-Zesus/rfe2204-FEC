@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
     color: black;
   }
   select {
-    border: 1px solid rgba(0, 0, 0, 100);
+    border: 1px solid rgba(0, 0, 0, 1);
     border-radius: 0;
     height: 3rem;
     font-weight: bold;
@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
     }
   }
   button {
-    border: 1px solid rgba(0, 0, 0, 100);
+    border: 1px solid rgba(0, 0, 0, 1);
     border-radius: 0;
     background: white;
     height: 3rem;
@@ -101,7 +101,7 @@ const HeadlineSpan = styled.span`
 `
 
 const Header = styled.header`
-  background: rgba(226,226,226,100);
+  background: rgba(226,226,226,1);
   margin-top: -0.5rem;
   width: 75rem;
   height: 5rem;
@@ -110,7 +110,7 @@ const Header = styled.header`
 `;
 
 const SearchBar = styled.div`
-  border: 1px solid rgba(0, 0, 0, 100);
+  border: 1px solid rgba(0, 0, 0, 1);
   width: 9rem;
   display: inline-block;
 `
