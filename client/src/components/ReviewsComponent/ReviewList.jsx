@@ -4,7 +4,8 @@ import ReviewEntry from './ReviewEntry.jsx';
 import ReviewButton from './ReviewButton.jsx';
 
 const ListContainer = styled.div`
-  max-heigtht: 50px;
+  height: 300px;
+  width: 100%;
   overflow: auto;
 `;
 
@@ -28,10 +29,12 @@ const ReviewList = ({reviews, handleHelpful, handleReport, handleOpenForm, userF
   
   if (listItem.length) {
     return (
-      <ListContainer>
-        {listItem.map((review, index) => <ReviewEntry review={review} key={index} handleHelpful={handleHelpful} handleReport={handleReport} userFilter={userFilter} userIsSort={userIsSort}/> )}
+      <>
+        <ListContainer>
+          {listItem.map((review, index) => <ReviewEntry review={review} key={index} handleHelpful={handleHelpful} handleReport={handleReport} userFilter={userFilter} userIsSort={userIsSort}/> )}
+        </ListContainer> 
         <ReviewButton showMoreReviewButton={showButton} handleOpenForm={handleOpenForm} load={load}/>
-      </ListContainer> 
+      </>
     );
   }
 };
