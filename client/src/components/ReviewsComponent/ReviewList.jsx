@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import ReviewEntry from './ReviewEntry.jsx';
 import ReviewButton from './ReviewButton.jsx';
+
+const ListContainer = styled.div`
+  max-heigtht: 50px;
+  overflow: auto;
+`;
 
 const ReviewList = ({reviews, handleHelpful, handleReport, handleOpenForm, userFilter, userIsSort}) => {
   const [showButton, setShowButton] = useState(true);
@@ -22,10 +28,10 @@ const ReviewList = ({reviews, handleHelpful, handleReport, handleOpenForm, userF
   
   if (listItem.length) {
     return (
-      <>
+      <ListContainer>
         {listItem.map((review, index) => <ReviewEntry review={review} key={index} handleHelpful={handleHelpful} handleReport={handleReport} userFilter={userFilter} userIsSort={userIsSort}/> )}
         <ReviewButton showMoreReviewButton={showButton} handleOpenForm={handleOpenForm} load={load}/>
-      </> 
+      </ListContainer> 
     );
   }
 };
