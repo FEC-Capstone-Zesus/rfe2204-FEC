@@ -11,20 +11,18 @@ const RatingContainer = styled.div`
 
 const Ratings = ({ratings, recommended, factors, filter, setNewFilter, setUserIsSort, userIsSort }) => {
   const [meta, setMeta] = useState({ratings, recommended, factors});
+
   const handlefilter = (event, star) => {
     event.preventDefault();
     let newState = {...filter};
     let temp = newState[star];
     newState[star] = !temp;
     setNewFilter(newState);
-    if (!filter[1] && !filter[2] && !filter[3] && !filter[4] && !filter[5]) {
-      setUserIsSort(false)
-    } else {
-      setUserIsSort(true)
-    }
+    let isSorting = !filter[1] && !filter[2] && !filter[3] && !filter[4] && !filter[5] ? false : true;
+    setUserIsSort(isSorting);
   };
-
-
+  console.log(userIsSort);
+  
   const handleClear = (event) => {
     event.preventDefault();
     setNewFilter({ 5: false, 4: false, 3: false, 2: false, 1 : false });
