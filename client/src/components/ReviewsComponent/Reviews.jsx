@@ -12,14 +12,14 @@ const ReviewContainer = styled.div`
   max-width: 550px;
 `;
 
-const Reviews = ({reviews, productName, factors, userFilter}) => {
+const Reviews = ({reviews, productName, factors, userFilter, userIsSort}) => {
   const [helpful, setHelpful] = useState('');
   const [newest, setNewest] = useState('');
   const [relevant, setRelevant] = useState('');
   const [openForm, setOpenForm] = useState(false);
   const [reviewList, setReviewList] = useState(reviews.results);
   const [reviewsCount, setReviewsCount] = useState(reviews.results.length);
-
+  
   const handleSort = (sort) => {
     if ((sort === 'helpful' && helpful.length > 0) || (sort === 'newest' && newest.length > 0) || (sort === 'relevant' && relevant.length > 0)) {
       if (sort === 'helpful') { setReviewList(JSON.parse(JSON.stringify(helpful))) }
@@ -113,7 +113,7 @@ const Reviews = ({reviews, productName, factors, userFilter}) => {
     <>
       <ReviewContainer>
         <ReviewCount count={reviewsCount} handleSort={handleSort} />
-        <ReviewList reviews={reviewList} handleHelpful={handleHelpful} handleReport={handleReport} handleOpenForm={handleOpenForm} userFilter={userFilter}/>
+        <ReviewList reviews={reviewList} handleHelpful={handleHelpful} handleReport={handleReport} handleOpenForm={handleOpenForm} userFilter={userFilter} userIsSort={userIsSort}/>
       </ReviewContainer>
       {openForm ? <ReviewForm productName={productName} product_id={reviews.product} factors={factors} handleCloseForm={handleCloseForm} handleSubmit={handleSubmit}></ReviewForm> : null}
     </>
