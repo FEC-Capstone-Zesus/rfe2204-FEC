@@ -216,32 +216,33 @@ The app is composed of three main sections and their subcomponents/features:
     }
 
 #### Example Response
-`Status 201 CREATED`
+    Status 201 CREATED`
 
 ## PUT Mark Review Helpful
 
 `/reviews/:review_id/helpful`
 
 #### Example Response
-`Status 204 NO CONTENT`
+    Status 204 NO CONTENT
 
 ## PUT Report Review
 
 `/reviews/:review_id/report`
 
 #### Example Response
-`Status 204 NO CONTENT`
+    Status 204 NO CONTENT
 
 # Technology Choices
 
-Framework
+#### Framework
 
--React
--Redux
+- React
 
-CSS
+- Redux
 
--styled-components
+#### CSS
+
+- styled-components
 
 # Collaborators
 
