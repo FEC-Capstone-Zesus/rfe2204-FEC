@@ -1,4 +1,4 @@
-# Store of Zeus #### or, rfe2204-FEC
+# Store of Zeus
 
 ![Demo GIF](https://github.com/FEC-Capstone-Zesus/rfe2204-FEC/blob/overview/client/dist/assets/Demo.gif?raw=true)
 
@@ -16,7 +16,7 @@ Start server and client:
 
 >$npm run dev
 
-## Project
+# Project
 
 The purpose of this app is to replicate an estore environment front-end. It performs API calls to GET product and related information and saves the initial data to a Redux store. Redux was chosen due to the need of components across the app sharing the same data. The UI is a combination of React and styled-components.
 
@@ -232,7 +232,7 @@ The app is composed of three main sections and their subcomponents/features:
 #### Example Response
 `Status 204 NO CONTENT`
 
-## Technology Choices
+# Technology Choices
 
 Framework
 
@@ -243,27 +243,27 @@ CSS
 
 -styled-components
 
-## Collaborators
+# Collaborators
 
-#### Nikko Elliott
+### Nikko Elliott
 
  - Section: Overview
 
  - Github: <a href='https://github.com/nelliott82'>nelliott82</a>
 
-#### Brice Koppin
+### Brice Koppin
 
  - Section: Related Items & Comparison
 
  - Github: <a href='https://github.com/Bkoppin'>Bkoppin</a>
 
-#### Yaokai Dong
+### Yaokai Dong
 
  - Section: Ratings & Reviews
 
  - Github: <a href='https://github.com/ykdong'>ykdong</a>
 
-## MIT License
+# MIT License
 
 MIT License
 
