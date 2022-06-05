@@ -1,7 +1,7 @@
 # Store of Zeus
 ### or rfe2204-FEC
 
-<img src="/assets/Demo.gif" width="640"/>
+![Demo GIF](/assets/Demo.gif)
 
 # Setup
 Install all dependencies:
