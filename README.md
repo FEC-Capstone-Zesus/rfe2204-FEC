@@ -1,7 +1,7 @@
 # Store of Zeus
 ### or rfe2204-FEC
 
-![Demo GIF](/assets/Demo.gif)
+![Demo GIF](https://github.com/FEC-Capstone-Zesus/rfe2204-FEC/blob/overview/client/dist/assets/Demo.gif?raw=true)
 
 # Setup
 Install all dependencies:
