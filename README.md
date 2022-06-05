@@ -1,9 +1,9 @@
-# Store of Zeus
-### or, rfe2204-FEC
+# Store of Zeus #### or, rfe2204-FEC
 
 ![Demo GIF](https://github.com/FEC-Capstone-Zesus/rfe2204-FEC/blob/overview/client/dist/assets/Demo.gif?raw=true)
 
 # Setup
+
 Fork and clone the repo.
 
 Install all dependencies:
@@ -21,7 +21,6 @@ Start server and client:
 The purpose of this app is to replicate an estore environment front-end. It performs API calls to GET product and related information and saves the initial data to a Redux store. Redux was chosen due to the need of components across the app sharing the same data. The UI is a combination of React and styled-components.
 
 The app is composed of three main sections and their subcomponents/features:
-
 
 ### Overview
 > - Image Gallery
@@ -41,9 +40,11 @@ The app is composed of three main sections and their subcomponents/features:
 > - Rating Breakdown
 > - Product Breakdown
 
-## REST API for Store of Zeus
+# REST API for Store of Zeus
 
-### GET `/products`
+## GET Products
+
+`/products`
 
 #### Example Response
 
@@ -62,7 +63,9 @@ The app is composed of three main sections and their subcomponents/features:
         // ..
     ]
 
-### GET `/products/:product_id`
+## GET Single Product
+
+`/products/:product_id`
 
 #### Example Response
 
@@ -89,7 +92,9 @@ The app is composed of three main sections and their subcomponents/features:
       ]
     }
 
-### GET `/products/:product_id/styles`
+## GET Styles
+
+`/products/:product_id/styles`
 
 #### Example Response
 
@@ -120,7 +125,9 @@ The app is composed of three main sections and their subcomponents/features:
       ]
     }
 
-### GET `/products/:product_id/related`
+## GET Related Items
+
+`/products/:product_id/related`
 
 #### Example Response
 
@@ -131,7 +138,9 @@ The app is composed of three main sections and their subcomponents/features:
         37317
     ]
 
-### GET `/reviews?product_id=[product_id]`
+## GET Reviews
+
+`/reviews?product_id=[product_id]`
 
 #### Example Response
 
@@ -156,7 +165,9 @@ The app is composed of three main sections and their subcomponents/features:
         ]
     }
 
-### GET `/reviews/meta?product_id=[product_id]`
+## GET Reviews Meta Data
+
+`/reviews/meta?product_id=[product_id]`
 
 #### Example Response
 
@@ -186,58 +197,9 @@ The app is composed of three main sections and their subcomponents/features:
         }
     }
 
-### GET `/qa/questions`
+## POST Review
 
-#### Example Response
-
-    {
-        "product_id": "37311",
-        "results": [
-            {
-                "question_id": 640994,
-                "question_body": "Where have all the cowboys gone?",
-                "question_date": "2022-05-25T00:00:00.000Z",
-                "asker_name": "Someone",
-                "question_helpfulness": 77,
-                "reported": false,
-                "answers": {
-                    "5985683": {
-                        "id": 5985683,
-                        "body": "afsf",
-                        "date": "2022-05-29T00:00:00.000Z",
-                        "answerer_name": "cdsv",
-                        "helpfulness": 2,
-                        "photos": []
-                    }
-                    // ..
-                }
-            }
-            // ..
-        ]
-    }
-
-### GET `/qa/questions/:question_id/answers`
-
-#### Example Response
-
-    {
-        "question": "640994",
-        "page": 1,
-        "count": 5,
-        "results": [
-            {
-                "answer_id": 5985701,
-                "body": "Testing bold since all you folks reported all the sellers already haha",
-                "date": "2022-05-30T00:00:00.000Z",
-                "answerer_name": "Seller",
-                "helpfulness": 51,
-                "photos": []
-            }
-            // ..
-        ]
-    }
-
-### POST `/reviews`
+`/reviews`
 
 #### Example Post
 
@@ -254,67 +216,21 @@ The app is composed of three main sections and their subcomponents/features:
     }
 
 #### Example Response
-##### `Status 201 CREATED`
+`Status 201 CREATED`
 
-### POST `/qa/questions`
+## PUT Mark Review Helpful
 
-#### Example Post
-
-    {
-      product_id: [integer],
-      name: [text],
-      email: [text],
-      body: [text]
-    }
+`/reviews/:review_id/helpful`
 
 #### Example Response
-##### `Status 201 CREATED`
+`Status 204 NO CONTENT`
 
-### POST `/qa/questions/:question_id/answers`
+## PUT Report Review
 
-#### Example Post
-
-    {
-      photos: [[text]],
-      name: [text],
-      email: [text],
-      body: [text]
-    }
+`/reviews/:review_id/report`
 
 #### Example Response
-##### `Status 201 CREATED`
-
-### PUT `/reviews/:review_id/helpful`
-
-#### Example Response
-##### `Status 204 NO CONTENT`
-
-### PUT `/reviews/:review_id/report`
-
-#### Example Response
-##### `Status 204 NO CONTENT`
-
-### PUT `/qa/questions/:question_id/helpful`
-
-#### Example Response
-##### `Status 204 NO CONTENT`
-
-### PUT `/qa/questions/:question_id/report`
-
-#### Example Response
-##### `Status 204 NO CONTENT`
-
-### PUT `/qa/questions/:answer_id/helpful`
-
-#### Example Response
-##### `Status 204 NO CONTENT`
-
-### PUT `/qa/questions/:answer_id/report`
-
-#### Example Response
-##### `Status 204 NO CONTENT`
-
-
+`Status 204 NO CONTENT`
 
 ## Technology Choices
 
