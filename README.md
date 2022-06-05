@@ -43,7 +43,8 @@ The app is composed of three main sections and their subcomponents/features:
 
 ## REST API for Store of Zeus
 
-### `GET /products`
+### GET `/products`
+
 #### Example Response
 
     [
@@ -61,7 +62,8 @@ The app is composed of three main sections and their subcomponents/features:
         // ..
     ]
 
-### `GET /products/:product_id`
+### GET `/products/:product_id`
+
 #### Example Response
 
     {
@@ -87,7 +89,8 @@ The app is composed of three main sections and their subcomponents/features:
       ]
     }
 
-### `GET /products/:product_id/styles`
+### GET `/products/:product_id/styles`
+
 #### Example Response
 
     {
@@ -117,7 +120,8 @@ The app is composed of three main sections and their subcomponents/features:
       ]
     }
 
-### `GET /products/:product_id/related`
+### GET `/products/:product_id/related`
+
 #### Example Response
 
     [
@@ -127,7 +131,8 @@ The app is composed of three main sections and their subcomponents/features:
         37317
     ]
 
-### `GET /reviews?product_id=[product_id]`
+### GET `/reviews?product_id=[product_id]`
+
 #### Example Response
 
     {
@@ -151,7 +156,8 @@ The app is composed of three main sections and their subcomponents/features:
         ]
     }
 
-### `GET /reviews/meta?product_id=[product_id]`
+### GET `/reviews/meta?product_id=[product_id]`
+
 #### Example Response
 
     {
@@ -180,7 +186,8 @@ The app is composed of three main sections and their subcomponents/features:
         }
     }
 
-### `GET /qa/questions`
+### GET `/qa/questions`
+
 #### Example Response
 
     {
@@ -209,7 +216,8 @@ The app is composed of three main sections and their subcomponents/features:
         ]
     }
 
-### `GET /qa/questions/:question_id/answers`
+### GET `/qa/questions/:question_id/answers`
+
 #### Example Response
 
     {
@@ -229,7 +237,8 @@ The app is composed of three main sections and their subcomponents/features:
         ]
     }
 
-### `POST /reviews`
+### POST `/reviews`
+
 #### Example Post
 
     {
@@ -247,7 +256,8 @@ The app is composed of three main sections and their subcomponents/features:
 #### Example Response
 ##### `Status 201 CREATED`
 
-### `POST /qa/questions`
+### POST `/qa/questions`
+
 #### Example Post
 
     {
@@ -260,7 +270,8 @@ The app is composed of three main sections and their subcomponents/features:
 #### Example Response
 ##### `Status 201 CREATED`
 
-### `POST /qa/questions/:question_id/answers`
+### POST `/qa/questions/:question_id/answers`
+
 #### Example Post
 
     {
@@ -273,27 +284,33 @@ The app is composed of three main sections and their subcomponents/features:
 #### Example Response
 ##### `Status 201 CREATED`
 
-### `PUT /reviews/:review_id/helpful`
+### PUT `/reviews/:review_id/helpful`
+
 #### Example Response
 ##### `Status 204 NO CONTENT`
 
-### `PUT /reviews/:review_id/report`
+### PUT `/reviews/:review_id/report`
+
 #### Example Response
 ##### `Status 204 NO CONTENT`
 
-### `PUT /qa/questions/:question_id/helpful`
+### PUT `/qa/questions/:question_id/helpful`
+
 #### Example Response
 ##### `Status 204 NO CONTENT`
 
-### `PUT /qa/questions/:question_id/report`
+### PUT `/qa/questions/:question_id/report`
+
 #### Example Response
 ##### `Status 204 NO CONTENT`
 
-### `PUT /qa/questions/:answer_id/helpful`
+### PUT `/qa/questions/:answer_id/helpful`
+
 #### Example Response
 ##### `Status 204 NO CONTENT`
 
-### `PUT /qa/questions/:answer_id/report`
+### PUT `/qa/questions/:answer_id/report`
+
 #### Example Response
 ##### `Status 204 NO CONTENT`
 
@@ -314,21 +331,21 @@ CSS
 
 #### Nikko Elliott
 
-Section: Overview
+ - Section: Overview
 
-Github: <a href='https://github.com/nelliott82'>nelliott82</a>
+ - Github: <a href='https://github.com/nelliott82'>nelliott82</a>
 
 #### Brice Koppin
 
-Section: Related Items & Comparison
+ - Section: Related Items & Comparison
 
-Github: <a href='https://github.com/Bkoppin'>Bkoppin</a>
+ - Github: <a href='https://github.com/Bkoppin'>Bkoppin</a>
 
 #### Yaokai Dong
 
-Section: Ratings & Reviews
+ - Section: Ratings & Reviews
 
-Github: <a href='https://github.com/ykdong'>ykdong</a>
+ - Github: <a href='https://github.com/ykdong'>ykdong</a>
 
 ## MIT License
 
