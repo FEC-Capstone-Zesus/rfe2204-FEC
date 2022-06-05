@@ -121,7 +121,7 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
   }
 
   return (
-    <MainImage id='mainImage' alt='Main image of product' currentImage={mainImage ? mainImage : ''}>
+    <MainImage id='mainImage' alt='Main image of product' currentImage={mainImage ? mainImage : '/assets/no-image.png'}>
       <ImageCarousel data-testid='imageCarousel' onClick={(e) => stopParentOnClick(e)}>
         {imagesArray.length ? imagesArray.length > 7 ?
           <CarouselArrow id='carouselUp'
@@ -138,7 +138,7 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
                     <ImageThumbnail data-testid={photo.thumbnail_url}
                                     alt={`Thumbnail image ${i + 1}`}
                                     onClick={(e) => updateCurrentImage(e, photo)}
-                                    currentThumbnail={photo.thumbnail_url}/>
+                                    currentThumbnail={photo.thumbnail_url ? photo.thumbnail_url : '/assets/no-image.png'}/>
                     <ImageNoUnderline />
                     {photo.url === mainImage ?
                       <ImageUnderline />
