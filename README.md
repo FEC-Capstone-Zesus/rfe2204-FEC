@@ -218,7 +218,7 @@ The app is composed of three main sections and their subcomponents/features:
     }
 
 #### Example Response
-    Status 201 CREATED`
+    Status 201 CREATED
 
 ## PUT Mark Review Helpful
 
