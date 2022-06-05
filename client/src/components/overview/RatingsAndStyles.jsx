@@ -6,7 +6,9 @@ const axios = require('axios')
 const RatingsStyles = styled.div`
   width: 25rem;
   height: 35rem;
-  padding: 2rem 1.5rem 2rem 1.5rem;
+  padding: 2rem 1.5rem;
+  display: block;
+  overflow: auto;
 `
 const Ratings = styled.div`
   margin-top: ${({length}) => (length > 8 ? `-2rem` : '0')};
@@ -14,6 +16,7 @@ const Ratings = styled.div`
 const ProductName = styled.h1`
   margin-top: ${({length}) => (length > 8 ? '0.7rem' : '' )};
   margin-bottom: ${({length}) => (length > 8 ? '0.7rem' : '' )};
+  font-size: ${({char}) => (char > 21 ? '1.5em' : '2em' )};
 `
 const ProductCatgory = styled.h5`
   margin-top: ${({length}) => (length > 8 ? '0.7rem' : '' )};
@@ -187,7 +190,7 @@ const RatingsAndStyles = ( { product,
           {product.id ? product.category.toUpperCase() : null}
         </ProductCatgory>
       </div>
-      <ProductName length={styles.results.length}>{product.id ? product.name : null}</ProductName>
+      <ProductName length={styles.results.length} char={product.name.length} >{product.id ? product.name : null}</ProductName>
 
       {currentStyle.style_id ? !currentStyle.sale_price ?
         <span>${currentStyle.original_price}</span> :
@@ -214,7 +217,7 @@ const RatingsAndStyles = ( { product,
                                    id={style.name}
                                    onClick={() => updateCurrentStyle(style)}>
                     {style.style_id === currentStyle.style_id ? <CheckMark>✓</CheckMark> : null}
-                    <StyledImage alt={`Choose style ${style.name}`} src={style.photos[0].thumbnail_url} />
+                    <StyledImage alt={`Choose style ${style.name}`} src={style.photos[0].thumbnail_url ? style.photos[0].thumbnail_url : '/assets/no-image.png'} />
                   </StyledImageSpan>)
           })
         : null}
