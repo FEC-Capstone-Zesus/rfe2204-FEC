@@ -20,7 +20,7 @@ Navigate to: http://localhost:3000/
 
 # Project
 
-The purpose of this app is to replicate an estore environment front-end. It performs API calls to GET product and related information and saves the initial data to a Redux store. Redux was chosen due to the need of components across the app sharing the same data. The UI is a combination of React and styled-components.
+The purpose of this app is to replicate an estore environment front-end. It performs API calls to GET product and related information and saves the initial data to a Redux store. Redux was chosen due to the need of components across the app sharing the same data. The UI is a combination of React and styled-components. Styled-components was chosen for its familiar CSS syntax as well as the ease of keeping styles within the same component file.
 
 The app is composed of three main sections and their subcomponents/features:
 
