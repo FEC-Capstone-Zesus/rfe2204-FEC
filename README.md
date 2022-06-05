@@ -23,18 +23,18 @@ The purpose of this app is to replicate an estore environment front-end. It perf
 The app is composed of three main sections and their subcomponents/features:
 
 
->### Overview
+### Overview
 > - Image Gallery
 > - Expanded View
 > - Product Information
 > - Style Selector
 > - Add to cart
 
->### Related Items & Comparison
+### Related Items & Comparison
 > - Related Products Cards
 > - Your Outfit List
 
->### Ratings & Reviews
+### Ratings & Reviews
 > - Write new review
 > - Reviews List
 > - Sorting
@@ -43,8 +43,8 @@ The app is composed of three main sections and their subcomponents/features:
 
 ## REST API for Store of Zeus
 
-> `GET /products`
->> #### Example Response
+### `GET /products`
+#### Example Response
 
     [
         {
@@ -61,8 +61,8 @@ The app is composed of three main sections and their subcomponents/features:
         // ..
     ]
 
-> `GET /products/:product_id`
->> #### Example Response
+### `GET /products/:product_id`
+#### Example Response
 
     {
       "id": 37311,
@@ -87,8 +87,8 @@ The app is composed of three main sections and their subcomponents/features:
       ]
     }
 
-> `GET /products/:product_id/styles`
->> #### Example Response
+### `GET /products/:product_id/styles`
+#### Example Response
 
     {
       "product_id": "37311",
@@ -117,8 +117,8 @@ The app is composed of three main sections and their subcomponents/features:
       ]
     }
 
-> `GET /products/:product_id/related`
->> #### Example Response
+### `GET /products/:product_id/related`
+#### Example Response
 
     [
         37312,
@@ -127,8 +127,8 @@ The app is composed of three main sections and their subcomponents/features:
         37317
     ]
 
-> `GET /reviews?product_id=[product_id]`
->> #### Example Response
+### `GET /reviews?product_id=[product_id]`
+#### Example Response
 
     {
         "product": "37311",
@@ -151,8 +151,8 @@ The app is composed of three main sections and their subcomponents/features:
         ]
     }
 
-> `GET /reviews/meta?product_id=[product_id]`
->> #### Example Response
+### `GET /reviews/meta?product_id=[product_id]`
+#### Example Response
 
     {
         "product_id": "37311",
@@ -180,8 +180,8 @@ The app is composed of three main sections and their subcomponents/features:
         }
     }
 
-> `GET /qa/questions`
->> #### Example Response
+### `GET /qa/questions`
+#### Example Response
 
     {
         "product_id": "37311",
@@ -209,8 +209,8 @@ The app is composed of three main sections and their subcomponents/features:
         ]
     }
 
-> `GET /qa/questions/:question_id/answers`
->> #### Example Response
+### `GET /qa/questions/:question_id/answers`
+#### Example Response
 
     {
         "question": "640994",
@@ -229,8 +229,8 @@ The app is composed of three main sections and their subcomponents/features:
         ]
     }
 
-> `POST /reviews`
->> #### Example Post
+### `POST /reviews`
+#### Example Post
 
     {
       product_id: [integer],
@@ -244,11 +244,11 @@ The app is composed of three main sections and their subcomponents/features:
       characteristics: [object]
     }
 
->> #### Example Response
->> `Status 201 CREATED`
+#### Example Response
+##### `Status 201 CREATED`
 
-> `POST /qa/questions`
->> #### Example Post
+### `POST /qa/questions`
+#### Example Post
 
     {
       product_id: [integer],
@@ -257,11 +257,11 @@ The app is composed of three main sections and their subcomponents/features:
       body: [text]
     }
 
->> #### Example Response
->> `Status 201 CREATED`
+#### Example Response
+##### `Status 201 CREATED`
 
-> `POST /qa/questions/:question_id/answers`
->> #### Example Post
+### `POST /qa/questions/:question_id/answers`
+#### Example Post
 
     {
       photos: [[text]],
@@ -270,31 +270,32 @@ The app is composed of three main sections and their subcomponents/features:
       body: [text]
     }
 
->> #### Example Response
->> `Status 201 CREATED`
+#### Example Response
+##### `Status 201 CREATED`
 
-> `PUT /reviews/:review_id/helpful`
->> #### Example Response
->> `Status 204 NO CONTENT`
+### `PUT /reviews/:review_id/helpful`
+#### Example Response
+##### `Status 204 NO CONTENT`
 
-> `PUT /reviews/:review_id/report`
->> #### Example Response
->> `Status 204 NO CONTENT`
+### `PUT /reviews/:review_id/report`
+#### Example Response
+##### `Status 204 NO CONTENT`
 
-> `PUT /qa/questions/:question_id/helpful`
->> #### Example Response
+### `PUT /qa/questions/:question_id/helpful`
+#### Example Response
+##### `Status 204 NO CONTENT`
 
-> `PUT /qa/questions/:question_id/report`
->> #### Example Response
->> `Status 204 NO CONTENT`
+### `PUT /qa/questions/:question_id/report`
+#### Example Response
+##### `Status 204 NO CONTENT`
 
-> `PUT /qa/questions/:answer_id/helpful`
->> #### Example Response
->> `Status 204 NO CONTENT`
+### `PUT /qa/questions/:answer_id/helpful`
+#### Example Response
+##### `Status 204 NO CONTENT`
 
-> `PUT /qa/questions/:answer_id/report`
->> #### Example Response
->> `Status 204 NO CONTENT`
+### `PUT /qa/questions/:answer_id/report`
+#### Example Response
+##### `Status 204 NO CONTENT`
 
 
 
@@ -311,17 +312,23 @@ CSS
 
 ## Collaborators
 
-> Nikko Elliott
+#### Nikko Elliott
 
->> Github: <a href='https://github.com/nelliott82'>https://github.com/nelliott82</a>
+Section: Overview
 
-> Brice Koppin
+Github: <a href='https://github.com/nelliott82'>nelliott82</a>
 
->> Github: <a href='https://github.com/Bkoppin'>https://github.com/Bkoppin</a>
+#### Brice Koppin
 
-> Yaokai Dong
+Section: Related Items & Comparison
 
->> Github: <a href='https://github.com/ykdong'>https://github.com/ykdong</a>
+Github: <a href='https://github.com/Bkoppin'>Bkoppin</a>
+
+#### Yaokai Dong
+
+Section: Ratings & Reviews
+
+Github: <a href='https://github.com/ykdong'>ykdong</a>
 
 ## MIT License
 
