@@ -16,7 +16,7 @@ Start server and client:
 
 >$npm run dev
 
-Navigate to: https://localhost:3000
+Navigate to: http://localhost:3000/
 
 # Project
 
