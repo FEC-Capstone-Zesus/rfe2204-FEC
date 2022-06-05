@@ -254,17 +254,24 @@ The app is composed of three main sections and their subcomponents/features:
 
  - Github: <a href='https://github.com/nelliott82'>nelliott82</a>
 
+ - LinkedIn: <a href='https://www.linkedin.com/in/nelliott3482/'>https://www.linkedin.com/in/nelliott3482/</a>
+
 ### Brice Koppin
 
  - Section: Related Items & Comparison
 
  - Github: <a href='https://github.com/Bkoppin'>Bkoppin</a>
 
+ - LinkedIn: <a href='https://www.linkedin.com/in/brice-koppin-8728b0158/'>https://www.linkedin.com/in/brice-koppin-8728b0158/</a>
+
 ### Yaokai Dong
 
  - Section: Ratings & Reviews
 
  - Github: <a href='https://github.com/ykdong'>ykdong</a>
+
+  - LinkedIn: <a href='https://www.linkedin.com/mwlite/in/yaokai-dong-44ab15178'>https://www.linkedin.com/mwlite/in/yaokai-dong-44ab15178</a>
+
 
 # MIT License
 
