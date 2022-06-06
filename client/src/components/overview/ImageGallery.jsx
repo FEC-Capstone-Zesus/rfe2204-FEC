@@ -20,9 +20,7 @@ const ImageCarousel = styled.div`
   margin-top: 2rem;
   margin-left: 1.5rem;
   float: left;
-  &:hover {
-    cursor: default;
-  }
+  cursor: default;
 `
 const ImageThumbnail = styled.div`
   width: 3rem;
@@ -33,9 +31,7 @@ const ImageThumbnail = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 ImageThumbnail.defaultProps = {
   alt: ''
@@ -46,9 +42,7 @@ const CarouselArrow = styled.div`
   border-color: rgba(0,0,0);
   width: 3.1rem;
   height: 1rem;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 const ImageUnderline = styled.div`
   border: 2px solid rgba(0, 0, 0, 1);
@@ -75,18 +69,14 @@ const ArrowLeft = styled.div`
   padding-left: 1rem;
   width: 3rem;
   font-size: 30px;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 const ArrowRight = styled.div`
   background: rgba(226,226,226,0.5);
   padding-left: 1rem;
   width: 3rem;
   font-size: 30px;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 
 var max = 0;

@@ -19,9 +19,7 @@ const MainImageContainer = styled.div`
   background-origin: content-box;
   background-position: center;
   background-size: ${({zoomed}) => (zoomed ? `250%` : 'contain')};
-  &:hover {
-    cursor: ${({zoomed}) => (zoomed ? `url('/assets/minus-cursor.png') 0 8, auto` : 'crosshair')};
-  }
+  cursor: ${({zoomed}) => (zoomed ? `url('/assets/minus-cursor.png') 0 8, auto` : 'crosshair')};
 `
 MainImageContainer.defaultProps = {
   alt: ''
@@ -36,9 +34,7 @@ const ImageCarousel = styled.div`
   position: absolute;
   display: inline-block;
   margin-left: 1.5rem;
-  &:hover {
-    cursor: default;
-  }
+  cursor: default;
 `
 const ImageIcon = styled.div`
   width: 2rem;
@@ -46,9 +42,7 @@ const ImageIcon = styled.div`
   border: 1.2px solid;
   background: rgba(226,226,226,1);
   text-align: center;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 ImageIcon.defaultProps = {
   alt: ''
@@ -59,9 +53,7 @@ const CarouselArrow = styled.div`
   border-color: rgba(0,0,0);
   width: 2.1rem;
   height: 0.75rem;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 const ImageUnderline = styled.div`
   border: 2px solid rgba(0, 0, 0, 1);
@@ -90,18 +82,14 @@ const ArrowLeft = styled.div`
   padding-left: 1rem;
   width: 3rem;
   font-size: 30px;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 const ArrowRight = styled.div`
   background: rgba(226,226,226,0.5);
   padding-left: 1rem;
   width: 3rem;
   font-size: 30px;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 const ExitExpanded = styled.div`
   float: left;
@@ -111,9 +99,7 @@ const ExitExpanded = styled.div`
   background: rgba(226,226,226,0.5);
   position: relative;
   left: 95.5%;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 
 var max = 0;

@@ -43,9 +43,7 @@ const StyledImage = styled.img`
   border: 1px solid;
   object-fit: cover;
   clip-path: circle(46%);
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 StyledImage.defaultProps = {
   src: '',
@@ -62,9 +60,7 @@ const CheckMark = styled.div`
   width: 1rem;
   font-size: 70%;
   border-radius: 50%;
-  &:hover {
-    cursor: default;
-  }
+  cursor: default;
 `
 const StylesContainer = styled.div`
   height: ${({length}) => (length > 8 ? '17rem' : '13rem')};
