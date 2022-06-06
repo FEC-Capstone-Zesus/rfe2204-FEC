@@ -14,9 +14,7 @@ const ImagesStylesContainer = styled.div`
 const ImagesGalleryHoverDiv = styled.div`
   width: 50rem;
   height: 35rem;
-  &:hover {
-    cursor: zoom-in;
-  }
+  cursor: zoom-in;
 `
 
 const Overview = ( { expanded, toggleExpanded } ) => {

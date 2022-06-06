@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 const StarRatingContainer = styled.span`
-  &:hover {
-    cursor: default;
-  }
+  cursor: default;
 `
 const StarFraction = styled.span`
  display: block;

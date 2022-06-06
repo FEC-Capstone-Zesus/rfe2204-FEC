@@ -19,19 +19,14 @@ const Summary = ( { product } ) => {
     <SummaryDiv>
       <Empty/>
       <Buttons>
-        <div class="fb-share-button"
-             data-href="http://localhost:3000/"
-             data-size="large"
-             data-layout="button_count"
-             alt='Share on Facebook' >
-        </div>
+        <a alt='Share on Facebook' href="https://www.facebook.com/sharer/sharer.php?u=" ><img alt='Facebook share logo' width='36px' src='/assets/fb_share.png'></img></a>
         &nbsp;
         &nbsp;
-        <a alt='Share on Twitter' href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Wow! This product I found is amazing! Check it out!" data-hashtags="zeus" data-lang="en" data-show-count="false">Tweet</a>
+        <a alt='Share on Twitter' href="https://twitter.com/share?ref_src=twsrc%5Etfw" data-text="Wow! This product I found is amazing! Check it out!" data-hashtags="zeus" data-lang="en" data-show-count="false"><img alt='Twitter share logo' width='42px' src='/assets/twitter_share.png'></img></a>
         &nbsp;
         &nbsp;
-        <a alt='Share on Pinterest' data-pin-do="buttonBookmark" data-pin-tall="true" data-pin-round="true" href="https://www.pinterest.com/pin/create/button/">
-          <img alt='Pinterest share logo' src="//assets.pinterest.com/images/pidgets/pinit_fg_en_round_red_16.png" />
+        <a alt='Share on Pinterest' href="https://www.pinterest.com/pin/create/button/">
+          <img alt='Pinterest share logo' width='36px' src='/assets/pinterest_share.png' />
         </a>
       </Buttons>
     </SummaryDiv>

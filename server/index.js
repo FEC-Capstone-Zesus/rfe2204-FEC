@@ -12,7 +12,7 @@ const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe'
 app.use(cors());
 app.use(compression());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../client/dist')))
+app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.urlencoded({extended:true}))
 // products API
 

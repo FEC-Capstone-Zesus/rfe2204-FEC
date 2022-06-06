@@ -20,9 +20,7 @@ const ImageCarousel = styled.div`
   margin-top: 2rem;
   margin-left: 1.5rem;
   float: left;
-  &:hover {
-    cursor: default;
-  }
+  cursor: default;
 `
 const ImageThumbnail = styled.div`
   width: 3rem;
@@ -33,9 +31,7 @@ const ImageThumbnail = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 ImageThumbnail.defaultProps = {
   alt: ''
@@ -46,9 +42,7 @@ const CarouselArrow = styled.div`
   border-color: rgba(0,0,0);
   width: 3.1rem;
   height: 1rem;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 const ImageUnderline = styled.div`
   border: 2px solid rgba(0, 0, 0, 1);
@@ -75,18 +69,14 @@ const ArrowLeft = styled.div`
   padding-left: 1rem;
   width: 3rem;
   font-size: 30px;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 const ArrowRight = styled.div`
   background: rgba(226,226,226,0.5);
   padding-left: 1rem;
   width: 3rem;
   font-size: 30px;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
 
 var max = 0;
@@ -121,7 +111,7 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
   }
 
   return (
-    <MainImage id='mainImage' alt='Main image of product' currentImage={mainImage ? mainImage : ''}>
+    <MainImage id='mainImage' alt='Main image of product' currentImage={mainImage ? mainImage : '/assets/no-image.png'}>
       <ImageCarousel data-testid='imageCarousel' onClick={(e) => stopParentOnClick(e)}>
         {imagesArray.length ? imagesArray.length > 7 ?
           <CarouselArrow id='carouselUp'
@@ -138,7 +128,7 @@ const ImageGallery = ( { mainImage, imagesArray, slice, changeMainImage, changeS
                     <ImageThumbnail data-testid={photo.thumbnail_url}
                                     alt={`Thumbnail image ${i + 1}`}
                                     onClick={(e) => updateCurrentImage(e, photo)}
-                                    currentThumbnail={photo.thumbnail_url}/>
+                                    currentThumbnail={photo.thumbnail_url ? photo.thumbnail_url : '/assets/no-image.png'}/>
                     <ImageNoUnderline />
                     {photo.url === mainImage ?
                       <ImageUnderline />
