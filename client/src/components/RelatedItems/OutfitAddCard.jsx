@@ -30,11 +30,18 @@ const OutfitCardAdd = ({ item, currentProduct, metaData, setOutfit, outfit, setO
     transform:scale(1.02);
   }
   `
-  console.log(key)
 
 let outfitAdd = function() {
-  if(!Object.values(outfit).includes(currentProduct.id)) {
-  setOutfit([...outfit, {photo: styles.results[0].photos[0].thumbnail_url, add: false, id: currentProduct.id, productInfo: {currentProduct}}])}
+  let flag = false;
+  for(let i = 0; i < outfit.length; i++) {
+    if(Object.values(outfit[i]).includes(currentProduct.id)) {
+      flag = true;
+      break;
+    }
+  }
+  if(!flag) {
+    setOutfit([...outfit, {photo: styles.results[0].photos[0].thumbnail_url, add: false, id: currentProduct.id, productInfo: {currentProduct}}])
+  }
 };
 
 

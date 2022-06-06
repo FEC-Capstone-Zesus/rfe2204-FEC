@@ -89,7 +89,7 @@ const Votes = ({ recommended, rateNumber, filter, handleFilter, handleClear }) =
     <>
       <P>{percent}% of reviews recommend this product</P>
       <FilterButtonContainer filter={filter} handleClear={handleClear}/>
-      <RateContainer name="star_5" onClick={(event) => handleFilter(event, '5')} data-testid='star_5'>
+      <RateContainer name="star_5" onClick={(event) => handleFilter(event, 5)} data-testid='star_5'>
         <Span>5 stars</Span>
         <BarContainer>
           <Bar length={star_5+'%'} />
@@ -97,7 +97,7 @@ const Votes = ({ recommended, rateNumber, filter, handleFilter, handleClear }) =
         <RateCount>{count5}</RateCount>
       </RateContainer>
 
-      <RateContainer onClick={(event) => handleFilter(event, '4')} data-testid='star_4'>
+      <RateContainer onClick={(event) => handleFilter(event, 4)} data-testid='star_4'>
         <Span>4 stars</Span>
         <BarContainer>
           <Bar length={star_4+'%'} />
@@ -105,7 +105,7 @@ const Votes = ({ recommended, rateNumber, filter, handleFilter, handleClear }) =
         <RateCount>{count4}</RateCount>
       </RateContainer>
 
-      <RateContainer onClick={(event) => handleFilter(event, '3')} data-testid='star_3'>
+      <RateContainer onClick={(event) => handleFilter(event, 3)} data-testid='star_3'>
         <Span>3 stars</Span>
         <BarContainer>
           <Bar length={star_3+'%'} />
@@ -113,7 +113,7 @@ const Votes = ({ recommended, rateNumber, filter, handleFilter, handleClear }) =
         <RateCount>{count3}</RateCount>
       </RateContainer>
 
-      <RateContainer onClick={(event) => handleFilter(event, '2')} data-testid='star_2'>
+      <RateContainer onClick={(event) => handleFilter(event, 2)} data-testid='star_2'>
         <Span>2 stars</Span>
         <BarContainer>
           <Bar length={star_2+'%'} />
@@ -121,7 +121,7 @@ const Votes = ({ recommended, rateNumber, filter, handleFilter, handleClear }) =
         <RateCount>{count2}</RateCount>
       </RateContainer>
 
-      <RateContainer onClick={(event) => handleFilter(event, '1')} data-testid='star_1'>
+      <RateContainer onClick={(event) => handleFilter(event, 1)} data-testid='star_1'>
         <Span>1 stars</Span>
         <BarContainer>
           <Bar length={star_1+'%'} />

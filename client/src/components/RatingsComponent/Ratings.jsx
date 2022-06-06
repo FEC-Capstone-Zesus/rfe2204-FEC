@@ -9,28 +9,30 @@ const RatingContainer = styled.div`
   flex-direction: column;
 `;
 
-const Ratings = ({ratings, recommended, factors, handleUserSelect }) => {
-  const [filter, setFilter] = useState({ '5': false, '4': false, '3': false, '2': false, '1': false });
-  const [userfilter, setUserFilter] = useState([]);
+const Ratings = ({ratings, recommended, factors, filter, setNewFilter, setUserIsSort, userIsSort }) => {
   const [meta, setMeta] = useState({ratings, recommended, factors});
 
   const handlefilter = (event, star) => {
     event.preventDefault();
-    let newState = JSON.parse(JSON.stringify(filter));
-    newState[star] = !filter[star];
-    setFilter(newState);
-    handleUserSelect(filter);
+    let newState = {...filter};
+    let temp = newState[star];
+    newState[star] = !temp;
+    setNewFilter(newState);
+    let isSorting = !filter[1] && !filter[2] && !filter[3] && !filter[4] && !filter[5] ? false : true;
+    setUserIsSort(isSorting);
   };
-
+  console.log(userIsSort);
+  
   const handleClear = (event) => {
     event.preventDefault();
-    setFilter({ '5': false, '4': false, '3': false, '2': false, '1': false });
+    setNewFilter({ 5: false, 4: false, 3: false, 2: false, 1 : false });
+    setUserIsSort(false);
   };
 
   return (
     <RatingContainer>
-      <RatingAndStar rate={ ratings } meta={meta}/>
-      <Votes recommended={ recommended } rateNumber={ ratings } filter={filter} handleFilter={handlefilter} handleClear={handleClear}/>
+      <RatingAndStar rate={ratings} meta={meta}/>
+      <Votes recommended={recommended} rateNumber={ratings} filter={filter} handleFilter={handlefilter} handleClear={handleClear}/>
       <Factors factors={ factors }/>
     </RatingContainer>
   );

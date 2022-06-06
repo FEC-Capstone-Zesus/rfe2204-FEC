@@ -15,7 +15,9 @@ const initialState = {
   questions: [],
   expanded: false,
   relatedProducts: [],
-  outfit: [{add: true}]
+  outfit: [{add: true}],
+  filter: { 5: false, 4: false, 3: false, 2: false, 1: false },
+  userIsSort: false
 };
 
 var store = createStore(

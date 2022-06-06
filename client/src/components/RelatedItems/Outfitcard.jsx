@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import useAxios from 'axios-hooks'
 import styled from "styled-components";
 import StarRating from "../StarRating.jsx"
+import retrieve from "../../retrieve.js"
 
 const CardImage = styled.img`
   height:12rem;
@@ -12,7 +13,6 @@ const CardImage = styled.img`
 
 const Outfitcard = ({ item, currentProduct, metaData, setOutfit, outfit, outfitStyle, className }) => {
 
-  console.log({item})
   const Card_body = styled.li `
   display: flex;
   flex-direction: column;
@@ -32,8 +32,9 @@ const Outfitcard = ({ item, currentProduct, metaData, setOutfit, outfit, outfitS
     transform:scale(1.02);
   }
   `
+
   return (
-    <Card_body onClick = {() => retrieve(`${item}`)}>
+    <Card_body onClick = {() => retrieve(`${item.id}`)}>
       {item.photo !== undefined ? <CardImage src = {item.photo}/> : null}
         <p>{item.productInfo.currentProduct.name}
         <br></br>{item.productInfo.currentProduct.category}

@@ -6,7 +6,9 @@ const axios = require('axios')
 const RatingsStyles = styled.div`
   width: 25rem;
   height: 35rem;
-  padding: 2rem 1.5rem 2rem 1.5rem;
+  padding: 2rem 1.5rem;
+  display: block;
+  overflow: auto;
 `
 const Ratings = styled.div`
   margin-top: ${({length}) => (length > 8 ? `-2rem` : '0')};
@@ -14,6 +16,7 @@ const Ratings = styled.div`
 const ProductName = styled.h1`
   margin-top: ${({length}) => (length > 8 ? '0.7rem' : '' )};
   margin-bottom: ${({length}) => (length > 8 ? '0.7rem' : '' )};
+  font-size: ${({char}) => (char > 21 ? '1.5em' : '2em' )};
 `
 const ProductCatgory = styled.h5`
   margin-top: ${({length}) => (length > 8 ? '0.7rem' : '' )};
@@ -39,10 +42,8 @@ const StyledImage = styled.img`
   height: 4rem;
   border: 1px solid;
   object-fit: cover;
-  clip-path: circle(49%);
-  &:hover {
-    cursor: pointer;
-  }
+  clip-path: circle(46%);
+  cursor: pointer;
 `
 StyledImage.defaultProps = {
   src: '',
@@ -50,7 +51,7 @@ StyledImage.defaultProps = {
 };
 const CheckMark = styled.div`
   z-index: 1;
-  background: rgba(250,250,250,100);
+  background: rgba(250,250,250,1);
   position: absolute;
   top: 0.5rem;
   left: 2.8rem;
@@ -59,15 +60,13 @@ const CheckMark = styled.div`
   width: 1rem;
   font-size: 70%;
   border-radius: 50%;
-  &:hover {
-    cursor: default;
-  }
+  cursor: default;
 `
 const StylesContainer = styled.div`
   height: ${({length}) => (length > 8 ? '17rem' : '13rem')};
 `
 const AddToCart = styled.button`
-  width: 24.3rem;
+  width: 21.8rem;
   font-weight: 500;
   margin-top: 0.5rem;
   display: flex;
@@ -187,7 +186,7 @@ const RatingsAndStyles = ( { product,
           {product.id ? product.category.toUpperCase() : null}
         </ProductCatgory>
       </div>
-      <ProductName length={styles.results.length}>{product.id ? product.name : null}</ProductName>
+      <ProductName length={styles.results.length} char={product.name.length} >{product.id ? product.name : null}</ProductName>
 
       {currentStyle.style_id ? !currentStyle.sale_price ?
         <span>${currentStyle.original_price}</span> :
@@ -214,7 +213,7 @@ const RatingsAndStyles = ( { product,
                                    id={style.name}
                                    onClick={() => updateCurrentStyle(style)}>
                     {style.style_id === currentStyle.style_id ? <CheckMark>✓</CheckMark> : null}
-                    <StyledImage alt={`Choose style ${style.name}`} src={style.photos[0].thumbnail_url} />
+                    <StyledImage alt={`Choose style ${style.name}`} src={style.photos[0].thumbnail_url ? style.photos[0].thumbnail_url : '/assets/no-image.png'} />
                   </StyledImageSpan>)
           })
         : null}
@@ -234,20 +233,17 @@ const RatingsAndStyles = ( { product,
                 style={{ width: 16 + 'rem' }}
                 onChange={(e) => changeSelect(e)}
                 disabled={!inStock}>
+          {inStock ? <option value='selectSize' >SELECT SIZE</option> : <option value='outOfStock' >OUT OF STOCK</option> }
           {inStock ?
-          <>
-            <option value='selectSize' >SELECT SIZE</option>
-            {skusArray.map((sku, i) => {
+            skusArray.map((sku, i) => {
               if (sku[1].quantity) {
                 return (
                   <option key={sku[0]} value={JSON.stringify(sku)} >{sku[1].size}</option>
                 )
               }
-            })}
-          </>
-          : <option value='outOfStock' >OUT OF STOCK</option> }
+            })
+          : null }
         </select>
-        &nbsp;
         &nbsp;
         &nbsp;
         {size ?
@@ -255,14 +251,14 @@ const RatingsAndStyles = ( { product,
                 data-testid='qty'
                 id='qty'
                 onChange={(e) => changeSelect(e)}
-                style={{ width: 7 + 'rem' }}>
+                style={{ width: 5 + 'rem' }}>
           <option value='Select Qty' >1</option>
           {Array.from(Array(qtySelect).keys()).map(x => x + 1).slice(1, 15).map((qty) =>
           <option key={qty} value={qty} >{qty}</option>)}
         </select> :
         <select name='qty'
                 disabled={true}
-                style={{ width: 7 + 'rem' }}>
+                style={{ width: 5 + 'rem' }}>
           <option value='Select Qty' >-</option>
         </select>}
 
